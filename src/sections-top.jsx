@@ -2,8 +2,11 @@ export function Nav({ c, onContact }) {
   return (
     <nav className="nav">
       <a className="nav-logo" href="#top">
-        <span className="mark">CN</span>
-        <span>Código&nbsp;Norte</span>
+        <img
+          src="/cnlogo.png"
+          alt="Código Norte"
+          style={{ height: 38, borderRadius: 6, background: '#fff', padding: '2px 6px' }}
+        />
       </a>
       <div className="nav-links">
         {c.nav.links.map(l => (

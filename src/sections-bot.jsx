@@ -199,15 +199,11 @@ export function Footer({ c }) {
       <footer className="footer">
         <div className="footer-col">
           <div className="row" style={{gap:10, marginBottom:14}}>
-            <span style={{
-              display:'inline-flex', alignItems:'center', justifyContent:'center',
-              width:32, height:32, borderRadius:8,
-              background:'linear-gradient(140deg, var(--accent), #c25e3b)',
-              color:'#0e0e0c', fontFamily:'var(--f-mono)', fontWeight:700, fontSize:12,
-            }}>CN</span>
-            <span style={{fontFamily:'var(--f-display)', fontSize:18, fontWeight:600, letterSpacing:'-0.02em'}}>
-              Código&nbsp;Norte&nbsp;Soluciones
-            </span>
+            <img
+              src="/cnlogo.png"
+              alt="Código Norte"
+              style={{ height: 44, borderRadius: 6, background: '#fff', padding: '2px 6px' }}
+            />
           </div>
           <p style={{color:'var(--muted)', fontSize:13.5, maxWidth:'34ch', lineHeight:1.55}}>
             {c.nav.links[0].label === 'Servicios'
