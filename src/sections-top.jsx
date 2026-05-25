@@ -1,45 +1,115 @@
+import React from 'react'
 import { sectionClick } from './scroll'
+import { WHATSAPP_URL } from './constants'
 
-export function Nav({ c, onContact, onSection }) {
+export function Nav({ c, onSection }) {
+  const [open, setOpen] = React.useState(false)
+
+  const close = () => setOpen(false)
+  const go = (id) => (e) => {
+    sectionClick(id, onSection)(e)
+    close()
+  }
+
+  React.useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [open])
+
   return (
-    <nav className="nav">
-      <a
-        className="nav-logo"
-        href="#top"
-        onClick={sectionClick('top', onSection)}
-      >
-        <img
-          src="/cnslogo.png"
-          alt="Código Norte"
-          style={{ width: 68 }}
-        />
-      </a>
-      <div className="nav-links">
-        {c.nav.links.map(l => (
-          <a
-            key={l.id}
-            href={`#${l.id}`}
-            onClick={sectionClick(l.id, onSection)}
+    <>
+      <nav className="nav">
+        <a
+          className="nav-logo"
+          href="#top"
+          onClick={go('top')}
+        >
+          <img
+            src="/cnslogo.png"
+            alt="Código Norte"
+            style={{ width: 68 }}
+          />
+        </a>
+
+        <div className="nav-links" aria-label="Principal">
+          {c.nav.links.map(l => (
+            <a
+              key={l.id}
+              href={`#${l.id}`}
+              onClick={go(l.id)}
+            >
+              {l.label}
+            </a>
+          ))}
+        </div>
+
+        <div className="nav-actions">
+          <div className="nav-cta">
+            <span className="pill nav-status">
+              <span className="dot pulse" />
+              <span>{c.nav.status}</span>
+            </span>
+            <button type="button" className="btn btn-primary nav-cta-btn" onClick={go('planes')}>
+              {c.nav.cta}
+              <svg className="arr" width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H3.5M9 2V7.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" /></svg>
+            </button>
+          </div>
+          <button
+            type="button"
+            className="nav-toggle"
+            aria-expanded={open}
+            aria-controls="nav-drawer"
+            aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
+            onClick={() => setOpen(v => !v)}
           >
-            {l.label}
-          </a>
-        ))}
+            <span />
+            <span />
+            <span />
+          </button>
+        </div>
+      </nav>
+
+      <div
+        id="nav-drawer"
+        className={`nav-drawer${open ? ' open' : ''}`}
+        aria-hidden={!open}
+        onClick={close}
+      >
+        <div className="nav-drawer-panel" onClick={e => e.stopPropagation()}>
+          <div className="nav-drawer-hd">
+            <span className="pill">
+              <span className="dot pulse" />
+              <span>{c.nav.status}</span>
+            </span>
+            <button type="button" className="nav-drawer-close" aria-label="Cerrar" onClick={close}>×</button>
+          </div>
+          <nav className="nav-drawer-links" aria-label="Menú móvil">
+            {c.nav.links.map(l => (
+              <a key={l.id} href={`#${l.id}`} onClick={go(l.id)}>{l.label}</a>
+            ))}
+          </nav>
+          <div className="nav-drawer-cta">
+            <button type="button" className="btn btn-primary btn-lg" style={{ width: '100%' }} onClick={go('planes')}>
+              {c.nav.cta}
+            </button>
+            <a
+              className="btn btn-ghost btn-lg"
+              style={{ width: '100%', justifyContent: 'center' }}
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={close}
+            >
+              WhatsApp
+            </a>
+          </div>
+        </div>
       </div>
-      <div className="nav-cta">
-        <span className="pill" style={{display:'inline-flex'}}>
-          <span className="dot pulse" />
-          <span>{c.nav.status}</span>
-        </span>
-        <button className="btn btn-primary" onClick={sectionClick('planes', onSection)}>
-          {c.nav.cta}
-          <svg className="arr" width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H3.5M9 2V7.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" /></svg>
-        </button>
-      </div>
-    </nav>
+    </>
   )
 }
 
-export function Hero({ c, lang, onContact, onSection }) {
+export function Hero({ c, onSection }) {
   return (
     <section className="hero" id="top">
       <span className="crosshair tl" />
@@ -67,8 +137,8 @@ export function Hero({ c, lang, onContact, onSection }) {
         <div className="hero-tail">
           <div>
             <p className="lead">{c.hero.lead}</p>
-            <div className="row" style={{marginTop:28, flexWrap:'wrap'}}>
-              <button className="btn btn-primary btn-lg" onClick={sectionClick('planes', onSection)}>
+            <div className="row hero-actions">
+              <button type="button" className="btn btn-primary btn-lg" onClick={sectionClick('planes', onSection)}>
                 {c.nav.cta}
                 <svg className="arr" width="12" height="12" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H3.5M9 2V7.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" /></svg>
               </button>

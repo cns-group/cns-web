@@ -10,6 +10,7 @@ import { Plans } from './sections-plans'
 import { Work, Stack, Quotes, Metrics, FAQ, Contact, Footer } from './sections-bot'
 import { scrollToSection } from './scroll'
 import { WhatsAppFloat } from './whatsapp-float'
+import { parsePlanTabFromPath, setPlanPath } from './plan-routes'
 
 const TWEAK_DEFAULTS = {
   "palette":     ["#0e0e0c", "#f5f1e8", "#d97757", "#7a8f5c"],
@@ -73,19 +74,46 @@ export default function App() {
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS)
   const c = COPY[t.lang] || COPY.es
   const contactRef = React.useRef(null)
+  const [planTab, setPlanTab] = React.useState(
+    () => parsePlanTabFromPath() || 'ecommerce',
+  )
 
   React.useEffect(() => { applyTheme(t) }, [t])
 
-  const scrollToContact = React.useCallback(() => {
-    scrollToSection('contacto', { focus: true })
+  React.useEffect(() => {
+    const fromPath = parsePlanTabFromPath()
+    if (!fromPath) return
+    setPlanTab(fromPath)
+    const timer = window.setTimeout(() => scrollToSection('planes'), 80)
+    return () => window.clearTimeout(timer)
+  }, [])
+
+  React.useEffect(() => {
+    const onPopState = () => {
+      const fromPath = parsePlanTabFromPath()
+      if (fromPath) {
+        setPlanTab(fromPath)
+        scrollToSection('planes')
+      } else {
+        setPlanTab('ecommerce')
+      }
+    }
+    window.addEventListener('popstate', onPopState)
+    return () => window.removeEventListener('popstate', onPopState)
+  }, [])
+
+  const handlePlanTabChange = React.useCallback((tabId) => {
+    setPlanTab(tabId)
+    setPlanPath(tabId)
+    scrollToSection('planes')
   }, [])
 
   return (
     <div className="app">
-      <Nav c={c} onContact={scrollToContact} onSection={scrollToSection} />
-      <Hero c={c} lang={t.lang} onContact={scrollToContact} onSection={scrollToSection} />
+      <Nav c={c} onSection={scrollToSection} />
+      <Hero c={c} onSection={scrollToSection} />
       <Marquee items={c.marquee} />
-      <Plans c={c} lang={t.lang} onSection={scrollToSection} />
+      <Plans c={c} lang={t.lang} activeTab={planTab} onTabChange={handlePlanTabChange} />
       <Process c={c} />
       {/* <Metrics c={c} /> */}
       <Work c={c} />

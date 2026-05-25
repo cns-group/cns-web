@@ -1,6 +1,7 @@
 import React from 'react'
 import { SectionHeader } from './sections-mid'
 import { WorkScreen } from './mockups'
+import { WHATSAPP_URL, WHATSAPP_DISPLAY, EMAIL, INSTAGRAM_URL, INSTAGRAM_HANDLE } from './constants'
 
 export function Work({ c }) {
   const w = c.work
@@ -113,83 +114,45 @@ export function FAQ({ c }) {
 }
 
 export function Contact({ c, ctaRef }) {
-  const [sent, setSent] = React.useState(false)
-  const [form, setForm] = React.useState({
-    name: '', company: '', email: '', type: '', budget: '', msg: '',
-  })
-  const upd = (k) => (e) => setForm({ ...form, [k]: e.target.value })
-
-  const onSubmit = (e) => {
-    e.preventDefault()
-    setSent(true)
-  }
-
   const cc = c.contact
   return (
     <section className="sec" id="contacto" ref={ctaRef}>
       <SectionHeader num={cc.num} title={cc.title} titleEm={cc.titleEm} lead={cc.lead} />
-      <div className="contact">
-        {sent ? (
-          <div className="form-success">
-            <h4>✓ {cc.successTitle}</h4>
-            <p>{cc.successBody}</p>
-            <p style={{marginTop:8, fontFamily:'var(--f-mono)', fontSize:12, color:'var(--muted)'}}>
-              REF: CN-{Math.floor(Math.random()*900000+100000)} · {new Date().toISOString().slice(0,16).replace('T',' ')}
-            </p>
-            <div style={{marginTop:8}}>
-              <button type="button" className="btn btn-ghost" onClick={() => setSent(false)}>
-                {c.nav.links[0].label === 'Servicios' ? 'Enviar otra' : 'Send another'}
-              </button>
-            </div>
-          </div>
-        ) : (
-          <form className="form" onSubmit={onSubmit}>
-            <div className="field">
-              <label>{cc.form.name}</label>
-              <input required type="text" value={form.name} onChange={upd('name')} />
-            </div>
-            <div className="field">
-              <label>{cc.form.company}</label>
-              <input type="text" value={form.company} onChange={upd('company')} />
-            </div>
-            <div className="field">
-              <label>{cc.form.email}</label>
-              <input required type="email" value={form.email} onChange={upd('email')} placeholder="vos@empresa.com" />
-            </div>
-            <div className="field">
-              <label>{cc.form.type}</label>
-              <select required value={form.type} onChange={upd('type')}>
-                <option value="">—</option>
-                {cc.form.types.map(t => <option key={t} value={t}>{t}</option>)}
-              </select>
-            </div>
-            <div className="field">
-              <label>{cc.form.budget}</label>
-              <select value={form.budget} onChange={upd('budget')}>
-                <option value="">—</option>
-                {cc.form.budgets.map(b => <option key={b} value={b}>{b}</option>)}
-              </select>
-            </div>
-            <div className="field">
-              <label>{cc.form.msg}</label>
-              <textarea value={form.msg} onChange={upd('msg')} />
-            </div>
-            <div className="row" style={{justifyContent:'space-between', marginTop:8}}>
-              <span className="meta">↵ enter para enviar</span>
-              <button type="submit" className="btn btn-primary btn-lg">
-                {cc.form.send}
-                <svg className="arr" width="12" height="12" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H3.5M9 2V7.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" /></svg>
-              </button>
-            </div>
-          </form>
-        )}
+      <div className="contact-wa">
+        <div className="contact-wa-main">
+          <p className="contact-wa-lead">{cc.waLead}</p>
+          <a
+            className="btn btn-primary btn-lg contact-wa-btn"
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {cc.waCta}
+            <svg className="arr" width="12" height="12" viewBox="0 0 11 11" fill="none">
+              <path d="M2 9L9 2M9 2H3.5M9 2V7.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+            </svg>
+          </a>
+          <p className="contact-wa-hint">{cc.waHint}</p>
+        </div>
         <aside className="contact-aside">
-          {cc.aside.map((a, i) => (
-            <div key={i} className="contact-card">
-              <h4>{a.h}</h4>
-              <p>{a.body}</p>
-            </div>
-          ))}
+          <div className="contact-card">
+            <h4>{cc.aside[0].h}</h4>
+            <p>
+              <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+            </p>
+          </div>
+          <div className="contact-card">
+            <h4>{cc.aside[1].h}</h4>
+            <p>
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">{WHATSAPP_DISPLAY}</a>
+            </p>
+          </div>
+          <div className="contact-card">
+            <h4>Instagram</h4>
+            <p>
+              <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">{INSTAGRAM_HANDLE}</a>
+            </p>
+          </div>
         </aside>
       </div>
     </section>

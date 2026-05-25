@@ -1,5 +1,5 @@
 import React from 'react'
-import { sectionClick } from './scroll'
+import { whatsappPlanUrl } from './constants'
 
 function PayIcon({ name }) {
   const initials = name.split(/[ /]/).map(s => s[0]).join('').slice(0, 2).toUpperCase()
@@ -38,10 +38,11 @@ function fmtMoney(n, lang) {
   return n.toLocaleString('en-US').replace(/,/g, sep)
 }
 
-function PlanCard({ plan, c, lang, onSection }) {
+function PlanCard({ plan, productName, c, lang }) {
   const p = c.plans
   const isCommission = typeof plan.price === 'string' && plan.priceNum
   const isOneOff     = plan.priceLead != null
+  const waUrl = whatsappPlanUrl(productName, plan.tier, lang)
 
   return (
     <div className={`plan${plan.featured ? ' featured' : ''}`}>
@@ -111,9 +112,10 @@ function PlanCard({ plan, c, lang, onSection }) {
 
       <div className="plan-cta">
         <a
-          href="#contacto"
+          href={waUrl}
+          target="_blank"
+          rel="noopener noreferrer"
           className={`btn ${plan.featured ? 'btn-primary' : 'btn-ghost'} btn-lg`}
-          onClick={sectionClick('contacto', onSection, { focus: true })}
         >
           {plan.tier === 'Pro' ? p.ctaPro : `${p.cta} ${plan.tier}`}
           <svg className="arr" width="12" height="12" viewBox="0 0 11 11" fill="none">
@@ -125,11 +127,48 @@ function PlanCard({ plan, c, lang, onSection }) {
   )
 }
 
-export function Plans({ c, lang, onSection }) {
+function PlansProductBlock({ tab, c, lang }) {
+  return (
+    <section className="plans-product" id={`plan-${tab.id}`}>
+      <header className="plans-product-hd">
+        <span className="plans-product-num">/ {tab.n}</span>
+        <h3 className="plans-product-title">{tab.name}</h3>
+        <p className="plans-product-intro">{tab.intro}</p>
+        <p className="plans-product-lead">{tab.lead}</p>
+      </header>
+      <div className="plans-grid">
+        {(c.plans.software[tab.id] || []).map((tier, i) => (
+          <PlanCard key={i} plan={tier} productName={tab.name} c={c} lang={lang} />
+        ))}
+      </div>
+    </section>
+  )
+}
+
+function scrollToPlanProduct(tabId) {
+  const isMobile = window.matchMedia('(max-width: 880px)').matches
+  if (!isMobile) return
+  const el = document.getElementById(`plan-${tabId}`)
+  if (!el) return
+  const top = el.getBoundingClientRect().top + window.scrollY - 72
+  window.scrollTo({ top, behavior: 'smooth' })
+}
+
+export function Plans({ c, lang, activeTab = 'ecommerce', onTabChange }) {
   const p = c.plans
-  const [active, setActive] = React.useState('ecommerce')
+  const tabIds = p.tabs.map(t => t.id)
+  const active = tabIds.includes(activeTab) ? activeTab : tabIds[0]
   const tab = p.tabs.find(t => t.id === active) || p.tabs[0]
   const tiers = p.software[active] || []
+
+  const selectTab = (id) => {
+    onTabChange?.(id)
+    scrollToPlanProduct(id)
+  }
+
+  React.useEffect(() => {
+    scrollToPlanProduct(active)
+  }, [active])
 
   return (
     <section className="sec" id="planes" style={{paddingTop: 0}}>
@@ -146,43 +185,47 @@ export function Plans({ c, lang, onSection }) {
 
       <PayStrip c={c} />
 
-      <div className="plans-tabs" role="tablist">
-        {p.tabs.map(t => (
-          <button key={t.id} type="button" role="tab"
-                  aria-selected={t.id === active}
-                  className="plans-tab"
-                  data-on={t.id === active ? '1' : '0'}
-                  onClick={() => setActive(t.id)}>
-            <span className="tnum">/ {t.n}</span>
-            <span className="tname">{t.name}</span>
-          </button>
-        ))}
-      </div>
-
-      <div className="plans-content">
-        <div className="plans-intro">
-          <h3>
-            {tab.name}
-            <span className="title-em">— {tab.intro}</span>
-          </h3>
-          <p>{tab.lead}</p>
-        </div>
-
-        <div className="plans-grid">
-          {tiers.map((tier, i) => (
-            <PlanCard key={i} plan={tier} c={c} lang={lang} onSection={onSection} />
+      {/* Desktop: pestañas horizontales */}
+      <div className="plans-tabs-wrap">
+        <div className="plans-tabs" role="tablist">
+          {p.tabs.map(t => (
+            <button
+              key={t.id}
+              type="button"
+              role="tab"
+              aria-selected={t.id === active}
+              className="plans-tab"
+              data-on={t.id === active ? '1' : '0'}
+              onClick={() => selectTab(t.id)}
+            >
+              <span className="tnum">/ {t.n}</span>
+              <span className="tname">{t.name}</span>
+            </button>
           ))}
         </div>
+
+        <div className="plans-content">
+          <div className="plans-intro">
+            <h3>
+              {tab.name}
+              <span className="title-em">— {tab.intro}</span>
+            </h3>
+            <p>{tab.lead}</p>
+          </div>
+          <div className="plans-grid">
+            {tiers.map((tier, i) => (
+              <PlanCard key={i} plan={tier} productName={tab.name} c={c} lang={lang} />
+            ))}
+          </div>
+        </div>
       </div>
 
-      {/* <div className="plans-foot">
-        {p.footer.map((f, i) => (
-          <div key={i} className="ff">
-            <h6>{f.h}</h6>
-            <p>{f.p}</p>
-          </div>
+      {/* Mobile: todos los productos visibles, sin scroll horizontal */}
+      <div className="plans-catalog">
+        {p.tabs.map(t => (
+          <PlansProductBlock key={t.id} tab={t} c={c} lang={lang} />
         ))}
-      </div> */}
+      </div>
     </section>
   )
 }
