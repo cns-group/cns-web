@@ -22,12 +22,16 @@ export function Nav({ c, onSection }) {
         <a
           className="nav-logo"
           href="#top"
+          aria-label="Código Norte — inicio"
           onClick={go('top')}
         >
           <img
             src="/cnslogo.png"
-            alt="Código Norte"
-            style={{ width: 68 }}
+            alt=""
+            width={68}
+            height={68}
+            decoding="async"
+            style={{ width: 68, height: 'auto' }}
           />
         </a>
 
@@ -51,7 +55,7 @@ export function Nav({ c, onSection }) {
             </span>
             <button type="button" className="btn btn-primary nav-cta-btn" onClick={go('planes')}>
               {c.nav.cta}
-              <svg className="arr" width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H3.5M9 2V7.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" /></svg>
+              <svg className="arr" width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true"><path d="M2 9L9 2M9 2H3.5M9 2V7.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" /></svg>
             </button>
           </div>
           <button
@@ -109,6 +113,15 @@ export function Nav({ c, onSection }) {
 export function Hero({ c, onSection }) {
   return (
     <section className="hero" id="top">
+      <img
+        className="hero-bg"
+        src="/bg.webp"
+        alt=""
+        width={1920}
+        height={1080}
+        fetchPriority="high"
+        decoding="async"
+      />
       <span className="crosshair tl" />
       <span className="crosshair tr" />
       <span className="crosshair bl" />
@@ -137,7 +150,7 @@ export function Hero({ c, onSection }) {
             <div className="row hero-actions">
               <button type="button" className="btn btn-primary btn-lg" onClick={sectionClick('planes', onSection)}>
                 {c.nav.cta}
-                <svg className="arr" width="12" height="12" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H3.5M9 2V7.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" /></svg>
+                <svg className="arr" width="12" height="12" viewBox="0 0 11 11" fill="none" aria-hidden="true"><path d="M2 9L9 2M9 2H3.5M9 2V7.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" /></svg>
               </button>
               <a
                 className="btn btn-ghost btn-lg"

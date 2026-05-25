@@ -1,3 +1,5 @@
+export const SITE_URL = 'https://www.codigonortesoluciones.com'
+
 export const WHATSAPP_PHONE = '543517648146'
 export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_PHONE}`
 export const WHATSAPP_DISPLAY = '+54 351 764-8146'

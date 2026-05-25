@@ -137,6 +137,7 @@ export function Plans({ c, lang, activeTab = 'ecommerce', onTabChange }) {
   const selectTab = (id) => {
     onTabChange?.(id)
   }
+  const panelId = `plan-panel-${active}`
 
   return (
     <section className="sec" id="planes" style={{paddingTop: 0}}>
@@ -154,13 +155,16 @@ export function Plans({ c, lang, activeTab = 'ecommerce', onTabChange }) {
       <PayStrip c={c} />
 
       <div className="plans-tabs-wrap">
-        <div className="plans-tabs" role="tablist">
+        <div className="plans-tabs" role="tablist" aria-label={p.title}>
           {p.tabs.map(t => (
             <button
               key={t.id}
+              id={`tab-${t.id}`}
               type="button"
               role="tab"
               aria-selected={t.id === active}
+              aria-controls={t.id === active ? panelId : undefined}
+              tabIndex={t.id === active ? 0 : -1}
               className="plans-tab"
               data-on={t.id === active ? '1' : '0'}
               onClick={() => selectTab(t.id)}
@@ -171,7 +175,7 @@ export function Plans({ c, lang, activeTab = 'ecommerce', onTabChange }) {
           ))}
         </div>
 
-        <div className="plans-content">
+        <div className="plans-content" role="tabpanel" id={panelId} aria-labelledby={`tab-${active}`}>
           <div className="plans-intro">
             <h3>
               {tab.name}

@@ -19,7 +19,7 @@ export function Work({ c }) {
             <h3 className="work-title">{it.t}</h3>
             <div className="work-screen">
               {it.image ? (
-                <img className="work-img" src={it.image} alt={it.t} loading="lazy" />
+                <img className="work-img" src={it.image} alt={it.t} loading="lazy" decoding="async" width={1200} height={750} />
               ) : (
                 <WorkScreen kind={it.kind} />
               )}
@@ -98,14 +98,21 @@ export function FAQ({ c }) {
       <SectionHeader num={f.num} title={f.title} titleEm={f.titleEm} />
       <div className="faq">
         {f.items.map((it, i) => (
-          <div key={i}
-               className={`faq-item${open === i ? ' open' : ''}`}
-               onClick={() => setOpen(open === i ? -1 : i)}>
-            <div className="faq-q">
-              <span>{it.q}</span>
-              <span className="faq-icon">+</span>
-            </div>
-            <p className="faq-a">{it.a}</p>
+          <div key={i} className={`faq-item${open === i ? ' open' : ''}`}>
+            <h3 className="faq-q-wrap">
+              <button
+                id={`faq-q-${i}`}
+                type="button"
+                className="faq-q"
+                aria-expanded={open === i}
+                aria-controls={`faq-a-${i}`}
+                onClick={() => setOpen(open === i ? -1 : i)}
+              >
+                <span>{it.q}</span>
+                <span className="faq-icon" aria-hidden="true">+</span>
+              </button>
+            </h3>
+            <p className="faq-a" id={`faq-a-${i}`} role="region" aria-labelledby={`faq-q-${i}`}>{it.a}</p>
           </div>
         ))}
       </div>
@@ -128,7 +135,7 @@ export function Contact({ c, ctaRef }) {
             rel="noopener noreferrer"
           >
             {cc.waCta}
-            <svg className="arr" width="12" height="12" viewBox="0 0 11 11" fill="none">
+            <svg className="arr" width="12" height="12" viewBox="0 0 11 11" fill="none" aria-hidden="true">
               <path d="M2 9L9 2M9 2H3.5M9 2V7.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
             </svg>
           </a>
@@ -166,7 +173,7 @@ export function Footer({ c }) {
       <footer className="footer">
         <div className="footer-col footer-brand">
           <a className="nav-logo footer-logo" href="#top" aria-label="Código Norte — inicio">
-            <img src="/cnslogo.png" alt="Código Norte" style={{ width: 68 }} />
+            <img src="/cnslogo.png" alt="" width={68} height={68} decoding="async" style={{ width: 68, height: 'auto' }} />
           </a>
           <p className="footer-tagline">{f.tagline}</p>
         </div>
