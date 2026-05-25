@@ -23,7 +23,7 @@ export function applyTheme(t) {
   root.style.setProperty('--fg', fg)
   root.style.setProperty('--accent', ac)
   root.style.setProperty('--accent-2', ac2)
-  root.style.setProperty('--f-display', `'${t.fontDisplay}', 'Bebas Neue', ui-sans-serif, system-ui, sans-serif`)
+  root.style.setProperty('--f-display', `'${t.fontDisplay}', 'Bebas Neue', 'Bebas Neue Fallback', ui-sans-serif, system-ui, sans-serif`)
   root.style.setProperty('--fs-body', `${t.fontSize}px`)
 
   const off = (hex, d) => {

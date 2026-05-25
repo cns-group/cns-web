@@ -140,8 +140,8 @@ export function Plans({ c, lang, activeTab = 'ecommerce', onTabChange }) {
   const panelId = `plan-panel-${active}`
 
   return (
-    <section className="sec" id="planes" style={{paddingTop: 0}}>
-      <div className="sec-hd" style={{paddingTop: 'clamp(80px, 12vh, 140px)'}}>
+    <section className="sec sec--planes" id="planes">
+      <div className="sec-hd sec-hd--planes">
         <div>
           <div className="sec-num">{p.eyebrow}</div>
           <h2>

@@ -23,8 +23,8 @@ export default function App() {
     const fromPath = parsePlanTabFromPath()
     if (!fromPath) return
     setPlanTab(fromPath)
-    const timer = window.setTimeout(() => scrollToSection('planes'), 80)
-    return () => window.clearTimeout(timer)
+    const scroll = () => scrollToSection('planes')
+    requestAnimationFrame(() => requestAnimationFrame(scroll))
   }, [])
 
   React.useEffect(() => {
