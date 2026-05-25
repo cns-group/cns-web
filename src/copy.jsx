@@ -47,8 +47,8 @@ export const COPY = {
       titleEm: 'que hicimos',
       lead: 'Ellos ya confiaron en nosotros.',
       items: [
-        { cat: 'Ecommerce',   t: 'Impacto Tienda',         m: 'Plan Pro integrado end to end, acompañamiento en cada paso. Multiscrsal Formosa/Corrientes', kind: 'shop', image: '/cliente2.png' },
-        { cat: 'Turnero personalizado', t: 'Barbería Authentic', m: 'Turnero personalizado para la barbería Authentic. De Bariloche Argentina', kind: 'orders', image: '/cliente1.png' },
+        { n: '01', cat: 'Ecommerce',   t: 'Impacto Tienda',         m: 'Plan Pro integrado end to end, acompañamiento en cada paso. Multiscrsal Formosa/Corrientes', kind: 'shop', image: '/cliente2.png' },
+        { n: '02', cat: 'Turnero personalizado', t: 'Barbería Authentic', m: 'Turnero personalizado para la barbería Authentic. De Bariloche Argentina', kind: 'orders', image: '/cliente1.png' },
         // { cat: 'Gastronomía', t: 'Almacén del Sur — 3 sucursales', m: 'Comandas, stock y delivery unificado. Tiempo de salida ↓ 38%.', kind: 'orders', image: '/clienteauthentic.png' },
         // { cat: 'E-ticketera', t: 'Festival Pachamama 2025',         m: '14.000 entradas vendidas. Validación QR sin internet en puerta.', kind: 'ticket', image: '/clienteimpacto.jpeg' },
       ],
@@ -74,8 +74,8 @@ export const COPY = {
       ],
     },
     quotes: {
-      eyebrow: '05 — Lo que dicen',
-      num: 'Capítulo 05',
+      eyebrow: '04 — Lo que dicen',
+      num: 'Capítulo 04',
       title: 'No te creas',
       titleEm: 'lo que decimos',
       lead: 'Creele al que ya lo está usando todos los días.',
@@ -103,8 +103,8 @@ export const COPY = {
       ],
     },
     plans: {
-      eyebrow: '· Planes',
-      num: 'Capítulo 03',
+      eyebrow: '01 — Planes',
+      num: 'Capítulo 01',
       title: 'Elegí tu plan,',
       titleEm: 'seis sistemas que entendemos a medida',
       lead: 'Cada uno de nuestros sistemas viene en tres tamaños. Empezás con lo que necesitás hoy, escalás cuando hace falta. Vamos juntos, mes a mes, cancelás cuando quieras.',
@@ -259,8 +259,8 @@ export const COPY = {
       currency: 'AR$',
     },
     faq: {
-      eyebrow: '06 — Preguntas',
-      num: 'Capítulo 06',
+      eyebrow: '05 — Preguntas',
+      num: 'Capítulo 05',
       title: 'Lo que siempre',
       titleEm: 'nos preguntan',
       items: [
@@ -277,8 +277,8 @@ export const COPY = {
       ],
     },
     contact: {
-      eyebrow: '07 — Trabajemos juntos',
-      num: 'Capítulo 07',
+      eyebrow: '06 — Trabajemos juntos',
+      num: 'Capítulo 06',
       title: 'Contanos',
       titleEm: 'tu proyecto',
       lead: 'Respondemos en menos de 24 horas hábiles. Cara a cara.',
@@ -375,10 +375,8 @@ export const COPY = {
       titleEm: 'we shipped',
       lead: 'A sample. More under NDA — ask us for a private demo.',
       items: [
-        { cat: 'Ecommerce',   t: 'La Posta — Valley Wines',         m: 'Store + monthly wine subscription. 480 active customers.', kind: 'shop', image: '/clienteimpacto.jpeg' },
-        { cat: 'Turneros', t: 'Almacén del Sur — 3 locations',   m: 'Unified orders, stock and delivery. Ticket time ↓ 38%.', kind: 'orders', image: '/clienteauthentic.png' },
-        { cat: 'Gyms',        t: 'Club Atlético San Pedro',         m: '1,200 members. Auto-debit, QR access, capped classes.', kind: 'gym', image: '/clienteimpacto.jpeg' },
-        { cat: 'E-ticketera', t: 'Pachamama Festival 2025',          m: '14,000 tickets sold. QR validation with zero internet at the gate.', kind: 'ticket', image: '/clienteimpacto.jpeg' },
+        { n: '01', cat: 'Ecommerce',   t: 'Impacto Tienda',         m: 'Pro plan integrated end to end. Multi-store Formosa/Corrientes.', kind: 'shop', image: '/cliente2.png' },
+        { n: '02', cat: 'Custom queue', t: 'Barbería Authentic', m: 'Custom booking for Authentic barbershop. Bariloche, Argentina.', kind: 'orders', image: '/cliente1.png' },
       ],
     },
     stack: {
@@ -396,8 +394,8 @@ export const COPY = {
       ],
     },
     quotes: {
-      eyebrow: '05 — Reviews',
-      num: 'Chapter 05',
+      eyebrow: '04 — Reviews',
+      num: 'Chapter 04',
       title: 'Don\'t take',
       titleEm: 'our word',
       lead: 'Trust the ones using it every day.',
@@ -419,8 +417,8 @@ export const COPY = {
       ],
     },
     plans: {
-      eyebrow: '· Plans',
-      num: 'Chapter 03',
+      eyebrow: '01 — Plans',
+      num: 'Chapter 01',
       title: 'Pick your plan,',
       titleEm: 'grow without a ceiling',
       lead: 'Every system comes in three sizes. Start with what you need today, scale when you need to. No eternal contracts: month-to-month, cancel any time.',
@@ -564,8 +562,8 @@ export const COPY = {
       currency: 'AR$',
     },
     faq: {
-      eyebrow: '06 — Questions',
-      num: 'Chapter 06',
+      eyebrow: '05 — Questions',
+      num: 'Chapter 05',
       title: 'What we\'re',
       titleEm: 'always asked',
       items: [
@@ -578,8 +576,8 @@ export const COPY = {
       ],
     },
     contact: {
-      eyebrow: '07 — Let\'s work together',
-      num: 'Chapter 07',
+      eyebrow: '06 — Let\'s work together',
+      num: 'Chapter 06',
       title: 'Tell us',
       titleEm: 'about it',
       lead: 'We reply in under 24 business hours. No sales funnels, no discovery agencies.',

@@ -7,12 +7,13 @@ export function Work({ c }) {
   return (
     <section className="sec" id="casos">
       <SectionHeader num={w.num} title={w.title} titleEm={w.titleEm} lead={w.lead} />
-      <div className="work">
+      <div className="work-wrap">
+        <div className={`work work--count-${w.items.length}`}>
         {w.items.map((it, i) => (
           <article key={i} className="work-card">
             <div className="work-meta">
               <div className="work-cat">{it.cat}</div>
-              <div className="work-cat">// {String(i+1).padStart(2,'0')}</div>
+              <div className="work-cat">// {it.n ?? String(i + 1).padStart(2, '0')}</div>
             </div>
             <h3 className="work-title">{it.t}</h3>
             <div className="work-screen">
@@ -25,6 +26,7 @@ export function Work({ c }) {
             <p style={{color:'var(--muted)', fontSize:14}}>{it.m}</p>
           </article>
         ))}
+        </div>
       </div>
     </section>
   )
