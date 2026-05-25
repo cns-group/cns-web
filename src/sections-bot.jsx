@@ -16,15 +16,27 @@ export function Work({ c }) {
               <div className="work-cat">{it.cat}</div>
               <div className="work-cat">// {it.n ?? String(i + 1).padStart(2, '0')}</div>
             </div>
-            <h3 className="work-title">{it.t}</h3>
+            <h3 className="work-title">
+              {it.url ? (
+                <a href={it.url} target="_blank" rel="noopener noreferrer">{it.t}</a>
+              ) : (
+                it.t
+              )}
+            </h3>
             <div className="work-screen">
               {it.image ? (
-                <img className="work-img" src={it.image} alt={it.t} loading="lazy" decoding="async" width={1200} height={750} />
+                it.url ? (
+                  <a href={it.url} target="_blank" rel="noopener noreferrer" className="work-screen-link">
+                    <img className="work-img" src={it.image} alt={it.t} loading="lazy" decoding="async" width={1200} height={750} />
+                  </a>
+                ) : (
+                  <img className="work-img" src={it.image} alt={it.t} loading="lazy" decoding="async" width={1200} height={750} />
+                )
               ) : (
                 <WorkScreen kind={it.kind} />
               )}
             </div>
-            <p style={{color:'var(--muted)', fontSize:14}}>{it.m}</p>
+            <p className="work-desc">{it.m}</p>
           </article>
         ))}
         </div>

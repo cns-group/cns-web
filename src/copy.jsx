@@ -47,8 +47,8 @@ export const COPY = {
       titleEm: 'que hicimos',
       lead: 'Ellos ya confiaron en nosotros.',
       items: [
-        { n: '01', cat: 'Ecommerce',   t: 'Impacto Tienda',         m: 'Plan Pro integrado end to end, acompañamiento en cada paso. Multiscrsal Formosa/Corrientes', kind: 'shop', image: '/cliente2.webp' },
-        { n: '02', cat: 'Turnero personalizado', t: 'Barbería Authentic', m: 'Turnero personalizado para la barbería Authentic. De Bariloche Argentina', kind: 'orders', image: '/cliente1.webp' },
+        { n: '01', cat: 'Ecommerce',   t: 'Impacto Tienda',         m: 'Plan Pro integrado end to end, acompañamiento en cada paso. Multiscrsal Formosa/Corrientes', kind: 'shop', image: '/cliente2.webp', url: 'https://www.impactotienda.com' },
+        { n: '02', cat: 'Turnero personalizado', t: 'Barbería Authentic', m: 'Turnero personalizado para la barbería Authentic. De Bariloche Argentina', kind: 'orders', image: '/cliente1.webp', url: 'https://www.authenticbarberia.com' },
         // { cat: 'Gastronomía', t: 'Almacén del Sur — 3 sucursales', m: 'Comandas, stock y delivery unificado. Tiempo de salida ↓ 38%.', kind: 'orders', image: '/clienteauthentic.png' },
         // { cat: 'E-ticketera', t: 'Festival Pachamama 2025',         m: '14.000 entradas vendidas. Validación QR sin internet en puerta.', kind: 'ticket', image: '/clienteimpacto.jpeg' },
       ],
@@ -114,7 +114,7 @@ export const COPY = {
         'Mercado Pago', 'Visa', 'Mastercard', 'Transferencia (CBU/CVU)','Efectivo',
       ],
       tabs: [
-        { id: 'ecommerce', n: '01', name: 'Ecommerce',     intro: 'Vendé online 24/7.',         lead: 'Tienda propia con catálogo, carrito, pasarela de pago integrada. Es tu plataforma.' },
+        { id: 'ecommerce', n: '01', name: 'Ecommerce',     intro: 'Vendé online 24/7. Controla tu negocio desde cualquier lugar.',         lead: 'Tienda propia con catálogo, carrito, pasarela de pago integrada. Es tu plataforma.' },
         { id: 'ticket',    n: '02', name: 'E-ticketera',   intro: 'Vendé entradas y validá QR en la puerta.',     lead: 'Para boliches, teatros, espectáculos y eventos corporativos. Cobrá con Mercado Pago o transferencia y seguí al evento.' },
         { id: 'gastro',    n: '03', name: 'Gastronomía',   intro: 'Mozo, cocina, delivery y caja, en un mismo sistema.',  lead: 'QR para mesas y mostrador, pantalla de pedidos en cocina, seguimiento de delivery, stock por insumo y arqueo de caja.' },
         { id: 'gym',       n: '04', name: 'Gimnasios',     intro: 'Socios, cuotas y acceso QR sin volverte loco.',         lead: 'Débito automático, control de acceso por QR, clases con cupo, métricas de retención. Para gimnasios, estudios, pilates, crossfit.' },
@@ -365,8 +365,8 @@ export const COPY = {
       titleEm: 'we shipped',
       lead: 'A sample. More under NDA — ask us for a private demo.',
       items: [
-        { n: '01', cat: 'Ecommerce',   t: 'Impacto Tienda',         m: 'Pro plan integrated end to end. Multi-store Formosa/Corrientes.', kind: 'shop', image: '/cliente2.webp' },
-        { n: '02', cat: 'Custom queue', t: 'Barbería Authentic', m: 'Custom booking for Authentic barbershop. Bariloche, Argentina.', kind: 'orders', image: '/cliente1.webp' },
+        { n: '01', cat: 'Ecommerce',   t: 'Impacto Tienda',         m: 'Pro plan integrated end to end. Multi-store Formosa/Corrientes.', kind: 'shop', image: '/cliente2.webp', url: 'https://www.impactotienda.com' },
+        { n: '02', cat: 'Custom queue', t: 'Barbería Authentic', m: 'Custom booking for Authentic barbershop. Bariloche, Argentina.', kind: 'orders', image: '/cliente1.webp', url: 'https://www.authenticbarberia.com' },
       ],
     },
     stack: {

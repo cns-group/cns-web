@@ -8,7 +8,7 @@ function PayIcon({ name }) {
       display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
       width: 22, height: 16, borderRadius: 3,
       background: 'var(--surface-2)', color: 'var(--fg-2)',
-      fontFamily: 'var(--f-mono)', fontSize: 9, fontWeight: 600, letterSpacing: 0,
+      fontFamily: 'var(--f-mono)', fontSize: 11, fontWeight: 600, letterSpacing: 0,
       border: '1px solid var(--line-2)',
     }}>{initials}</span>
   )
