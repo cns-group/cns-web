@@ -127,33 +127,6 @@ function PlanCard({ plan, productName, c, lang }) {
   )
 }
 
-function PlansProductBlock({ tab, c, lang }) {
-  return (
-    <section className="plans-product" id={`plan-${tab.id}`}>
-      <header className="plans-product-hd">
-        <span className="plans-product-num">/ {tab.n}</span>
-        <h3 className="plans-product-title">{tab.name}</h3>
-        <p className="plans-product-intro">{tab.intro}</p>
-        <p className="plans-product-lead">{tab.lead}</p>
-      </header>
-      <div className="plans-grid">
-        {(c.plans.software[tab.id] || []).map((tier, i) => (
-          <PlanCard key={i} plan={tier} productName={tab.name} c={c} lang={lang} />
-        ))}
-      </div>
-    </section>
-  )
-}
-
-function scrollToPlanProduct(tabId) {
-  const isMobile = window.matchMedia('(max-width: 880px)').matches
-  if (!isMobile) return
-  const el = document.getElementById(`plan-${tabId}`)
-  if (!el) return
-  const top = el.getBoundingClientRect().top + window.scrollY - 72
-  window.scrollTo({ top, behavior: 'smooth' })
-}
-
 export function Plans({ c, lang, activeTab = 'ecommerce', onTabChange }) {
   const p = c.plans
   const tabIds = p.tabs.map(t => t.id)
@@ -163,12 +136,7 @@ export function Plans({ c, lang, activeTab = 'ecommerce', onTabChange }) {
 
   const selectTab = (id) => {
     onTabChange?.(id)
-    scrollToPlanProduct(id)
   }
-
-  React.useEffect(() => {
-    scrollToPlanProduct(active)
-  }, [active])
 
   return (
     <section className="sec" id="planes" style={{paddingTop: 0}}>
@@ -185,7 +153,6 @@ export function Plans({ c, lang, activeTab = 'ecommerce', onTabChange }) {
 
       <PayStrip c={c} />
 
-      {/* Desktop: pestañas horizontales */}
       <div className="plans-tabs-wrap">
         <div className="plans-tabs" role="tablist">
           {p.tabs.map(t => (
@@ -218,13 +185,6 @@ export function Plans({ c, lang, activeTab = 'ecommerce', onTabChange }) {
             ))}
           </div>
         </div>
-      </div>
-
-      {/* Mobile: todos los productos visibles, sin scroll horizontal */}
-      <div className="plans-catalog">
-        {p.tabs.map(t => (
-          <PlansProductBlock key={t.id} tab={t} c={c} lang={lang} />
-        ))}
       </div>
     </section>
   )
