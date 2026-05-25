@@ -5,9 +5,11 @@ import {
   TweakColor, TweakSelect, TweakSlider, TweakRadio,
 } from './tweaks-panel'
 import { Nav, Hero, Marquee } from './sections-top'
-import { Services, Process } from './sections-mid'
+import { Process } from './sections-mid'
 import { Plans } from './sections-plans'
 import { Work, Stack, Quotes, Metrics, FAQ, Contact, Footer } from './sections-bot'
+import { scrollToSection } from './scroll'
+import { WhatsAppFloat } from './whatsapp-float'
 
 const TWEAK_DEFAULTS = {
   "palette":     ["#0e0e0c", "#f5f1e8", "#d97757", "#7a8f5c"],
@@ -26,7 +28,7 @@ const PALETTES = [
   ["#1a1f2e", "#e8d5b7", "#c97064", "#6b8e9f"],
 ]
 
-const DISPLAY_FONTS = ['Bebas Neue', 'Bricolage Grotesque', 'Instrument Serif']
+const DISPLAY_FONTS = ['Bebas Neue', 'Bricolage Grotesque']
 
 function applyTheme(t) {
   const root = document.documentElement
@@ -75,30 +77,25 @@ export default function App() {
   React.useEffect(() => { applyTheme(t) }, [t])
 
   const scrollToContact = React.useCallback(() => {
-    const el = contactRef.current
-    if (!el) return
-    window.scrollTo({
-      top: el.getBoundingClientRect().top + window.scrollY - 60,
-      behavior: 'smooth',
-    })
-    el.querySelector('input, select, textarea')?.focus({ preventScroll: true })
+    scrollToSection('contacto', { focus: true })
   }, [])
 
   return (
     <div className="app">
-      <Nav c={c} onContact={scrollToContact} />
-      <Hero c={c} lang={t.lang} onContact={scrollToContact} />
+      <Nav c={c} onContact={scrollToContact} onSection={scrollToSection} />
+      <Hero c={c} lang={t.lang} onContact={scrollToContact} onSection={scrollToSection} />
       <Marquee items={c.marquee} />
-      <Services c={c} />
-      <Plans c={c} lang={t.lang} />
+      <Plans c={c} lang={t.lang} onSection={scrollToSection} />
       <Process c={c} />
-      <Metrics c={c} />
+      {/* <Metrics c={c} /> */}
       <Work c={c} />
-      <Stack c={c} />
+      {/* <Stack c={c} /> */}
       <Quotes c={c} />
       <FAQ c={c} />
       <Contact c={c} ctaRef={contactRef} />
       <Footer c={c} />
+
+      <WhatsAppFloat />
 
       <TweaksPanel title="Tweaks · Código Norte">
         <TweakSection label="Palette" />

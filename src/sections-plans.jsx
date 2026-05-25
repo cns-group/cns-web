@@ -1,4 +1,5 @@
 import React from 'react'
+import { sectionClick } from './scroll'
 
 function PayIcon({ name }) {
   const initials = name.split(/[ /]/).map(s => s[0]).join('').slice(0, 2).toUpperCase()
@@ -37,7 +38,7 @@ function fmtMoney(n, lang) {
   return n.toLocaleString('en-US').replace(/,/g, sep)
 }
 
-function PlanCard({ plan, c, lang }) {
+function PlanCard({ plan, c, lang, onSection }) {
   const p = c.plans
   const isCommission = typeof plan.price === 'string' && plan.priceNum
   const isOneOff     = plan.priceLead != null
@@ -109,7 +110,11 @@ function PlanCard({ plan, c, lang }) {
       </ul>
 
       <div className="plan-cta">
-        <a href="#contacto" className={`btn ${plan.featured ? 'btn-primary' : 'btn-ghost'} btn-lg`}>
+        <a
+          href="#contacto"
+          className={`btn ${plan.featured ? 'btn-primary' : 'btn-ghost'} btn-lg`}
+          onClick={sectionClick('contacto', onSection, { focus: true })}
+        >
           {plan.tier === 'Pro' ? p.ctaPro : `${p.cta} ${plan.tier}`}
           <svg className="arr" width="12" height="12" viewBox="0 0 11 11" fill="none">
             <path d="M2 9L9 2M9 2H3.5M9 2V7.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
@@ -120,7 +125,7 @@ function PlanCard({ plan, c, lang }) {
   )
 }
 
-export function Plans({ c, lang }) {
+export function Plans({ c, lang, onSection }) {
   const p = c.plans
   const [active, setActive] = React.useState('ecommerce')
   const tab = p.tabs.find(t => t.id === active) || p.tabs[0]
@@ -133,10 +138,7 @@ export function Plans({ c, lang }) {
           <div className="sec-num">{p.eyebrow}</div>
           <h2>
             {p.title}{' '}
-            <span style={{
-              fontFamily:'var(--f-serif)', fontStyle:'italic', fontWeight:400,
-              color:'var(--accent)', textTransform:'none', fontSize:'0.92em',
-            }}>{p.titleEm}</span>
+            <span className="title-em">{p.titleEm}</span>
           </h2>
         </div>
         <p className="lead">{p.lead}</p>
@@ -161,30 +163,26 @@ export function Plans({ c, lang }) {
         <div className="plans-intro">
           <h3>
             {tab.name}
-            <span style={{
-              fontFamily:'var(--f-serif)', fontStyle:'italic', fontWeight:400,
-              color:'var(--accent)', textTransform:'none', fontSize:'0.78em',
-              marginLeft: 16,
-            }}>— {tab.intro}</span>
+            <span className="title-em">— {tab.intro}</span>
           </h3>
           <p>{tab.lead}</p>
         </div>
 
         <div className="plans-grid">
           {tiers.map((tier, i) => (
-            <PlanCard key={i} plan={tier} c={c} lang={lang} />
+            <PlanCard key={i} plan={tier} c={c} lang={lang} onSection={onSection} />
           ))}
         </div>
       </div>
 
-      <div className="plans-foot">
+      {/* <div className="plans-foot">
         {p.footer.map((f, i) => (
           <div key={i} className="ff">
             <h6>{f.h}</h6>
             <p>{f.p}</p>
           </div>
         ))}
-      </div>
+      </div> */}
     </section>
   )
 }

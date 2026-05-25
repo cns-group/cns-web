@@ -16,7 +16,11 @@ export function Work({ c }) {
             </div>
             <h3 className="work-title">{it.t}</h3>
             <div className="work-screen">
-              <WorkScreen kind={it.kind} />
+              {it.image ? (
+                <img className="work-img" src={it.image} alt={it.t} loading="lazy" />
+              ) : (
+                <WorkScreen kind={it.kind} />
+              )}
             </div>
             <p style={{color:'var(--muted)', fontSize:14}}>{it.m}</p>
           </article>
@@ -51,6 +55,10 @@ export function Quotes({ c }) {
       <div className="quotes">
         {q.items.map((it, i) => (
           <figure key={i} className="quote">
+            <span className="quote-index" aria-hidden="true">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <span className="quote-mark" aria-hidden="true">“</span>
             <blockquote className="quote-text">{it.q}</blockquote>
             <figcaption className="quote-by">
               <div className="quote-av">{it.av}</div>
@@ -180,12 +188,6 @@ export function Contact({ c, ctaRef }) {
               <p>{a.body}</p>
             </div>
           ))}
-          <div className="callout">
-            <strong style={{color:'var(--accent)'}}>+ </strong>
-            {c.nav.links[0].label === 'Servicios'
-              ? 'Si estás en Jujuy, Salta o Tucumán, vamos a tu local. Sin cargo, sin compromiso.'
-              : 'If you\'re in Jujuy, Salta or Tucumán, we visit your place. Free, no strings.'}
-          </div>
         </aside>
       </div>
     </section>
@@ -197,24 +199,26 @@ export function Footer({ c }) {
   return (
     <>
       <footer className="footer">
-        <div className="footer-col">
-          <div className="row" style={{gap:10, marginBottom:14}}>
-            <img
-              src="/cnlogo.png"
-              alt="Código Norte"
-              style={{ height: 44, borderRadius: 6, background: '#fff', padding: '2px 6px' }}
-            />
-          </div>
-          <p style={{color:'var(--muted)', fontSize:13.5, maxWidth:'34ch', lineHeight:1.55}}>
-            {c.nav.links[0].label === 'Servicios'
-              ? 'Software a medida desde San Salvador de Jujuy, para todo el norte y un poco más allá.'
-              : 'Custom software from San Salvador de Jujuy, for the north and a bit beyond.'}
-          </p>
+        <div className="footer-col footer-brand">
+          <a className="nav-logo footer-logo" href="#top" aria-label="Código Norte — inicio">
+            <img src="/cnslogo.png" alt="Código Norte" style={{ width: 68 }} />
+          </a>
+          <p className="footer-tagline">{f.tagline}</p>
         </div>
         {f.cols.map((col, i) => (
           <div key={i} className="footer-col">
             <h5>{col.h}</h5>
-            {col.links.map(l => <a key={l} href="#">{l}</a>)}
+            <nav aria-label={col.h}>
+              {col.links.map((link, j) => (
+                <a
+                  key={j}
+                  href={link.href}
+                  {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                >
+                  {link.label}
+                </a>
+              ))}
+            </nav>
           </div>
         ))}
       </footer>
