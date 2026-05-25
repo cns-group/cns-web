@@ -44,7 +44,7 @@ export function Nav({ c, onSection }) {
         </div>
 
         <div className="nav-actions">
-          <div className="nav-cta">
+          <div className="nav-cta nav-cta--desktop">
             <span className="pill nav-status">
               <span className="dot pulse" />
               <span>{c.nav.status}</span>
@@ -77,10 +77,7 @@ export function Nav({ c, onSection }) {
       >
         <div className="nav-drawer-panel" onClick={e => e.stopPropagation()}>
           <div className="nav-drawer-hd">
-            <span className="pill">
-              <span className="dot pulse" />
-              <span>{c.nav.status}</span>
-            </span>
+            <span className="nav-drawer-title">Menú</span>
             <button type="button" className="nav-drawer-close" aria-label="Cerrar" onClick={close}>×</button>
           </div>
           <nav className="nav-drawer-links" aria-label="Menú móvil">
