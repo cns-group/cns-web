@@ -196,14 +196,14 @@ export const COPY = {
           ] },
         ],
         gym: [
-          { tier: 'Starter', tag: 'STR', sub: 'Gym de barrio / estudio', price: 80000, setup: 25000, feats: [
+          { tier: 'Starter', tag: 'STR', sub: 'Gym de barrio / estudio', price: 100000, setup: 25000, feats: [
             ['Hasta', '100 socios activos'], ['', '1 sede'],
             ['','Sistema de notificaciones'],
             ['', 'Control de acceso por QR o DNI'],
             ['', 'Gestión de miembros y pagos manuales'],
             ['Soporte', 'personalizado'],
           ], muted: ['Sin pagos online', 'Sin clases personalizadas', 'Sin rutinas y programas de entrenamiento'] },
-          { tier: 'Grow', tag: 'GRW', sub: 'Gimnasio establecido', price: 100000, setup: 25000, featured: true, feats: [
+          { tier: 'Grow', tag: 'GRW', sub: 'Gimnasio establecido', price: 150000, setup: 25000, featured: true, feats: [
             ['', 'Todo lo de Starter, más:'], ['Hasta', '300 socios activos'], ['', 'Hasta 3 sedes'], 
             ['', 'Panel de entrenadores'],
             ['Pagos', 'online Mercado Pago, Transferencia, tarjetas'], ['', 'Gestión de eventos'],
