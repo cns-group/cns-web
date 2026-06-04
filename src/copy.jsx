@@ -49,8 +49,8 @@ export const COPY = {
       items: [
         { n: '01', cat: 'Ecommerce',   t: 'Impacto Tienda',         m: 'Plan Pro integrado end to end, acompañamiento en cada paso. Multisucursal Formosa/Corrientes', kind: 'shop', image: '/cliente2.webp', url: 'https://www.impactotienda.com.ar' },
         { n: '02', cat: 'Turnero personalizado', t: 'Barbería Authentic', m: 'Turnero personalizado para la barbería Authentic. De Bariloche Argentina', kind: 'orders', image: '/cliente1.webp', url: 'https://www.authenticbarberia.com' },
-        // { cat: 'Gastronomía', t: 'Almacén del Sur — 3 sucursales', m: 'Comandas, stock y delivery unificado. Tiempo de salida ↓ 38%.', kind: 'orders', image: '/clienteauthentic.png' },
-        // { cat: 'E-ticketera', t: 'Festival Pachamama 2025',         m: '14.000 entradas vendidas. Validación QR sin internet en puerta.', kind: 'ticket', image: '/clienteimpacto.jpeg' },
+        { n: '03', cat: 'Landing profesional', t: 'Legales MV Kulman', m: 'Landing profesional para la abogada Veronica Kulman. De Entre Rios, Argentina', kind: 'orders', image: '/cliente3.webp', url: 'https://legalesmvkulman.com' },
+        { n: '04', cat: 'Gimnasio', t: 'Buena Vida', m: 'Sistema de gestión de gimnasio grow para el Gimnasio Buena Vida. De Formosa, Argentina', kind: 'orders', image: '/cliente4.webp', url: 'https://buenavidaarg.com' },
       ],
     },
     stack: {
@@ -367,6 +367,7 @@ export const COPY = {
       items: [
         { n: '01', cat: 'Ecommerce',   t: 'Impacto Tienda',         m: 'Pro plan integrated end to end. Multi-store Formosa/Corrientes.', kind: 'shop', image: '/cliente2.webp', url: 'https://www.impactotienda.com' },
         { n: '02', cat: 'Custom queue', t: 'Barbería Authentic', m: 'Custom booking for Authentic barbershop. Bariloche, Argentina.', kind: 'orders', image: '/cliente1.webp', url: 'https://www.authenticbarberia.com' },
+        { n: '03', cat: 'Professional landing', t: 'Legales MV Kulman', m: 'Professional landing for Veronica Kulman. Entre Rios, Argentina.', kind: 'orders', image: '/cliente3.webp', url: 'https://legalesmvkulman.com' },
       ],
     },
     stack: {
