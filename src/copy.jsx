@@ -290,16 +290,127 @@ export const COPY = {
         { h: 'Por WhatsApp' },
       ],
     },
+    legal: {
+      back: '← Volver al inicio',
+      terms: {
+        title: 'Términos y Condiciones',
+        updatedLabel: 'Última actualización',
+        updated: '16 de junio de 2026',
+        sections: [
+          {
+            title: '1. Uso del servicio',
+            paragraphs: [
+              'Codigo Norte Soluciones provee herramientas SaaS para automatización de comunicaciones, notificaciones y gestión de procesos.',
+            ],
+          },
+          {
+            title: '2. Responsabilidad del usuario',
+            intro: 'El usuario se compromete a:',
+            bullets: [
+              'No usar la plataforma para spam',
+              'Cumplir con políticas de Meta y WhatsApp',
+              'No enviar contenido ilegal',
+            ],
+          },
+          {
+            title: '3. Integraciones externas',
+            paragraphs: [
+              'El servicio puede depender de APIs externas (como Meta/WhatsApp). No garantizamos disponibilidad continua de dichos servicios.',
+            ],
+          },
+          {
+            title: '4. Limitación de responsabilidad',
+            intro: 'No nos responsabilizamos por:',
+            bullets: [
+              'Fallas de servicios externos',
+              'Pérdidas indirectas',
+            ],
+          },
+          {
+            title: '5. Cancelación',
+            paragraphs: [
+              'Nos reservamos el derecho de suspender cuentas que violen estas condiciones.',
+            ],
+          },
+        ],
+        contact: {
+          title: '6. Contacto',
+          email: 'codigonortesoluciones@gmail.com',
+        },
+      },
+      privacy: {
+        title: 'Política de Privacidad',
+        updatedLabel: 'Última actualización',
+        updated: '16 de junio de 2026',
+        sections: [
+          {
+            title: '1. Información que recopilamos',
+            intro: 'En Codigo Norte Soluciones (https://codigonortesoluciones.com), valoramos la privacidad de nuestros usuarios y clientes. Podemos recopilar:',
+            bullets: [
+              'Nombre y datos de contacto',
+              'Información de uso de la plataforma',
+              'Datos enviados a través de integraciones (por ejemplo, WhatsApp, APIs de terceros)',
+            ],
+          },
+          {
+            title: '2. Uso de la información',
+            intro: 'Utilizamos la información para:',
+            bullets: [
+              'Proveer y mejorar nuestros servicios SaaS',
+              'Gestionar comunicaciones automatizadas (notificaciones, recordatorios, etc.)',
+              'Brindar soporte técnico',
+            ],
+          },
+          {
+            title: '3. Integraciones con terceros',
+            paragraphs: [
+              'Nuestra plataforma puede integrarse con servicios como Meta (WhatsApp), APIs de mensajería y otras herramientas externas. El uso de estos servicios está sujeto a sus propias políticas de privacidad.',
+            ],
+          },
+          {
+            title: '4. Protección de datos',
+            paragraphs: [
+              'Implementamos medidas de seguridad para proteger la información contra accesos no autorizados.',
+            ],
+          },
+          {
+            title: '5. Compartición de datos',
+            intro: 'No vendemos datos personales. Solo compartimos información cuando es necesario para:',
+            bullets: [
+              'Proveer el servicio',
+              'Cumplir obligaciones legales',
+            ],
+          },
+          {
+            title: '6. Derechos del usuario',
+            paragraphs: [
+              'Los usuarios pueden solicitar acceso, modificación o eliminación de sus datos.',
+            ],
+          },
+        ],
+        contact: {
+          title: '7. Contacto',
+          email: 'codigonortesoluciones@gmail.com',
+        },
+      },
+    },
     footer: {
       tagline: 'Software a medida para todo el norte y más allá.',
       cols: [
         {
           h: 'Sitio',
           links: [
-            { label: 'Planes', href: '#planes' },
-            { label: 'Proceso', href: '#proceso' },
-            { label: 'Casos', href: '#casos' },
-            { label: 'Contacto', href: '#contacto' },
+            { label: 'Planes', href: '/#planes' },
+            { label: 'Proceso', href: '/#proceso' },
+            { label: 'Casos', href: '/#casos' },
+            { label: 'Contacto', href: '/#contacto' },
+          ],
+        },
+        {
+          h: 'Legal',
+          links: [
+            { label: 'Términos y condiciones', href: '/terminos' },
+            { label: 'Política de privacidad', href: '/privacidad' },
           ],
         },
         {
@@ -580,16 +691,127 @@ export const COPY = {
         { h: 'On WhatsApp' },
       ],
     },
+    legal: {
+      back: '← Back to home',
+      terms: {
+        title: 'Terms and Conditions',
+        updatedLabel: 'Last updated',
+        updated: 'June 16, 2026',
+        sections: [
+          {
+            title: '1. Use of the service',
+            paragraphs: [
+              'Codigo Norte Soluciones provides SaaS tools for communication automation, notifications, and process management.',
+            ],
+          },
+          {
+            title: '2. User responsibility',
+            intro: 'Users agree to:',
+            bullets: [
+              'Not use the platform for spam',
+              'Comply with Meta and WhatsApp policies',
+              'Not send illegal content',
+            ],
+          },
+          {
+            title: '3. External integrations',
+            paragraphs: [
+              'The service may depend on external APIs (such as Meta/WhatsApp). We do not guarantee continuous availability of those services.',
+            ],
+          },
+          {
+            title: '4. Limitation of liability',
+            intro: 'We are not liable for:',
+            bullets: [
+              'Failures of external services',
+              'Indirect losses',
+            ],
+          },
+          {
+            title: '5. Cancellation',
+            paragraphs: [
+              'We reserve the right to suspend accounts that violate these terms.',
+            ],
+          },
+        ],
+        contact: {
+          title: '6. Contact',
+          email: 'codigonortesoluciones@gmail.com',
+        },
+      },
+      privacy: {
+        title: 'Privacy Policy',
+        updatedLabel: 'Last updated',
+        updated: 'June 16, 2026',
+        sections: [
+          {
+            title: '1. Information we collect',
+            intro: 'At Codigo Norte Soluciones (https://codigonortesoluciones.com), we value the privacy of our users and clients. We may collect:',
+            bullets: [
+              'Name and contact details',
+              'Platform usage information',
+              'Data sent through integrations (e.g. WhatsApp, third-party APIs)',
+            ],
+          },
+          {
+            title: '2. Use of information',
+            intro: 'We use the information to:',
+            bullets: [
+              'Provide and improve our SaaS services',
+              'Manage automated communications (notifications, reminders, etc.)',
+              'Provide technical support',
+            ],
+          },
+          {
+            title: '3. Third-party integrations',
+            paragraphs: [
+              'Our platform may integrate with services such as Meta (WhatsApp), messaging APIs, and other external tools. Use of these services is subject to their own privacy policies.',
+            ],
+          },
+          {
+            title: '4. Data protection',
+            paragraphs: [
+              'We implement security measures to protect information against unauthorized access.',
+            ],
+          },
+          {
+            title: '5. Data sharing',
+            intro: 'We do not sell personal data. We only share information when necessary to:',
+            bullets: [
+              'Provide the service',
+              'Comply with legal obligations',
+            ],
+          },
+          {
+            title: '6. User rights',
+            paragraphs: [
+              'Users may request access to, modification of, or deletion of their data.',
+            ],
+          },
+        ],
+        contact: {
+          title: '7. Contact',
+          email: 'codigonortesoluciones@gmail.com',
+        },
+      },
+    },
     footer: {
       tagline: 'Custom software for the north and a bit beyond.',
       cols: [
         {
           h: 'Site',
           links: [
-            { label: 'Plans', href: '#planes' },
-            { label: 'Process', href: '#proceso' },
-            { label: 'Work', href: '#casos' },
-            { label: 'Contact', href: '#contacto' },
+            { label: 'Plans', href: '/#planes' },
+            { label: 'Process', href: '/#proceso' },
+            { label: 'Work', href: '/#casos' },
+            { label: 'Contact', href: '/#contacto' },
+          ],
+        },
+        {
+          h: 'Legal',
+          links: [
+            { label: 'Terms and conditions', href: '/terminos' },
+            { label: 'Privacy policy', href: '/privacidad' },
           ],
         },
         {
