@@ -69,6 +69,8 @@ await toWebp('cliente1.png', { maxWidth: 1200, quality: 80 })
 await toWebp('cliente2.png', { maxWidth: 1200, quality: 80 })
 await toWebp('cliente3.jpeg', { maxWidth: 1200, quality: 80 })
 await toWebp('cliente4.jpeg', { maxWidth: 1200, quality: 80 })
+await toWebp('cliente5.jpeg', { maxWidth: 1200, quality: 80 })
+await toWebp('cliente6.jpeg', { maxWidth: 1200, quality: 80 })
 await resizePng('cnslogo.png', 200)
 
 console.log('Done.')
