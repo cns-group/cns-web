@@ -3,42 +3,125 @@ import { SectionHeader } from './sections-mid'
 import { WorkScreen } from './mockups'
 import { WHATSAPP_URL, WHATSAPP_DISPLAY, EMAIL, INSTAGRAM_URL, INSTAGRAM_HANDLE } from './constants'
 
+function WorkCard({ it, i }) {
+  return (
+    <article className="work-card work-slide">
+      <div className="work-meta">
+        <div className="work-cat">{it.cat}</div>
+        <div className="work-cat">// {it.n ?? String(i + 1).padStart(2, '0')}</div>
+      </div>
+      <h3 className="work-title">
+        {it.url ? (
+          <a href={it.url} target="_blank" rel="noopener noreferrer">{it.t}</a>
+        ) : (
+          it.t
+        )}
+      </h3>
+      <div className="work-screen">
+        {it.image ? (
+          it.url ? (
+            <a href={it.url} target="_blank" rel="noopener noreferrer" className="work-screen-link">
+              <img className="work-img" src={it.image} alt={it.t} loading="lazy" decoding="async" width={1200} height={750} />
+            </a>
+          ) : (
+            <img className="work-img" src={it.image} alt={it.t} loading="lazy" decoding="async" width={1200} height={750} />
+          )
+        ) : (
+          <WorkScreen kind={it.kind} />
+        )}
+      </div>
+      <p className="work-desc">{it.m}</p>
+    </article>
+  )
+}
+
 export function Work({ c }) {
   const w = c.work
+  const count = w.items.length
+  const [active, setActive] = React.useState(0)
+  const trackRef = React.useRef(null)
+
+  const goTo = React.useCallback((idx) => {
+    const next = ((idx % count) + count) % count
+    trackRef.current?.children[next]?.scrollIntoView({
+      behavior: 'smooth',
+      inline: 'center',
+      block: 'nearest',
+    })
+    setActive(next)
+  }, [count])
+
+  React.useEffect(() => {
+    const track = trackRef.current
+    if (!track) return
+
+    const slides = [...track.children]
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const best = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
+        if (!best) return
+        const idx = slides.indexOf(best.target)
+        if (idx >= 0) setActive(idx)
+      },
+      { root: track, threshold: [0.55, 0.75, 1] },
+    )
+
+    slides.forEach((slide) => observer.observe(slide))
+    return () => observer.disconnect()
+  }, [count])
+
   return (
     <section className="sec" id="casos">
       <SectionHeader num={w.num} title={w.title} titleEm={w.titleEm} lead={w.lead} />
       <div className="work-wrap">
-        <div className={`work work--count-${w.items.length}`}>
-        {w.items.map((it, i) => (
-          <article key={i} className="work-card">
-            <div className="work-meta">
-              <div className="work-cat">{it.cat}</div>
-              <div className="work-cat">// {it.n ?? String(i + 1).padStart(2, '0')}</div>
+        <div className="work-carousel" aria-roledescription="carousel" aria-label={w.title}>
+          <div className="work-carousel-controls">
+            <span className="work-carousel-count" aria-live="polite">
+              {String(active + 1).padStart(2, '0')} / {String(count).padStart(2, '0')}
+            </span>
+            <div className="work-carousel-nav">
+              <button
+                type="button"
+                className="work-carousel-btn"
+                aria-label={w.carouselPrev}
+                onClick={() => goTo(active - 1)}
+              >
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                  <path d="M9 2L4 7L9 12" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+              <div className="work-carousel-dots" role="tablist" aria-label={w.carouselDots}>
+                {w.items.map((it, i) => (
+                  <button
+                    key={it.n ?? i}
+                    type="button"
+                    role="tab"
+                    className={`work-carousel-dot${active === i ? ' active' : ''}`}
+                    aria-label={`${it.t} (${i + 1}/${count})`}
+                    aria-selected={active === i}
+                    onClick={() => goTo(i)}
+                  />
+                ))}
+              </div>
+              <button
+                type="button"
+                className="work-carousel-btn"
+                aria-label={w.carouselNext}
+                onClick={() => goTo(active + 1)}
+              >
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                  <path d="M5 2L10 7L5 12" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
             </div>
-            <h3 className="work-title">
-              {it.url ? (
-                <a href={it.url} target="_blank" rel="noopener noreferrer">{it.t}</a>
-              ) : (
-                it.t
-              )}
-            </h3>
-            <div className="work-screen">
-              {it.image ? (
-                it.url ? (
-                  <a href={it.url} target="_blank" rel="noopener noreferrer" className="work-screen-link">
-                    <img className="work-img" src={it.image} alt={it.t} loading="lazy" decoding="async" width={1200} height={750} />
-                  </a>
-                ) : (
-                  <img className="work-img" src={it.image} alt={it.t} loading="lazy" decoding="async" width={1200} height={750} />
-                )
-              ) : (
-                <WorkScreen kind={it.kind} />
-              )}
-            </div>
-            <p className="work-desc">{it.m}</p>
-          </article>
-        ))}
+          </div>
+          <div className="work-carousel-track" ref={trackRef}>
+            {w.items.map((it, i) => (
+              <WorkCard key={it.n ?? i} it={it} i={i} />
+            ))}
+          </div>
         </div>
       </div>
     </section>

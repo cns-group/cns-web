@@ -46,6 +46,9 @@ export const COPY = {
       title: 'Lo último',
       titleEm: 'que hicimos',
       lead: 'Ellos ya confiaron en nosotros.',
+      carouselPrev: 'Proyecto anterior',
+      carouselNext: 'Proyecto siguiente',
+      carouselDots: 'Proyectos',
       items: [
         { n: '01', cat: 'Ecommerce',   t: 'Impacto Tienda',         m: 'Plan Pro integrado end to end, acompañamiento en cada paso. Multisucursal Formosa/Corrientes', kind: 'shop', image: '/cliente2.webp', url: 'https://www.impactotienda.com.ar' },
         { n: '02', cat: 'Turnero personalizado', t: 'Barbería Authentic', m: 'Turnero personalizado para la barbería Authentic. De Bariloche Argentina', kind: 'orders', image: '/cliente1.webp', url: 'https://www.authenticbarberia.com' },
@@ -475,6 +478,9 @@ export const COPY = {
       title: 'Latest',
       titleEm: 'we shipped',
       lead: 'A sample. More under NDA — ask us for a private demo.',
+      carouselPrev: 'Previous project',
+      carouselNext: 'Next project',
+      carouselDots: 'Projects',
       items: [
         { n: '01', cat: 'Ecommerce',   t: 'Impacto Tienda',         m: 'Pro plan integrated end to end. Multi-store Formosa/Corrientes.', kind: 'shop', image: '/cliente2.webp', url: 'https://www.impactotienda.com' },
         { n: '02', cat: 'Custom queue', t: 'Barbería Authentic', m: 'Custom booking for Authentic barbershop. Bariloche, Argentina.', kind: 'orders', image: '/cliente1.webp', url: 'https://www.authenticbarberia.com' },
