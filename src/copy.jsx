@@ -53,8 +53,9 @@ export const COPY = {
         { n: '01', cat: 'Ecommerce',   t: 'Impacto Tienda',         m: 'Plan Pro integrado end to end, acompañamiento en cada paso. Multisucursal Formosa/Corrientes', kind: 'shop', image: '/cliente2.webp', url: 'https://www.impactotienda.com.ar' },
         { n: '02', cat: 'Turnero personalizado', t: 'Barbería Authentic', m: 'Turnero personalizado para la barbería Authentic. De Bariloche Argentina', kind: 'orders', image: '/cliente1.webp', url: 'https://www.authenticbarberia.com' },
         { n: '03', cat: 'Landing profesional', t: 'Legales MV Kulman', m: 'Landing profesional para la abogada Veronica Kulman. De Entre Rios, Argentina', kind: 'orders', image: '/cliente3.webp', url: 'https://legalesmvkulman.com' },
-        { n: '04', cat: 'Landing personalizada', t: 'Patagonia Inquieta', m: 'Sistema de reserva de torus por la Patagonia. De Bariloche, Argentina', kind: 'orders', image: '/cliente5.webp', url: 'https://www.patagoniainquieta.com' },
-        { n: '04', cat: 'Gimnasio', t: 'CR-ONF', m: 'Sistema de gestión de gimnasio grow para el Gimnasio CR-ONFIT. De Formosa, Argentina', kind: 'orders', image: '/cliente6.webp', url: 'https://www.cronfit.com.ar' },
+        { n: '04', cat: 'Gimnasio', t: 'Buena Vida', m: 'Sistema de gestión de gimnasio grow para el Gimnasio Buena Vida. De Formosa, Argentina', kind: 'orders', image: '/cliente4.webp', url: 'https://buenavidaarg.com' },
+        { n: '05', cat: 'Landing personalizada', t: 'Patagonia Inquieta', m: 'Sistema de reserva de torus por la Patagonia. De Bariloche, Argentina', kind: 'orders', image: '/cliente5.webp', url: 'https://www.patagoniainquieta.com' },
+        { n: '06', cat: 'Gimnasio', t: 'CR-ONF', m: 'Sistema de gestión de gimnasio grow para el Gimnasio CR-ONFIT. De Formosa, Argentina', kind: 'orders', image: '/cliente6.webp', url: 'https://www.cronfit.com.ar' },
       ],
     },
     stack: {
