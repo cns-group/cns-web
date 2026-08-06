@@ -1,5 +1,5 @@
 /** IDs internos de pestaña en copy.plans.tabs */
-export const PLAN_TAB_IDS = ['ecommerce', 'ticket', 'gastro', 'gym', 'queue', 'landing']
+export const PLAN_TAB_IDS = ['ecommerce', 'gym', 'queue', 'landing', 'ticket', 'gastro']
 
 /** Slug en URL → id de pestaña */
 const SLUG_TO_TAB = {

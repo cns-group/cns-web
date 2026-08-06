@@ -3,6 +3,7 @@ export const COPY = {
     nav: {
       links: [
         { id: 'planes',    label: 'Planes' },
+        { id: 'desarrollo-a-medida', label: 'A medida' },
         { id: 'proceso',   label: 'Proceso' },
         { id: 'casos',     label: 'Casos' },
         { id: 'contacto',  label: 'Contacto' },
@@ -120,13 +121,14 @@ export const COPY = {
       ],
       tabs: [
         { id: 'ecommerce', n: '01', name: 'Ecommerce',     intro: 'Vendé online 24/7. Controla tu negocio desde cualquier lugar.',         lead: 'Tienda propia con catálogo, carrito, pasarela de pago integrada. Es tu plataforma.' },
-        { id: 'ticket',    n: '02', name: 'E-ticketera',   intro: 'Vendé entradas y validá QR en la puerta.',     lead: 'Para boliches, teatros, espectáculos y eventos corporativos. Cobrás con Mercado Pago o transferencia y seguí al evento.' },
-        { id: 'gastro',    n: '03', name: 'Gastronomía',   intro: 'Mozo, cocina, delivery y caja, en un mismo sistema.',  lead: 'QR para mesas y mostrador, pantalla de pedidos en cocina, seguimiento de delivery, stock por insumo y arqueo de caja.' },
-        { id: 'gym',       n: '04', name: 'Gimnasios',     intro: 'Socios, cuotas y acceso QR sin volverte loco.',         lead: 'Débito automático, control de acceso por QR, clases con cupo, métricas de retención. Para gimnasios, estudios, pilates, crossfit.' },
-        { id: 'queue',     n: '05', name: 'Turneros',      intro: 'Crea tu propia marca personal y tomá el control.',     lead: 'Para profesionales particulares, clínicas y consultorios. Automatiza tus reservas y funciona 24/7.' },
-        { id: 'landing',   n: '06', name: 'Landing pro',   intro: 'Tu cara online — sin templates de Wix.',                lead: 'Sitio profesional para abogados, contadores, médicos, arquitectos. Diseño a medida, formularios serios.' },
+        { id: 'gym',       n: '02', name: 'Gimnasios',     intro: 'Socios, cuotas y acceso QR sin volverte loco.',         lead: 'Débito automático, control de acceso por QR, clases con cupo, métricas de retención. Para gimnasios, estudios, pilates, crossfit.' },
+        { id: 'queue',     n: '03', name: 'Turneros',      intro: 'Crea tu propia marca personal y tomá el control.',     lead: 'Para profesionales particulares, clínicas y consultorios. Automatiza tus reservas y funciona 24/7.' },
+        { id: 'landing',   n: '04', name: 'Landing pro',   intro: 'Tu cara online — sin templates de Wix.',                lead: 'Sitio profesional para abogados, contadores, médicos, arquitectos. Diseño a medida, formularios serios.' },
+        { id: 'ticket',    n: '05', name: 'E-ticketera',   intro: 'Vendé entradas y validá QR en la puerta.',     lead: 'Para boliches, teatros, espectáculos y eventos corporativos. Cobrás con Mercado Pago o transferencia y seguí al evento.' },
+        { id: 'gastro',    n: '06', name: 'Gastronomía',   intro: 'Mozo, cocina, delivery y caja, en un mismo sistema.',  lead: 'QR para mesas y mostrador, pantalla de pedidos en cocina, seguimiento de delivery, stock por insumo y arqueo de caja.' },
       ],
       monthly: '/mes',
+      priceFrom: 'A partir de',
       setup: 'Costo de implementación',
       featured: 'Más elegido',
       footer: [
@@ -137,12 +139,12 @@ export const COPY = {
       software: {
         ecommerce: [
           { tier: 'Starter', tag: 'STR', sub: 'Para empezar a vender ya', price: 50000, setup: 25000, feats: [
-            ['Hasta', '200 productos'], ['', '1 sucursal · Panel admin/empleados'], ['', 'Catálogo + carrito + checkout hacia Whats App'],
+            ['Hasta', '50 productos'], ['', '1 sucursal · Panel admin/empleados'], ['', 'Catálogo + carrito + checkout hacia Whats App'],
             ['', 'Dominio + SSL + hosting incluido'],['Promociones', 'gestionás tus promociones por la web'],['Soporte', 'personalizado'],
           ], muted: ['Sin pasarela de pago integrada', 'Sin panel de ventas', 'Sin metodos de envio'] },
           { tier: 'Grow', tag: 'GRW', sub: 'Para vender en serio', price: 120000, setup: 25000, featured: true, feats: [
             ['', 'Todo lo de Starter, más:'], ['Catálogo:', 'Sin límite de productos'], ['', '2 sucursales, varios locales'],
-            ['Pagos:', 'MP, Transferencia, Tarjetas'],
+            ['Pagos:', 'Mercado Pago, Transferencia, Tarjetas'],
             ['', 'Sin límite de usuarios'],
             ['', 'Integración con Correo Argentino / Andreani'],
             ['Soporte', 'personalizado'],
@@ -151,7 +153,7 @@ export const COPY = {
             ['', 'Todo lo de Starter, más:'],
             ['', 'Productos ilimitados'], ['', 'Multi-sucursal'],
             ['', 'Sin límite de usuarios'],
-            ['Pagos:', 'MP, Transferencia, Tarjetas'],
+            ['Pagos:', 'Mercado Pago, Transferencia, Tarjetas'],
             ['', 'Integración con Correo Argentino / Andreani'],
             ['Soporte', 'dedicado prioritario'],
           ] },
@@ -166,7 +168,7 @@ export const COPY = {
           { tier: 'Grow', tag: 'GRW', sub: 'Festivales y eventos medianos', price: 'comisión', priceNum: '5%', priceSuffix: 'por ticket vendido', setup: 25000, featured: true,
              feats: [
             ['', 'Sin límite de entradas'], ['', 'Todos los tipos de entrada (general, vip, early, free)'], ['', 'Múltiples eventos simultáneos'], 
-            ['Pagos:', 'MP + Transferencia + tarjetas + débito'],
+            ['Pagos:', 'Mercado Pago + Transferencia + tarjetas + débito'],
             ['Galería de fotos', 'para potenciar tu comunidad online'],
             ['Sistema de RRPP','incluido con links de pago'], ['', 'QR validable desde el celular'],
             ['', 'Reserva y gestión de mesas online, con menú propio'],
@@ -188,7 +190,7 @@ export const COPY = {
           { tier: 'Grow', tag: 'GRW', sub: 'Hasta 3 locales', price: 35000, setup: 25000, featured: true, feats: [
             ['', 'Todo lo de Starter, más:'], ['', '3 locales'],
             ['', 'Panel de pedidos de proveedores'], ['', 'Programa de fidelización'],
-            ['Pagos:', 'MP, Transferencia, tarjetas'],
+            ['Pagos:', 'Mercado Pago, Transferencia, tarjetas'],
             ['', 'Panel de registro de pagos'],
             ['', 'Panel de promociones'],
             ['Soporte', 'personalizado'],
@@ -262,6 +264,19 @@ export const COPY = {
       cta: 'Empezar con',
       ctaPro: 'Hablemos',
       currency: 'AR$',
+    },
+    customDev: {
+      eyebrow: '¿Nada encaja?',
+      title: 'Desarrollo de software',
+      titleEm: 'a medida',
+      lead: 'Si tu negocio necesita un sistema particular que no está en nuestros planes, lo diseñamos y construimos desde cero — con alcance claro y cotización fija.',
+      points: [
+        'Análisis de requerimientos y demo personalizada',
+        'Propuesta con presupuesto detallado',
+        'Entrega iterativa hasta producción',
+      ],
+      cta: 'Pedir cotización',
+      hint: 'Contanos qué necesitás construir y te respondemos con un presupuesto a medida.',
     },
     faq: {
       eyebrow: '05 — Preguntas',
@@ -406,6 +421,7 @@ export const COPY = {
           h: 'Sitio',
           links: [
             { label: 'Planes', href: '/#planes' },
+            { label: 'Desarrollo a medida', href: '/#desarrollo-a-medida' },
             { label: 'Proceso', href: '/#proceso' },
             { label: 'Casos', href: '/#casos' },
             { label: 'Contacto', href: '/#contacto' },
@@ -437,6 +453,7 @@ export const COPY = {
     nav: {
       links: [
         { id: 'planes',    label: 'Plans' },
+        { id: 'desarrollo-a-medida', label: 'Custom' },
         { id: 'proceso',   label: 'Process' },
         { id: 'casos',     label: 'Work' },
         { id: 'contacto',  label: 'Contact' },
@@ -539,13 +556,14 @@ export const COPY = {
       ],
       tabs: [
         { id: 'ecommerce', n: '01', name: 'Ecommerce',     intro: 'Sell online.',         lead: 'Your own store with catalog, cart, payment gateway. It\'s your platform.' },
-        { id: 'ticket',    n: '02', name: 'E-ticketera',   intro: 'Sell tickets and validate QR at the door.',  lead: 'For festivals, theatres, shows and corporate events. Charge with Mercado Pago, assign seats, enter the venue without internet.' },
-        { id: 'gastro',    n: '03', name: 'Restaurants',   intro: 'Waiter, kitchen, delivery and till — one system.',   lead: 'POS for tables and counter, KDS in the kitchen, in-house delivery, recipe-level stock and daily reconciliation.' },
-        { id: 'gym',       n: '04', name: 'Gyms',          intro: 'Members, fees and QR access without losing sleep.',  lead: 'Auto-debit, QR access control, classes with capacity, retention metrics. For gyms, studios, pilates, crossfit.' },
-        { id: 'queue',     n: '05', name: 'Queueing',      intro: 'Voice call-out, TV display and live metrics.',       lead: 'For clinics, public offices, banks and surgeries. Multi-counter, TTS, queue and service-time metrics.' },
-        { id: 'landing',   n: '06', name: 'Pro landing',   intro: 'Your face online — no Wix templates.',                lead: 'Professional site for lawyers, accountants, doctors, architects. Custom design, serious forms, local SEO.' },
+        { id: 'gym',       n: '02', name: 'Gyms',          intro: 'Members, fees and QR access without losing sleep.',  lead: 'Auto-debit, QR access control, classes with capacity, retention metrics. For gyms, studios, pilates, crossfit.' },
+        { id: 'queue',     n: '03', name: 'Queueing',      intro: 'Voice call-out, TV display and live metrics.',       lead: 'For clinics, public offices, banks and surgeries. Multi-counter, TTS, queue and service-time metrics.' },
+        { id: 'landing',   n: '04', name: 'Pro landing',   intro: 'Your face online — no Wix templates.',                lead: 'Professional site for lawyers, accountants, doctors, architects. Custom design, serious forms, local SEO.' },
+        { id: 'ticket',    n: '05', name: 'E-ticketera',   intro: 'Sell tickets and validate QR at the door.',  lead: 'For festivals, theatres, shows and corporate events. Charge with Mercado Pago, assign seats, enter the venue without internet.' },
+        { id: 'gastro',    n: '06', name: 'Restaurants',   intro: 'Waiter, kitchen, delivery and till — one system.',   lead: 'POS for tables and counter, KDS in the kitchen, in-house delivery, recipe-level stock and daily reconciliation.' },
       ],
       monthly: '/mo',
+      priceFrom: 'From',
       setup: 'Setup',
       featured: 'Most picked',
       footer: [
@@ -670,6 +688,19 @@ export const COPY = {
       cta: 'Start with',
       ctaPro: 'Let\'s talk',
       currency: 'AR$',
+    },
+    customDev: {
+      eyebrow: 'Nothing fits?',
+      title: 'Custom software',
+      titleEm: 'development',
+      lead: 'If your business needs a particular system that isn\'t in our plans, we design and build it from scratch — with clear scope and a fixed quote.',
+      points: [
+        'Requirements analysis and personalized demo',
+        'Detailed proposal and budget',
+        'Iterative delivery through to production',
+      ],
+      cta: 'Request a quote',
+      hint: 'Tell us what you need to build and we\'ll reply with a tailored estimate.',
     },
     faq: {
       eyebrow: '05 — Questions',
@@ -810,6 +841,7 @@ export const COPY = {
           h: 'Site',
           links: [
             { label: 'Plans', href: '/#planes' },
+            { label: 'Custom development', href: '/#desarrollo-a-medida' },
             { label: 'Process', href: '/#proceso' },
             { label: 'Work', href: '/#casos' },
             { label: 'Contact', href: '/#contacto' },

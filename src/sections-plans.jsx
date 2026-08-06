@@ -1,7 +1,37 @@
 import React from 'react'
-import { whatsappPlanUrl } from './constants'
+import { whatsappPlanUrl, whatsappCustomDevUrl } from './constants'
+
+function MercadoPagoIcon({ size = 22 }) {
+  const h = Math.round(size * 34 / 48)
+  return (
+    <img
+      src="/mercadopago.svg"
+      alt=""
+      width={size}
+      height={h}
+      style={{ display: 'block', borderRadius: 3, flexShrink: 0 }}
+    />
+  )
+}
+
+function FeatText({ text }) {
+  if (!text.includes('Mercado Pago')) return text
+  const parts = text.split('Mercado Pago')
+  return parts.map((part, i) => (
+    <React.Fragment key={i}>
+      {part}
+      {i < parts.length - 1 && (
+        <span className="feat-mp">
+          <MercadoPagoIcon size={18} />
+          Mercado Pago
+        </span>
+      )}
+    </React.Fragment>
+  ))
+}
 
 function PayIcon({ name }) {
+  if (name === 'Mercado Pago') return <MercadoPagoIcon />
   const initials = name.split(/[ /]/).map(s => s[0]).join('').slice(0, 2).toUpperCase()
   return (
     <span style={{
@@ -56,6 +86,7 @@ function PlanCard({ plan, productName, c, lang }) {
         {isCommission ? (
           <>
             <div className="plan-price">
+              <span className="plan-from">{p.priceFrom}</span>
               <span className="plan-num">{plan.priceNum}</span>
             </div>
             <div className="plan-setup">{plan.priceSuffix}</div>
@@ -70,6 +101,7 @@ function PlanCard({ plan, productName, c, lang }) {
         ) : isOneOff ? (
           <>
             <div className="plan-price">
+              <span className="plan-from">{p.priceFrom}</span>
               <span className="plan-currency">{p.currency}</span>
               <span className="plan-num">{fmtMoney(plan.priceLead, lang)}</span>
               <span className="plan-per">{lang === 'es' ? 'único' : 'one-off'}</span>
@@ -81,6 +113,7 @@ function PlanCard({ plan, productName, c, lang }) {
         ) : (
           <>
             <div className="plan-price">
+              <span className="plan-from">{p.priceFrom}</span>
               <span className="plan-currency">{p.currency}</span>
               <span className="plan-num">{fmtMoney(plan.price, lang)}</span>
               <span className="plan-per">{p.monthly}</span>
@@ -101,7 +134,7 @@ function PlanCard({ plan, productName, c, lang }) {
           <li key={i}>
             <span>
               {f[0] && <b>{f[0]} </b>}
-              {f[1]}
+              <FeatText text={f[1]} />
             </span>
           </li>
         ))}
@@ -190,6 +223,47 @@ export function Plans({ c, lang, activeTab = 'ecommerce', onTabChange }) {
           </div>
         </div>
       </div>
+
+      <CustomDev c={c} lang={lang} />
     </section>
+  )
+}
+
+export function CustomDev({ c, lang }) {
+  const d = c.customDev
+  const waUrl = whatsappCustomDevUrl(lang)
+
+  return (
+    <div className="custom-dev" id="desarrollo-a-medida" aria-labelledby="custom-dev-title">
+      <div className="custom-dev-inner">
+        <div className="custom-dev-copy">
+          <div className="custom-dev-eyebrow">{d.eyebrow}</div>
+          <h2 id="custom-dev-title" className="custom-dev-title">
+            {d.title}{' '}
+            <span className="title-em">{d.titleEm}</span>
+          </h2>
+          <p className="custom-dev-lead">{d.lead}</p>
+          <ul className="custom-dev-points">
+            {d.points.map((point) => (
+              <li key={point}>{point}</li>
+            ))}
+          </ul>
+        </div>
+        <div className="custom-dev-cta">
+          <a
+            href={waUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-primary btn-lg custom-dev-btn"
+          >
+            {d.cta}
+            <svg className="arr" width="12" height="12" viewBox="0 0 11 11" fill="none" aria-hidden="true">
+              <path d="M2 9L9 2M9 2H3.5M9 2V7.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+            </svg>
+          </a>
+          <p className="custom-dev-hint">{d.hint}</p>
+        </div>
+      </div>
+    </div>
   )
 }
