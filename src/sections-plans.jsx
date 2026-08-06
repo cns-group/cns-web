@@ -44,23 +44,6 @@ function PayIcon({ name }) {
   )
 }
 
-function PayStrip({ c }) {
-  const p = c.plans
-  return (
-    <section className="pay-strip" aria-label="Payment methods">
-      <span className="lbl">{p.payHd}</span>
-      <div className="pay-list">
-        {p.payMethods.map(m => (
-          <span key={m} className="pay-pill">
-            <PayIcon name={m} />
-            {m}
-          </span>
-        ))}
-      </div>
-      <span className="foot">{p.payFoot}</span>
-    </section>
-  )
-}
 
 function fmtMoney(n, lang) {
   if (typeof n !== 'number') return n
@@ -184,8 +167,6 @@ export function Plans({ c, lang, activeTab = 'ecommerce', onTabChange }) {
         </div>
         <p className="lead">{p.lead}</p>
       </div>
-
-      <PayStrip c={c} />
 
       <div className="plans-tabs-wrap">
         <div className="plans-tabs" role="tablist" aria-label={p.title}>
