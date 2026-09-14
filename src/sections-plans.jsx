@@ -42,7 +42,7 @@ function PayIcon({ name }) {
       border: '1px solid var(--line-2)',
     }}>{initials}</span>
   )
-}
+};
 
 
 function fmtMoney(n, lang) {

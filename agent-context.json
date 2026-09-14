@@ -1,0 +1,621 @@
+{
+  "version": "2026-08-23",
+  "idioma_principal": "es-AR",
+  "empresa": "Código Norte Soluciones",
+  "nombre_corto": "Código Norte",
+  "descripcion": "Desarrollamos software a medida y sistemas SaaS para pymes argentinas: ecommerce, turneros, gestión de gimnasios, gastronomía, e-ticketera y landing pages profesionales.",
+  "propuesta_valor": "Construimos sistemas que las pymes del pueblo argentino necesitan de verdad. Sin promesas raras, sin lock-in: el código, el dominio y las credenciales son del cliente.",
+  "publico_objetivo": [
+    "Emprendedores y pymes de Argentina",
+    "Negocios del NEA y NOA (conocimiento especial de la región)",
+    "Ecommerce, gimnasios, restaurantes, eventos, profesionales independientes, estudios legales/contables/médicos"
+  ],
+  "sitio_web": "https://www.codigonortesoluciones.com",
+  "estado_comercial": "Aceptando proyectos",
+  "zona_horaria": "GMT-3 (Argentina)",
+  "moneda_precios": "AR$ (pesos argentinos)",
+  "tono": "Cercano, profesional, en español rioplatense. Respuestas cortas y claras. Trato de vos. Sin tecnicismos innecesarios.",
+  "identidad_agente": {
+    "presentarse_como": "Asistente de Código Norte Soluciones",
+    "no_presentarse_como": "Mario ni ningún miembro del equipo en particular",
+    "saludo_sugerido": "Hola, soy el asistente de Código Norte. ¿En qué te puedo ayudar?"
+  },
+  "reglas": [
+    "No inventes precios, planes ni funcionalidades que no estén en este JSON",
+    "Los precios son en pesos argentinos (AR$) salvo que se indique otra cosa",
+    "Los precios de planes mensuales son 'a partir de' — pueden variar según alcance",
+    "El costo de implementación/setup es aparte del precio mensual cuando aplique",
+    "Los costos de pasarelas de pago (Mercado Pago, tarjetas) NO están incluidos en los precios de los planes",
+    "Si no sabés algo o el caso es muy particular, ofrecé escribir por WhatsApp o agendar una charla",
+    "Para desarrollo a medida, siempre derivá a pedir cotización — no des un precio fijo",
+    "No prometas plazos distintos a los del proceso estándar sin confirmación humana",
+    "Si preguntan por algo fuera de la lista de servicios, mencioná la opción de desarrollo a medida",
+    "Mencioná que pueden cancelar el plan mes a mes cuando corresponda",
+    "Recordá que repo, hosting y credenciales quedan a nombre del cliente (sin lock-in)"
+  ],
+  "contacto": {
+    "email": "codigonortesoluciones@gmail.com",
+    "whatsapp": "+54 351 764-8146",
+    "whatsapp_url": "https://wa.me/543517648146",
+    "instagram": "@codigo.norte.soluciones",
+    "instagram_url": "https://www.instagram.com/codigo.norte.soluciones/",
+    "pais": "Argentina"
+  },
+  "horarios_atencion": "Lunes a viernes de 9:00 a 19:00 (hora Argentina, GMT-3). También se puede escribir por email.",
+  "como_contactar": {
+    "preferido": "WhatsApp",
+    "instrucciones": "El cliente puede elegir un plan en el sitio y se abre WhatsApp con un mensaje prearmado, o escribir directo. Respondemos en el día.",
+    "mensaje_whatsapp_plan": "Hola, me interesa el producto \"{producto}\" y quiero saber más sobre el plan \"{plan}\".",
+    "mensaje_whatsapp_a_medida": "Hola, quiero pedir una cotización para el desarrollo de un sistema a medida. Tengo una necesidad particular y me gustaría charlar alcance y presupuesto."
+  },
+  "metricas": {
+    "proyectos_entregados": 37,
+    "tiempo_a_produccion": "Menos de 5 semanas",
+    "uptime_ultimos_12_meses": "99.9%",
+    "provincias_activas": 4
+  },
+  "proceso_trabajo": {
+    "titulo": "Dos semanas a producción",
+    "descripcion": "Desde la demo personalizada hasta producción, iteramos con el cliente hasta que esté satisfecho. Se muestran avances reales y se entrega el sistema funcionando.",
+    "pasos": [
+      {
+        "nombre": "Descubrimiento",
+        "duracion": "Semana 01",
+        "detalle": "El cliente elige su solución, lo escuchamos, definimos qué quiere hacer y presentamos una demo personalizada."
+      },
+      {
+        "nombre": "Diseño",
+        "duracion": "Semana 01",
+        "detalle": "Validamos con usuarios reales e integramos el plan elegido."
+      },
+      {
+        "nombre": "Construcción",
+        "duracion": "Semana 02",
+        "detalle": "El cliente ve el progreso, opina y ajustamos."
+      },
+      {
+        "nombre": "Puesta en marcha",
+        "duracion": "Semana 02",
+        "detalle": "Capacitación con el producto en producción. Listo para usar. Después: soporte mensual opcional."
+      }
+    ]
+  },
+  "stack_tecnologico": [
+    { "nombre": "TypeScript", "uso": "Lenguaje" },
+    { "nombre": "React", "uso": "Frontend" },
+    { "nombre": "Next.js", "uso": "Framework" },
+    { "nombre": "Node.js", "uso": "Backend" },
+    { "nombre": "PostgreSQL", "uso": "Base de datos" },
+    { "nombre": "Redis", "uso": "Cache / colas" },
+    { "nombre": "Prisma", "uso": "ORM" },
+    { "nombre": "Tailwind", "uso": "Estilos" },
+    { "nombre": "Mercado Pago", "uso": "Pagos Argentina" },
+    { "nombre": "Transferencia", "uso": "Pagos (CBU/CVU)" },
+    { "nombre": "Cloudflare", "uso": "Infraestructura / CDN" }
+  ],
+  "metodos_pago_clientes_finales": [
+    "Mercado Pago",
+    "Visa",
+    "Mastercard",
+    "Amex",
+    "Naranja",
+    "Cabal",
+    "Transferencia CBU/CVU",
+    "Efectivo"
+  ],
+  "politicas_comerciales": {
+    "contrato": "Planes mes a mes, se puede cancelar cuando se quiera",
+    "precios": "En pesos argentinos. Sin comisión por venta de Código Norte, sin cargos por usuario, sin tarifas ocultas",
+    "soporte": "Incluido en todos los planes (personalizado; dedicado prioritario en planes Pro)",
+    "propiedad": "Repositorio, hosting y credenciales a nombre del cliente. Sin lock-in",
+    "dominio_hosting": "El costo de configuración anual incluye dominio y hosting — es del cliente para siempre",
+    "configuracion_anual_referencia": "25.000 AR$ al año (costo de configuración externo al trabajo mensual; puede variar según plan)",
+    "pasarelas_pago": "Los costos de Mercado Pago y otras pasarelas no están incluidos en el precio del plan"
+  },
+  "desarrollo_a_medida": {
+    "disponible": true,
+    "cuando_ofrecer": "Cuando el cliente necesita un sistema particular que no encaja en ninguno de los 6 productos estándar",
+    "descripcion": "Diseñamos y construimos desde cero con alcance claro y cotización fija.",
+    "incluye": [
+      "Análisis de requerimientos y demo personalizada",
+      "Propuesta con presupuesto detallado",
+      "Entrega iterativa hasta producción"
+    ],
+    "cta": "Pedir cotización por WhatsApp",
+    "url_sitio": "https://www.codigonortesoluciones.com/#desarrollo-a-medida",
+    "nota_precio": "No hay precio publicado — siempre requiere cotización"
+  },
+  "servicios": [
+    {
+      "id": "ecommerce",
+      "nombre": "Ecommerce",
+      "orden": 1,
+      "url_producto": "https://www.codigonortesoluciones.com/ecommerce",
+      "descripcion_corta": "Tienda online propia con catálogo, carrito y pasarela de pago integrada.",
+      "descripcion_larga": "Vendé online 24/7. Controlá tu negocio desde cualquier lugar. Es tu plataforma, no un marketplace.",
+      "publico": "Comercios que quieren vender online con catálogo propio",
+      "planes": [
+        {
+          "nombre": "Starter",
+          "subtitulo": "Para empezar a vender ya",
+          "precio_mensual_ar": 50000,
+          "precio_nota": "A partir de AR$ 50.000/mes",
+          "implementacion_ar": 25000,
+          "destacado": false,
+          "incluye": [
+            "Hasta 50 productos",
+            "1 sucursal · Panel admin/empleados",
+            "Catálogo + carrito + checkout hacia WhatsApp",
+            "Dominio + SSL + hosting incluido",
+            "Promociones: gestionás tus promociones por la web",
+            "Soporte personalizado"
+          ],
+          "no_incluye": [
+            "Pasarela de pago integrada",
+            "Panel de ventas",
+            "Métodos de envío"
+          ]
+        },
+        {
+          "nombre": "Grow",
+          "subtitulo": "Para vender en serio",
+          "precio_mensual_ar": 120000,
+          "precio_nota": "A partir de AR$ 120.000/mes",
+          "implementacion_ar": 25000,
+          "destacado": true,
+          "incluye": [
+            "Todo lo de Starter, más:",
+            "Catálogo sin límite de productos",
+            "2 sucursales, varios locales",
+            "Pagos: Mercado Pago, Transferencia, Tarjetas",
+            "Sin límite de usuarios",
+            "Integración con Correo Argentino / Andreani",
+            "Soporte personalizado"
+          ]
+        },
+        {
+          "nombre": "Pro",
+          "subtitulo": "Sin monto fijo",
+          "precio_modelo": "comision",
+          "precio_nota": "A partir de 5% por producto vendido",
+          "implementacion_ar": 25000,
+          "destacado": false,
+          "incluye": [
+            "Todo lo de Starter, más:",
+            "Productos ilimitados",
+            "Multi-sucursal",
+            "Sin límite de usuarios",
+            "Pagos: Mercado Pago, Transferencia, Tarjetas",
+            "Integración con Correo Argentino / Andreani",
+            "Soporte dedicado prioritario"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gym",
+      "nombre": "Gimnasios",
+      "orden": 2,
+      "url_producto": "https://www.codigonortesoluciones.com/gimnasios",
+      "descripcion_corta": "Socios, cuotas y acceso QR sin volverte loco.",
+      "descripcion_larga": "Débito automático, control de acceso por QR, clases con cupo, métricas de retención. Para gimnasios, estudios, pilates, crossfit.",
+      "publico": "Gimnasios, estudios de pilates, crossfit y centros de entrenamiento",
+      "planes": [
+        {
+          "nombre": "Starter",
+          "subtitulo": "Gym de barrio / estudio",
+          "precio_mensual_ar": 100000,
+          "precio_nota": "A partir de AR$ 100.000/mes",
+          "implementacion_ar": 25000,
+          "incluye": [
+            "Hasta 100 socios activos",
+            "1 sede",
+            "Sistema de notificaciones",
+            "Control de acceso por QR o DNI",
+            "Gestión de miembros y pagos manuales",
+            "Soporte personalizado"
+          ],
+          "no_incluye": [
+            "Pagos online",
+            "Clases personalizadas",
+            "Rutinas y programas de entrenamiento"
+          ]
+        },
+        {
+          "nombre": "Grow",
+          "subtitulo": "Gimnasio establecido",
+          "precio_mensual_ar": 150000,
+          "precio_nota": "A partir de AR$ 150.000/mes",
+          "implementacion_ar": 25000,
+          "destacado": true,
+          "incluye": [
+            "Todo lo de Starter, más:",
+            "Hasta 300 socios activos",
+            "Hasta 3 sedes",
+            "Panel de entrenadores",
+            "Pagos online: Mercado Pago, Transferencia, tarjetas",
+            "Gestión de eventos",
+            "Rutinas y programas de entrenamiento personalizados",
+            "Soporte personalizado"
+          ]
+        },
+        {
+          "nombre": "Pro",
+          "subtitulo": "Empezá sin costos",
+          "precio_modelo": "comision",
+          "precio_nota": "A partir de 5% por socio activo",
+          "implementacion": "A medida",
+          "incluye": [
+            "Todo lo de Grow, más:",
+            "Sin límite de socios",
+            "Sin límite de sedes",
+            "Soporte dedicado prioritario"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "queue",
+      "nombre": "Turneros",
+      "orden": 3,
+      "url_producto": "https://www.codigonortesoluciones.com/turneros",
+      "descripcion_corta": "Creá tu propia marca personal y tomá el control de tus reservas.",
+      "descripcion_larga": "Para profesionales particulares, clínicas y consultorios. Automatizá reservas y funciona 24/7.",
+      "publico": "Profesionales independientes, barberías, clínicas, consultorios",
+      "planes": [
+        {
+          "nombre": "Starter",
+          "subtitulo": "Un profesional",
+          "precio_mensual_ar": 20000,
+          "precio_nota": "A partir de AR$ 20.000/mes",
+          "implementacion_ar": 25000,
+          "incluye": [
+            "Marca personal",
+            "Sin límite de servicios",
+            "Reserva con mail y panel administrador",
+            "Configuración de servicios y horarios",
+            "Bloqueo de horarios y días",
+            "Pagos de reservas online: Mercado Pago, Transferencia, tarjetas",
+            "Panel de administración de cobros y reservas",
+            "Botón de WhatsApp para reservar",
+            "Soporte personalizado"
+          ]
+        },
+        {
+          "nombre": "Grow",
+          "subtitulo": "Un equipo",
+          "precio_modelo": "comision",
+          "precio_nota": "A partir de AR$ 10.000 por profesional activo/mes",
+          "implementacion_ar": 25000,
+          "destacado": true,
+          "incluye": [
+            "Todo lo de Starter, más:",
+            "Sin límite de profesionales",
+            "Configuración de cursos y capacitaciones",
+            "Soporte personalizado"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "landing",
+      "nombre": "Landing pro",
+      "orden": 4,
+      "url_producto": "https://www.codigonortesoluciones.com/landing",
+      "descripcion_corta": "Tu cara online — sin templates de Wix.",
+      "descripcion_larga": "Sitio profesional para abogados, contadores, médicos, arquitectos. Diseño a medida, formularios serios.",
+      "publico": "Profesionales, estudios, abogados, contadores, médicos, arquitectos",
+      "planes": [
+        {
+          "nombre": "Starter",
+          "subtitulo": "Tu sitio profesional",
+          "precio_mensual_ar": 20000,
+          "precio_nota": "A partir de AR$ 20.000/mes",
+          "implementacion_ar": 19000,
+          "destacado": true,
+          "incluye": [
+            "1 página · diseño a medida de tu marca",
+            "Secciones: Sobre mí, Servicios, Testimonios, Contacto",
+            "Botón de WhatsApp para contactar",
+            "Formulario de contacto",
+            "Galería hasta 20 fotos",
+            "Dominio + SSL + hosting incluido",
+            "Soporte personalizado"
+          ],
+          "no_incluye": [
+            "Blog / CMS",
+            "Multi-idioma"
+          ]
+        },
+        {
+          "nombre": "Grow",
+          "subtitulo": "Pagás una sola vez por un año",
+          "precio_modelo": "anual",
+          "precio_nota": "A partir de AR$ 120.000 por año (ahorro 50% vs mensual)",
+          "implementacion_ar": 19000,
+          "incluye": [
+            "1 página · diseño a medida de tu marca",
+            "Secciones: Sobre mí, Servicios, Testimonios, Contacto",
+            "Botón de WhatsApp para contactar",
+            "Formulario de contacto",
+            "Galería hasta 20 fotos",
+            "Dominio + SSL + hosting incluido",
+            "Soporte personalizado"
+          ]
+        },
+        {
+          "nombre": "Pro",
+          "subtitulo": "Estudio o agencia grande",
+          "precio_mensual_ar": 50000,
+          "precio_nota": "A partir de AR$ 50.000/mes",
+          "implementacion_ar": 25000,
+          "incluye": [
+            "Todo lo de Grow, más:",
+            "Hasta 5 páginas",
+            "Multi-idioma (ES/EN/PT)",
+            "Galería de fotos ilimitada",
+            "Soporte dedicado prioritario"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ticket",
+      "nombre": "E-ticketera",
+      "orden": 5,
+      "url_producto": "https://www.codigonortesoluciones.com/e-ticketera",
+      "descripcion_corta": "Vendé entradas y validá QR en la puerta.",
+      "descripcion_larga": "Para boliches, teatros, espectáculos y eventos corporativos. Cobrás con Mercado Pago o transferencia y seguís al evento.",
+      "publico": "Productores, boliches, teatros, festivales, eventos corporativos",
+      "planes": [
+        {
+          "nombre": "Starter",
+          "subtitulo": "Tu primer evento online",
+          "precio_modelo": "comision",
+          "precio_nota": "A partir de 4,5% por ticket vendido",
+          "implementacion_ar": 25000,
+          "incluye": [
+            "Sin límite de entradas",
+            "Todos los tipos de entrada (general, vip, early, free)",
+            "Pagos: Mercado Pago + transferencia",
+            "QR validable desde celular",
+            "Reporte de ventas en vivo",
+            "Reserva y gestión de mesas online",
+            "Soporte personalizado"
+          ],
+          "no_incluye": [
+            "Panel RRPP",
+            "Menú de mesas online"
+          ]
+        },
+        {
+          "nombre": "Grow",
+          "subtitulo": "Festivales y eventos medianos",
+          "precio_modelo": "comision",
+          "precio_nota": "A partir de 5% por ticket vendido",
+          "implementacion_ar": 25000,
+          "destacado": true,
+          "incluye": [
+            "Sin límite de entradas",
+            "Todos los tipos de entrada",
+            "Múltiples eventos simultáneos",
+            "Pagos: Mercado Pago + Transferencia + tarjetas + débito",
+            "Galería de fotos para potenciar tu comunidad online",
+            "Sistema de RRPP incluido con links de pago",
+            "QR validable desde el celular",
+            "Reserva y gestión de mesas online con menú propio",
+            "Soporte personalizado"
+          ]
+        },
+        {
+          "nombre": "Pro",
+          "subtitulo": "Productoras y eventos grandes",
+          "precio_modelo": "comision",
+          "precio_nota": "A partir de 3,5% por ticket vendido o cuota fija mensual",
+          "implementacion": "A medida",
+          "incluye": [
+            "Todo lo de Grow, más:",
+            "Multi-sucursal",
+            "Sin límite de usuarios",
+            "API + integración con ERP",
+            "App propia para scanner y promociones por usuario",
+            "Soporte dedicado prioritario"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gastro",
+      "nombre": "Gastronomía",
+      "orden": 6,
+      "url_producto": "https://www.codigonortesoluciones.com/gastronomia",
+      "descripcion_corta": "Mozo, cocina, delivery y caja en un mismo sistema.",
+      "descripcion_larga": "QR para mesas y mostrador, pantalla de pedidos en cocina, seguimiento de delivery, stock por insumo y arqueo de caja.",
+      "publico": "Restaurantes, bares, cafeterías, locales con delivery",
+      "planes": [
+        {
+          "nombre": "Starter",
+          "subtitulo": "Un solo local",
+          "precio_mensual_ar": 25000,
+          "precio_nota": "A partir de AR$ 25.000/mes",
+          "implementacion_ar": 25000,
+          "incluye": [
+            "1 local",
+            "QR para mesas y mostrador",
+            "Pantalla de pedidos en cocina",
+            "Carta y panel de stock de productos sin límite",
+            "Arqueo de caja",
+            "Soporte personalizado"
+          ],
+          "no_incluye": [
+            "Programa de fidelización",
+            "Panel de promociones",
+            "Pagos online"
+          ]
+        },
+        {
+          "nombre": "Grow",
+          "subtitulo": "Hasta 3 locales",
+          "precio_mensual_ar": 35000,
+          "precio_nota": "A partir de AR$ 35.000/mes",
+          "implementacion_ar": 25000,
+          "destacado": true,
+          "incluye": [
+            "Todo lo de Starter, más:",
+            "3 locales",
+            "Panel de pedidos de proveedores",
+            "Programa de fidelización",
+            "Pagos: Mercado Pago, Transferencia, tarjetas",
+            "Panel de registro de pagos",
+            "Panel de promociones",
+            "Soporte personalizado"
+          ]
+        },
+        {
+          "nombre": "Pro",
+          "subtitulo": "Sin límite de locales",
+          "precio_mensual_ar": 100000,
+          "precio_nota": "A partir de AR$ 100.000/mes",
+          "implementacion": "A medida",
+          "incluye": [
+            "Todo lo de Grow, más:",
+            "Sin límite de locales",
+            "API para integrar tu sistema ERP",
+            "App móvil del cliente",
+            "Soporte dedicado prioritario"
+          ]
+        }
+      ]
+    }
+  ],
+  "casos_exito": [
+    {
+      "nombre": "Impacto Tienda",
+      "tipo": "Ecommerce",
+      "ubicacion": "Formosa / Corrientes, Argentina",
+      "descripcion": "Plan Pro integrado end to end, acompañamiento en cada paso. Multisucursal.",
+      "url": "https://www.impactotienda.com.ar",
+      "testimonio": {
+        "texto": "Unificamos el tráfico de dos webs de cada local en una sola, mejoró nuestro tráfico y el diseño de la página nos encantó.",
+        "autor": "Sebastián Segovia",
+        "cargo": "Director, Impacto Tienda"
+      }
+    },
+    {
+      "nombre": "Barbería Authentic",
+      "tipo": "Turnero personalizado",
+      "ubicacion": "Bariloche, Argentina",
+      "descripcion": "Turnero personalizado con marca propia.",
+      "url": "https://www.authenticbarberia.com",
+      "testimonio": {
+        "texto": "Dejamos un CRM genérico para tener nuestra propia marca personal y aprovechamos la promo por miembro para bajar nuestros costos.",
+        "autor": "Sebastián Pagano",
+        "cargo": "Dueño, Barbería Authentic"
+      }
+    },
+    {
+      "nombre": "Legales MV Kulman",
+      "tipo": "Landing profesional",
+      "ubicacion": "Entre Ríos, Argentina",
+      "descripcion": "Landing profesional para estudio de abogacía.",
+      "url": "https://legalesmvkulman.com",
+      "testimonio": {
+        "texto": "Abrí mi estudio propio y mi web me permitió llegar a más clientes y tener un sitio y una imagen mucho más profesional.",
+        "autor": "Veronica Kulman",
+        "cargo": "Abogada, Estudio de Abogacía"
+      }
+    },
+    {
+      "nombre": "Buena Vida",
+      "tipo": "Gimnasio",
+      "ubicacion": "Formosa, Argentina",
+      "descripcion": "Sistema de gestión de gimnasio plan Grow.",
+      "url": "https://buenavidaarg.com"
+    },
+    {
+      "nombre": "Patagonia Inquieta",
+      "tipo": "Landing / reservas",
+      "ubicacion": "Bariloche, Argentina",
+      "descripcion": "Sistema de reserva de tours por la Patagonia.",
+      "url": "https://www.patagoniainquieta.com"
+    },
+    {
+      "nombre": "CR-ONFIT",
+      "tipo": "Gimnasio",
+      "ubicacion": "Formosa, Argentina",
+      "descripcion": "Sistema de gestión de gimnasio plan Grow.",
+      "url": "https://www.cronfit.com.ar"
+    }
+  ],
+  "faqs": [
+    {
+      "pregunta": "¿Cuánto sale un proyecto?",
+      "respuesta": "Depende del producto y plan. Cada solución tiene precios distintos en pesos argentinos. Además hay un costo de configuración (desde AR$ 19.000 según el producto; referencia anual AR$ 25.000). Los costos de pasarelas de pago no están incluidos."
+    },
+    {
+      "pregunta": "¿Trabajan solo en el norte?",
+      "respuesta": "No. Conocemos bien la realidad de las pymes del NEA y NOA, pero tenemos clientes en varias provincias del país. El trabajo es remoto."
+    },
+    {
+      "pregunta": "¿Se puede transferir el dominio?",
+      "respuesta": "Sí. El costo de configuración anual incluye dominio y hosting. Es tuyo para siempre."
+    },
+    {
+      "pregunta": "¿Hacen mantenimiento después?",
+      "respuesta": "Sí. Todos los planes incluyen soporte personalizado. Estamos para apoyarte en lo que necesites."
+    },
+    {
+      "pregunta": "¿Y si necesito algo que no está en la lista?",
+      "respuesta": "Ofrecemos desarrollo de software a medida. Escribinos contando qué necesitás y te armamos una cotización según la complejidad."
+    },
+    {
+      "pregunta": "¿Integran con Mercado Pago?",
+      "respuesta": "Sí, ya está integrado y probado en producción. QR, débito automático, transferencia, tarjetas — según el plan."
+    },
+    {
+      "pregunta": "¿De quién es el código?",
+      "respuesta": "Es del cliente. Repositorio, hosting y credenciales a tu nombre. Si dejás de trabajar con nosotros, te entregamos las llaves. Sin lock-in."
+    },
+    {
+      "pregunta": "¿Hay contrato eterno?",
+      "respuesta": "No. Los planes son mes a mes y podés cancelar cuando quieras."
+    },
+    {
+      "pregunta": "¿Cuánto tarda en estar listo?",
+      "respuesta": "El proceso estándar es de aproximadamente dos semanas a producción, con demo personalizada al inicio."
+    },
+    {
+      "pregunta": "¿Cómo empiezo?",
+      "respuesta": "Elegí un producto y plan en codigonortesoluciones.com o escribinos por WhatsApp al +54 351 764-8146. Respondemos en el día."
+    }
+  ],
+  "urls_utiles": {
+    "inicio": "https://www.codigonortesoluciones.com",
+    "planes": "https://www.codigonortesoluciones.com/#planes",
+    "desarrollo_a_medida": "https://www.codigonortesoluciones.com/#desarrollo-a-medida",
+    "proceso": "https://www.codigonortesoluciones.com/#proceso",
+    "casos": "https://www.codigonortesoluciones.com/#casos",
+    "contacto": "https://www.codigonortesoluciones.com/#contacto",
+    "terminos": "https://www.codigonortesoluciones.com/terminos",
+    "privacidad": "https://www.codigonortesoluciones.com/privacidad",
+    "productos": {
+      "ecommerce": "https://www.codigonortesoluciones.com/ecommerce",
+      "gimnasios": "https://www.codigonortesoluciones.com/gimnasios",
+      "turneros": "https://www.codigonortesoluciones.com/turneros",
+      "landing": "https://www.codigonortesoluciones.com/landing",
+      "e_ticketera": "https://www.codigonortesoluciones.com/e-ticketera",
+      "gastronomia": "https://www.codigonortesoluciones.com/gastronomia"
+    }
+  },
+  "legal": {
+    "terminos_actualizados": "16 de junio de 2026",
+    "privacidad_actualizada": "16 de junio de 2026",
+    "resumen": "Código Norte provee herramientas SaaS para automatización, comunicaciones y gestión de procesos. No se venden datos personales. El usuario debe cumplir políticas de Meta/WhatsApp y no usar la plataforma para spam."
+  },
+  "flujos_agente": {
+    "consulta_precio": "Identificar producto → mencionar plan Starter/Grow/Pro con precio del JSON → aclarar implementación aparte y que pasarelas no están incluidas → ofrecer WhatsApp",
+    "consulta_a_medida": "Explicar desarrollo a medida → no dar precio → invitar a pedir cotización por WhatsApp",
+    "consulta_fuera_alcance": "Ser honesto → ofrecer WhatsApp para evaluar → no inventar capacidades",
+    "cierre_conversacion": "Ofrecer link al producto específico o WhatsApp +54 351 764-8146"
+  }
+}
