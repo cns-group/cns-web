@@ -43,7 +43,7 @@ function LegalPageShell({ children, c }) {
   return (
     <div className="app legal-page">
       <header className="legal-top">
-        <Link className="nav-logo legal-logo" to="/" aria-label="Código Norte — inicio">
+        <Link className="nav-logo legal-logo" to="/" aria-label="Código Norte · inicio">
           <img
             src="/cnslogo.png"
             alt=""

@@ -1,47 +1,30 @@
 export const TWEAK_DEFAULTS = {
-  palette:     ['#0e0e0c', '#f5f1e8', '#d97757', '#7a8f5c'],
-  theme:       'dark',
+  palette:     ['#f7f9fc', '#0f172a', '#2563eb', '#16a34a'],
+  theme:       'light',
   density:     'regular',
-  fontDisplay: 'Bebas Neue',
+  fontDisplay: 'system',
   lang:        'es',
   fontSize:    15.5,
 }
 
 export function applyTheme(t) {
   const root = document.documentElement
-  const [bg, fg, ac, ac2] = t.palette
-  const isLight = (() => {
-    const h = bg.replace('#', '')
-    const x = h.length === 3 ? h.replace(/./g, c => c + c) : h
-    const n = parseInt(x, 16)
-    const r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255
-    return (r + g + b) / 3 > 128
-  })()
-  root.dataset.theme = isLight ? 'light' : 'dark'
-  root.dataset.density = t.density
-  root.style.setProperty('--bg', bg)
-  root.style.setProperty('--fg', fg)
-  root.style.setProperty('--accent', ac)
-  root.style.setProperty('--accent-2', ac2)
-  root.style.setProperty('--f-display', `'${t.fontDisplay}', 'Bebas Neue', 'Bebas Neue Fallback', ui-sans-serif, system-ui, sans-serif`)
-  root.style.setProperty('--fs-body', `${t.fontSize}px`)
+  const [, , ac, ac2] = t.palette
 
-  const off = (hex, d) => {
-    const h = hex.replace('#', '')
-    const x = h.length === 3 ? h.replace(/./g, c => c + c) : h
-    const n = parseInt(x, 16)
-    let r = ((n >> 16) & 255) + d, g = ((n >> 8) & 255) + d, b = (n & 255) + d
-    r = Math.max(0, Math.min(255, r))
-    g = Math.max(0, Math.min(255, g))
-    b = Math.max(0, Math.min(255, b))
-    return '#' + [r, g, b].map(v => v.toString(16).padStart(2, '0')).join('')
-  }
-  const sign = isLight ? -1 : 1
-  root.style.setProperty('--surface',   off(bg, 8 * sign))
-  root.style.setProperty('--surface-2', off(bg, 14 * sign))
-  root.style.setProperty('--line',      off(bg, 20 * sign))
-  root.style.setProperty('--line-2',    off(bg, 32 * sign))
-  root.style.setProperty('--fg-2',      off(fg, -24 * sign))
-  root.style.setProperty('--muted',     off(fg, -72 * sign))
-  root.style.setProperty('--muted-2',   off(fg, -100 * sign))
+  root.dataset.theme = 'light'
+  root.dataset.density = t.density
+
+  root.style.setProperty('--bg', '#f7f9fc')
+  root.style.setProperty('--surface', '#ffffff')
+  root.style.setProperty('--surface-2', '#f1f5f9')
+  root.style.setProperty('--line', '#e3e8ef')
+  root.style.setProperty('--line-2', '#cbd5e1')
+  root.style.setProperty('--fg', '#0f172a')
+  root.style.setProperty('--fg-2', '#334155')
+  root.style.setProperty('--muted', '#64748b')
+  root.style.setProperty('--muted-2', '#94a3b8')
+  root.style.setProperty('--accent', ac || '#2563eb')
+  root.style.setProperty('--accent-2', ac2 || '#16a34a')
+  root.style.setProperty('--accent-hi', '#eef4ff')
+  root.style.setProperty('--fs-body', `${t.fontSize}px`)
 }

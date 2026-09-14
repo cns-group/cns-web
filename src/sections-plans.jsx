@@ -143,7 +143,7 @@ function PlanCard({ plan, productName, c, lang }) {
   )
 }
 
-export function Plans({ c, lang, activeTab = 'ecommerce', onTabChange }) {
+export function Plans({ c, lang, activeTab = 'crm', onTabChange }) {
   const p = c.plans
   const tabIds = p.tabs.map(t => t.id)
   const active = tabIds.includes(activeTab) ? activeTab : tabIds[0]
@@ -169,31 +169,33 @@ export function Plans({ c, lang, activeTab = 'ecommerce', onTabChange }) {
       </div>
 
       <div className="plans-tabs-wrap">
-        <div className="plans-tabs" role="tablist" aria-label={p.title}>
-          {p.tabs.map(t => (
-            <button
-              key={t.id}
-              id={`tab-${t.id}`}
-              type="button"
-              role="tab"
-              aria-selected={t.id === active}
-              aria-controls={t.id === active ? panelId : undefined}
-              tabIndex={t.id === active ? 0 : -1}
-              className="plans-tab"
-              data-on={t.id === active ? '1' : '0'}
-              onClick={() => selectTab(t.id)}
-            >
-              <span className="tnum">/ {t.n}</span>
-              <span className="tname">{t.name}</span>
-            </button>
-          ))}
-        </div>
+        {p.tabs.length > 1 && (
+          <div className="plans-tabs" role="tablist" aria-label={p.title}>
+            {p.tabs.map(t => (
+              <button
+                key={t.id}
+                id={`tab-${t.id}`}
+                type="button"
+                role="tab"
+                aria-selected={t.id === active}
+                aria-controls={t.id === active ? panelId : undefined}
+                tabIndex={t.id === active ? 0 : -1}
+                className="plans-tab"
+                data-on={t.id === active ? '1' : '0'}
+                onClick={() => selectTab(t.id)}
+              >
+                <span className="tnum">/ {t.n}</span>
+                <span className="tname">{t.name}</span>
+              </button>
+            ))}
+          </div>
+        )}
 
         <div className="plans-content" role="tabpanel" id={panelId} aria-labelledby={`tab-${active}`}>
           <div className="plans-intro">
             <h3>
               {tab.name}
-              <span className="title-em">— {tab.intro}</span>
+              <span className="title-em">· {tab.intro}</span>
             </h3>
             <p>{tab.lead}</p>
           </div>

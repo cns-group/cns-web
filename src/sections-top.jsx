@@ -22,7 +22,7 @@ export function Nav({ c, onSection }) {
         <a
           className="nav-logo"
           href="#top"
-          aria-label="Código Norte — inicio"
+          aria-label="Código Norte · inicio"
           onClick={go('top')}
         >
           <img
@@ -113,67 +113,48 @@ export function Nav({ c, onSection }) {
 export function Hero({ c, onSection }) {
   return (
     <section className="hero" id="top">
-      <img
-        className="hero-bg"
-        src="/bg.webp"
-        alt=""
-        width={1920}
-        height={1080}
-        fetchPriority="high"
-        decoding="async"
-      />
-      <span className="crosshair tl" />
-      <span className="crosshair tr" />
-      <span className="crosshair bl" />
-      <span className="crosshair br" />
-
-      <div className="hero-corner">
-        <span>{c.hero.cornerLine1}</span>
-        <span>{c.hero.cornerLine2}</span>
-        <span>● {c.hero.footStatus}</span>
-      </div>
-
-      <div className="hero-grid">
-        <div>
-          <div className="eyebrow" style={{marginBottom:28}}>{c.hero.eyebrow}</div>
+      <div className="hero-inner">
+        <div className="hero-copy">
+          <div className="eyebrow">{c.hero.eyebrow}</div>
           <h1>
             <span className="word">{c.hero.titleA} </span>
             <span className="word">{c.hero.titleB}</span><br/>
             <span className="word accent">{c.hero.titleC}</span>
             <span className="word"> {c.hero.titleD}</span>
           </h1>
+          <p className="lead">{c.hero.lead}</p>
+          <div className="row hero-actions">
+            <button type="button" className="btn btn-primary btn-lg" onClick={sectionClick('planes', onSection)}>
+              {c.nav.cta}
+              <svg className="arr" width="12" height="12" viewBox="0 0 11 11" fill="none" aria-hidden="true"><path d="M2 9L9 2M9 2H3.5M9 2V7.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" /></svg>
+            </button>
+            <a
+              className="btn btn-ghost btn-lg"
+              href="#proceso"
+              onClick={sectionClick('proceso', onSection)}
+            >
+              {c.nav.ctaGhost}
+            </a>
+          </div>
         </div>
 
-        <div className="hero-tail">
-          <div>
-            <p className="lead">{c.hero.lead}</p>
-            <div className="row hero-actions">
-              <button type="button" className="btn btn-primary btn-lg" onClick={sectionClick('planes', onSection)}>
-                {c.nav.cta}
-                <svg className="arr" width="12" height="12" viewBox="0 0 11 11" fill="none" aria-hidden="true"><path d="M2 9L9 2M9 2H3.5M9 2V7.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" /></svg>
-              </button>
-              <a
-                className="btn btn-ghost btn-lg"
-                href="#casos"
-                onClick={sectionClick('casos', onSection)}
-              >
-                {c.nav.ctaGhost}
-              </a>
+        <div className="hero-visual" aria-hidden="true">
+          <div className="browser-frame">
+            <div className="browser-bar">
+              <span className="bdot r" /><span className="bdot y" /><span className="bdot g" />
             </div>
+            <img
+              className="browser-img"
+              src="/dashboard-hero.png"
+              alt=""
+              width={1905}
+              height={950}
+              fetchpriority="high"
+              decoding="async"
+            />
           </div>
         </div>
       </div>
     </section>
-  )
-}
-
-export function Marquee({ items }) {
-  const doubled = [...items, ...items]
-  return (
-    <div className="marquee" aria-hidden="true">
-      <div className="marquee-track">
-        {doubled.map((t, i) => <span key={i}>{t}</span>)}
-      </div>
-    </div>
   )
 }

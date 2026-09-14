@@ -1,9 +1,9 @@
 import React from 'react'
 import { COPY } from './copy'
-import { Nav, Hero, Marquee } from './sections-top'
+import { Nav, Hero } from './sections-top'
 import { Process } from './sections-mid'
 import { Plans } from './sections-plans'
-import { Work, Quotes, FAQ, Contact, Footer } from './sections-bot'
+import { Quotes, FAQ, Contact, Footer } from './sections-bot'
 import { scrollToSection } from './scroll'
 import { WhatsAppFloat } from './whatsapp-float'
 import { parsePlanTabFromPath, setPlanPath } from './plan-routes'
@@ -14,7 +14,7 @@ export default function App() {
   const c = COPY[t.lang] || COPY.es
   const contactRef = React.useRef(null)
   const [planTab, setPlanTab] = React.useState(
-    () => parsePlanTabFromPath() || 'ecommerce',
+    () => parsePlanTabFromPath() || 'crm',
   )
 
   React.useEffect(() => { applyTheme(t) }, [t])
@@ -34,7 +34,7 @@ export default function App() {
         setPlanTab(fromPath)
         scrollToSection('planes')
       } else {
-        setPlanTab('ecommerce')
+        setPlanTab('crm')
       }
     }
     window.addEventListener('popstate', onPopState)
@@ -52,10 +52,8 @@ export default function App() {
       <Nav c={c} onSection={scrollToSection} />
       <main id="main">
         <Hero c={c} onSection={scrollToSection} />
-        <Marquee items={c.marquee} />
-        <Plans c={c} lang={t.lang} activeTab={planTab} onTabChange={handlePlanTabChange} />
         <Process c={c} />
-        <Work c={c} />
+        <Plans c={c} lang={t.lang} activeTab={planTab} onTabChange={handlePlanTabChange} />
         <Quotes c={c} />
         <FAQ c={c} />
         <Contact c={c} ctaRef={contactRef} />
