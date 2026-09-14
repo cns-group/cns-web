@@ -1,5 +1,6 @@
 import React from 'react'
 import { SectionHeader } from './sections-mid'
+import { Reveal } from './reveal'
 import { WHATSAPP_URL, WHATSAPP_DISPLAY, EMAIL, INSTAGRAM_URL, INSTAGRAM_HANDLE } from './constants'
 
 export function Stack({ c }) {
@@ -9,10 +10,10 @@ export function Stack({ c }) {
       <SectionHeader eyebrow={s.eyebrow} title={s.title} titleEm={s.titleEm} lead={s.lead} />
       <div className="stack-list">
         {s.items.map((it, i) => (
-          <div key={i} className="stack-item">
+          <Reveal as="div" key={i} index={i} className="stack-item">
             <span className="stack-cat">{String(i+1).padStart(2,'0')} · {it.c}</span>
             <span className="stack-name">{it.n}</span>
-          </div>
+          </Reveal>
         ))}
       </div>
     </section>
@@ -26,7 +27,7 @@ export function Quotes({ c }) {
       <SectionHeader eyebrow={q.eyebrow} title={q.title} titleEm={q.titleEm} lead={q.lead} />
       <div className="quotes">
         {q.items.map((it, i) => (
-          <figure key={i} className="quote">
+          <Reveal as="figure" key={i} index={i} className="quote">
             <span className="quote-index" aria-hidden="true">
               {String(i + 1).padStart(2, '0')}
             </span>
@@ -39,7 +40,7 @@ export function Quotes({ c }) {
                 <span>{it.role}</span>
               </div>
             </figcaption>
-          </figure>
+          </Reveal>
         ))}
       </div>
     </section>
@@ -67,7 +68,7 @@ export function FAQ({ c }) {
       <SectionHeader eyebrow={f.eyebrow} title={f.title} titleEm={f.titleEm} />
       <div className="faq">
         {f.items.map((it, i) => (
-          <div key={i} className={`faq-item${open === i ? ' open' : ''}`}>
+          <Reveal as="div" key={i} index={i} className={`faq-item${open === i ? ' open' : ''}`}>
             <h3 className="faq-q-wrap">
               <button
                 id={`faq-q-${i}`}
@@ -82,7 +83,7 @@ export function FAQ({ c }) {
               </button>
             </h3>
             <p className="faq-a" id={`faq-a-${i}`} role="region" aria-labelledby={`faq-q-${i}`}>{it.a}</p>
-          </div>
+          </Reveal>
         ))}
       </div>
     </section>
@@ -95,7 +96,7 @@ export function Contact({ c, ctaRef }) {
     <section className="sec" id="contacto" ref={ctaRef}>
       <SectionHeader eyebrow={cc.eyebrow} title={cc.title} titleEm={cc.titleEm} lead={cc.lead} />
       <div className="contact-wa">
-        <div className="contact-wa-main">
+        <Reveal as="div" className="contact-wa-main">
           <p className="contact-wa-lead">{cc.waLead}</p>
           <a
             className="btn btn-primary btn-lg contact-wa-btn"
@@ -109,26 +110,26 @@ export function Contact({ c, ctaRef }) {
             </svg>
           </a>
           <p className="contact-wa-hint">{cc.waHint}</p>
-        </div>
+        </Reveal>
         <aside className="contact-aside">
-          <div className="contact-card">
+          <Reveal as="div" index={1} className="contact-card">
             <h4>{cc.aside[0].h}</h4>
             <p>
               <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
             </p>
-          </div>
-          <div className="contact-card">
+          </Reveal>
+          <Reveal as="div" index={2} className="contact-card">
             <h4>{cc.aside[1].h}</h4>
             <p>
               <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">{WHATSAPP_DISPLAY}</a>
             </p>
-          </div>
-          <div className="contact-card">
+          </Reveal>
+          <Reveal as="div" index={3} className="contact-card">
             <h4>Instagram</h4>
             <p>
               <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">{INSTAGRAM_HANDLE}</a>
             </p>
-          </div>
+          </Reveal>
         </aside>
       </div>
     </section>
@@ -141,8 +142,8 @@ export function Footer({ c }) {
     <>
       <footer className="footer">
         <div className="footer-col footer-brand">
-          <a className="nav-logo footer-logo" href="#top" aria-label="Código Norte · inicio">
-            <img src="/cnslogo.png" alt="" width={68} height={68} decoding="async" style={{ width: 68, height: 'auto' }} />
+          <a className="nav-logo footer-logo" href="#top" aria-label="CNS · inicio">
+            <img src="/cnslogo.png" alt="" width={94} height={34} decoding="async" style={{ width: 94, height: 'auto' }} />
           </a>
           <p className="footer-tagline">{f.tagline}</p>
         </div>

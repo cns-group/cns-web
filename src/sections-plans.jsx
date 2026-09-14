@@ -1,5 +1,6 @@
 import React from 'react'
 import { whatsappPlanUrl, whatsappCustomDevUrl } from './constants'
+import { Reveal } from './reveal'
 
 function MercadoPagoIcon({ size = 22 }) {
   const h = Math.round(size * 34 / 48)
@@ -51,14 +52,14 @@ function fmtMoney(n, lang) {
   return n.toLocaleString('en-US').replace(/,/g, sep)
 }
 
-function PlanCard({ plan, productName, c, lang }) {
+function PlanCard({ plan, productName, c, lang, index = 0 }) {
   const p = c.plans
   const isCommission = typeof plan.price === 'string' && plan.priceNum
   const isOneOff     = plan.priceLead != null
   const waUrl = whatsappPlanUrl(productName, plan.tier, lang)
 
   return (
-    <div className={`plan${plan.featured ? ' featured' : ''}`}>
+    <Reveal as="div" index={index} className={`plan${plan.featured ? ' featured' : ''}`}>
       {plan.featured && <span className="plan-tag">{p.featured}</span>}
       <div>
         <div className="plan-name">{plan.tier}</div>
@@ -139,7 +140,7 @@ function PlanCard({ plan, productName, c, lang }) {
           </svg>
         </a>
       </div>
-    </div>
+    </Reveal>
   )
 }
 
@@ -157,7 +158,7 @@ export function Plans({ c, lang, activeTab = 'crm', onTabChange }) {
 
   return (
     <section className="sec sec--planes" id="planes">
-      <div className="sec-hd sec-hd--planes">
+      <Reveal as="div" className="sec-hd sec-hd--planes">
         <div>
           <div className="sec-num">{p.eyebrow}</div>
           <h2>
@@ -166,7 +167,7 @@ export function Plans({ c, lang, activeTab = 'crm', onTabChange }) {
           </h2>
         </div>
         <p className="lead">{p.lead}</p>
-      </div>
+      </Reveal>
 
       <div className="plans-tabs-wrap">
         {p.tabs.length > 1 && (
@@ -201,7 +202,7 @@ export function Plans({ c, lang, activeTab = 'crm', onTabChange }) {
           </div>
           <div className="plans-grid">
             {tiers.map((tier, i) => (
-              <PlanCard key={i} plan={tier} productName={tab.name} c={c} lang={lang} />
+              <PlanCard key={i} index={i} plan={tier} productName={tab.name} c={c} lang={lang} />
             ))}
           </div>
         </div>
@@ -219,7 +220,7 @@ export function CustomDev({ c, lang }) {
   return (
     <div className="custom-dev" id="desarrollo-a-medida" aria-labelledby="custom-dev-title">
       <div className="custom-dev-inner">
-        <div className="custom-dev-copy">
+        <Reveal as="div" className="custom-dev-copy">
           <div className="custom-dev-eyebrow">{d.eyebrow}</div>
           <h2 id="custom-dev-title" className="custom-dev-title">
             {d.title}{' '}
@@ -231,8 +232,8 @@ export function CustomDev({ c, lang }) {
               <li key={point}>{point}</li>
             ))}
           </ul>
-        </div>
-        <div className="custom-dev-cta">
+        </Reveal>
+        <Reveal as="div" index={1} className="custom-dev-cta">
           <a
             href={waUrl}
             target="_blank"
@@ -245,7 +246,7 @@ export function CustomDev({ c, lang }) {
             </svg>
           </a>
           <p className="custom-dev-hint">{d.hint}</p>
-        </div>
+        </Reveal>
       </div>
     </div>
   )

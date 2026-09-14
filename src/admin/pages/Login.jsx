@@ -33,9 +33,9 @@ export function LoginPage() {
     <div className="admin-login">
       <form className="admin-login-card" onSubmit={handleSubmit}>
         <div className="admin-brand admin-brand--center">
-          <span className="admin-brand-mark">CN</span>
+          <span className="admin-brand-mark">CNS</span>
           <div>
-            <strong>Código Norte CRM</strong>
+            <strong>CNS CRM</strong>
             <small>Panel de administración</small>
           </div>
         </div>

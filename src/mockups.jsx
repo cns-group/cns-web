@@ -12,7 +12,7 @@ export function MockShop() {
           <div className="p">$ 14.800</div>
         </div>
         <div className="card-mini">
-          <div className="ph" style={{background:'linear-gradient(135deg, #2563eb 0%, #16a34a 100%)', opacity:.35}} />
+          <div className="ph" style={{background:'linear-gradient(135deg, #098eed 0%, #16a34a 100%)', opacity:.35}} />
           <div className="t">Torrontés 2024</div>
           <div className="p">$ 9.200</div>
         </div>
@@ -101,12 +101,12 @@ export function MockChart() {
         <svg viewBox="0 0 200 80" preserveAspectRatio="none">
           <defs>
             <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%"  stopColor="#2563eb" stopOpacity=".45" />
-              <stop offset="100%" stopColor="#2563eb" stopOpacity="0" />
+              <stop offset="0%"  stopColor="#098eed" stopOpacity=".45" />
+              <stop offset="100%" stopColor="#098eed" stopOpacity="0" />
             </linearGradient>
           </defs>
           <path d="M0,60 L20,55 L40,58 L60,48 L80,42 L100,38 L120,30 L140,28 L160,18 L180,14 L200,8 L200,80 L0,80 Z" fill="url(#g1)" />
-          <path d="M0,60 L20,55 L40,58 L60,48 L80,42 L100,38 L120,30 L140,28 L160,18 L180,14 L200,8" fill="none" stroke="#2563eb" strokeWidth="1.5" />
+          <path d="M0,60 L20,55 L40,58 L60,48 L80,42 L100,38 L120,30 L140,28 L160,18 L180,14 L200,8" fill="none" stroke="#098eed" strokeWidth="1.5" />
         </svg>
       </div>
       <div className="mock-row" style={{marginTop:6}}>

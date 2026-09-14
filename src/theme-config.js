@@ -1,5 +1,5 @@
 export const TWEAK_DEFAULTS = {
-  palette:     ['#f7f9fc', '#0f172a', '#2563eb', '#16a34a'],
+  palette:     ['#f7f9fc', '#0f172a', '#098eed', '#16a34a'],
   theme:       'light',
   density:     'regular',
   fontDisplay: 'system',
@@ -23,7 +23,7 @@ export function applyTheme(t) {
   root.style.setProperty('--fg-2', '#334155')
   root.style.setProperty('--muted', '#64748b')
   root.style.setProperty('--muted-2', '#94a3b8')
-  root.style.setProperty('--accent', ac || '#2563eb')
+  root.style.setProperty('--accent', ac || '#098eed')
   root.style.setProperty('--accent-2', ac2 || '#16a34a')
   root.style.setProperty('--accent-hi', '#eef4ff')
   root.style.setProperty('--fs-body', `${t.fontSize}px`)

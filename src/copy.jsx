@@ -316,9 +316,9 @@ export const COPY = {
           ],
         },
       ],
-      base: '© 2026 Código Norte Soluciones · Argentina',
+      base: '© 2026 CNS · Argentina',
       baseRight: 'Argentina · GMT‑3',
-      wordmark: 'codigo norte.',
+      wordmark: 'cns.',
     },
   },
 
@@ -624,9 +624,9 @@ export const COPY = {
           ],
         },
       ],
-      base: '© 2026 Código Norte Soluciones · Argentina',
+      base: '© 2026 CNS · Argentina',
       baseRight: 'Argentina · GMT‑3',
-      wordmark: 'codigo norte.',
+      wordmark: 'cns.',
     },
   },
 }

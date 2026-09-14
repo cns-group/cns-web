@@ -43,14 +43,14 @@ function LegalPageShell({ children, c }) {
   return (
     <div className="app legal-page">
       <header className="legal-top">
-        <Link className="nav-logo legal-logo" to="/" aria-label="Código Norte · inicio">
+        <Link className="nav-logo legal-logo" to="/" aria-label="CNS · inicio">
           <img
             src="/cnslogo.png"
             alt=""
-            width={68}
-            height={68}
+            width={94}
+            height={34}
             decoding="async"
-            style={{ width: 68, height: 'auto' }}
+            style={{ width: 94, height: 'auto' }}
           />
         </Link>
         <Link className="legal-back" to="/">{c.legal.back}</Link>

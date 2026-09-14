@@ -23,9 +23,9 @@ export function AdminLayout() {
     <div className="admin-shell">
       <aside className="admin-sidebar">
         <div className="admin-brand">
-          <span className="admin-brand-mark">CN</span>
+          <span className="admin-brand-mark">CNS</span>
           <div>
-            <strong>Código Norte</strong>
+            <strong>CNS</strong>
             <small>CRM Admin</small>
           </div>
         </div>
