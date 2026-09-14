@@ -13,8 +13,8 @@ export const COPY = {
     },
     hero: {
       eyebrow: 'CRM de WhatsApp con IA',
-      titleA: 'Tu WhatsApp,',
-      titleB: 'con un CRM',
+      titleA: 'Tu WhatsApp',
+      titleB: 'con un Agente',
       titleC: 'que responde',
       titleD: 'solo.',
       lead:
