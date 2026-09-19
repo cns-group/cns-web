@@ -128,3 +128,76 @@ export function Mock({ kind }) {
     default: return null
   }
 }
+
+export function WorkScreen({ kind }) {
+  if (kind === 'shop') return (
+    <div style={{padding:20, height:'100%', display:'flex', flexDirection:'column', gap:14}}>
+      <div className="mock-hd" style={{margin:0}}>
+        <span style={{color:'var(--fg)', fontFamily:'var(--f-display)', fontSize:14}}>la-posta.com.ar</span>
+        <span className="dotgroup"><i /><i /><i /></span>
+      </div>
+      <div style={{display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:10, flex:1}}>
+        {[0,1,2,3,4,5].map(i => (
+          <div key={i} className="card-mini" style={{padding:8}}>
+            <div className="ph" style={{height:50, background:`linear-gradient(${135 + i*10}deg, #098eed${i%2?'55':'88'}, #16a34a${i%2?'33':'55'})`}} />
+            <div className="t" style={{fontSize:9.5}}>Vino · Línea {i+1}</div>
+            <div className="p" style={{fontSize:10.5}}>$ {(8 + i*1.7).toFixed(1)}k</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+  if (kind === 'orders') return (
+    <div style={{padding:20, height:'100%', display:'flex', flexDirection:'column', gap:10}}>
+      <div className="mock-hd" style={{margin:0}}>
+        <span style={{color:'var(--fg)', fontFamily:'var(--f-display)', fontSize:14}}>Cocina · KDS</span>
+        <span style={{color:'var(--muted)'}}>14:32</span>
+      </div>
+      <div className="orders" style={{flex:1}}>
+        <div className="order"><span className="mn">#142</span><span className="it">Milanesa napolitana ×2 · papas</span><span className="st ok">listo</span></div>
+        <div className="order"><span className="mn">#143</span><span className="it">Empanadas salteñas ×6</span><span className="st pend">cocina</span></div>
+        <div className="order"><span className="mn">#144</span><span className="it">Locro tradicional ×1</span><span className="st pend">cocina</span></div>
+        <div className="order"><span className="mn">#145</span><span className="it">Tabla picada · Cerveza ×2</span><span className="st pend">barra</span></div>
+        <div className="order"><span className="mn">#146</span><span className="it">Postre flan · Café</span><span className="st ok">listo</span></div>
+      </div>
+    </div>
+  )
+  if (kind === 'gym') return (
+    <div style={{padding:20, height:'100%', display:'flex', flexDirection:'column', gap:14}}>
+      <div className="mock-hd" style={{margin:0}}>
+        <span style={{color:'var(--fg)', fontFamily:'var(--f-display)', fontSize:14}}>Club San Pedro · Socios</span>
+        <span style={{color:'var(--accent-2)'}}>● 1.214 activos</span>
+      </div>
+      <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:10}}>
+        <div className="card-mini" style={{padding:14}}>
+          <div style={{fontFamily:'var(--f-display)', fontSize:28, fontWeight:600, color:'var(--fg)', letterSpacing:'-0.02em'}}>92<span style={{color:'var(--accent)', fontSize:18}}>%</span></div>
+          <div style={{fontSize:9.5, color:'var(--muted)', fontFamily:'var(--f-mono)', letterSpacing:'0.06em'}}>RETENCIÓN 12M</div>
+        </div>
+        <div className="card-mini" style={{padding:14}}>
+          <div style={{fontFamily:'var(--f-display)', fontSize:28, fontWeight:600, color:'var(--fg)', letterSpacing:'-0.02em'}}>847</div>
+          <div style={{fontSize:9.5, color:'var(--muted)', fontFamily:'var(--f-mono)', letterSpacing:'0.06em'}}>ACCESOS HOY</div>
+        </div>
+      </div>
+      <div style={{flex:1}}>
+        <div className="gym-row"><span className="h">07:00</span><span className="c">Funcional</span><span className="b">12/15</span></div>
+        <div className="gym-row"><span className="h">09:00</span><span className="c">Spinning</span><span className="b full">20/20</span></div>
+        <div className="gym-row"><span className="h">18:00</span><span className="c">Pilates</span><span className="b">8/12</span></div>
+      </div>
+    </div>
+  )
+  if (kind === 'ticket') return (
+    <div style={{padding:20, height:'100%', display:'flex', flexDirection:'column', gap:14}}>
+      <div className="mock-hd" style={{margin:0}}>
+        <span style={{color:'var(--fg)', fontFamily:'var(--f-display)', fontSize:14}}>Pachamama · Validación</span>
+        <span style={{color:'var(--accent)'}}>● en vivo</span>
+      </div>
+      <MockTicket />
+      <div style={{display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:8}}>
+        <div className="card-mini" style={{padding:10}}><div style={{fontFamily:'var(--f-display)', fontSize:22, fontWeight:600, color:'var(--fg)'}}>14.087</div><div style={{fontSize:9, color:'var(--muted)', fontFamily:'var(--f-mono)'}}>VALIDADOS</div></div>
+        <div className="card-mini" style={{padding:10}}><div style={{fontFamily:'var(--f-display)', fontSize:22, fontWeight:600, color:'var(--accent)'}}>3</div><div style={{fontSize:9, color:'var(--muted)', fontFamily:'var(--f-mono)'}}>DUPLICADOS</div></div>
+        <div className="card-mini" style={{padding:10}}><div style={{fontFamily:'var(--f-display)', fontSize:22, fontWeight:600, color:'var(--accent-2)'}}>4</div><div style={{fontSize:9, color:'var(--muted)', fontFamily:'var(--f-mono)'}}>PUERTAS</div></div>
+      </div>
+    </div>
+  )
+  return null
+}

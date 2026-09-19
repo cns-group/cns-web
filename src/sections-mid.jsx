@@ -1,5 +1,4 @@
 import { Reveal } from './reveal'
-import { WhatsAppDemo } from './whatsapp-demo'
 
 export function SectionHeader({ eyebrow, title, titleEm, lead }) {
   return (
@@ -23,7 +22,7 @@ export function Process({ c }) {
       <SectionHeader eyebrow={p.eyebrow} title={p.title} titleEm={p.titleEm} lead={p.lead} />
       <div className="process">
         {p.steps.map((step, i) => (
-          <Reveal as="div" key={i} index={i} className="step">
+          <Reveal as="div" key={i} index={i} variant={i % 2 ? 'left' : 'right'} className="step">
             <div className="step-tick">{step.dur}</div>
             <div className="step-num">
               {i + 1}
@@ -32,29 +31,6 @@ export function Process({ c }) {
             <p className="step-body">{step.d}</p>
           </Reveal>
         ))}
-      </div>
-      <div className="process-shot">
-        <Reveal as="figure" variant="scale" className="process-shot-frame">
-          <div className="browser-frame">
-            <div className="browser-bar">
-              <span className="bdot r" /><span className="bdot y" /><span className="bdot g" />
-            </div>
-            <img
-              className="browser-img"
-              src="/inbox-hero.png"
-              alt=""
-              width={1907}
-              height={937}
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
-        </Reveal>
-        <Reveal as="div" index={1} className="process-shot-copy">
-          <WhatsAppDemo compact />
-          <h3>{p.shotTitle}</h3>
-          <p>{p.shotCaption}</p>
-        </Reveal>
       </div>
     </section>
   )

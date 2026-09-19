@@ -6,6 +6,7 @@ import { Reveal } from './reveal'
 export function Nav({ c, onSection }) {
   const [open, setOpen] = React.useState(false)
   const [scrolled, setScrolled] = React.useState(false)
+  const [progress, setProgress] = React.useState(0)
 
   const close = () => setOpen(false)
   const go = (id) => (e) => {
@@ -19,7 +20,11 @@ export function Nav({ c, onSection }) {
   }, [open])
 
   React.useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8)
+    const onScroll = () => {
+      setScrolled(window.scrollY > 8)
+      const max = document.documentElement.scrollHeight - window.innerHeight
+      setProgress(max > 0 ? Math.min(1, window.scrollY / max) : 0)
+    }
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
@@ -28,6 +33,7 @@ export function Nav({ c, onSection }) {
   return (
     <>
       <nav className={`nav${scrolled ? ' nav--scrolled' : ''}`}>
+        <div className="scroll-progress" style={{ transform: `scaleX(${progress})` }} aria-hidden="true" />
         <a
           className="nav-logo"
           href="#top"
@@ -122,15 +128,23 @@ export function Nav({ c, onSection }) {
 export function Hero({ c, onSection }) {
   return (
     <section className="hero" id="top">
+      <div className="hero-glow hero-glow--a" data-parallax="-0.32" data-plx-from="scroll" aria-hidden="true" />
+      <div className="hero-glow hero-glow--b" data-parallax="-0.16" data-plx-from="scroll" aria-hidden="true" />
       <div className="hero-inner">
         <div className="hero-copy">
           <Reveal as="div" index={0} className="eyebrow">{c.hero.eyebrow}</Reveal>
-          <Reveal as="h1" index={1}>
-            <span className="word">{c.hero.titleA} </span>
-            <span className="word">{c.hero.titleB}</span><br/>
-            <span className="word accent">{c.hero.titleC}</span>
-            <span className="word"> {c.hero.titleD}</span>
-          </Reveal>
+          <h1 className="hero-title">
+            <span className="hero-line">
+              <span className="word" style={{ '--i': 0 }}>{c.hero.titleA}</span>
+              {' '}
+              <span className="word" style={{ '--i': 1 }}>{c.hero.titleB}</span>
+            </span>
+            <span className="hero-line">
+              <span className="word accent" style={{ '--i': 2 }}>{c.hero.titleC}</span>
+              {' '}
+              <span className="word" style={{ '--i': 3 }}>{c.hero.titleD}</span>
+            </span>
+          </h1>
           <Reveal as="p" index={2} className="lead">{c.hero.lead}</Reveal>
           <Reveal as="div" index={3} className="row hero-actions">
             <button type="button" className="btn btn-primary btn-lg" onClick={sectionClick('planes', onSection)}>
@@ -139,8 +153,8 @@ export function Hero({ c, onSection }) {
             </button>
             <a
               className="btn btn-ghost btn-lg"
-              href="#proceso"
-              onClick={sectionClick('proceso', onSection)}
+              href="#casos"
+              onClick={sectionClick('casos', onSection)}
             >
               {c.nav.ctaGhost}
             </a>
@@ -148,22 +162,35 @@ export function Hero({ c, onSection }) {
         </div>
 
         <Reveal as="div" index={2} variant="scale" className="hero-visual" aria-hidden="true">
-          <div className="browser-frame">
-            <div className="browser-bar">
-              <span className="bdot r" /><span className="bdot y" /><span className="bdot g" />
+          <div className="plx" data-parallax="0.18" data-plx-from="scroll">
+            <div className="browser-frame">
+              <div className="browser-bar">
+                <span className="bdot r" /><span className="bdot y" /><span className="bdot g" />
+              </div>
+              <img
+                className="browser-img"
+                src="/dashboard-hero.png"
+                alt=""
+                width={1905}
+                height={950}
+                fetchpriority="high"
+                decoding="async"
+              />
             </div>
-            <img
-              className="browser-img"
-              src="/dashboard-hero.png"
-              alt=""
-              width={1905}
-              height={950}
-              fetchpriority="high"
-              decoding="async"
-            />
           </div>
         </Reveal>
       </div>
     </section>
+  )
+}
+
+export function Marquee({ items }) {
+  const doubled = [...items, ...items]
+  return (
+    <div className="marquee" aria-hidden="true">
+      <div className="marquee-track">
+        {doubled.map((t, i) => <span key={i}>{t}</span>)}
+      </div>
+    </div>
   )
 }

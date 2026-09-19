@@ -3,6 +3,83 @@ import { SectionHeader } from './sections-mid'
 import { Reveal } from './reveal'
 import { WHATSAPP_URL, WHATSAPP_DISPLAY, EMAIL, INSTAGRAM_URL, INSTAGRAM_HANDLE } from './constants'
 
+function siteHost(url) {
+  try {
+    return new URL(url).host.replace(/^www\./, '')
+  } catch {
+    return ''
+  }
+}
+
+function WorkShot({ it, i, featured, openLabel }) {
+  const host = it.url ? siteHost(it.url) : ''
+  const Tag = it.url ? 'a' : 'div'
+  const linkProps = it.url
+    ? {
+        href: it.url,
+        target: '_blank',
+        rel: 'noopener noreferrer',
+        'aria-label': `${it.t}. ${openLabel}`,
+      }
+    : {}
+
+  return (
+    <Reveal
+      as="article"
+      index={i}
+      variant={featured ? 'scale' : i % 2 ? 'left' : 'right'}
+      className="work-shot"
+    >
+      <Tag className="work-shot-link" {...linkProps}>
+        <div className="browser-frame work-shot-browser">
+          <div className="browser-bar">
+            <span className="bdot r" /><span className="bdot y" /><span className="bdot g" />
+            {host && <span className="browser-url">{host}</span>}
+          </div>
+          <div className="work-shot-media">
+            <img
+              className="work-shot-img"
+              src={it.image}
+              alt=""
+              width={1920}
+              height={1080}
+              loading={featured ? 'eager' : 'lazy'}
+              decoding="async"
+            />
+          </div>
+        </div>
+        <div className="work-shot-meta">
+          <span className="work-cat">{it.n} · {it.cat}</span>
+          <h3 className="work-title">{it.t}</h3>
+          <p className="work-desc">{it.m}</p>
+          {it.url && (
+            <span className="work-shot-cta">
+              {openLabel}
+              <svg className="arr" width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true">
+                <path d="M2 9L9 2M9 2H3.5M9 2V7.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+              </svg>
+            </span>
+          )}
+        </div>
+      </Tag>
+    </Reveal>
+  )
+}
+
+export function Work({ c }) {
+  const w = c.work
+  return (
+    <section className="sec" id="casos">
+      <SectionHeader eyebrow={w.eyebrow} title={w.title} titleEm={w.titleEm} lead={w.lead} />
+      <div className="work-reel">
+        {w.items.map((it, i) => (
+          <WorkShot key={it.n ?? i} it={it} i={i} featured={i === 0} openLabel={w.open} />
+        ))}
+      </div>
+    </section>
+  )
+}
+
 export function Stack({ c }) {
   const s = c.stack
   return (
@@ -27,7 +104,7 @@ export function Quotes({ c }) {
       <SectionHeader eyebrow={q.eyebrow} title={q.title} titleEm={q.titleEm} lead={q.lead} />
       <div className="quotes">
         {q.items.map((it, i) => (
-          <Reveal as="figure" key={i} index={i} className="quote">
+          <Reveal as="figure" key={i} index={i} variant={i === 1 ? 'scale' : i % 2 ? 'right' : 'left'} className="quote">
             <span className="quote-index" aria-hidden="true">
               {String(i + 1).padStart(2, '0')}
             </span>

@@ -15,8 +15,11 @@
   grid-template-columns: 240px 1fr;
   background: var(--admin-bg);
   color: var(--admin-fg);
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 13px;
+  font-family: 'Bebas Neue', 'Bebas Neue Fallback', sans-serif;
+  font-weight: 400;
+  font-synthesis: none;
+  letter-spacing: 0.04em;
+  font-size: 16px;
 }
 
 .admin-sidebar {

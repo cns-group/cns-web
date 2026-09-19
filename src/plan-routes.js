@@ -1,14 +1,29 @@
 /** IDs internos de pestaña en copy.plans.tabs */
-export const PLAN_TAB_IDS = ['crm']
+export const PLAN_TAB_IDS = ['ecommerce', 'gym', 'queue', 'landing', 'ticket', 'gastro']
 
 /** Slug en URL → id de pestaña */
 const SLUG_TO_TAB = {
-  crm: 'crm',
+  ecommerce: 'ecommerce',
+  'e-ticketera': 'ticket',
+  ticketera: 'ticket',
+  gastronomia: 'gastro',
+  gastro: 'gastro',
+  gimnasios: 'gym',
+  gym: 'gym',
+  turneros: 'queue',
+  turnero: 'queue',
+  'landing-pro': 'landing',
+  landing: 'landing',
 }
 
 /** id de pestaña → slug canónico para compartir */
 export const TAB_TO_SLUG = {
-  crm: 'crm',
+  ecommerce: 'ecommerce',
+  ticket: 'e-ticketera',
+  gastro: 'gastronomia',
+  gym: 'gimnasios',
+  queue: 'turneros',
+  landing: 'landing',
 }
 
 export function parsePlanTabFromPath(pathname = window.location.pathname) {

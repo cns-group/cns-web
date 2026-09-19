@@ -4,7 +4,7 @@ export const TWEAK_DEFAULTS = {
   density:     'regular',
   fontDisplay: 'system',
   lang:        'es',
-  fontSize:    15.5,
+  fontSize:    18,
 }
 
 export function applyTheme(t) {

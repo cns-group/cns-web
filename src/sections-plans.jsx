@@ -144,7 +144,7 @@ function PlanCard({ plan, productName, c, lang, index = 0 }) {
   )
 }
 
-export function Plans({ c, lang, activeTab = 'crm', onTabChange }) {
+export function Plans({ c, lang, activeTab = 'ecommerce', onTabChange }) {
   const p = c.plans
   const tabIds = p.tabs.map(t => t.id)
   const active = tabIds.includes(activeTab) ? activeTab : tabIds[0]
