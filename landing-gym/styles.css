@@ -156,11 +156,12 @@ a { color: inherit; }
   height: 64px;
 }
 .brand {
-  font: italic 900 18px/1 var(--heading);
-  text-transform: uppercase;
-  color: var(--primary);
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
   text-decoration: none;
 }
+.brand img { display: block; width: auto; height: 34px; }
 .nav__links {
   display: flex;
   gap: 20px;

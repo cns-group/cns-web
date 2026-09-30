@@ -150,7 +150,7 @@
       gap: 1rem;
       padding-block: 0.6rem;
     }
-    .marca img { width: auto; height: 56px; }
+    .marca img { display: block; width: auto; height: 40px; }
     .nav {
       display: flex;
       gap: 1.75rem;
@@ -616,7 +616,7 @@
 
     @media (max-width: 640px) {
       body { font-size: 1rem; }
-      .marca img { height: 46px; }
+      .marca img { height: 34px; }
       .recorrido { grid-template-columns: 1fr; }
       .areas { grid-template-columns: 1fr; }
       .arranque li { grid-template-columns: 2.75rem 1fr; gap: 1rem; }
@@ -659,10 +659,7 @@
   <header class="cabecera">
     <div class="contenedor">
       <a class="marca" href="#">
-        <picture>
-          <source srcset="assets/logoimpacto.webp" type="image/webp">
-          <img src="assets/logoimpacto.png" alt="Impacto" width="56" height="56">
-        </picture>
+        <img src="assets/cnslogo.png" alt="Código Norte Soluciones" width="300" height="108">
       </a>
       <nav class="nav" aria-label="Principal">
         <a href="#como-funciona">Cómo funciona</a>

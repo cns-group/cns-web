@@ -110,7 +110,7 @@ export const COPY = {
       eyebrow: '01 — Planes',
       num: 'Capítulo 01',
       title: 'Elegí tu plan,',
-      titleEm: 'seis sistemas que entendemos a medida',
+      titleEm: 'sistemas que entendemos a medida',
       lead: 'Cada uno de nuestros sistemas viene en tres tamaños. Empezás con lo que necesitás hoy, escalás cuando hace falta. Vamos juntos, mes a mes, cancelás cuando quieras.',
       payHd: 'Tus clientes pagan con',
       payFoot: 'Activamos cada método como te quede mas cómodo. Comisiones según el proveedor.',

@@ -1,6 +1,7 @@
 import React from 'react'
 import { whatsappPlanUrl, whatsappCustomDevUrl } from './constants'
 import { Reveal } from './reveal'
+import { PLAN_TAB_IDS } from './plan-routes'
 
 function MercadoPagoIcon({ size = 22 }) {
   const h = Math.round(size * 34 / 48)
@@ -146,9 +147,10 @@ function PlanCard({ plan, productName, c, lang, index = 0 }) {
 
 export function Plans({ c, lang, activeTab = 'ecommerce', onTabChange }) {
   const p = c.plans
-  const tabIds = p.tabs.map(t => t.id)
+  const tabs = p.tabs.filter(t => PLAN_TAB_IDS.includes(t.id))
+  const tabIds = tabs.map(t => t.id)
   const active = tabIds.includes(activeTab) ? activeTab : tabIds[0]
-  const tab = p.tabs.find(t => t.id === active) || p.tabs[0]
+  const tab = tabs.find(t => t.id === active) || tabs[0]
   const tiers = p.software[active] || []
 
   const selectTab = (id) => {
@@ -170,9 +172,9 @@ export function Plans({ c, lang, activeTab = 'ecommerce', onTabChange }) {
       </Reveal>
 
       <div className="plans-tabs-wrap">
-        {p.tabs.length > 1 && (
+        {tabs.length > 1 && (
           <div className="plans-tabs" role="tablist" aria-label={p.title}>
-            {p.tabs.map(t => (
+            {tabs.map((t, i) => (
               <button
                 key={t.id}
                 id={`tab-${t.id}`}
@@ -185,7 +187,7 @@ export function Plans({ c, lang, activeTab = 'ecommerce', onTabChange }) {
                 data-on={t.id === active ? '1' : '0'}
                 onClick={() => selectTab(t.id)}
               >
-                <span className="tnum">/ {t.n}</span>
+                <span className="tnum">/ {String(i + 1).padStart(2, '0')}</span>
                 <span className="tname">{t.name}</span>
               </button>
             ))}
@@ -201,7 +203,7 @@ export function Plans({ c, lang, activeTab = 'ecommerce', onTabChange }) {
             <div className="plans-intro-side">
               <p>{tab.lead}</p>
               {tab.landing && (
-                <a href={tab.landing} className="btn btn-ghost">
+                <a href={tab.landing} target="_blank" rel="noopener noreferrer" className="btn btn-ghost">
                   {p.landingCta}
                   <svg className="arr" width="12" height="12" viewBox="0 0 11 11" fill="none" aria-hidden="true">
                     <path d="M2 9L9 2M9 2H3.5M9 2V7.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
