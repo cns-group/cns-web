@@ -1,3 +1,7 @@
 {
+  "redirects": [
+    { "source": "/sistema-ecommerce", "destination": "/sistema-ecommerce/", "permanent": true },
+    { "source": "/sistema-gimnasios", "destination": "/sistema-gimnasios/", "permanent": true }
+  ],
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }

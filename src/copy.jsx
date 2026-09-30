@@ -118,8 +118,8 @@ export const COPY = {
         'Mercado Pago', 'Visa', 'Mastercard', 'Transferencia (CBU/CVU)','Efectivo',
       ],
       tabs: [
-        { id: 'ecommerce', n: '01', name: 'Ecommerce',     intro: 'Vendé online 24/7. Controla tu negocio desde cualquier lugar.',         lead: 'Tienda propia con catálogo, carrito, pasarela de pago integrada. Es tu plataforma.' },
-        { id: 'gym',       n: '02', name: 'Gimnasios',     intro: 'Socios, cuotas y acceso QR sin volverte loco.',         lead: 'Débito automático, control de acceso por QR, clases con cupo, métricas de retención. Para gimnasios, estudios, pilates, crossfit.' },
+        { id: 'ecommerce', n: '01', name: 'Ecommerce',     intro: 'Vendé online 24/7. Controla tu negocio desde cualquier lugar.',         lead: 'Tienda propia con catálogo, carrito, pasarela de pago integrada. Es tu plataforma.', landing: '/sistema-ecommerce/' },
+        { id: 'gym',       n: '02', name: 'Gimnasios',     intro: 'Socios, cuotas y acceso QR sin volverte loco.',         lead: 'Débito automático, control de acceso por QR, clases con cupo, métricas de retención. Para gimnasios, estudios, pilates, crossfit.', landing: '/sistema-gimnasios/' },
         { id: 'queue',     n: '03', name: 'Turneros',      intro: 'Crea tu propia marca personal y tomá el control.',     lead: 'Para profesionales particulares, clínicas y consultorios. Automatiza tus reservas y funciona 24/7.' },
         { id: 'landing',   n: '04', name: 'Landing pro',   intro: 'Tu cara online — sin templates de Wix.',                lead: 'Sitio profesional para abogados, contadores, médicos, arquitectos. Diseño a medida, formularios serios.' },
         { id: 'ticket',    n: '05', name: 'E-ticketera',   intro: 'Vendé entradas y validá QR en la puerta.',     lead: 'Para boliches, teatros, espectáculos y eventos corporativos. Cobrás con Mercado Pago o transferencia y seguí al evento.' },
@@ -127,6 +127,7 @@ export const COPY = {
       ],
       monthly: '/mes',
       priceFrom: 'A partir de',
+      landingCta: 'Ver el sistema en detalle',
       setup: 'Costo de implementación',
       featured: 'Más elegido',
       footer: [
@@ -554,8 +555,8 @@ export const COPY = {
         'Mercado Pago', 'Visa', 'Mastercard', 'Transfer (CBU/CVU)', 'Cash',
       ],
       tabs: [
-        { id: 'ecommerce', n: '01', name: 'Ecommerce',     intro: 'Sell online.',         lead: 'Your own store with catalog, cart, payment gateway. It\'s your platform.' },
-        { id: 'gym',       n: '02', name: 'Gyms',          intro: 'Members, fees and QR access without losing sleep.',  lead: 'Auto-debit, QR access control, classes with capacity, retention metrics. For gyms, studios, pilates, crossfit.' },
+        { id: 'ecommerce', n: '01', name: 'Ecommerce',     intro: 'Sell online.',         lead: 'Your own store with catalog, cart, payment gateway. It\'s your platform.', landing: '/sistema-ecommerce/' },
+        { id: 'gym',       n: '02', name: 'Gyms',          intro: 'Members, fees and QR access without losing sleep.',  lead: 'Auto-debit, QR access control, classes with capacity, retention metrics. For gyms, studios, pilates, crossfit.', landing: '/sistema-gimnasios/' },
         { id: 'queue',     n: '03', name: 'Queueing',      intro: 'Voice call-out, TV display and live metrics.',       lead: 'For clinics, public offices, banks and surgeries. Multi-counter, TTS, queue and service-time metrics.' },
         { id: 'landing',   n: '04', name: 'Pro landing',   intro: 'Your face online — no Wix templates.',                lead: 'Professional site for lawyers, accountants, doctors, architects. Custom design, serious forms, local SEO.' },
         { id: 'ticket',    n: '05', name: 'E-ticketera',   intro: 'Sell tickets and validate QR at the door.',  lead: 'For festivals, theatres, shows and corporate events. Charge with Mercado Pago, assign seats, enter the venue without internet.' },
@@ -563,6 +564,7 @@ export const COPY = {
       ],
       monthly: '/mo',
       priceFrom: 'From',
+      landingCta: 'See the system in detail',
       setup: 'Setup',
       featured: 'Most picked',
       footer: [

@@ -8,6 +8,7 @@
     "optimize-images": "node scripts/optimize-images.mjs",
     "prebuild": "node scripts/copy-fonts.mjs && node scripts/optimize-images.mjs",
     "build": "vite build",
+    "postbuild": "node scripts/copy-landings.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kinetic — Sistema de gestión para gimnasios</title>
+  <meta name="description" content="Socios, cuotas, consultas, clases, rutinas y asistencias de tu gimnasio en un solo panel. Con app para tus socios y check-in por QR.">
+  <meta property="og:title" content="Kinetic — Sistema de gestión para gimnasios">
+  <meta property="og:description" content="Socios, cuotas, consultas, clases, rutinas y asistencias en un solo panel.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#0e0e0e">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@700;800;900&family=Manrope:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Saltar al contenido</a>
+
+  <header class="nav">
+    <div class="wrap nav__inner">
+      <a class="brand" href="#top">Kinetic</a>
+      <nav class="nav__links" aria-label="Principal">
+        <a href="#modulos">Módulos</a>
+        <a href="#socios">App del socio</a>
+        <a href="#implementacion">Implementación</a>
+        <a href="#precio">Precio</a>
+        <a href="#preguntas">Preguntas</a>
+      </nav>
+      <a class="btn btn--small" href="#contacto">Pedir demo</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Hero -->
+    <section class="hero" id="top">
+      <div class="hero__glow hero__glow--blue" aria-hidden="true"></div>
+      <div class="hero__glow hero__glow--orange" aria-hidden="true"></div>
+      <div class="wrap hero__grid">
+        <div class="hero__copy">
+          <p class="eyebrow">Sistema de gestión para gimnasios</p>
+          <h1><span class="accent">Tu gimnasio</span> ordenado en un solo panel</h1>
+          <p class="hero__tagline">Socios, cuotas, consultas, clases, rutinas y asistencias.</p>
+          <p class="lead">Dejá las planillas y el cuaderno de recepción: sabé en tiempo real quién debe, quién vino y cuántos socios activos tenés.</p>
+          <div class="hero__actions">
+            <a class="btn" href="#contacto">Pedir una demo</a>
+            <a class="btn btn--outline" href="#modulos">Ver qué incluye</a>
+          </div>
+          <ul class="hero__facts">
+            <li><strong>2 a 3 semanas</strong>para tenerlo funcionando</li>
+            <li><strong>Con tu marca</strong>y tu dominio propio</li>
+            <li><strong>Sin permanencia</strong>cancelás cuando quieras</li>
+          </ul>
+        </div>
+
+        <div class="mock" aria-label="Vista de ejemplo del panel de administración" role="img">
+          <div class="mock__bar"><span></span><span></span><span></span><em>panel.tugimnasio.com.ar</em></div>
+          <div class="mock__body">
+            <aside class="mock__side" aria-hidden="true">
+              <b class="is-on">Inicio</b><b>Socios</b><b>Pagos</b><b>Consultas</b><b>Clases</b><b>Rutinas</b><b>Reportes</b>
+            </aside>
+            <div class="mock__main">
+              <div class="mock__stats">
+                <div><small>Socios activos</small><strong>312</strong><i class="up">+18 este mes</i></div>
+                <div><small>Ingresos del mes</small><strong>$8,4M</strong><i class="up">+12%</i></div>
+                <div><small>Ingresos hoy</small><strong>147</strong><i>check-ins QR</i></div>
+              </div>
+              <div class="mock__cols">
+                <div class="mock__card">
+                  <h4>Cuotas vencidas</h4>
+                  <ul>
+                    <li><span>Lucía Fernández</span><em class="tag tag--orange">5 días</em></li>
+                    <li><span>Martín Gómez</span><em class="tag tag--orange">3 días</em></li>
+                    <li><span>Sofía Ruiz</span><em class="tag tag--blue">vence hoy</em></li>
+                  </ul>
+                </div>
+                <div class="mock__card">
+                  <h4>Consultas para seguir</h4>
+                  <ul>
+                    <li><span>Nicolás P. · Instagram</span><em class="tag tag--orange-soft">agendado</em></li>
+                    <li><span>Carla M. · WhatsApp</span><em class="tag tag--orange-soft">seguimiento</em></li>
+                    <li><span>Diego A. · Mostrador</span><em class="tag tag--blue">convertido</em></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="mock__card">
+                <h4>Asistencias de la semana</h4>
+                <div class="bars" aria-hidden="true">
+                  <span style="--h:62%"></span><span style="--h:78%"></span><span style="--h:70%"></span><span style="--h:88%"></span><span style="--h:66%"></span><span style="--h:34%"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Problemas -->
+    <section class="section section--low">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="eyebrow">Lo que resuelve</p>
+          <h2>¿Te suena alguna de estas?</h2>
+        </div>
+        <div class="grid-2">
+          <article class="card card--left-blue">
+            <h3>“No sé quién está al día con la cuota”</h3>
+            <p>Cada pago queda registrado con su comprobante en PDF, y el panel te muestra quién debe y a quién le vence esta semana.</p>
+          </article>
+          <article class="card card--left-orange">
+            <h3>“Las consultas se me pierden en WhatsApp”</h3>
+            <p>Cada interesado entra a un tablero con su estado y fecha de seguimiento. Le escribís desde el sistema y queda el historial.</p>
+          </article>
+          <article class="card card--left-blue">
+            <h3>“La clase de las 19 se llena de más”</h3>
+            <p>Las clases tienen cupo. Los socios reservan desde el celular y el coach ve la lista de inscriptos antes de empezar.</p>
+          </article>
+          <article class="card card--left-orange">
+            <h3>“Las rutinas están en papelitos y fotos”</h3>
+            <p>El entrenador arma la rutina en el sistema, con videos de cada ejercicio, y el socio la tiene en el teléfono.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Módulos -->
+    <section class="section" id="modulos">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="eyebrow">Módulos</p>
+          <h2>Todo en un mismo sistema</h2>
+          <p>Elegí un área para ver qué incluye.</p>
+        </div>
+
+        <div class="tabs" role="tablist" aria-label="Áreas del sistema">
+          <button class="tab" role="tab" id="tab-gestion" aria-controls="panel-gestion" aria-selected="true" style="--c: var(--blue)">Gestión y cobranzas</button>
+          <button class="tab" role="tab" id="tab-captacion" aria-controls="panel-captacion" aria-selected="false" tabindex="-1" style="--c: var(--orange)">Consultas y captación</button>
+          <button class="tab" role="tab" id="tab-acceso" aria-controls="panel-acceso" aria-selected="false" tabindex="-1" style="--c: var(--orange-soft)">Acceso y clases</button>
+          <button class="tab" role="tab" id="tab-entrenamiento" aria-controls="panel-entrenamiento" aria-selected="false" tabindex="-1" style="--c: var(--primary)">Entrenamiento</button>
+        </div>
+
+        <div class="panel" role="tabpanel" id="panel-gestion" aria-labelledby="tab-gestion" style="--c: var(--blue)">
+          <div class="panel__intro">
+            <h3>Gestión y cobranzas</h3>
+            <p>La parte administrativa del día a día, con los números del gimnasio siempre a la vista.</p>
+          </div>
+          <ul class="feature-list">
+            <li><b>Dashboard en tiempo real</b>Socios activos, ingresos del mes, ocupación y alertas.</li>
+            <li><b>Planes de membresía</b>Precios y duraciones flexibles: mensual, trimestral, por cantidad de clases.</li>
+            <li><b>Pagos y comprobantes</b>Registro de cobros, comprobante en PDF y lista de cuotas pendientes.</li>
+            <li><b>Cobro online o en efectivo</b>El socio paga desde la app o en recepción, con confirmación del administrador.</li>
+            <li><b>Varias sucursales</b>Cada sede opera por separado dentro del mismo sistema.</li>
+            <li><b>Equipo y permisos</b>Administradores, recepción y entrenadores, cada uno con su acceso.</li>
+          </ul>
+        </div>
+
+        <div class="panel" role="tabpanel" id="panel-captacion" aria-labelledby="tab-captacion" style="--c: var(--orange)" hidden>
+          <div class="panel__intro">
+            <h3>Consultas y captación</h3>
+            <p>Cada persona que pregunta por un plan es un posible socio. Que ninguna quede sin respuesta.</p>
+          </div>
+          <ul class="feature-list">
+            <li><b>Registro de interesados</b>Desde mostrador, WhatsApp, Instagram o la web, todo en un lugar.</li>
+            <li><b>Tablero por estado</b>Nuevo, contactado, seguimiento, agendado, convertido o perdido.</li>
+            <li><b>Agenda de seguimientos</b>Alertas de los contactos vencidos para no dejar pasar a nadie.</li>
+            <li><b>WhatsApp integrado</b>Escribís con un toque y queda registrado con notas e historial.</li>
+            <li><b>Alta en un paso</b>Convertís la consulta en socio con el plan que eligió.</li>
+            <li><b>Promociones y bienvenida</b>Descuentos y eventos para atraer socios nuevos.</li>
+          </ul>
+        </div>
+
+        <div class="panel" role="tabpanel" id="panel-acceso" aria-labelledby="tab-acceso" style="--c: var(--orange-soft)" hidden>
+          <div class="panel__intro">
+            <h3>Acceso y clases</h3>
+            <p>Recepción sin filas y clases sin sobrecupo.</p>
+          </div>
+          <ul class="feature-list">
+            <li><b>Kiosco con QR</b>Una tablet en la entrada y el socio registra su ingreso en segundos.</li>
+            <li><b>Check-in desde el celular</b>También puede marcar asistencia desde su propia app.</li>
+            <li><b>Historial de asistencias</b>Reportes por período para ver qué horarios rinden más.</li>
+            <li><b>Clases con cupo</b>Horarios, entrenador asignado y cantidad máxima de lugares.</li>
+            <li><b>Reservas online</b>El socio reserva su turno desde el celular.</li>
+            <li><b>Vista del coach</b>Lista de inscriptos y póster con QR para cada clase.</li>
+          </ul>
+        </div>
+
+        <div class="panel" role="tabpanel" id="panel-entrenamiento" aria-labelledby="tab-entrenamiento" style="--c: var(--primary)" hidden>
+          <div class="panel__intro">
+            <h3>Entrenamiento</h3>
+            <p>Herramientas para que tus entrenadores sigan a cada socio, más allá de la sala.</p>
+          </div>
+          <ul class="feature-list">
+            <li><b>Biblioteca de ejercicios</b>Con video e instrucciones para cada movimiento.</li>
+            <li><b>Rutinas personalizadas</b>El entrenador las arma y asigna a cada socio.</li>
+            <li><b>Módulo funcional (WOD)</b>Entrenamiento del día, registro de resultados y exportación a PDF.</li>
+            <li><b>Pantalla para la sala</b>La rutina o el WOD del día proyectado en una TV.</li>
+            <li><b>Progreso del socio</b>Peso, medidas y evolución a lo largo del tiempo.</li>
+            <li><b>Plantillas para coaches</b>Rutinas base reutilizables para armar más rápido.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- App del socio -->
+    <section class="section section--low" id="socios">
+      <div class="wrap member__grid">
+        <div class="phone" role="img" aria-label="Vista de ejemplo de la app del socio en un celular">
+          <div class="phone__screen">
+            <div class="phone__top"><b>Hola, Lucía</b><small>Plan Musculación · 3x semana</small></div>
+            <div class="phone__plan">
+              <small>Tu plan vence en</small>
+              <strong>12 días</strong>
+              <span class="phone__btn">Renovar plan</span>
+            </div>
+            <div class="phone__qr" aria-hidden="true">
+              <svg viewBox="0 0 21 21" shape-rendering="crispEdges"><path fill="currentColor" d="M0 0h7v7H0zM1 1v5h5V1zM2 2h3v3H2zM14 0h7v7h-7zM15 1v5h5V1zM16 2h3v3h-3zM0 14h7v7H0zM1 15v5h5v-5zM2 16h3v3H2zM8 0h1v2H8zM10 1h2v1h-2zM9 3h2v2H9zM12 4h1v3h-1zM8 6h2v2H8zM0 8h2v1H0zM3 8h3v1H3zM7 9h3v1H7zM11 8h2v2h-2zM14 8h2v1h-2zM17 8h4v1h-4zM1 10h2v2H1zM4 10h1v3H4zM6 11h3v1H6zM10 11h1v3h-1zM12 11h3v1h-3zM16 10h2v2h-2zM19 10h2v3h-2zM8 13h1v1H8zM13 13h2v2h-2zM16 13h2v1h-2zM8 15h3v1H8zM12 16h2v2h-2zM15 15h1v3h-1zM17 15h4v1h-4zM9 17h2v2H9zM17 17h2v2h-2zM8 20h3v1H8zM12 19h3v2h-3zM16 19h1v2h-1zM19 19h2v2h-2z"/></svg>
+              <small>Mostrá este código en recepción</small>
+            </div>
+            <div class="phone__class">
+              <div><b>Funcional</b><small>Hoy 19:00 · Coach Pablo</small></div>
+              <em>Reservado</em>
+            </div>
+          </div>
+        </div>
+        <div class="member__copy">
+          <p class="eyebrow">App del socio</p>
+          <h2>Tu gimnasio en el celular de cada socio</h2>
+          <p class="lead">Una app web con el nombre y los colores de tu gimnasio. Se instala en la pantalla de inicio de Android y iPhone, sin pasar por las tiendas.</p>
+          <ul class="checks">
+            <li>Registro con email o ingreso con Google</li>
+            <li>Ve su plan, cuándo vence y lo renueva online</li>
+            <li>Reserva clases y hace check-in con QR</li>
+            <li>Consulta su rutina con videos de cada ejercicio</li>
+            <li>Sigue su progreso: peso, medidas y evolución</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Implementación -->
+    <section class="section" id="implementacion">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="eyebrow">Implementación</p>
+          <h2>Funcionando en 2 a 3 semanas</h2>
+          <p>Nos ocupamos de la instalación y la carga inicial. Vos seguís atendiendo el gimnasio.</p>
+        </div>
+        <ol class="steps">
+          <li class="card">
+            <h3>Relevamiento</h3>
+            <p>Una reunión para definir planes, sucursales, usuarios y cómo trabaja tu equipo.</p>
+          </li>
+          <li class="card">
+            <h3>Configuración</h3>
+            <p>Instalamos el sistema con tu marca, cargamos los datos iniciales y dejamos listo tu dominio.</p>
+          </li>
+          <li class="card">
+            <h3>Capacitación</h3>
+            <p>Hasta dos sesiones remotas para administración y entrenadores.</p>
+          </li>
+          <li class="card">
+            <h3>Salida en vivo</h3>
+            <p>Publicamos el sistema y te acompañamos durante la primera semana de uso.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Precio -->
+    <section class="section section--low" id="precio">
+      <div class="wrap pricing__grid">
+        <div class="pricing__copy">
+          <p class="eyebrow">Precio</p>
+          <h2>Un solo plan, todo incluido</h2>
+          <p class="lead">Sin costo de implementación y sin contrato de permanencia. Tus datos son tuyos: si algún día te vas, te entregamos una exportación completa.</p>
+          <p class="pricing__note">La cuota se actualiza en el mismo porcentaje en que aumentes tus planes de membresía, así el costo del sistema acompaña el valor de tu gimnasio.</p>
+        </div>
+        <article class="price-card">
+          <span class="badge">Todo incluido</span>
+          <h3>Servicio mensual</h3>
+          <p class="price-card__amount">$100.000</p>
+          <p class="price-card__period">Por mes</p>
+          <p class="price-card__extra"><strong>+ $25.000 / año</strong> de hosting y dominio</p>
+          <ul class="checks checks--small">
+            <li>Todos los módulos y actualizaciones</li>
+            <li>Tu marca y dominio propio con HTTPS</li>
+            <li>Servidor en la nube con copias de seguridad automáticas</li>
+            <li>Implementación incluida en el primer mes</li>
+            <li>Soporte por WhatsApp y email, lunes a viernes de 9 a 18</li>
+          </ul>
+          <a class="btn btn--block" href="#contacto">Quiero implementarlo</a>
+          <p class="price-card__foot">Pagás por transferencia o Mercado Pago.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="preguntas">
+      <div class="wrap faq__wrap">
+        <div>
+          <p class="eyebrow">Dudas</p>
+          <h2>Preguntas frecuentes</h2>
+        </div>
+        <div class="faq__list">
+          <details>
+            <summary>¿Necesito instalar algo en las computadoras del gimnasio?</summary>
+            <p>No. Funciona desde el navegador en cualquier computadora, tablet o celular. Para el kiosco de ingreso alcanza con una tablet en recepción.</p>
+          </details>
+          <details>
+            <summary>¿Puedo pasar los socios que ya tengo?</summary>
+            <p>Sí. En la etapa de configuración cargamos tus planes, sucursales y la información inicial de tus socios.</p>
+          </details>
+          <details>
+            <summary>¿Mis socios tienen que bajar una app de la tienda?</summary>
+            <p>No. Entran desde la web del gimnasio y pueden agregarla a la pantalla de inicio del celular, en Android y en iPhone.</p>
+          </details>
+          <details>
+            <summary>Tengo más de una sede, ¿sirve igual?</summary>
+            <p>Sí. Cada sucursal tiene sus propios socios, clases y caja, y los administradores eligen la sede al ingresar.</p>
+          </details>
+          <details>
+            <summary>¿Qué pasa si quiero dejar de usarlo?</summary>
+            <p>Cancelás cuando quieras, abonando el mes en curso. Los datos son tuyos y te entregamos una exportación completa.</p>
+          </details>
+          <details>
+            <summary>¿Cómo arrancamos?</summary>
+            <p>Escribinos y coordinamos una demo. Si te sirve, se abonan los $25.000 de hosting y dominio y empezamos la configuración.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contacto -->
+    <section class="section section--low contact" id="contacto">
+      <div class="hero__glow hero__glow--blue contact__glow" aria-hidden="true"></div>
+      <div class="wrap contact__grid">
+        <div class="contact__copy">
+          <p class="eyebrow">Contacto</p>
+          <h2>Veamos si le sirve a <span class="accent">tu gimnasio</span></h2>
+          <p class="lead">Contanos un poco de tu gimnasio y te mostramos el sistema funcionando, con tus planes y tus horarios.</p>
+          <a class="btn btn--outline-blue" id="wa-direct" href="#" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+        </div>
+        <form class="form card" id="contact-form" novalidate>
+          <div class="field">
+            <label for="f-name">Tu nombre</label>
+            <input id="f-name" name="name" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="f-gym">Nombre del gimnasio</label>
+            <input id="f-gym" name="gym" autocomplete="organization" required>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="f-city">Ciudad</label>
+              <input id="f-city" name="city" autocomplete="address-level2">
+            </div>
+            <div class="field">
+              <label for="f-size">Socios activos</label>
+              <select id="f-size" name="size">
+                <option value="">Elegí una opción</option>
+                <option>Menos de 100</option>
+                <option>Entre 100 y 300</option>
+                <option>Entre 300 y 600</option>
+                <option>Más de 600</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-msg">¿Qué te gustaría resolver? <span class="optional">(opcional)</span></label>
+            <textarea id="f-msg" name="message" rows="3"></textarea>
+          </div>
+          <p class="form__error" id="form-error" role="alert" hidden>Completá tu nombre y el nombre del gimnasio para continuar.</p>
+          <button class="btn btn--block" type="submit">Enviar por WhatsApp</button>
+          <p class="form__hint">Se abre WhatsApp con tu mensaje listo para enviar.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <span>© <span id="year">2026</span> Kinetic</span>
+      <a href="#contacto">Pedir una demo</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

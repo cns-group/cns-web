@@ -198,7 +198,17 @@ export function Plans({ c, lang, activeTab = 'ecommerce', onTabChange }) {
               {tab.name}
               <span className="title-em">· {tab.intro}</span>
             </h3>
-            <p>{tab.lead}</p>
+            <div className="plans-intro-side">
+              <p>{tab.lead}</p>
+              {tab.landing && (
+                <a href={tab.landing} className="btn btn-ghost">
+                  {p.landingCta}
+                  <svg className="arr" width="12" height="12" viewBox="0 0 11 11" fill="none" aria-hidden="true">
+                    <path d="M2 9L9 2M9 2H3.5M9 2V7.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                  </svg>
+                </a>
+              )}
+            </div>
           </div>
           <div className="plans-grid">
             {tiers.map((tier, i) => (
