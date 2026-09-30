@@ -2,7 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import { LANDINGS } from './scripts/landings.mjs'
+import { LANDINGS, EXTERNAL_LANDINGS } from './scripts/landings.mjs'
 
 const MIME = {
   '.html': 'text/html; charset=utf-8',
@@ -22,6 +22,13 @@ function staticLandings() {
     configureServer(server) {
       server.middlewares.use((req, res, next) => {
         const url = decodeURIComponent((req.url || '').split('?')[0])
+        const external = EXTERNAL_LANDINGS.find(l => url === `/${l.route}` || url === `/${l.route}/`)
+        if (external) {
+          res.statusCode = 302
+          res.setHeader('Location', external.url)
+          return res.end()
+        }
+
         const landing = LANDINGS.find(l => url === `/${l.route}` || url.startsWith(`/${l.route}/`))
         if (!landing) return next()
 

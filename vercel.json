@@ -1,7 +1,9 @@
 {
   "redirects": [
     { "source": "/sistema-ecommerce", "destination": "/sistema-ecommerce/", "permanent": true },
-    { "source": "/sistema-gimnasios", "destination": "/sistema-gimnasios/", "permanent": true }
+    { "source": "/sistema-gimnasios", "destination": "/sistema-gimnasios/", "permanent": true },
+    { "source": "/sistema-gastronomia", "destination": "https://cafe-resto-zeta.vercel.app/", "permanent": false },
+    { "source": "/sistema-gastronomia/", "destination": "https://cafe-resto-zeta.vercel.app/", "permanent": false }
   ],
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
