@@ -57,7 +57,8 @@ function PlanCard({ plan, productName, c, lang, index = 0 }) {
   const p = c.plans
   const isCommission = typeof plan.price === 'string' && plan.priceNum
   const isOneOff     = plan.priceLead != null
-  const waUrl = whatsappPlanUrl(productName, plan.tier, lang)
+  const ctaUrl = plan.ctaHref || whatsappPlanUrl(productName, plan.tier, lang)
+  const setupLabel = plan.setupLabel || p.setup
 
   return (
     <Reveal as="div" index={index} className={`plan${plan.featured ? ' featured' : ''}`}>
@@ -98,13 +99,13 @@ function PlanCard({ plan, productName, c, lang, index = 0 }) {
         ) : (
           <>
             <div className="plan-price">
-              <span className="plan-from">{p.priceFrom}</span>
+              {!plan.fixed && <span className="plan-from">{p.priceFrom}</span>}
               <span className="plan-currency">{p.currency}</span>
               <span className="plan-num">{fmtMoney(plan.price, lang)}</span>
               <span className="plan-per">{p.monthly}</span>
             </div>
             <div className="plan-setup">
-              {p.setup}: {plan.setup === 0
+              {setupLabel}: {plan.setup === 0
                 ? (lang === 'es' ? <b>sin setup</b> : <b>no setup</b>)
                 : typeof plan.setup === 'number'
                   ? <b>{p.currency} {fmtMoney(plan.setup, lang)}</b>
@@ -130,12 +131,12 @@ function PlanCard({ plan, productName, c, lang, index = 0 }) {
 
       <div className="plan-cta">
         <a
-          href={waUrl}
+          href={ctaUrl}
           target="_blank"
           rel="noopener noreferrer"
           className={`btn ${plan.featured ? 'btn-primary' : 'btn-ghost'} btn-lg`}
         >
-          {plan.tier === 'Pro' ? p.ctaPro : `${p.cta} ${plan.tier}`}
+          {plan.ctaLabel || (plan.tier === 'Pro' ? p.ctaPro : `${p.cta} ${plan.tier}`)}
           <svg className="arr" width="12" height="12" viewBox="0 0 11 11" fill="none">
             <path d="M2 9L9 2M9 2H3.5M9 2V7.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
           </svg>

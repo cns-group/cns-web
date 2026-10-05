@@ -19,7 +19,7 @@ export const COPY = {
       titleC: 'Remoto,',
       titleD: 'de punta a punta.',
       lead:
-        'Diseñamos y construimos sistemas para pymes desde cualquier lugar: ecommerce, turneros, gestión de gimnasios y restaurantes, e-ticketera. Kickoff por videollamada, iteramos online y entregamos andando. Sin promesas raras.',
+        'Diseñamos y construimos sistemas para pymes desde cualquier lugar: ecommerce, turneros y gestión de gimnasios y restaurantes. Kickoff por videollamada, iteramos online y entregamos andando. Sin promesas raras.',
       footMeta: 'GMT‑3',
       footStatus: 'Operando',
     },
@@ -202,23 +202,26 @@ export const COPY = {
           ] },
         ],
         gym: [
-          { tier: 'Starter', tag: 'STR', sub: 'Gym de barrio / estudio', price: 100000, setup: 25000, feats: [
-            ['Hasta', '100 socios activos'], ['', '1 sede'],
-            ['','Sistema de notificaciones'],
-            ['', 'Control de acceso por QR o DNI'],
-            ['', 'Gestión de miembros y pagos manuales'],
-            ['Soporte', 'personalizado'],
-          ], muted: ['Sin pagos online', 'Sin clases personalizadas', 'Sin rutinas y programas de entrenamiento'] },
-          { tier: 'Grow', tag: 'GRW', sub: 'Gimnasio establecido', price: 150000, setup: 25000, featured: true, feats: [
-            ['', 'Todo lo de Starter, más:'], ['Hasta', '300 socios activos'], ['', 'Hasta 3 sedes'], 
-            ['', 'Panel de entrenadores'],
-            ['Pagos', 'online Mercado Pago, Transferencia, tarjetas'], ['', 'Gestión de eventos'],
-            ['', 'Rutinas y programas de entrenamiento personalizados'],
+          { tier: 'Mensual', sub: 'Pagás mes a mes', price: 80000, fixed: true, setup: 25000, setupLabel: 'Hosting anual (en el primer pago)', ctaLabel: 'Crear mi gimnasio', ctaHref: '/sistema-gimnasios/#registro', feats: [
+            ['', 'Todos los módulos: socios, cuotas, clases, rutinas y acceso QR'],
+            ['', 'App para tus socios con tu logo y tus colores'],
+            ['Tu web', 'en tugimnasio.codigonortesoluciones.com'],
+            ['Cobrás', 'online con Mercado Pago'],
             ['Soporte', 'personalizado'],
           ] },
-          { tier: 'Pro', tag: 'PRO', sub: 'Empezá sin costos', price: 'comision',priceNum: '5%', priceSuffix: 'por socio activo', setup: 'a medida', feats: [
-            ['', 'Todo lo de Grow, más:'], ['', 'Sin límite de socios'], ['', 'Sin límite de sedes'],
-            ['Soporte', 'dedicado prioritario'],
+          { tier: 'Semestral', sub: 'Pagás $432.000 cada 6 meses · ahorrás 10%', price: 72000, fixed: true, setup: 25000, setupLabel: 'Hosting anual (en el primer pago)', ctaLabel: 'Crear mi gimnasio', ctaHref: '/sistema-gimnasios/#registro', featured: true, feats: [
+            ['', 'Todos los módulos: socios, cuotas, clases, rutinas y acceso QR'],
+            ['', 'App para tus socios con tu logo y tus colores'],
+            ['Tu web', 'en tugimnasio.codigonortesoluciones.com'],
+            ['Cobrás', 'online con Mercado Pago'],
+            ['Soporte', 'personalizado'],
+          ] },
+          { tier: 'Anual', sub: 'Pagás $768.000 por año · ahorrás 20%', price: 64000, fixed: true, setup: 25000, setupLabel: 'Hosting anual (en el primer pago)', ctaLabel: 'Crear mi gimnasio', ctaHref: '/sistema-gimnasios/#registro', feats: [
+            ['', 'Todos los módulos: socios, cuotas, clases, rutinas y acceso QR'],
+            ['', 'App para tus socios con tu logo y tus colores'],
+            ['Tu web', 'en tugimnasio.codigonortesoluciones.com'],
+            ['Cobrás', 'online con Mercado Pago'],
+            ['Soporte', 'personalizado'],
           ] },
         ],
         queue: [
@@ -468,7 +471,7 @@ export const COPY = {
       titleC: 'Remote,',
       titleD: 'end to end.',
       lead:
-        'We design and build systems for small businesses from anywhere: ecommerce, booking, gym and restaurant management, ticketing. Kickoff over video, iterate online, ship it running. No weird promises.',
+        'We design and build systems for small businesses from anywhere: ecommerce, booking, and gym and restaurant management. Kickoff over video, iterate online, ship it running. No weird promises.',
       footMeta: 'GMT‑3',
       footStatus: 'Operational',
     },
@@ -631,22 +634,26 @@ export const COPY = {
           ] },
         ],
         gym: [
-          { tier: 'Starter', tag: 'STR', sub: 'Neighbourhood gym / studio', price: 59000, setup: 320000, feats: [
-            ['Up to', '300 active members'], ['', '1 location'], ['', 'Fees + auto reminders'],
-            ['Pay:', 'MP, transfer, cash'], ['', 'Manual access control'],
-            ['', 'Digital QR card'], ['Support', 'email · 48 h'],
-          ], muted: ['No auto-debit', 'No capped classes'] },
-          { tier: 'Grow', tag: 'GRW', sub: 'Established gym', price: 119000, setup: 580000, featured: true, feats: [
-            ['Up to', '1,500 active members'], ['', 'Up to 3 locations'], ['', 'Everything in Starter, plus:'],
-            ['', 'Auto-debit MP / card'], ['', 'QR access control (turnstile)'],
-            ['', 'Classes with capacity + waitlist'], ['', 'Retention + churn reports'],
-            ['Support', 'WhatsApp · 24 h'],
+          { tier: 'Monthly', sub: 'Pay month to month', price: 80000, fixed: true, setup: 25000, setupLabel: 'Yearly hosting (on the first payment)', ctaLabel: 'Create my gym', ctaHref: '/sistema-gimnasios/#registro', feats: [
+            ['', 'Every module: members, fees, classes, routines and QR access'],
+            ['', 'Member app with your logo and colours'],
+            ['Your site', 'at yourgym.codigonortesoluciones.com'],
+            ['Collect', 'online with Mercado Pago'],
+            ['Support', 'personal'],
           ] },
-          { tier: 'Pro', tag: 'PRO', sub: 'Multi-site chain', price: 220000, setup: 'custom', feats: [
-            ['', 'Unlimited members'], ['', 'Unlimited locations'], ['', 'Everything in Grow, plus:'],
-            ['', 'Native mobile app (iOS + Android)'], ['', 'Bookings, assessments, training plans'],
-            ['', 'Scale / cardio integration'], ['', 'Multi-site BI'],
-            ['Support', 'dedicated · 4 h'],
+          { tier: 'Semester', sub: 'Pay 432,000 every 6 months · save 10%', price: 72000, fixed: true, setup: 25000, setupLabel: 'Yearly hosting (on the first payment)', ctaLabel: 'Create my gym', ctaHref: '/sistema-gimnasios/#registro', featured: true, feats: [
+            ['', 'Every module: members, fees, classes, routines and QR access'],
+            ['', 'Member app with your logo and colours'],
+            ['Your site', 'at yourgym.codigonortesoluciones.com'],
+            ['Collect', 'online with Mercado Pago'],
+            ['Support', 'personal'],
+          ] },
+          { tier: 'Yearly', sub: 'Pay 768,000 per year · save 20%', price: 64000, fixed: true, setup: 25000, setupLabel: 'Yearly hosting (on the first payment)', ctaLabel: 'Create my gym', ctaHref: '/sistema-gimnasios/#registro', feats: [
+            ['', 'Every module: members, fees, classes, routines and QR access'],
+            ['', 'Member app with your logo and colours'],
+            ['Your site', 'at yourgym.codigonortesoluciones.com'],
+            ['Collect', 'online with Mercado Pago'],
+            ['Support', 'personal'],
           ] },
         ],
         queue: [
