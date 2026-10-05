@@ -559,6 +559,35 @@ a { color: inherit; }
 }
 .price-card__extra strong { color: var(--text); font-weight: 700; }
 .price-card .checks { margin-bottom: 26px; }
+.billing {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  padding: 4px;
+  margin-bottom: 22px;
+  background: var(--surface-highest);
+  border: 1px solid rgba(72, 72, 71, .55);
+}
+.billing__opt {
+  padding: 9px 4px;
+  background: transparent;
+  border: none;
+  color: var(--text-soft);
+  font: 600 11px/1.3 var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+}
+.billing__opt span { display: block; color: var(--orange); font-size: 10px; }
+.billing__opt:hover { color: var(--text); }
+.billing__opt.is-active { background: var(--blue); color: var(--on-primary); }
+.billing__opt.is-active span { color: var(--on-primary); }
+.price-card__saving {
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--orange-soft);
+}
 .price-card__foot { margin-top: 12px; text-align: center; font-size: 12px; color: var(--text-soft); }
 
 /* FAQ */
@@ -633,6 +662,29 @@ details p { padding: 0 40px 22px 0; font-size: 15px; color: var(--text-soft); ma
 .field textarea:focus { outline: none; border-color: var(--blue); }
 .field [aria-invalid] { border-color: var(--error); }
 .form__error { color: var(--error); font-size: 14px; font-weight: 600; }
+
+/* Registro de gimnasio */
+.signup__step { display: grid; gap: 16px; }
+.signup__step[hidden] { display: none; }
+.signup__slug { display: flex; align-items: center; gap: 8px; }
+.signup__slug input { flex: 1; min-width: 0; }
+.signup__slug span { color: var(--text-soft); font-size: 14px; white-space: nowrap; }
+.signup__status { min-height: 1.2em; font-size: 13px; color: var(--text-soft); }
+.signup__status.is-ok { color: #4ade80; }
+.signup__status.is-bad { color: var(--error); }
+.signup__info { color: #4ade80; font-size: 14px; font-weight: 600; }
+.signup__link {
+  background: none;
+  border: none;
+  color: var(--primary);
+  font: 600 14px/1.4 var(--body);
+  cursor: pointer;
+  padding: 0;
+}
+.signup .btn[disabled] { opacity: .5; cursor: wait; }
+@media (max-width: 560px) {
+  .signup__slug { flex-direction: column; align-items: stretch; }
+}
 .form__hint { text-align: center; font-size: 12px; color: var(--text-soft); }
 
 /* Footer */

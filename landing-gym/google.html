@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="referrer" content="no-referrer">
+  <title>Ingresar con Google</title>
+  <meta name="theme-color" content="#0e0e0e">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@700;800;900&family=Manrope:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .gauth { min-height: 100vh; display: grid; place-items: center; padding: 24px; }
+    .gauth__card { width: 100%; max-width: 420px; background: var(--surface-high); padding: 36px 28px; text-align: center; }
+    .gauth__card h1 { font-size: 24px; margin: 8px 0 10px; text-transform: uppercase; }
+    .gauth__card p { color: var(--text-soft); font-size: 14px; line-height: 1.5; }
+    .gauth__btn { display: flex; justify-content: center; margin: 26px 0 18px; min-height: 44px; }
+    .gauth__back { color: var(--text-soft); font-size: 13px; }
+    .gauth__error { color: #ff7351; }
+  </style>
+</head>
+<body>
+  <main class="gauth">
+    <div class="gauth__card">
+      <p class="eyebrow">Ingreso seguro</p>
+      <h1 id="gauth-title">Ingresar con Google</h1>
+      <p id="gauth-msg">Elegí tu cuenta de Google para entrar a tu gimnasio.</p>
+      <div class="gauth__btn" id="gauth-button"></div>
+      <a class="gauth__back" id="gauth-back" href="./">Volver</a>
+    </div>
+  </main>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="google.js"></script>
+</body>
+</html>

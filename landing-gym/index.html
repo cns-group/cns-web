@@ -27,8 +27,9 @@
         <a href="#implementacion">Implementación</a>
         <a href="#precio">Precio</a>
         <a href="#preguntas">Preguntas</a>
+        <a href="#contacto">Pedir demo</a>
       </nav>
-      <a class="btn btn--small" href="#contacto">Pedir demo</a>
+      <a class="btn btn--small" href="#registro">Crear mi gimnasio</a>
     </div>
   </header>
 
@@ -44,12 +45,12 @@
           <p class="hero__tagline">Socios, cuotas, consultas, clases, rutinas y asistencias.</p>
           <p class="lead">Dejá las planillas y el cuaderno de recepción: sabé en tiempo real quién debe, quién vino y cuántos socios activos tenés.</p>
           <div class="hero__actions">
-            <a class="btn" href="#contacto">Pedir una demo</a>
-            <a class="btn btn--outline" href="#modulos">Ver qué incluye</a>
+            <a class="btn" href="#registro">Crear mi gimnasio</a>
+            <a class="btn btn--outline" href="#contacto">Pedir una demo</a>
           </div>
           <ul class="hero__facts">
             <li><strong>2 a 3 semanas</strong>para tenerlo funcionando</li>
-            <li><strong>Con tu marca</strong>y tu dominio propio</li>
+            <li><strong>Con tu marca</strong>tu logo y tus colores</li>
             <li><strong>Sin permanencia</strong>cancelás cuando quieras</li>
           </ul>
         </div>
@@ -253,7 +254,7 @@
           </li>
           <li class="card">
             <h3>Configuración</h3>
-            <p>Instalamos el sistema con tu marca, cargamos los datos iniciales y dejamos listo tu dominio.</p>
+            <p>Configuramos el sistema con tu marca y cargamos los datos iniciales.</p>
           </li>
           <li class="card">
             <h3>Capacitación</h3>
@@ -278,20 +279,84 @@
         </div>
         <article class="price-card">
           <span class="badge">Todo incluido</span>
-          <h3>Servicio mensual</h3>
-          <p class="price-card__amount">$100.000</p>
-          <p class="price-card__period">Por mes</p>
-          <p class="price-card__extra"><strong>+ $25.000 / año</strong> de hosting y dominio</p>
+          <div class="billing" role="group" aria-label="Forma de pago">
+            <button type="button" class="billing__opt is-active" data-billing="monthly" aria-pressed="true">Mensual</button>
+            <button type="button" class="billing__opt" data-billing="semester" aria-pressed="false">Semestral <span>-10%</span></button>
+            <button type="button" class="billing__opt" data-billing="annual" aria-pressed="false">Anual <span>-20%</span></button>
+          </div>
+          <h3 id="price-title">Servicio mensual</h3>
+          <p class="price-card__amount" id="price-amount">$80.000</p>
+          <p class="price-card__period" id="price-period">Por mes</p>
+          <p class="price-card__saving" id="price-saving" aria-live="polite" hidden></p>
+          <p class="price-card__extra"><strong>+ $25.000 / año</strong> de hosting, se suma al primer pago</p>
           <ul class="checks checks--small">
             <li>Todos los módulos y actualizaciones</li>
-            <li>Tu marca y dominio propio con HTTPS</li>
+            <li>Tu web con tu logo y tus colores, con HTTPS</li>
             <li>Servidor en la nube con copias de seguridad automáticas</li>
             <li>Implementación incluida en el primer mes</li>
             <li>Soporte por WhatsApp y email, lunes a viernes de 9 a 18</li>
           </ul>
           <a class="btn btn--block" href="#contacto">Quiero implementarlo</a>
-          <p class="price-card__foot">Pagás por transferencia o Mercado Pago.</p>
+          <p class="price-card__foot">Pagás con Mercado Pago.</p>
         </article>
+      </div>
+    </section>
+
+    <!-- Registro -->
+    <section class="section contact" id="registro">
+      <div class="hero__glow hero__glow--orange contact__glow" aria-hidden="true"></div>
+      <div class="wrap contact__grid">
+        <div class="contact__copy">
+          <p class="eyebrow">Empezá ahora</p>
+          <h2>Creá <span class="accent">tu gimnasio</span> en minutos</h2>
+          <p class="lead">Dejanos los datos de tu gimnasio, confirmá tu correo y elegí tu plan. Apenas se acredita el pago te enviamos el acceso a tu panel.</p>
+          <ul class="checks">
+            <li>Tu web en <strong id="signup-domain-example">tugimnasio.codigonortesoluciones.com</strong></li>
+            <li>Pagás con Mercado Pago: mensual, semestral o anual</li>
+            <li>Con tu logo, tus colores y app para tus socios</li>
+          </ul>
+        </div>
+
+        <div class="card form signup">
+          <form id="signup-form" class="signup__step" novalidate>
+            <div class="field">
+              <label for="s-gym">Nombre de tu marca</label>
+              <input id="s-gym" name="gymName" maxlength="80" autocomplete="organization" required>
+            </div>
+            <div class="field">
+              <label for="s-slug">Dirección de tu web</label>
+              <div class="signup__slug">
+                <input id="s-slug" name="slug" maxlength="32" autocapitalize="off" spellcheck="false" required>
+                <span id="s-domain">.codigonortesoluciones.com</span>
+              </div>
+              <small class="signup__status" id="s-slug-status" aria-live="polite"></small>
+            </div>
+            <div class="field">
+              <label for="s-owner">Tu nombre</label>
+              <input id="s-owner" name="ownerName" maxlength="80" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="s-address">Dirección del gimnasio</label>
+              <input id="s-address" name="address" maxlength="160" autocomplete="street-address" placeholder="Calle 123, Ciudad" required>
+            </div>
+            <div class="field">
+              <label for="s-email">Correo</label>
+              <input id="s-email" name="email" type="email" autocomplete="email" required>
+            </div>
+            <p class="form__error" id="signup-error" role="alert" hidden></p>
+            <button class="btn btn--block" type="submit">Continuar</button>
+            <p class="form__hint">Te enviamos un correo para validar tu dirección.</p>
+          </form>
+
+          <div id="signup-sent" class="signup__step" hidden>
+            <h3>Revisá tu correo</h3>
+            <p class="lead">Te enviamos un link a <strong id="signup-email-sent"></strong>. Abrilo para elegir tu plan y realizar el pago con Mercado Pago.</p>
+            <p class="form__error" id="signup-sent-error" role="alert" hidden></p>
+            <p class="signup__info" id="signup-sent-info" hidden></p>
+            <button class="signup__link" type="button" id="signup-resend">Reenviar correo</button>
+            <button class="signup__link" type="button" id="signup-back">Cambiar datos</button>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -325,7 +390,7 @@
           </details>
           <details>
             <summary>¿Cómo arrancamos?</summary>
-            <p>Escribinos y coordinamos una demo. Si te sirve, se abonan los $25.000 de hosting y dominio y empezamos la configuración.</p>
+            <p>Registrá tu gimnasio desde esta página, elegí tu plan y pagá con Mercado Pago (el primer pago incluye el hosting del año). Apenas se acredita creamos tu gimnasio y te enviamos el acceso a tu panel. El subdominio queda tuyo recién al pagar. Si preferís verlo antes, escribinos y coordinamos una demo.</p>
           </details>
         </div>
       </div>
