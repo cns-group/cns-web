@@ -802,6 +802,11 @@ p  { margin: 0; }
     gap: 56px 32px;
     align-items: start;
   }
+  .work-shot:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: calc(50% - 16px);
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .work-shot-browser { transition: none; }
