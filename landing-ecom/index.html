@@ -555,6 +555,104 @@
       max-width: 64ch;
     }
 
+    /* Planes */
+    .planes {
+      margin-top: 3rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+    .plan {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 2rem 1.75rem;
+      border-radius: var(--radio);
+      background: var(--blanco);
+      border: 1px solid var(--linea);
+    }
+    .plan-destacado { border: 2px solid var(--azul); box-shadow: 8px 8px 0 var(--azul-bruma); }
+    .plan-etiqueta {
+      position: absolute;
+      top: -0.8rem;
+      left: 1.75rem;
+      padding: 0.2rem 0.75rem;
+      border-radius: 999px;
+      background: var(--naranja-vivo);
+      color: var(--grafito);
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+    .plan h3 { font-size: 1.35rem; color: var(--grafito); }
+    .plan-sub { margin-top: 0.25rem; color: var(--texto-suave); font-size: 0.95rem; }
+    .plan-precio { margin-top: 1.25rem; font-size: 2.4rem; font-weight: 800; color: var(--azul); letter-spacing: -0.03em; }
+    .plan-precio small { font-size: 1rem; font-weight: 600; color: var(--texto-suave); letter-spacing: 0; }
+    .plan-hosting { margin-top: 0.35rem; font-size: 0.9rem; color: var(--texto-suave); }
+    .plan .boton { margin-top: 1.75rem; justify-content: center; }
+    .planes-incluye {
+      margin: 2rem 0 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem 1.75rem;
+      color: var(--texto-suave);
+    }
+    .planes-incluye li::before { content: '✓ '; color: var(--azul); font-weight: 800; }
+
+    /* Alta online */
+    .alta .contenedor {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: clamp(2rem, 6vw, 5rem);
+      align-items: start;
+    }
+    .alta-pasos { margin: 2rem 0 0; padding-left: 1.2rem; color: var(--texto-suave); display: grid; gap: 0.6rem; }
+    .alta-pasos strong { color: var(--grafito); }
+    .formulario {
+      padding: 2rem;
+      border-radius: var(--radio);
+      background: var(--blanco);
+      border: 1px solid var(--linea);
+      box-shadow: 10px 10px 0 var(--azul-bruma);
+    }
+    .formulario h3 { font-size: 1.5rem; color: var(--grafito); margin-bottom: 1.25rem; }
+    .campo { display: grid; gap: 0.35rem; margin-bottom: 1rem; }
+    .campo label { font-weight: 700; font-size: 0.95rem; color: var(--grafito); }
+    .campo input {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 1.5px solid var(--linea);
+      border-radius: 0.75rem;
+      font: inherit;
+      color: var(--texto);
+      background: var(--blanco);
+    }
+    .campo input:focus { outline: none; border-color: var(--azul-vivo); box-shadow: 0 0 0 3px rgb(37 99 235 / 0.15); }
+    .campo-slug { display: flex; align-items: center; border: 1.5px solid var(--linea); border-radius: 0.75rem; overflow: hidden; }
+    .campo-slug:focus-within { border-color: var(--azul-vivo); box-shadow: 0 0 0 3px rgb(37 99 235 / 0.15); }
+    .campo-slug input { border: 0; border-radius: 0; min-width: 0; box-shadow: none !important; }
+    .campo-slug span { padding: 0 1rem; color: var(--texto-suave); font-size: 0.9rem; white-space: nowrap; }
+    .campo small { font-size: 0.85rem; color: var(--texto-suave); }
+    .campo small.ok { color: #15803d; font-weight: 700; }
+    .campo small.mal { color: #b91c1c; font-weight: 700; }
+    .formulario .boton { width: 100%; justify-content: center; margin-top: 0.5rem; cursor: pointer; }
+    .formulario .boton:disabled { opacity: 0.6; cursor: wait; }
+    .form-error { margin-top: 1rem; padding: 0.75rem 1rem; border-radius: 0.75rem; background: #fef2f2; color: #b91c1c; }
+    .form-info { margin-top: 1rem; color: #15803d; font-weight: 600; }
+    .enlace-boton {
+      margin-top: 1rem;
+      margin-right: 1.25rem;
+      padding: 0;
+      border: 0;
+      background: none;
+      font: inherit;
+      font-weight: 700;
+      color: var(--azul);
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
     /* Cierre */
     .cierre {
       background: var(--azul);
@@ -608,6 +706,8 @@
       .recorrido::before { display: none; }
       .areas { grid-template-columns: repeat(2, 1fr); }
       .caso .contenedor { grid-template-columns: 1fr; }
+      .planes { grid-template-columns: 1fr; max-width: 460px; }
+      .alta .contenedor { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 760px) {
@@ -664,8 +764,9 @@
       <nav class="nav" aria-label="Principal">
         <a href="#como-funciona">Cómo funciona</a>
         <a href="#panel">El panel</a>
+        <a href="#precios">Precios</a>
         <a href="#preguntas">Preguntas</a>
-        <a class="boton boton-primario" data-whatsapp href="#contacto">Pedir una demo</a>
+        <a class="boton boton-primario" href="#registro">Crear mi tienda</a>
       </nav>
     </div>
   </header>
@@ -682,11 +783,11 @@
             y un panel donde ves cada pedido. Con tu marca y tu dominio.
           </p>
           <div class="hero-acciones">
-            <a class="boton boton-primario" data-whatsapp href="#contacto">
+            <a class="boton boton-primario" href="#registro">Crear mi tienda ahora</a>
+            <a class="boton boton-secundario" data-whatsapp href="#contacto">
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.1 5.1 0 0 0 1.1 2.7 11.7 11.7 0 0 0 4.5 4c1.7.7 2.3.8 3.2.7a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.4-.3Z"/></svg>
               Pedir una demo por WhatsApp
             </a>
-            <a class="boton boton-secundario" href="#como-funciona">Ver cómo funciona</a>
           </div>
           <p class="hero-nota">Es la plataforma con la que vende Impacto Tienda en Formosa y Corrientes.</p>
         </div>
@@ -867,13 +968,111 @@
       </div>
     </section>
 
+    <section class="seccion seccion-suave" id="precios">
+      <div class="contenedor">
+        <h2 class="titulo-seccion">Precios simples, sin comisiones por venta</h2>
+        <p class="intro-seccion">
+          Elegí cómo pagar. El hosting y la dirección web se pagan una vez por año, junto con el primer pago.
+        </p>
+        <div class="planes" id="planes">
+          <article class="plan" data-plan="monthly">
+            <h3>Mensual</h3>
+            <p class="plan-sub">Pagás mes a mes</p>
+            <p class="plan-precio"><span data-precio>—</span><small>/mes</small></p>
+            <p class="plan-hosting" data-hosting></p>
+            <a class="boton boton-secundario" href="#registro">Crear mi tienda</a>
+          </article>
+          <article class="plan plan-destacado" data-plan="semester">
+            <span class="plan-etiqueta" data-descuento>Ahorrás 10%</span>
+            <h3>Semestral</h3>
+            <p class="plan-sub" data-total>Cada 6 meses</p>
+            <p class="plan-precio"><span data-precio>—</span><small>/mes</small></p>
+            <p class="plan-hosting" data-hosting></p>
+            <a class="boton boton-primario" href="#registro">Crear mi tienda</a>
+          </article>
+          <article class="plan" data-plan="annual">
+            <span class="plan-etiqueta" data-descuento>Ahorrás 20%</span>
+            <h3>Anual</h3>
+            <p class="plan-sub" data-total>Una vez por año</p>
+            <p class="plan-precio"><span data-precio>—</span><small>/mes</small></p>
+            <p class="plan-hosting" data-hosting></p>
+            <a class="boton boton-secundario" href="#registro">Crear mi tienda</a>
+          </article>
+        </div>
+        <ul class="planes-incluye">
+          <li>Hasta 200 productos, con 5 fotos cada uno</li>
+          <li>Tu propio Mercado Pago, sin comisión nuestra</li>
+          <li>Tu logo y tus colores</li>
+          <li>Panel de pedidos, stock y envíos</li>
+          <li>Soporte por WhatsApp</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="seccion alta" id="registro">
+      <div class="contenedor">
+        <div>
+          <h2 class="titulo-seccion">Creá tu tienda en 5 minutos</h2>
+          <p class="intro-seccion">Sin llamadas ni esperas. Completás tus datos, pagás y ya podés cargar productos.</p>
+          <ol class="alta-pasos">
+            <li><strong>Completá el formulario</strong> con el nombre de tu tienda y tu correo.</li>
+            <li><strong>Abrí el link</strong> que te enviamos por correo y elegí tu plan.</li>
+            <li><strong>Pagá con Mercado Pago</strong> y recibí tu usuario y contraseña.</li>
+            <li>Tu tienda queda en <strong id="alta-ejemplo">tutienda.tienda.codigonortesoluciones.com</strong></li>
+          </ol>
+        </div>
+
+        <div class="formulario">
+          <form id="alta-form" novalidate>
+            <h3>Datos de tu tienda</h3>
+            <div class="campo">
+              <label for="alta-nombre">Nombre de la tienda</label>
+              <input id="alta-nombre" name="storeName" maxlength="80" autocomplete="organization" required>
+            </div>
+            <div class="campo">
+              <label for="alta-slug">Dirección web</label>
+              <div class="campo-slug">
+                <input id="alta-slug" name="slug" maxlength="32" autocomplete="off" spellcheck="false" required>
+                <span id="alta-dominio">.tienda.codigonortesoluciones.com</span>
+              </div>
+              <small id="alta-slug-estado" aria-live="polite">Solo letras, números y guiones.</small>
+            </div>
+            <div class="campo">
+              <label for="alta-dueno">Tu nombre</label>
+              <input id="alta-dueno" name="ownerName" maxlength="80" autocomplete="name" required>
+            </div>
+            <div class="campo">
+              <label for="alta-email">Correo</label>
+              <input id="alta-email" name="email" type="email" maxlength="150" autocomplete="email" required>
+              <small>Va a ser tu usuario para entrar al panel.</small>
+            </div>
+            <div class="campo">
+              <label for="alta-whatsapp">WhatsApp (opcional)</label>
+              <input id="alta-whatsapp" name="whatsapp" inputmode="tel" maxlength="20" autocomplete="tel" placeholder="3482 123456">
+            </div>
+            <button class="boton boton-primario" type="submit">Continuar</button>
+            <p class="form-error" id="alta-error" role="alert" hidden></p>
+          </form>
+
+          <div id="alta-enviado" hidden>
+            <h3>Revisá tu correo</h3>
+            <p>Te enviamos un link a <strong id="alta-email-enviado"></strong>. Abrilo para elegir tu plan y pagar con Mercado Pago.</p>
+            <p class="form-error" id="alta-enviado-error" role="alert" hidden></p>
+            <p class="form-info" id="alta-enviado-info" hidden></p>
+            <button class="enlace-boton" type="button" id="alta-reenviar">Reenviar correo</button>
+            <button class="enlace-boton" type="button" id="alta-volver">Cambiar datos</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="seccion seccion-suave" id="preguntas">
       <div class="contenedor">
         <h2 class="titulo-seccion">Preguntas frecuentes</h2>
         <div class="preguntas">
           <details>
             <summary>¿Cuánto cuesta?</summary>
-            <p>Depende del tamaño de tu catálogo, la cantidad de sucursales y las integraciones que necesites. Escribinos y te pasamos una cotización cerrada.</p>
+            <p>Tenés un abono mensual, semestral o anual (ver <a href="#precios">precios</a>) más el hosting anual. No cobramos comisión por venta. Si necesitás varias sucursales o integraciones a medida, escribinos y te pasamos una cotización.</p>
           </details>
           <details>
             <summary>¿Necesito saber programar?</summary>
@@ -933,6 +1132,166 @@
     });
 
     document.getElementById('anio').textContent = new Date().getFullYear();
+
+    // Alta de tiendas: precios y registro contra la API de la plataforma.
+    const ES_LOCAL = /(^|\.)localhost$|^127\.0\.0\.1$/.test(location.hostname);
+    const API_BASE = ES_LOCAL
+      ? 'http://localhost:3010/api'
+      : 'https://multitenant-back-ecomerce-production.up.railway.app/api';
+
+    async function plataforma(method, path, body) {
+      const res = await fetch(`${API_BASE}/platform${path}`, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: body ? JSON.stringify(body) : undefined,
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        if (res.status === 429) throw new Error('Demasiados intentos. Esperá unos minutos y probá de nuevo.');
+        throw new Error(data.error || 'No pudimos procesar la solicitud. Probá de nuevo.');
+      }
+      return data;
+    }
+
+    const pesos = (n) => `$${Math.round(n).toLocaleString('es-AR')}`;
+
+    plataforma('GET', '/plans')
+      .then((r) => {
+        r.plans.forEach((p) => {
+          const card = document.querySelector(`[data-plan="${p.period}"]`);
+          if (!card) return;
+          card.querySelector('[data-precio]').textContent = pesos(p.perMonth);
+          const total = card.querySelector('[data-total]');
+          if (total && p.months > 1) total.textContent = `Pagás ${pesos(p.amount)} cada ${p.months} meses`;
+          const descuento = card.querySelector('[data-descuento]');
+          if (descuento && p.discountPercent) descuento.textContent = `Ahorrás ${p.discountPercent}%`;
+          card.querySelector('[data-hosting]').textContent = r.hostingFee
+            ? `+ ${pesos(r.hostingFee)} de hosting anual en el primer pago`
+            : '';
+        });
+      })
+      .catch(() => {
+        document.getElementById('planes').querySelectorAll('[data-precio]').forEach((el) => {
+          el.textContent = 'Consultanos';
+          el.nextElementSibling.hidden = true;
+        });
+      });
+
+    plataforma('GET', '/config')
+      .then((cfg) => {
+        if (!cfg.rootDomain) return;
+        document.getElementById('alta-dominio').textContent = `.${cfg.rootDomain}`;
+        document.getElementById('alta-ejemplo').textContent = `tutienda.${cfg.rootDomain}`;
+      })
+      .catch(() => {});
+
+    const altaForm = document.getElementById('alta-form');
+    const altaEnviado = document.getElementById('alta-enviado');
+    const slugInput = document.getElementById('alta-slug');
+    const slugEstado = document.getElementById('alta-slug-estado');
+    const altaError = document.getElementById('alta-error');
+    const enviadoError = document.getElementById('alta-enviado-error');
+    const enviadoInfo = document.getElementById('alta-enviado-info');
+
+    const aSlug = (v) =>
+      v.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9]+/g, '-').replace(/^-+/, '').slice(0, 32);
+
+    let slugTocado = false;
+    let slugOk = false;
+    let slugTimer = 0;
+    let slugSeq = 0;
+    let requestId = '';
+
+    function estadoSlug(texto, clase) {
+      slugEstado.textContent = texto;
+      slugEstado.className = clase || '';
+    }
+
+    function verificarSlug() {
+      const slug = slugInput.value.replace(/-+$/, '');
+      slugOk = false;
+      clearTimeout(slugTimer);
+      if (!slug) return estadoSlug('Solo letras, números y guiones.', '');
+      estadoSlug('Verificando…', '');
+      const seq = ++slugSeq;
+      slugTimer = setTimeout(async () => {
+        try {
+          const r = await plataforma('GET', `/slug-available?slug=${encodeURIComponent(slug)}`);
+          if (seq !== slugSeq) return;
+          slugOk = r.available;
+          estadoSlug(r.available ? 'Disponible' : r.reason || 'No disponible', r.available ? 'ok' : 'mal');
+        } catch (err) {
+          if (seq === slugSeq) estadoSlug(err.message, 'mal');
+        }
+      }, 350);
+    }
+
+    altaForm.elements.storeName.addEventListener('input', (e) => {
+      if (slugTocado) return;
+      slugInput.value = aSlug(e.target.value).replace(/-+$/, '');
+      verificarSlug();
+    });
+
+    slugInput.addEventListener('input', () => {
+      slugTocado = true;
+      slugInput.value = aSlug(slugInput.value);
+      verificarSlug();
+    });
+
+    function mostrarError(el, mensaje) {
+      el.textContent = mensaje;
+      el.hidden = !mensaje;
+    }
+
+    function mostrarPaso(paso) {
+      altaForm.hidden = paso !== altaForm;
+      altaEnviado.hidden = paso !== altaEnviado;
+    }
+
+    altaForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const datos = Object.fromEntries(new FormData(altaForm));
+      datos.slug = datos.slug.replace(/-+$/, '');
+      if (datos.storeName.trim().length < 2 || datos.ownerName.trim().length < 2 || !datos.email.includes('@')) {
+        return mostrarError(altaError, 'Completá el nombre de la tienda, tu nombre y tu correo.');
+      }
+      if (!slugOk) return mostrarError(altaError, 'Elegí una dirección web disponible.');
+      mostrarError(altaError, '');
+
+      const boton = altaForm.querySelector('button[type="submit"]');
+      boton.disabled = true;
+      try {
+        const r = await plataforma('POST', '/signup', datos);
+        if (r.devLink) {
+          window.location.href = r.devLink;
+          return;
+        }
+        requestId = r.requestId;
+        document.getElementById('alta-email-enviado').textContent = r.email;
+        mostrarError(enviadoError, '');
+        enviadoInfo.hidden = true;
+        mostrarPaso(altaEnviado);
+      } catch (err) {
+        mostrarError(altaError, err.message);
+      } finally {
+        boton.disabled = false;
+      }
+    });
+
+    document.getElementById('alta-reenviar').addEventListener('click', async () => {
+      mostrarError(enviadoError, '');
+      enviadoInfo.hidden = true;
+      try {
+        await plataforma('POST', '/signup/resend', { requestId });
+        enviadoInfo.textContent = 'Te enviamos el correo de nuevo.';
+        enviadoInfo.hidden = false;
+      } catch (err) {
+        mostrarError(enviadoError, err.message);
+      }
+    });
+
+    document.getElementById('alta-volver').addEventListener('click', () => mostrarPaso(altaForm));
 
     const sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (!sinMovimiento) {
