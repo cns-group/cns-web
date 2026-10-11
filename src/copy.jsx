@@ -124,6 +124,7 @@ export const COPY = {
         { id: 'ticket',    n: '05', name: 'E-ticketera',   intro: 'Vendé entradas y validá QR en la puerta.',     lead: 'Para boliches, teatros, espectáculos y eventos corporativos. Cobrás con Mercado Pago o transferencia y seguí al evento.' },
         { id: 'gastro',    n: '06', name: 'Gastronomía',   intro: 'Mozo, cocina, delivery y caja, en un mismo sistema.',  lead: 'QR para mesas y mostrador, pantalla de pedidos en cocina, seguimiento de delivery, stock por insumo y arqueo de caja.', landing: '/sistema-gastronomia' },
         { id: 'clinic',    n: '07', name: 'Clínica médica', intro: 'Agenda, historia clínica y telemedicina en un solo lugar.', lead: 'MediCore, para clínicas y médicos particulares: turnos, historia clínica, telemedicina, sala de espera, portal del paciente y facturación con obras sociales. Probalo 30 días gratis.', landing: 'https://cns.codigonortesoluciones.com' },
+        { id: 'pos',    n: '08', name: 'Sistema POS', intro: 'Sistema de Gestíon interna para inventiraio, facturacion y cobro de negocio.', lead: 'Sistema de Gestíon interna para inventiraio, facturacion y cobro de negocio.' },
       ],
       monthly: '/mes',
       priceFrom: 'A partir de',
@@ -262,6 +263,22 @@ export const COPY = {
             ['Pagás', 'con Mercado Pago, cancelás cuando quieras'],
           ] },
         ],
+        pos: [
+          { tier: 'Starter', tag: 'GRW', sub: 'Pagás una sola vez por un año', price: 'comision',priceNum: '30.000', priceSuffix: 'por año', setup: 19000, featured: false, feats: [
+            ['', 'Ventas'], 
+            ['', 'Stock'],
+            ['', 'Caja y arqueo de caja'],
+            ['', 'Reportes'],
+            ['', 'Tickets con tu logo'],
+
+          ] },
+          { tier: 'Grow', sub: 'Tu sitio  profesional', price: 40000, setup: 19000,featured: true, feats: [
+            ['', 'Todo lo de Starter, más:'],
+            ['', 'Facturación electronica con ARCA'],
+            ['', 'Factura B con CAE y QR'],
+            ['Soporte', 'dedicado prioritario'],
+          ] },
+        ],
         landing: [
           { tier: 'Grow', tag: 'GRW', sub: 'Pagás una sola vez por un año', price: 'comision',priceNum: '120.000', priceSuffix: 'por año (AHORRO 50% vs mensual)', setup: 19000, featured: false, feats: [
             ['', '1 página · diseño a medida de tu marca'], ['Secciones', 'Sobre mi, Servicios, Testimonios, Contacto'],
@@ -282,7 +299,7 @@ export const COPY = {
             ['', 'Multi-idioma (ES/EN/PT)'], ['', 'Galería de fotos ilimitada'],
              ['Soporte', 'dedicado prioritario'],
           ] },
-        ],
+        ]
       },
       cta: 'Empezar con',
       ctaPro: 'Hablemos',
