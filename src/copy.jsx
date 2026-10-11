@@ -264,7 +264,7 @@ export const COPY = {
           ] },
         ],
         pos: [
-          { tier: 'Starter', tag: 'STR', price: 'comision', price : 30.000, setup: 19000, featured: true, feats: [
+          { tier: 'Starter', tag: 'STR', price: 'comision', price : 30000, setup: 19000, featured: true, feats: [
             ['', 'Ventas'], 
             ['', 'Stock'],
             ['', 'Caja y arqueo de caja'],
