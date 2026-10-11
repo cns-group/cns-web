@@ -264,7 +264,7 @@ export const COPY = {
           ] },
         ],
         pos: [
-          { tier: 'Starter', tag: 'GRW', sub: 'Pagás una sola vez por un año', price: 'comision',priceNum: '30.000', priceSuffix: 'por año', setup: 19000, featured: false, feats: [
+          { tier: 'Starter', tag: 'STR', price: 'comision', price : 30.000, setup: 19000, featured: true, feats: [
             ['', 'Ventas'], 
             ['', 'Stock'],
             ['', 'Caja y arqueo de caja'],
