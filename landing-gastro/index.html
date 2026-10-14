@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cafe Resto — La web y los pedidos de tu cafetería</title>
+  <meta name="description" content="Tu cafetería con su propia web, su carta y sus pedidos. Tus clientes escanean el QR, piden y pagan con MercadoPago.">
+  <meta property="og:title" content="Cafe Resto — La web y los pedidos de tu cafetería">
+  <meta property="og:description" content="Cada local tiene su dominio, su carta y su cuenta de cobro.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloock&family=Figtree:wght@400;500;600;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="page">
+  <div class="heroWrap">
+    <img src="images/cafe-medialunas.jpg" alt="" class="heroPhoto">
+    <header class="nav">
+      <a href="#top" class="brand">Cafe Resto</a>
+      <nav class="navLinks" aria-label="Secciones">
+        <a href="#locales">Cada local</a>
+        <a href="#como">Cómo funciona</a>
+        <a href="#incluye">Qué incluye</a>
+      </nav>
+      <a href="app/?tenant=demo" class="navCta">Ver demo</a>
+    </header>
+
+    <section class="hero" id="top">
+      <div class="heroText">
+        <h1 class="heroTitle">Tu cafetería, con su propia web, su carta y sus pedidos.</h1>
+        <p class="heroLead">
+          Tus clientes escanean el QR, piden y pagan con MercadoPago.
+          Vos recibís la comanda al instante en el panel. Cada local tiene su
+          dominio, su carta y su cuenta de cobro.
+        </p>
+        <div class="heroActions">
+          <a href="https://wa.me/5493517648146?text=Hola%2C%20tengo%20una%20cafeter%C3%ADa%20y%20quiero%20sumarla%20a%20Cafe%20Resto." class="btnPrimary" target="_blank" rel="noopener noreferrer">Quiero sumar mi café</a>
+          <a href="app/admin/login?tenant=demo" class="btnGhost">Entrar al panel de prueba</a>
+        </div>
+      </div>
+
+      <div class="printer" aria-label="Ejemplo de comanda recibida">
+        <div class="printerSlot"></div>
+        <div class="ticketClip">
+          <div class="ticket">
+            <p class="ticketShop">TU CAFÉ</p>
+            <hr>
+            <p class="ticketRow"><span>Pedido #0142</span><span>Mesa 4</span></p>
+            <p class="ticketMuted">Hoy 12:41</p>
+            <hr>
+            <p class="ticketRow"><span>2 x Flat white</span><span>$3.200</span></p>
+            <p class="ticketRow"><span>3 x Medialuna</span><span>$1.200</span></p>
+            <p class="ticketRow"><span>1 x Tostado J&amp;Q</span><span>$2.500</span></p>
+            <p class="ticketNote">sin azúcar el segundo</p>
+            <hr>
+            <p class="ticketRow ticketTotal"><span>TOTAL</span><span>$6.900</span></p>
+            <p class="ticketMuted">MercadoPago</p>
+            <span class="stamp">Pagado</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section id="locales" class="tenants">
+    <div class="inner">
+      <h2 class="sectionTitle">Un sistema para muchos cafés. Cada uno en lo suyo.</h2>
+      <p class="sectionLead">
+        Todos los locales usan la misma plataforma, pero ninguno ve los datos
+        de otro. Tu cliente entra a tu dominio y ve solo tu carta.
+      </p>
+
+      <div class="packets">
+        <article class="packet white">
+          <h3>Tu café</h3>
+          <p class="packetDetail">Tu carta, tus precios y tus pedidos</p>
+        </article>
+        <article class="packet kraft">
+          <h3>El café de enfrente</h3>
+          <p class="packetDetail">Usa el mismo sistema, pero no ve nada de lo tuyo ni vos de él</p>
+        </article>
+        <article class="packet pink">
+          <h3>Tu segunda sucursal</h3>
+          <p class="packetDetail">Con su propia carta, sus horarios y su panel</p>
+        </article>
+      </div>
+
+      <div class="split">
+        <div>
+          <h3 class="splitTitle">Es tuyo</h3>
+          <ul class="list">
+            <li>Tu dominio, con tu nombre</li>
+            <li>Tu carta, tus fotos y tus precios</li>
+            <li>Tus horarios y si hoy abrís o no</li>
+            <li>Tus pedidos y tus clientes</li>
+            <li>Tu cuenta de MercadoPago: la plata va directo a vos</li>
+            <li>Tus usuarios del panel</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="splitTitle">Lo ponemos nosotros</h3>
+          <ul class="list">
+            <li>El sistema y sus actualizaciones</li>
+            <li>Servidores y base de datos</li>
+            <li>La integración con MercadoPago</li>
+            <li>Soporte cuando algo no anda</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="como" class="board">
+    <div class="inner">
+      <h2 class="boardTitle">Cómo arrancás</h2>
+      <ol class="steps">
+        <li>
+          <h3>Nos pasás los datos del local</h3>
+          <p>Creamos tu espacio y tu usuario para el panel.</p>
+        </li>
+        <li>
+          <h3>Cargás tu carta</h3>
+          <p>Categorías, productos, fotos y precios, desde el celu o la compu.</p>
+        </li>
+        <li>
+          <h3>Conectás MercadoPago</h3>
+          <p>Autorizás tu cuenta una vez y los cobros llegan directo.</p>
+        </li>
+        <li>
+          <h3>Apuntás tu dominio y pegás el QR</h3>
+          <p>Tus clientes piden desde la mesa o desde su casa.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="incluye" class="menuSection">
+    <figure class="menuPhoto">
+      <img src="images/cafe2.jpg" alt="Barista sirviendo un latte con arte en la espuma" loading="lazy">
+    </figure>
+    <div class="menuCard">
+      <h2 class="menuTitle">La carta del servicio</h2>
+      <ul class="menuList">
+        <li><span>Menú digital con fotos</span><span class="leader" aria-hidden="true"></span><span class="menuPrice">incluido</span></li>
+        <li><span>Pedidos en mesa, para llevar o delivery</span><span class="leader" aria-hidden="true"></span><span class="menuPrice">incluido</span></li>
+        <li><span>Pedidos en tiempo real en el panel</span><span class="leader" aria-hidden="true"></span><span class="menuPrice">incluido</span></li>
+        <li><span>Cobro con MercadoPago o efectivo</span><span class="leader" aria-hidden="true"></span><span class="menuPrice">incluido</span></li>
+        <li><span>Código QR por mesa</span><span class="leader" aria-hidden="true"></span><span class="menuPrice">incluido</span></li>
+        <li><span>Horarios y aviso de abierto o cerrado</span><span class="leader" aria-hidden="true"></span><span class="menuPrice">incluido</span></li>
+        <li><span>Seguimiento del pedido para el cliente</span><span class="leader" aria-hidden="true"></span><span class="menuPrice">incluido</span></li>
+        <li><span>Mapa y datos de contacto del local</span><span class="leader" aria-hidden="true"></span><span class="menuPrice">incluido</span></li>
+      </ul>
+      <p class="menuFoot">Todo se maneja desde un mismo panel.</p>
+    </div>
+  </section>
+
+  <section class="closing">
+    <img src="images/cafe1.jpg" alt="" class="closingPhoto" loading="lazy">
+    <h2 class="closingTitle">¿Tenés un café? Pasá a probarlo.</h2>
+    <p>
+      La demo es un local de prueba: pedí algo desde la carta y miralo
+      llegar al panel.
+    </p>
+    <div class="heroActions">
+      <a href="app/?tenant=demo" class="btnPrimary">Abrir la demo</a>
+      <a href="https://wa.me/5493517648146?text=Hola%2C%20tengo%20una%20cafeter%C3%ADa%20y%20quiero%20sumarla%20a%20Cafe%20Resto." class="btnGhostLight" target="_blank" rel="noopener noreferrer">Escribinos por WhatsApp</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span>Cafe Resto</span>
+    <span>Panel demo: admin@cafeteria.com / Admin2024!</span>
+  </footer>
+</div>
+</body>
+</html>

@@ -40,7 +40,9 @@ function staticLandings() {
 
         const base = path.resolve(landing.dir)
         const rel = url.slice(landing.route.length + 2) || 'index.html'
-        const file = path.resolve(base, rel)
+        let file = path.resolve(base, rel)
+        // Apps SPA embebidas (ej. sistema-cafeteria/app/): rutas sin archivo → su index.html
+        if (!path.extname(file) && rel.startsWith('app/')) file = path.resolve(base, 'app/index.html')
         if (!file.startsWith(base) || !fs.existsSync(file) || fs.statSync(file).isDirectory()) return next()
 
         res.setHeader('Content-Type', MIME[path.extname(file).toLowerCase()] || 'application/octet-stream')
