@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Impacto | Tu tienda online con stock por sucursal, Mercado Pago y envíos</title>
-  <meta name="description" content="La plataforma con la que vende Impacto Tienda: stock por sucursal, Mercado Pago, transferencia y efectivo, envíos con Andreani y Correo Argentino, precios mayoristas y un panel para manejar todo.">
+  <title>Tu tienda online con stock por sucursal, Mercado Pago y envíos | Código Norte</title>
+  <meta name="description" content="Tu tienda online lista para vender: stock por sucursal, Mercado Pago con cuotas y tarjetas, envíos con Correo Argentino, precios mayoristas y un panel para manejar todo.">
   <meta name="theme-color" content="#1446b8">
-  <meta property="og:title" content="Impacto | Tu tienda online, lista para vender">
-  <meta property="og:description" content="Stock por sucursal, Mercado Pago, envíos con Andreani y Correo Argentino, y un panel para manejar todo.">
+  <meta property="og:title" content="Tu tienda online, lista para vender">
+  <meta property="og:description" content="Stock por sucursal, Mercado Pago, envíos con Correo Argentino y un panel para manejar todo.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="assets/logoimpacto.png">
+  <meta property="og:image" content="assets/cnslogo.png">
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="apple-touch-icon" href="/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -172,7 +172,7 @@
     .hero .contenedor {
       position: relative;
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
+      grid-template-columns: minmax(0, 52rem);
       gap: clamp(2.5rem, 6vw, 5rem);
       align-items: center;
     }
@@ -448,7 +448,7 @@
       background: var(--naranja);
     }
 
-    /* Caso real, en el modo oscuro de Impacto */
+    /* Sección en modo oscuro */
     .caso .contenedor {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -542,6 +542,8 @@
       background: var(--azul-bruma);
       color: var(--azul);
       font-size: 1.3rem;
+      line-height: 1;
+      padding-bottom: 0.12rem;
       transition: transform 0.2s ease, background-color 0.2s ease;
     }
     .preguntas details[open] summary::after {
@@ -727,7 +729,24 @@
       .hero-orbe-azul { width: 260px; height: 260px; border-width: 26px; }
     }
 
+    /* Animaciones */
+    @keyframes entrada { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+    @keyframes flotar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+    .hero h1, .hero-bajada, .hero-acciones { animation: entrada 0.8s cubic-bezier(.2,.7,.2,1) both; }
+    .hero-bajada { animation-delay: 0.12s; }
+    .hero-acciones { animation-delay: 0.24s; }
+    .hero-orbe { animation: flotar 7s ease-in-out infinite; }
+    .hero-orbe-naranja { animation-delay: -3.5s; }
+    .js-anim .rev { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(.2,.7,.2,1); transition-delay: calc(var(--i, 0) * 90ms); }
+    .js-anim .rev.visto { opacity: 1; transform: none; }
+    .boton { transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease; }
+    .boton:hover { transform: translateY(-2px); }
+    .area, .plan, .recorrido li, .arranque li { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+    .area:hover, .plan:hover { transform: translateY(-4px); }
+
     @media (prefers-reduced-motion: reduce) {
+      .hero h1, .hero-bajada, .hero-acciones, .hero-orbe { animation: none; }
+      .js-anim .rev { opacity: 1; transform: none; }
       html { scroll-behavior: auto; }
       .franja-pista { animation: none; }
       *, *::before, *::after { transition: none !important; }
@@ -740,18 +759,16 @@
   <div class="franja" aria-label="Lo que incluye la tienda">
     <div class="franja-pista">
       <div class="franja-items">
-        <span>Mercado Pago con cuotas sin interés</span><span aria-hidden="true">✦</span>
-        <span>Envíos con Andreani y Correo Argentino</span><span aria-hidden="true">✦</span>
-        <span>Stock por sucursal</span><span aria-hidden="true">✦</span>
-        <span>Precios mayoristas por cantidad</span><span aria-hidden="true">✦</span>
-        <span>Catálogo en Instagram y Facebook</span><span aria-hidden="true">✦</span>
+        <span>Envíos con Correo Argentino</span><span aria-hidden="true">✦</span>
+        <span>Catálogo de productos</span><span aria-hidden="true">✦</span>
+        <span>Pagos con Mercado Pago</span><span aria-hidden="true">✦</span>
+        <span>Cuotas y tarjetas</span><span aria-hidden="true">✦</span>
       </div>
       <div class="franja-items" aria-hidden="true">
-        <span>Mercado Pago con cuotas sin interés</span><span>✦</span>
-        <span>Envíos con Andreani y Correo Argentino</span><span>✦</span>
-        <span>Stock por sucursal</span><span>✦</span>
-        <span>Precios mayoristas por cantidad</span><span>✦</span>
-        <span>Catálogo en Instagram y Facebook</span><span>✦</span>
+        <span>Envíos con Correo Argentino</span><span>✦</span>
+        <span>Catálogo de productos</span><span>✦</span>
+        <span>Pagos con Mercado Pago</span><span>✦</span>
+        <span>Cuotas y tarjetas</span><span>✦</span>
       </div>
     </div>
   </div>
@@ -779,8 +796,8 @@
         <div>
           <h1>Tu tienda online, lista para vender desde el primer día.</h1>
           <p class="hero-bajada">
-            Con el stock de cada sucursal, cobro con Mercado Pago, envíos con Andreani o Correo Argentino
-            y un panel donde ves cada pedido. Con tu marca y tu dominio.
+            Con el stock de cada sucursal, cobro con Mercado Pago, envíos con Correo Argentino,
+            cuotas y tarjetas, y un panel donde ves cada pedido. Con tu marca y tu dominio.
           </p>
           <div class="hero-acciones">
             <a class="boton boton-primario" href="#registro">Probala gratis 10 días</a>
@@ -789,43 +806,64 @@
               Pedir una demo por WhatsApp
             </a>
           </div>
-          <p class="hero-nota">Es la plataforma con la que vende Impacto Tienda en Formosa y Corrientes.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="seccion alta" id="registro">
+      <div class="contenedor">
+        <div>
+          <h2 class="titulo-seccion">Creá tu tienda en 5 minutos</h2>
+          <p class="intro-seccion">Sin llamadas ni esperas ni tarjeta. Completás tus datos y ya podés cargar productos. Los primeros 10 días son gratis.</p>
+          <ol class="alta-pasos">
+            <li><strong>Completá el formulario</strong> con el nombre de tu tienda y tu correo.</li>
+            <li><strong>Abrí el link</strong> que te enviamos por correo y activá tu prueba gratis.</li>
+            <li><strong>Recibí tu usuario y contraseña</strong> y usá la tienda 10 días gratis. Si te gusta, elegís un plan desde el panel.</li>
+            <li>Tu tienda queda en <strong id="alta-ejemplo">tutienda.tienda.codigonortesoluciones.com</strong></li>
+          </ol>
         </div>
 
-        <figure class="ticket" aria-label="Ejemplo de un pedido procesado por la tienda">
-          <div class="ticket-cabeza">
-            <span class="ticket-pedido">Pedido 1048</span>
-            <span class="ticket-total">$ 89.900</span>
-          </div>
-          <div class="ticket-cuerpo">
-            <ul class="ticket-productos">
-              <li><span>Auriculares bluetooth</span><span>1 u.</span></li>
-              <li><span>Cargador rápido 20W</span><span>1 u.</span></li>
-            </ul>
-            <ol class="pasos-pedido">
-              <li class="hecho">
-                <span class="tilde" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7"/></svg></span>
-                <span>Stock reservado en la sucursal Formosa</span>
-              </li>
-              <li class="hecho">
-                <span class="tilde" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7"/></svg></span>
-                <span>Pago aprobado en Mercado Pago, 6 cuotas sin interés</span>
-              </li>
-              <li class="hecho">
-                <span class="tilde" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7"/></svg></span>
-                <span>Envío creado en Correo Argentino</span>
-              </li>
-              <li class="hecho">
-                <span class="tilde" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7"/></svg></span>
-                <span>Email de confirmación enviado al cliente</span>
-              </li>
-            </ol>
-            <div class="ticket-pie">
-              <div class="codigo-barras" aria-hidden="true"></div>
-              <div class="ticket-envio">Formosa<br>CP 3600</div>
+        <div class="formulario">
+          <form id="alta-form" novalidate>
+            <h3>Datos de tu tienda</h3>
+            <div class="campo">
+              <label for="alta-nombre">Nombre de la tienda</label>
+              <input id="alta-nombre" name="storeName" maxlength="80" autocomplete="organization" required>
             </div>
+            <div class="campo">
+              <label for="alta-slug">Dirección web</label>
+              <div class="campo-slug">
+                <input id="alta-slug" name="slug" maxlength="32" autocomplete="off" spellcheck="false" required>
+                <span id="alta-dominio">.tienda.codigonortesoluciones.com</span>
+              </div>
+              <small id="alta-slug-estado" aria-live="polite">Solo letras, números y guiones.</small>
+            </div>
+            <div class="campo">
+              <label for="alta-dueno">Tu nombre</label>
+              <input id="alta-dueno" name="ownerName" maxlength="80" autocomplete="name" required>
+            </div>
+            <div class="campo">
+              <label for="alta-email">Correo</label>
+              <input id="alta-email" name="email" type="email" maxlength="150" autocomplete="email" required>
+              <small>Va a ser tu usuario para entrar al panel.</small>
+            </div>
+            <div class="campo">
+              <label for="alta-whatsapp">WhatsApp (opcional)</label>
+              <input id="alta-whatsapp" name="whatsapp" inputmode="tel" maxlength="20" autocomplete="tel" placeholder="3482 123456">
+            </div>
+            <button class="boton boton-primario" type="submit">Empezar prueba gratis</button>
+            <p class="form-error" id="alta-error" role="alert" hidden></p>
+          </form>
+
+          <div id="alta-enviado" hidden>
+            <h3>Revisá tu correo</h3>
+            <p>Te enviamos un link a <strong id="alta-email-enviado"></strong>. Abrilo para activar tu prueba gratis de 10 días.</p>
+            <p class="form-error" id="alta-enviado-error" role="alert" hidden></p>
+            <p class="form-info" id="alta-enviado-info" hidden></p>
+            <button class="enlace-boton" type="button" id="alta-reenviar">Reenviar correo</button>
+            <button class="enlace-boton" type="button" id="alta-volver">Cambiar datos</button>
           </div>
-        </figure>
+        </div>
       </div>
     </section>
 
@@ -846,7 +884,7 @@
           </li>
           <li>
             <h3>Se arma el envío</h3>
-            <p>El pedido se carga en Andreani o Correo Argentino con la dirección y el código postal del cliente.</p>
+            <p>El pedido se carga en Correo Argentino con la dirección y el código postal del cliente.</p>
           </li>
           <li>
             <h3>Te enterás al instante</h3>
@@ -906,7 +944,6 @@
           <div class="area">
             <h3>Marketing</h3>
             <ul>
-              <li>Catálogo sincronizado con Instagram y Facebook</li>
               <li>Pixel de Meta y Google Analytics listos</li>
               <li>Portada con slides que cambiás vos</li>
             </ul>
@@ -918,16 +955,16 @@
     <section class="seccion seccion-noche caso">
       <div class="contenedor">
         <div>
-          <h2 class="titulo-seccion">No es una maqueta: ya está vendiendo</h2>
+          <h2 class="titulo-seccion">Pensada para vender desde el primer día</h2>
           <p class="intro-seccion">
-            Impacto Tienda vende tecnología online con esta plataforma, con stock separado por sucursal
+            Una tienda completa, con stock separado por sucursal
             y una sección aparte para clientes mayoristas.
           </p>
           <a class="boton boton-naranja" data-whatsapp href="#contacto">Quiero verla funcionando</a>
         </div>
         <dl class="caso-datos">
           <div>
-            <dt>Sucursales en Formosa y Corrientes</dt>
+            <dt>Varias sucursales</dt>
             <dd>Cada una con su stock y su cuenta de cobro. El cliente compra de la que le queda cerca.</dd>
           </div>
           <div>
@@ -936,7 +973,7 @@
           </div>
           <div>
             <dt>Se adapta a cualquier marca</dt>
-            <dd>La misma plataforma hoy también vende como Óptica Irupe, con su logo, colores y portada.</dd>
+            <dd>Con tu logo, tus colores y tu portada, para que la tienda se vea como tu negocio.</dd>
           </div>
         </dl>
       </div>
@@ -1009,63 +1046,6 @@
       </div>
     </section>
 
-    <section class="seccion alta" id="registro">
-      <div class="contenedor">
-        <div>
-          <h2 class="titulo-seccion">Creá tu tienda en 5 minutos</h2>
-          <p class="intro-seccion">Sin llamadas ni esperas ni tarjeta. Completás tus datos y ya podés cargar productos. Los primeros 10 días son gratis.</p>
-          <ol class="alta-pasos">
-            <li><strong>Completá el formulario</strong> con el nombre de tu tienda y tu correo.</li>
-            <li><strong>Abrí el link</strong> que te enviamos por correo y activá tu prueba gratis.</li>
-            <li><strong>Recibí tu usuario y contraseña</strong> y usá la tienda 10 días gratis. Si te gusta, elegís un plan desde el panel.</li>
-            <li>Tu tienda queda en <strong id="alta-ejemplo">tutienda.tienda.codigonortesoluciones.com</strong></li>
-          </ol>
-        </div>
-
-        <div class="formulario">
-          <form id="alta-form" novalidate>
-            <h3>Datos de tu tienda</h3>
-            <div class="campo">
-              <label for="alta-nombre">Nombre de la tienda</label>
-              <input id="alta-nombre" name="storeName" maxlength="80" autocomplete="organization" required>
-            </div>
-            <div class="campo">
-              <label for="alta-slug">Dirección web</label>
-              <div class="campo-slug">
-                <input id="alta-slug" name="slug" maxlength="32" autocomplete="off" spellcheck="false" required>
-                <span id="alta-dominio">.tienda.codigonortesoluciones.com</span>
-              </div>
-              <small id="alta-slug-estado" aria-live="polite">Solo letras, números y guiones.</small>
-            </div>
-            <div class="campo">
-              <label for="alta-dueno">Tu nombre</label>
-              <input id="alta-dueno" name="ownerName" maxlength="80" autocomplete="name" required>
-            </div>
-            <div class="campo">
-              <label for="alta-email">Correo</label>
-              <input id="alta-email" name="email" type="email" maxlength="150" autocomplete="email" required>
-              <small>Va a ser tu usuario para entrar al panel.</small>
-            </div>
-            <div class="campo">
-              <label for="alta-whatsapp">WhatsApp (opcional)</label>
-              <input id="alta-whatsapp" name="whatsapp" inputmode="tel" maxlength="20" autocomplete="tel" placeholder="3482 123456">
-            </div>
-            <button class="boton boton-primario" type="submit">Empezar prueba gratis</button>
-            <p class="form-error" id="alta-error" role="alert" hidden></p>
-          </form>
-
-          <div id="alta-enviado" hidden>
-            <h3>Revisá tu correo</h3>
-            <p>Te enviamos un link a <strong id="alta-email-enviado"></strong>. Abrilo para activar tu prueba gratis de 10 días.</p>
-            <p class="form-error" id="alta-enviado-error" role="alert" hidden></p>
-            <p class="form-info" id="alta-enviado-info" hidden></p>
-            <button class="enlace-boton" type="button" id="alta-reenviar">Reenviar correo</button>
-            <button class="enlace-boton" type="button" id="alta-volver">Cambiar datos</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <section class="seccion seccion-suave" id="preguntas">
       <div class="contenedor">
         <h2 class="titulo-seccion">Preguntas frecuentes</h2>
@@ -1118,7 +1098,7 @@
 
   <footer class="pie">
     <div class="contenedor">
-      <span>Impacto, tiendas online para comercios argentinos.</span>
+      <span>Código Norte Soluciones, tiendas online para comercios argentinos.</span>
       <span>&copy; <span id="anio">2026</span></span>
     </div>
   </footer>
@@ -1306,6 +1286,22 @@
         setTimeout(() => li.classList.add('hecho'), 700 + i * 650);
       });
     }
+  </script>
+
+  <script>
+    // Aparición al hacer scroll
+    (function () {
+      if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      document.documentElement.classList.add('js-anim');
+      const sel = '.titulo-seccion, .intro-seccion, .recorrido li, .area, .caso-datos > div, .arranque li, .plan, .planes-incluye li, .alta .contenedor > *, .preguntas details, .cierre .contenedor > *';
+      const io = new IntersectionObserver((es) => es.forEach((e) => {
+        if (e.isIntersecting) { e.target.classList.add('visto'); io.unobserve(e.target); }
+      }), { threshold: 0.12 });
+      document.querySelectorAll(sel).forEach((el) => {
+        el.style.setProperty('--i', [...el.parentNode.children].indexOf(el) % 6);
+        el.classList.add('rev'); io.observe(el);
+      });
+    })();
   </script>
 </body>
 </html>
