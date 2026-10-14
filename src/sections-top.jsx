@@ -40,14 +40,8 @@ export function Nav({ c, onSection }) {
           aria-label="CNS · inicio"
           onClick={go('top')}
         >
-          <img
-            src="/cnslogo.png"
-            alt=""
-            width={94}
-            height={34}
-            decoding="async"
-            style={{ width: 94, height: 'auto' }}
-          />
+          <span className="brand-mark" aria-hidden="true">CN</span>
+          <span className="brand-name">Código Norte</span>
         </a>
 
         <div className="nav-links" aria-label="Principal">
@@ -159,26 +153,17 @@ export function Hero({ c, onSection }) {
               {c.nav.ctaGhost}
             </a>
           </Reveal>
+          <Reveal as="dl" index={4} className="hero-stats">
+            {c.metrics.items.slice(0, 2).map((metric) => (
+              <div key={metric.l}>
+                <dt>{metric.l}</dt>
+                <dd>{metric.n}<span>{metric.u}</span></dd>
+              </div>
+            ))}
+          </Reveal>
         </div>
 
-        <Reveal as="div" index={2} variant="scale" className="hero-visual" aria-hidden="true">
-          <div className="plx" data-parallax="0.18" data-plx-from="scroll">
-            <div className="browser-frame">
-              <div className="browser-bar">
-                <span className="bdot r" /><span className="bdot y" /><span className="bdot g" />
-              </div>
-              <img
-                className="browser-img"
-                src="/dashboard-hero.png"
-                alt=""
-                width={1905}
-                height={950}
-                fetchpriority="high"
-                decoding="async"
-              />
-            </div>
-          </div>
-        </Reveal>
+        <div className="hero-scroll" aria-hidden="true">Scrolleá para recorrer</div>
       </div>
     </section>
   )

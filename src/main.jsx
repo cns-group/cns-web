@@ -4,8 +4,10 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import App from './App'
 import AdminApp from './admin/AdminApp'
 import { TermsPage, PrivacyPage } from './legal-pages'
+import '@fontsource-variable/manrope'
 import './fonts.css'
 import './styles.css'
+import './skill-landing.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

@@ -1,6 +1,6 @@
 export const TWEAK_DEFAULTS = {
-  palette:     ['#f7f9fc', '#0f172a', '#098eed', '#16a34a'],
-  theme:       'light',
+  palette:     ['#000000', '#f2f7fb', '#38bdf8', '#0ea5e9'],
+  theme:       'dark',
   density:     'regular',
   fontDisplay: 'system',
   lang:        'es',
@@ -11,20 +11,21 @@ export function applyTheme(t) {
   const root = document.documentElement
   const [, , ac, ac2] = t.palette
 
-  root.dataset.theme = 'light'
+  root.dataset.theme = 'dark'
   root.dataset.density = t.density
 
-  root.style.setProperty('--bg', '#f7f9fc')
-  root.style.setProperty('--surface', '#ffffff')
-  root.style.setProperty('--surface-2', '#f1f5f9')
-  root.style.setProperty('--line', '#e3e8ef')
-  root.style.setProperty('--line-2', '#cbd5e1')
-  root.style.setProperty('--fg', '#0f172a')
-  root.style.setProperty('--fg-2', '#334155')
-  root.style.setProperty('--muted', '#64748b')
-  root.style.setProperty('--muted-2', '#94a3b8')
-  root.style.setProperty('--accent', ac || '#098eed')
-  root.style.setProperty('--accent-2', ac2 || '#16a34a')
-  root.style.setProperty('--accent-hi', '#eef4ff')
+  root.style.setProperty('--bg', '#000000')
+  root.style.setProperty('--surface', '#080b0d')
+  root.style.setProperty('--surface-2', '#0d1216')
+  root.style.setProperty('--line', '#20282e')
+  root.style.setProperty('--line-2', '#34414a')
+  root.style.setProperty('--fg', '#f2f7fb')
+  root.style.setProperty('--fg-2', '#c4d0d8')
+  root.style.setProperty('--muted', '#82909a')
+  root.style.setProperty('--muted-2', '#5d6971')
+  root.style.setProperty('--accent', ac || '#38bdf8')
+  root.style.setProperty('--accent-deep', '#0284c7')
+  root.style.setProperty('--accent-2', ac2 || '#0ea5e9')
+  root.style.setProperty('--accent-hi', '#082635')
   root.style.setProperty('--fs-body', `${t.fontSize}px`)
 }

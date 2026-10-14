@@ -220,7 +220,8 @@ export function Footer({ c }) {
       <footer className="footer">
         <div className="footer-col footer-brand">
           <a className="nav-logo footer-logo" href="#top" aria-label="CNS · inicio">
-            <img src="/cnslogo.png" alt="" width={94} height={34} decoding="async" style={{ width: 94, height: 'auto' }} />
+            <span className="brand-mark" aria-hidden="true">CN</span>
+            <span className="brand-name">Código Norte</span>
           </a>
           <p className="footer-tagline">{f.tagline}</p>
         </div>

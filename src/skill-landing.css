@@ -1,0 +1,57 @@
+/* Capa de la skill landing-page-design: tipografía, movimiento, tagline y estados.
+   Va al final de la cascada para no tocar styles.css. */
+
+:root {
+  --f-display: 'Manrope Variable', 'Manrope', system-ui, sans-serif;
+  --f-body: 'Manrope Variable', 'Manrope', system-ui, sans-serif;
+  --f-mono: 'Manrope Variable', 'Manrope', system-ui, sans-serif;
+  --ease: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+/* Tipografía: una sola familia, sin itálicas, sin pesos extremos */
+*, *::before, *::after { font-style: normal; }
+h1, h2, h3, h4, h5, h6 { font-weight: 700; text-transform: none; letter-spacing: -0.02em; }
+h1, h2, h3, .manifesto p, .tagline p { text-wrap: balance; }
+p, li, dd, .lead { text-wrap: pretty; }
+b, strong, .plan-name, .plan-num, .metric-n, .num, .stat b,
+.hero-float-card b { font-weight: 700; }
+
+/* Hero: título y bajada con ancho máximo de 680px */
+.hero h1, .hero .lead { max-width: 680px; }
+.hero h1 { font-size: clamp(40px, 6.4vw, 72px); line-height: 1; }
+
+/* Revelado al scroll: fade up pesado con blur */
+.reveal {
+  opacity: 0;
+  filter: blur(12px);
+  transform: translateY(64px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease), filter 0.8s var(--ease);
+}
+.reveal.is-visible { opacity: 1; filter: blur(0); transform: none; }
+.reveal--scale, .reveal--left, .reveal--right, .reveal--blur { transform: translateY(64px); }
+.reveal--scale.is-visible, .reveal--left.is-visible,
+.reveal--right.is-visible, .reveal--blur.is-visible { transform: none; filter: blur(0); }
+
+/* Botones: transiciones con la curva propia y estado activo físico */
+.btn, .plans-tab, .nav a {
+  transition-duration: 0.5s;
+  transition-timing-function: var(--ease);
+}
+.btn:active { transform: scale(0.98); }
+
+/* Tagline: una frase grande que se enciende palabra por palabra */
+.manifesto { background: #000; }
+.manifesto p { font-weight: 700; letter-spacing: -0.04em; max-width: 1080px; }
+.tag-word {
+  color: color-mix(in oklab, var(--fg) 30%, transparent);
+  transition: color 0.7s var(--ease);
+}
+.tag-word.is-on { color: var(--fg); }
+.manifesto p:last-child { color: inherit; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal--scale, .reveal--left, .reveal--right, .reveal--blur {
+    opacity: 1; filter: none; transform: none; transition: none;
+  }
+  .tag-word { color: var(--fg); transition: none; }
+}

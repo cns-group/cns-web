@@ -3,12 +3,39 @@ import { COPY } from './copy'
 import { Nav, Hero, Marquee } from './sections-top'
 import { Process } from './sections-mid'
 import { Plans } from './sections-plans'
-import { Work, Quotes, FAQ, Contact, Footer } from './sections-bot'
-import { scrollToSection } from './scroll'
+import { Work, Quotes, FAQ, Contact, Footer, Metrics } from './sections-bot'
+import { scrollToSection, sectionClick } from './scroll'
 import { WhatsAppFloat } from './whatsapp-float'
 import { parsePlanTabFromPath, setPlanPath } from './plan-routes'
 import { TWEAK_DEFAULTS, applyTheme } from './theme-config'
 import { startParallax } from './reveal'
+import { WorldCanvas } from './world-canvas'
+import { Tagline } from './tagline'
+
+function ChapterRail() {
+  const chapters = [
+    ['01', 'Inicio', 'top'],
+    ['02', 'Proceso', 'proceso'],
+    ['03', 'Soluciones', 'planes'],
+    ['04', 'Casos', 'casos'],
+    ['05', 'Contacto', 'contacto'],
+  ]
+
+  return (
+    <nav className="chapter-rail" aria-label="Capítulos">
+      <ul>
+        {chapters.map(([number, label, id]) => (
+          <li key={id}>
+            <a href={`#${id}`} onClick={sectionClick(id, scrollToSection)}>
+              <span>{number}</span>
+              {label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
+}
 
 export default function App() {
   const [t] = React.useState(TWEAK_DEFAULTS)
@@ -52,11 +79,15 @@ export default function App() {
 
   return (
     <div className="app">
+      <WorldCanvas />
       <Nav c={c} onSection={scrollToSection} />
       <main id="main">
+        <ChapterRail />
         <Hero c={c} onSection={scrollToSection} />
         <Marquee items={c.marquee} />
+        <Metrics c={c} />
         <Process c={c} />
+        <Tagline label="Nuestra mirada" lines={['El software bien hecho no es un gasto.', 'Es la base sobre la que tu negocio crece.']} />
         <Plans c={c} lang={t.lang} activeTab={planTab} onTabChange={handlePlanTabChange} />
         <Work c={c} />
         <Quotes c={c} />
