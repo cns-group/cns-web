@@ -57,7 +57,7 @@ function PlanCard({ plan, productName, landing, c, lang, index = 0 }) {
   const p = c.plans
   const isCommission = typeof plan.price === 'string' && plan.priceNum
   const isOneOff     = plan.priceLead != null
-  const ctaUrl = plan.ctaHref || landing || whatsappPlanUrl(productName, plan.tier, lang)
+  const ctaUrl = plan.ctaHref || (landing && (landing === '/sistema-ecommerce/' ? landing + '#registro' : landing)) || whatsappPlanUrl(productName, plan.tier, lang)
   const setupLabel = plan.setupLabel || p.setup
 
   return (
