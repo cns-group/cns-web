@@ -1,5 +1,5 @@
 // Número en formato internacional, sin "+" ni espacios (ej.: 5493515551234).
-const WHATSAPP_NUMBER = '5490000000000';
+const WHATSAPP_NUMBER = '5493517648146';
 
 const IS_LOCAL = /(^|\.)localhost$|^127\.0\.0\.1$/.test(location.hostname);
 const API_BASE = IS_LOCAL
@@ -11,8 +11,8 @@ const waLink = (text) =>
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
-document.getElementById('wa-direct').href = waLink(
-  'Hola, quiero conocer el sistema de gestión para gimnasios.'
+document.getElementById('wa-float').href = waLink(
+  'Hola, quiero consultar por el sistema de gestión para gimnasios.'
 );
 
 // Tabs de módulos
@@ -42,64 +42,20 @@ tabs.forEach((tab, i) => {
   });
 });
 
-// Formulario de contacto
-const form = document.getElementById('contact-form');
-const formError = document.getElementById('form-error');
-
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const data = Object.fromEntries(new FormData(form));
-  const name = data.name.trim();
-  const gym = data.gym.trim();
-
-  const fields = form.elements;
-  fields.name.toggleAttribute('aria-invalid', !name);
-  fields.gym.toggleAttribute('aria-invalid', !gym);
-  if (!name || !gym) {
-    formError.hidden = false;
-    (name ? fields.gym : fields.name).focus();
-    return;
-  }
-  formError.hidden = true;
-
-  const lines = [
-    `Hola, soy ${name} de ${gym}${data.city.trim() ? ` (${data.city.trim()})` : ''}.`,
-    'Quiero ver una demo del sistema de gestión para gimnasios.',
-  ];
-  if (data.size) lines.push(`Socios activos: ${data.size}.`);
-  if (data.message.trim()) lines.push(data.message.trim());
-
-  window.open(waLink(lines.join('\n')), '_blank', 'noopener');
-});
-
-// Precios por forma de pago
-const MONTHLY_PRICE = 80000;
-const BILLING = {
-  monthly: { title: 'Servicio mensual', months: 1, discount: 0 },
-  semester: { title: 'Servicio semestral', months: 6, discount: 0.1 },
-  annual: { title: 'Servicio anual', months: 12, discount: 0.2 },
-};
-const money = (n) => `$${Math.round(n).toLocaleString('es-AR')}`;
-
-document.querySelectorAll('.billing__opt').forEach((btn) => {
-  btn.addEventListener('click', () => {
-    const plan = BILLING[btn.dataset.billing];
-    document.querySelectorAll('.billing__opt').forEach((b) => {
-      b.classList.toggle('is-active', b === btn);
-      b.setAttribute('aria-pressed', String(b === btn));
-    });
-    const perMonth = MONTHLY_PRICE * (1 - plan.discount);
-    const total = perMonth * plan.months;
-    const saving = MONTHLY_PRICE * plan.months - total;
-    document.getElementById('price-title').textContent = plan.title;
-    document.getElementById('price-amount').textContent = money(perMonth);
-    document.getElementById('price-period').textContent =
-      plan.months === 1 ? 'Por mes' : `Por mes · ${money(total)} cada ${plan.months === 12 ? 'año' : '6 meses'}`;
-    const savingEl = document.getElementById('price-saving');
-    savingEl.hidden = !saving;
-    savingEl.textContent = saving ? `Ahorrás ${money(saving)} frente al pago mensual` : '';
+// Aparición al hacer scroll
+(function () {
+  if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.documentElement.classList.add('js-anim');
+  const sel = '.section__head, .card, .price-card, .feature-list li, .faq__list details, .member__grid > *, .contact__copy, .price-note';
+  const io = new IntersectionObserver((es) => es.forEach((e) => {
+    if (e.isIntersecting) { e.target.classList.add('seen'); io.unobserve(e.target); }
+  }), { threshold: 0.12 });
+  document.querySelectorAll(sel).forEach((el) => {
+    el.style.setProperty('--i', [...el.parentNode.children].indexOf(el) % 6);
+    el.classList.add('rev');
+    io.observe(el);
   });
-});
+})();
 
 // Registro de gimnasio
 async function platform(method, path, body) {
