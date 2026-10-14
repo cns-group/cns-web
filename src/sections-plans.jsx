@@ -53,11 +53,11 @@ function fmtMoney(n, lang) {
   return n.toLocaleString('en-US').replace(/,/g, sep)
 }
 
-function PlanCard({ plan, productName, c, lang, index = 0 }) {
+function PlanCard({ plan, productName, landing, c, lang, index = 0 }) {
   const p = c.plans
   const isCommission = typeof plan.price === 'string' && plan.priceNum
   const isOneOff     = plan.priceLead != null
-  const ctaUrl = plan.ctaHref || whatsappPlanUrl(productName, plan.tier, lang)
+  const ctaUrl = plan.ctaHref || landing || whatsappPlanUrl(productName, plan.tier, lang)
   const setupLabel = plan.setupLabel || p.setup
 
   return (
@@ -215,7 +215,7 @@ export function Plans({ c, lang, activeTab = 'ecommerce', onTabChange }) {
           </div>
           <div className="plans-grid">
             {tiers.map((tier, i) => (
-              <PlanCard key={i} index={i} plan={tier} productName={tab.name} c={c} lang={lang} />
+              <PlanCard key={i} index={i} plan={tier} productName={tab.name} landing={tab.landing} c={c} lang={lang} />
             ))}
           </div>
         </div>

@@ -203,21 +203,21 @@ export const COPY = {
           ] },
         ],
         gym: [
-          { tier: 'Mensual', sub: 'Pagás mes a mes', price: 80000, fixed: true, setup: 25000, setupLabel: 'Hosting anual (en el primer pago)', ctaLabel: 'Crear mi gimnasio', ctaHref: '/sistema-gimnasios/#registro', feats: [
+          { tier: 'Mensual', sub: 'Pagás mes a mes', price: 60000, fixed: true, setup: 25000, setupLabel: 'Hosting anual (en el primer pago)', ctaLabel: 'Crear mi gimnasio', ctaHref: '/sistema-gimnasios/#registro', feats: [
             ['', 'Todos los módulos: socios, cuotas, clases, rutinas y acceso QR'],
             ['', 'App para tus socios con tu logo y tus colores'],
             ['Tu web', 'en tugimnasio.codigonortesoluciones.com'],
             ['Cobrás', 'online con Mercado Pago'],
             ['Soporte', 'personalizado'],
           ] },
-          { tier: 'Semestral', sub: 'Pagás $432.000 cada 6 meses · ahorrás 10%', price: 72000, fixed: true, setup: 25000, setupLabel: 'Hosting anual (en el primer pago)', ctaLabel: 'Crear mi gimnasio', ctaHref: '/sistema-gimnasios/#registro', featured: true, feats: [
+          { tier: 'Semestral', sub: 'Pagás $324.000 cada 6 meses · ahorrás $36.000 (10%)', price: 54000, fixed: true, setup: 25000, setupLabel: 'Hosting anual (en el primer pago)', ctaLabel: 'Crear mi gimnasio', ctaHref: '/sistema-gimnasios/#registro', featured: true, feats: [
             ['', 'Todos los módulos: socios, cuotas, clases, rutinas y acceso QR'],
             ['', 'App para tus socios con tu logo y tus colores'],
             ['Tu web', 'en tugimnasio.codigonortesoluciones.com'],
             ['Cobrás', 'online con Mercado Pago'],
             ['Soporte', 'personalizado'],
           ] },
-          { tier: 'Anual', sub: 'Pagás $768.000 por año · ahorrás 20%', price: 64000, fixed: true, setup: 25000, setupLabel: 'Hosting anual (en el primer pago)', ctaLabel: 'Crear mi gimnasio', ctaHref: '/sistema-gimnasios/#registro', feats: [
+          { tier: 'Anual', sub: 'Pagás $576.000 por año · ahorrás $144.000 (20%)', price: 48000, fixed: true, setup: 25000, setupLabel: 'Hosting anual (en el primer pago)', ctaLabel: 'Crear mi gimnasio', ctaHref: '/sistema-gimnasios/#registro', feats: [
             ['', 'Todos los módulos: socios, cuotas, clases, rutinas y acceso QR'],
             ['', 'App para tus socios con tu logo y tus colores'],
             ['Tu web', 'en tugimnasio.codigonortesoluciones.com'],
@@ -264,7 +264,7 @@ export const COPY = {
           ] },
         ],
         pos: [
-          { tier: 'Starter', tag: 'STR', price: 'comision', price : 30000, setup: 19000, featured: true, feats: [
+          { tier: 'Starter', tag: 'STR', price: 30000, setup: 19000, featured: true, feats: [
             ['', 'Ventas'], 
             ['', 'Stock'],
             ['', 'Caja y arqueo de caja'],
@@ -672,21 +672,21 @@ export const COPY = {
           ] },
         ],
         gym: [
-          { tier: 'Monthly', sub: 'Pay month to month', price: 80000, fixed: true, setup: 25000, setupLabel: 'Yearly hosting (on the first payment)', ctaLabel: 'Create my gym', ctaHref: '/sistema-gimnasios/#registro', feats: [
+          { tier: 'Monthly', sub: 'Pay month to month', price: 60000, fixed: true, setup: 25000, setupLabel: 'Yearly hosting (on the first payment)', ctaLabel: 'Create my gym', ctaHref: '/sistema-gimnasios/#registro', feats: [
             ['', 'Every module: members, fees, classes, routines and QR access'],
             ['', 'Member app with your logo and colours'],
             ['Your site', 'at yourgym.codigonortesoluciones.com'],
             ['Collect', 'online with Mercado Pago'],
             ['Support', 'personal'],
           ] },
-          { tier: 'Semester', sub: 'Pay 432,000 every 6 months · save 10%', price: 72000, fixed: true, setup: 25000, setupLabel: 'Yearly hosting (on the first payment)', ctaLabel: 'Create my gym', ctaHref: '/sistema-gimnasios/#registro', featured: true, feats: [
+          { tier: 'Semester', sub: 'Pay 324,000 every 6 months · save 36,000 (10%)', price: 54000, fixed: true, setup: 25000, setupLabel: 'Yearly hosting (on the first payment)', ctaLabel: 'Create my gym', ctaHref: '/sistema-gimnasios/#registro', featured: true, feats: [
             ['', 'Every module: members, fees, classes, routines and QR access'],
             ['', 'Member app with your logo and colours'],
             ['Your site', 'at yourgym.codigonortesoluciones.com'],
             ['Collect', 'online with Mercado Pago'],
             ['Support', 'personal'],
           ] },
-          { tier: 'Yearly', sub: 'Pay 768,000 per year · save 20%', price: 64000, fixed: true, setup: 25000, setupLabel: 'Yearly hosting (on the first payment)', ctaLabel: 'Create my gym', ctaHref: '/sistema-gimnasios/#registro', feats: [
+          { tier: 'Yearly', sub: 'Pay 576,000 per year · save 144,000 (20%)', price: 48000, fixed: true, setup: 25000, setupLabel: 'Yearly hosting (on the first payment)', ctaLabel: 'Create my gym', ctaHref: '/sistema-gimnasios/#registro', feats: [
             ['', 'Every module: members, fees, classes, routines and QR access'],
             ['', 'Member app with your logo and colours'],
             ['Your site', 'at yourgym.codigonortesoluciones.com'],
