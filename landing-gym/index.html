@@ -95,6 +95,64 @@
       </div>
     </section>
 
+    <!-- Registro -->
+    <section class="section contact" id="registro">
+      <div class="hero__glow hero__glow--orange contact__glow" aria-hidden="true"></div>
+      <div class="wrap contact__grid">
+        <div class="contact__copy">
+          <p class="eyebrow">Empezá ahora</p>
+          <h2>Creá <span class="accent">tu gimnasio</span> y probalo 10 días gratis</h2>
+          <p class="lead">Dejanos los datos de tu gimnasio y confirmá tu correo. Tu gimnasio se crea al momento y lo usás 10 días gratis, sin tarjeta.</p>
+          <ul class="checks">
+            <li>Tu web en <strong id="signup-domain-example">tugimnasio.codigonortesoluciones.com</strong></li>
+            <li>10 días gratis, después elegís mensual, semestral o anual</li>
+            <li>Con tu logo, tus colores y app para tus socios</li>
+          </ul>
+        </div>
+
+        <div class="card form signup">
+          <form id="signup-form" class="signup__step" novalidate>
+            <div class="field">
+              <label for="s-gym">Nombre de tu marca</label>
+              <input id="s-gym" name="gymName" maxlength="80" autocomplete="organization" required>
+            </div>
+            <div class="field">
+              <label for="s-slug">Dirección de tu web</label>
+              <div class="signup__slug">
+                <input id="s-slug" name="slug" maxlength="32" autocapitalize="off" spellcheck="false" required>
+                <span id="s-domain">.codigonortesoluciones.com</span>
+              </div>
+              <small class="signup__status" id="s-slug-status" aria-live="polite"></small>
+            </div>
+            <div class="field">
+              <label for="s-owner">Tu nombre</label>
+              <input id="s-owner" name="ownerName" maxlength="80" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="s-address">Dirección del gimnasio</label>
+              <input id="s-address" name="address" maxlength="160" autocomplete="street-address" placeholder="Calle 123, Ciudad" required>
+            </div>
+            <div class="field">
+              <label for="s-email">Correo</label>
+              <input id="s-email" name="email" type="email" autocomplete="email" required>
+            </div>
+            <p class="form__error" id="signup-error" role="alert" hidden></p>
+            <button class="btn btn--block" type="submit">Crear mi gimnasio gratis</button>
+            <p class="form__hint">Te enviamos un correo para validar tu dirección.</p>
+          </form>
+
+          <div id="signup-sent" class="signup__step" hidden>
+            <h3>Revisá tu correo</h3>
+            <p class="lead">Te enviamos un link a <strong id="signup-email-sent"></strong>. Abrilo para activar tu gimnasio y empezar tus 10 días gratis.</p>
+            <p class="form__error" id="signup-sent-error" role="alert" hidden></p>
+            <p class="signup__info" id="signup-sent-info" hidden></p>
+            <button class="signup__link" type="button" id="signup-resend">Reenviar correo</button>
+            <button class="signup__link" type="button" id="signup-back">Cambiar datos</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Problemas -->
     <section class="section section--low">
       <div class="wrap">
@@ -322,64 +380,6 @@
           </article>
         </div>
         <p class="price-note">+ $25.000 por año de hosting, se suma al primer pago. Sin costo de implementación y sin contrato de permanencia. Tus datos son tuyos: si te vas, te entregamos una exportación completa. Pagás con Mercado Pago.</p>
-      </div>
-    </section>
-
-    <!-- Registro -->
-    <section class="section contact" id="registro">
-      <div class="hero__glow hero__glow--orange contact__glow" aria-hidden="true"></div>
-      <div class="wrap contact__grid">
-        <div class="contact__copy">
-          <p class="eyebrow">Empezá ahora</p>
-          <h2>Creá <span class="accent">tu gimnasio</span> y probalo 10 días gratis</h2>
-          <p class="lead">Dejanos los datos de tu gimnasio y confirmá tu correo. Tu gimnasio se crea al momento y lo usás 10 días gratis, sin tarjeta.</p>
-          <ul class="checks">
-            <li>Tu web en <strong id="signup-domain-example">tugimnasio.codigonortesoluciones.com</strong></li>
-            <li>10 días gratis, después elegís mensual, semestral o anual</li>
-            <li>Con tu logo, tus colores y app para tus socios</li>
-          </ul>
-        </div>
-
-        <div class="card form signup">
-          <form id="signup-form" class="signup__step" novalidate>
-            <div class="field">
-              <label for="s-gym">Nombre de tu marca</label>
-              <input id="s-gym" name="gymName" maxlength="80" autocomplete="organization" required>
-            </div>
-            <div class="field">
-              <label for="s-slug">Dirección de tu web</label>
-              <div class="signup__slug">
-                <input id="s-slug" name="slug" maxlength="32" autocapitalize="off" spellcheck="false" required>
-                <span id="s-domain">.codigonortesoluciones.com</span>
-              </div>
-              <small class="signup__status" id="s-slug-status" aria-live="polite"></small>
-            </div>
-            <div class="field">
-              <label for="s-owner">Tu nombre</label>
-              <input id="s-owner" name="ownerName" maxlength="80" autocomplete="name" required>
-            </div>
-            <div class="field">
-              <label for="s-address">Dirección del gimnasio</label>
-              <input id="s-address" name="address" maxlength="160" autocomplete="street-address" placeholder="Calle 123, Ciudad" required>
-            </div>
-            <div class="field">
-              <label for="s-email">Correo</label>
-              <input id="s-email" name="email" type="email" autocomplete="email" required>
-            </div>
-            <p class="form__error" id="signup-error" role="alert" hidden></p>
-            <button class="btn btn--block" type="submit">Crear mi gimnasio gratis</button>
-            <p class="form__hint">Te enviamos un correo para validar tu dirección.</p>
-          </form>
-
-          <div id="signup-sent" class="signup__step" hidden>
-            <h3>Revisá tu correo</h3>
-            <p class="lead">Te enviamos un link a <strong id="signup-email-sent"></strong>. Abrilo para activar tu gimnasio y empezar tus 10 días gratis.</p>
-            <p class="form__error" id="signup-sent-error" role="alert" hidden></p>
-            <p class="signup__info" id="signup-sent-info" hidden></p>
-            <button class="signup__link" type="button" id="signup-resend">Reenviar correo</button>
-            <button class="signup__link" type="button" id="signup-back">Cambiar datos</button>
-          </div>
-        </div>
       </div>
     </section>
 
