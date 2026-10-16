@@ -33,7 +33,7 @@ export function LoginPage() {
     <div className="admin-login">
       <form className="admin-login-card" onSubmit={handleSubmit}>
         <div className="admin-brand admin-brand--center">
-          <span className="admin-brand-mark">CNS</span>
+          <img className="admin-brand-logo" src="/cnslogo.png" alt="CNS" width="111" height="40" />
           <div>
             <strong>CNS CRM</strong>
             <small>Panel de administración</small>

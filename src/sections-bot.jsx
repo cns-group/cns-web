@@ -99,27 +99,67 @@ export function Stack({ c }) {
 
 export function Quotes({ c }) {
   const q = c.quotes
+  const [active, setActive] = React.useState(0)
+  const [paused, setPaused] = React.useState(false)
+  const count = q.items.length
+  const DURATION = 7000
+
+  React.useEffect(() => {
+    if (paused) return undefined
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined
+    const t = setTimeout(() => setActive(a => (a + 1) % count), DURATION)
+    return () => clearTimeout(t)
+  }, [active, paused, count])
+
+  const cur = q.items[active]
   return (
     <section className="sec">
       <SectionHeader eyebrow={q.eyebrow} title={q.title} titleEm={q.titleEm} lead={q.lead} />
-      <div className="quotes">
-        {q.items.map((it, i) => (
-          <Reveal as="figure" key={i} index={i} variant={i === 1 ? 'scale' : i % 2 ? 'right' : 'left'} className="quote">
-            <span className="quote-index" aria-hidden="true">
-              {String(i + 1).padStart(2, '0')}
-            </span>
-            <span className="quote-mark" aria-hidden="true">“</span>
-            <blockquote className="quote-text">{it.q}</blockquote>
-            <figcaption className="quote-by">
-              <div className="quote-av">{it.av}</div>
+      <Reveal
+        as="div"
+        variant="scale"
+        className="spot"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+      >
+        <div className="spot-main">
+          <span className="spot-mark" aria-hidden="true">“</span>
+          <figure className="spot-fig" key={active}>
+            <blockquote className="spot-text">{cur.q}</blockquote>
+            <figcaption className="spot-by">
+              <div className="quote-av">{cur.av}</div>
               <div className="quote-who">
-                <b>{it.who}</b>
-                <span>{it.role}</span>
+                <b>{cur.who}</b>
+                <span>{cur.role}</span>
               </div>
             </figcaption>
-          </Reveal>
-        ))}
-      </div>
+          </figure>
+        </div>
+        <div className="spot-tabs" role="tablist">
+          {q.items.map((it, i) => (
+            <button
+              key={i}
+              type="button"
+              role="tab"
+              aria-selected={i === active}
+              className={`spot-tab${i === active ? ' is-active' : ''}`}
+              onClick={() => setActive(i)}
+            >
+              <span className="spot-tab-av">{it.av}</span>
+              <span className="spot-tab-who">
+                <b>{it.who}</b>
+                <small>{it.role}</small>
+              </span>
+              <span className="spot-bar" aria-hidden="true">
+                <i
+                  key={i === active ? `a${active}` : 'x'}
+                  style={i === active ? { animationDuration: `${DURATION}ms`, animationPlayState: paused ? 'paused' : 'running' } : undefined}
+                />
+              </span>
+            </button>
+          ))}
+        </div>
+      </Reveal>
     </section>
   )
 }
@@ -220,8 +260,15 @@ export function Footer({ c }) {
       <footer className="footer">
         <div className="footer-col footer-brand">
           <a className="nav-logo footer-logo" href="#top" aria-label="CNS · inicio">
-            <span className="brand-mark" aria-hidden="true">CN</span>
-            <span className="brand-name">Código Norte</span>
+            <img
+              src="/cnslogo.png"
+              alt=""
+              width={110}
+              height={40}
+              loading="lazy"
+              decoding="async"
+              style={{ width: 110, height: 'auto' }}
+            />
           </a>
           <p className="footer-tagline">{f.tagline}</p>
         </div>

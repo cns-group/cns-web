@@ -315,8 +315,8 @@ export const COPY = {
         'Propuesta con presupuesto detallado',
         'Entrega iterativa hasta producción',
       ],
-      cta: 'Pedir cotización',
-      hint: 'Contanos qué necesitás construir y te respondemos con un presupuesto a medida.',
+      cta: 'Conozcamos tu caso',
+      hint: 'Coordinamos una llamada para charlar tu caso particular y ver cómo lo podemos resolver.',
     },
     faq: {
       eyebrow: '05 — Preguntas',
@@ -766,8 +766,8 @@ export const COPY = {
         'Detailed proposal and budget',
         'Iterative delivery through to production',
       ],
-      cta: 'Request a quote',
-      hint: 'Tell us what you need to build and we\'ll reply with a tailored estimate.',
+      cta: "Let's get to know your case",
+      hint: "We'll set up a call to talk through your particular case and how we can solve it.",
     },
     faq: {
       eyebrow: '05 — Questions',

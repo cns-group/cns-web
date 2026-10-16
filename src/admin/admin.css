@@ -55,6 +55,12 @@
   letter-spacing: 0.02em;
 }
 
+.admin-brand-logo {
+  height: 40px;
+  width: auto;
+  display: block;
+}
+
 .admin-brand strong {
   display: block;
   font-family: 'Bebas Neue', sans-serif;

@@ -16,7 +16,7 @@ export function whatsappPlanUrl(productName, planName, lang = 'es') {
 
 export function whatsappCustomDevUrl(lang = 'es') {
   const msg = lang === 'en'
-    ? 'Hi, I need a quote for custom software development. I have a particular system in mind and would like to discuss scope and pricing.'
-    : 'Hola, quiero pedir una cotización para el desarrollo de un sistema a medida. Tengo una necesidad particular y me gustaría charlar alcance y presupuesto.'
+    ? "Hi, I'd like to schedule a call to talk about a custom software project. I have a particular case in mind and would like you to get to know it."
+    : 'Hola, quiero organizar una llamada para charlar sobre un desarrollo a medida. Tengo un caso particular y me gustaría que lo conozcan.'
   return `${WHATSAPP_URL}?text=${encodeURIComponent(msg)}`
 }

@@ -14,8 +14,8 @@
   --fg-2:      #334155;
   --muted:     #64748b;
   --muted-2:   #94a3b8;
-  --accent:      #098eed;
-  --accent-deep: #076fb9;
+  --accent:      #0e82ec;
+  --accent-deep: #0a67bd;
   --accent-2:    #16a34a;
   --accent-hi:   #eef4ff;
   --accent-ink:  #ffffff;
@@ -1241,7 +1241,7 @@ p  { margin: 0; }
 .plan-feats li { display: grid; grid-template-columns: 16px 1fr; gap: 10px; align-items: start; font-size: 14.5px; line-height: 1.45; color: var(--fg-2); }
 .plan-feats li::before {
   content: ''; width: 16px; height: 16px; margin-top: 2px;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'><circle cx='7' cy='7' r='7' fill='%23098eed'/><path d='M3.4 7.2 5.8 9.6 10.6 4.4' fill='none' stroke='white' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'><circle cx='7' cy='7' r='7' fill='%230e82ec'/><path d='M3.4 7.2 5.8 9.6 10.6 4.4' fill='none' stroke='white' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/></svg>");
   background-repeat: no-repeat; background-position: center; background-size: 16px;
 }
 .plan-feats li.muted::before {
@@ -1284,7 +1284,7 @@ p  { margin: 0; }
 .custom-dev-points li::before {
   content: ''; position: absolute; left: 0; top: 0.45em;
   width: 14px; height: 14px; border-radius: 50%;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'><circle cx='7' cy='7' r='7' fill='%23098eed'/><path d='M3.4 7.2 5.8 9.6 10.6 4.4' fill='none' stroke='white' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'><circle cx='7' cy='7' r='7' fill='%230e82ec'/><path d='M3.4 7.2 5.8 9.6 10.6 4.4' fill='none' stroke='white' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/></svg>");
   background-repeat: no-repeat; background-size: 14px;
 }
 .custom-dev-cta {
@@ -1592,7 +1592,7 @@ h3, h4, h5, h6 {
 }
 .hero-orbit::before {
   inset: 16%;
-  background: radial-gradient(circle at 35% 30%, #bdeaff 0, #38bdf8 8%, #075d88 34%, #03151e 68%, #000 71%);
+  background: radial-gradient(circle at 35% 30%, #bdeaff 0, #0e82ec 8%, #075d88 34%, #03151e 68%, #000 71%);
   box-shadow: 0 0 100px rgba(56, 189, 248, .32);
 }
 .hero-orbit::after {
@@ -1899,3 +1899,95 @@ h3, h4, h5, h6 {
   html { scroll-behavior: auto; }
   .hero-orbit-line { animation: none; }
 }
+
+/* ── testimonials: spotlight ── */
+.spot {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  border: 1px solid var(--line);
+  background: #050809;
+  overflow: hidden;
+}
+@media (max-width: 880px) { .spot { grid-template-columns: 1fr; } }
+.spot-main {
+  position: relative;
+  padding: clamp(28px, 5vw, 56px);
+  min-height: 340px;
+  display: flex; align-items: center;
+  background: radial-gradient(70% 90% at 0% 0%, color-mix(in oklab, var(--accent) 16%, transparent), transparent 70%);
+}
+.spot-mark {
+  position: absolute; top: 8px; left: 24px;
+  font-size: 140px; line-height: 1; font-weight: 800;
+  color: var(--accent); opacity: .16; user-select: none;
+  animation: quoteFloat 3.6s ease-in-out infinite;
+}
+.spot-fig { position: relative; margin: 0; animation: spotIn .6s var(--ease) both; }
+@keyframes spotIn {
+  from { opacity: 0; transform: translateY(16px); filter: blur(6px); }
+  to { opacity: 1; transform: none; filter: blur(0); }
+}
+.spot-text {
+  margin: 0 0 28px;
+  font-size: clamp(20px, 2.4vw, 30px);
+  line-height: 1.4; letter-spacing: -0.02em;
+  color: var(--fg); font-weight: 500;
+}
+.spot-by { display: flex; gap: 12px; align-items: center; }
+.spot-tabs { display: flex; flex-direction: column; border-left: 1px solid var(--line); }
+@media (max-width: 880px) { .spot-tabs { border-left: 0; border-top: 1px solid var(--line); } }
+.spot-tab {
+  position: relative; flex: 1;
+  display: flex; align-items: center; gap: 14px;
+  padding: 20px 24px; text-align: left;
+  background: transparent; border: 0; border-bottom: 1px solid var(--line);
+  color: var(--muted); cursor: pointer; font: inherit;
+  transition: background .25s var(--ease), color .25s var(--ease);
+}
+.spot-tab:last-child { border-bottom: 0; }
+.spot-tab:hover { background: #081014; color: var(--fg-2); }
+.spot-tab.is-active { background: #081014; color: var(--fg); }
+.spot-tab-av {
+  flex-shrink: 0; width: 38px; height: 38px; border-radius: 50%;
+  display: grid; place-items: center; font-size: 13px; font-weight: 700;
+  border: 1px solid var(--line-2); transition: all .25s var(--ease);
+}
+.spot-tab.is-active .spot-tab-av { background: var(--accent); border-color: var(--accent); color: #001018; transform: scale(1.1); }
+.spot-tab-who { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.spot-tab-who b { font-size: 14px; font-weight: 700; }
+.spot-tab-who small { font-size: 12px; color: var(--muted); }
+.spot-bar { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; }
+.spot-bar i { display: block; height: 100%; width: 0; background: var(--accent); }
+.spot-tab.is-active .spot-bar i { animation: spotBar linear forwards; }
+@keyframes spotBar { from { width: 0; } to { width: 100%; } }
+@media (prefers-reduced-motion: reduce) {
+  .spot-fig, .spot-mark { animation: none; }
+  .spot-tab.is-active .spot-bar i { animation: none; width: 100%; }
+}
+
+/* ── legibilidad: textos secundarios mas grandes y con mas contraste ── */
+.custom-dev-hint,
+.hero-float-card span,
+.quote-who span,
+.spot-tab-who small,
+.plan-setup,
+.footer-base,
+.stack-cat,
+.step-tick,
+.pay-strip .foot { font-size: 14px; color: var(--fg-2); }
+.metric-l,
+.plan-sub,
+.contact-wa-hint,
+.legal-doc-updated { font-size: 14.5px; }
+.metric-l,
+.plan-sub { color: var(--fg-2); }
+.step-body,
+.footer-tagline { font-size: 15px; color: var(--fg-2); }
+.contact-card h4,
+.footer-col h5,
+.pay-strip .lbl,
+.plan-from,
+.nav-drawer-title { font-size: 13px; color: var(--muted); }
+.work-shot .work-cat { font-size: 12px; }
+.plans-tab .tnum { font-size: 12px; opacity: .85; }
+.footer-col a { font-size: 15px; }

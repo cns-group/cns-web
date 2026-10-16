@@ -23,7 +23,7 @@ export function AdminLayout() {
     <div className="admin-shell">
       <aside className="admin-sidebar">
         <div className="admin-brand">
-          <span className="admin-brand-mark">CNS</span>
+          <img className="admin-brand-logo" src="/cnslogo.png" alt="CNS" width="111" height="40" />
           <div>
             <strong>CNS</strong>
             <small>CRM Admin</small>

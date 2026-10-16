@@ -40,8 +40,14 @@ export function Nav({ c, onSection }) {
           aria-label="CNS · inicio"
           onClick={go('top')}
         >
-          <span className="brand-mark" aria-hidden="true">CN</span>
-          <span className="brand-name">Código Norte</span>
+          <img
+            src="/cnslogo.png"
+            alt=""
+            width={94}
+            height={34}
+            decoding="async"
+            style={{ width: 94, height: 'auto' }}
+          />
         </a>
 
         <div className="nav-links" aria-label="Principal">
