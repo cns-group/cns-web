@@ -138,24 +138,26 @@ export const COPY = {
       ],
       software: {
         ecommerce: [
-          { tier: 'Starter', tag: 'STR', sub: 'Para empezar a vender ya', price: 50000, setup: 25000, feats: [
-            ['Hasta', '50 productos'], ['', '1 sucursal · Panel admin/empleados'], ['', 'Catálogo + carrito + checkout hacia Whats App'],
-            ['', 'Dominio + SSL + hosting incluido'],['Promociones', 'gestionás tus promociones por la web'],['Soporte', 'personalizado'],
-          ], muted: ['Sin pasarela de pago integrada', 'Sin panel de ventas', 'Sin metodos de envio'] },
-          { tier: 'Grow', tag: 'GRW', sub: 'Para vender en serio', price: 120000, setup: 25000, featured: true, feats: [
-            ['', 'Todo lo de Starter, más:'], ['Catálogo:', 'Sin límite de productos'], ['', '2 sucursales, varios locales'],
-            ['Pagos:', 'Mercado Pago, Transferencia, Tarjetas'],
-            ['', 'Sin límite de usuarios'],
-            ['', 'Integración con Correo Argentino / Andreani'],
-            ['Soporte', 'personalizado'],
-          ],},
-          { tier: 'Pro', tag: 'PRO', sub: 'Sin monto fijo', price: 'comision',priceNum: '5%', priceSuffix: 'por producto vendido', setup: 25000, feats: [
-            ['', 'Todo lo de Starter, más:'],
-            ['', 'Productos ilimitados'], ['', 'Multi-sucursal'],
-            ['', 'Sin límite de usuarios'],
-            ['Pagos:', 'Mercado Pago, Transferencia, Tarjetas'],
-            ['', 'Integración con Correo Argentino / Andreani'],
-            ['Soporte', 'dedicado prioritario'],
+          { tier: 'Mensual', sub: 'Pagás mes a mes', price: 20000, fixed: true, setup: 25000, setupLabel: 'Hosting anual (en el primer pago)', ctaLabel: 'Crear mi tienda', ctaHref: '/sistema-ecommerce/#registro', feats: [
+            ['Hasta', '200 productos, con 5 fotos cada uno'],
+            ['', 'Tu logo y tus colores'],
+            ['Cobrás', 'con tu propio Mercado Pago, sin comisión nuestra'],
+            ['', 'Panel de pedidos, stock y envíos'],
+            ['Soporte', 'por WhatsApp'],
+          ] },
+          { tier: 'Semestral', sub: 'Pagás $118.800 cada 6 meses · ahorrás $1.200 (1%)', price: 19800, fixed: true, setup: 25000, setupLabel: 'Hosting anual (en el primer pago)', ctaLabel: 'Crear mi tienda', ctaHref: '/sistema-ecommerce/#registro', featured: true, feats: [
+            ['Hasta', '200 productos, con 5 fotos cada uno'],
+            ['', 'Tu logo y tus colores'],
+            ['Cobrás', 'con tu propio Mercado Pago, sin comisión nuestra'],
+            ['', 'Panel de pedidos, stock y envíos'],
+            ['Soporte', 'por WhatsApp'],
+          ] },
+          { tier: 'Anual', sub: 'Pagás $204.000 por año · ahorrás $36.000 (15%)', price: 17000, fixed: true, setup: 25000, setupLabel: 'Hosting anual (en el primer pago)', ctaLabel: 'Crear mi tienda', ctaHref: '/sistema-ecommerce/#registro', feats: [
+            ['Hasta', '200 productos, con 5 fotos cada uno'],
+            ['', 'Tu logo y tus colores'],
+            ['Cobrás', 'con tu propio Mercado Pago, sin comisión nuestra'],
+            ['', 'Panel de pedidos, stock y envíos'],
+            ['Soporte', 'por WhatsApp'],
           ] },
         ],
         ticket: [
@@ -615,22 +617,26 @@ export const COPY = {
       ],
       software: {
         ecommerce: [
-          { tier: 'Starter', tag: 'STR', sub: 'To start selling now', price: 89000, setup: 450000, feats: [
-            ['Up to', '100 products'], ['', '1 store · 1 admin'], ['', 'Catalog + cart + checkout'],
-            ['Pay:', 'Mercado Pago + transfer'],
-            ['', 'Domain + SSL + hosting included'], ['Support', 'email · 48 h'],
-          ], muted: ['No recurring subscriptions', 'No native mobile app'] },
-          { tier: 'Grow', tag: 'GRW', sub: 'To sell seriously', price: 159000, setup: 850000, featured: true, feats: [
-            ['Up to', '1,000 products'], ['', '3 stores · 5 users'], ['', 'Everything in Starter, plus:'],
-            ['Pay:', 'MP, Transfer, cards'], ['', 'Recurring / subscription orders'],
-            ['', 'Coupons, discounts, gift cards'], ['', 'Andreani / OCA / Correo integration'],
-            ['Support', 'WhatsApp · 24 h'],
-          ], muted: ['No ERP / SAP integration'] },
-          { tier: 'Pro', tag: 'PRO', sub: 'Operations at scale', price: 290000, setup: 'custom', feats: [
-            ['', 'Unlimited products'], ['', 'Multi-store · unlimited users'], ['', 'Everything in Grow, plus:'],
-            ['', 'Custom API + integrations'], ['', 'ERP / SAP / Tango / Bejerman'],
-            ['', 'Multi-currency · multi-language'], ['', 'B2B portal + price lists'],
-            ['', 'SLA 99.9% · staging environment'], ['Support', 'dedicated · 4 h'],
+          { tier: 'Monthly', sub: 'Pay month to month', price: 20000, fixed: true, setup: 25000, setupLabel: 'Yearly hosting (on the first payment)', ctaLabel: 'Create my store', ctaHref: '/sistema-ecommerce/#registro', feats: [
+            ['Up to', '200 products, 5 photos each'],
+            ['', 'Your logo and colours'],
+            ['Collect', 'with your own Mercado Pago, no commission from us'],
+            ['', 'Orders, stock and shipping panel'],
+            ['Support', 'via WhatsApp'],
+          ] },
+          { tier: 'Semester', sub: 'Pay 118,800 every 6 months · save 1,200 (1%)', price: 19800, fixed: true, setup: 25000, setupLabel: 'Yearly hosting (on the first payment)', ctaLabel: 'Create my store', ctaHref: '/sistema-ecommerce/#registro', featured: true, feats: [
+            ['Up to', '200 products, 5 photos each'],
+            ['', 'Your logo and colours'],
+            ['Collect', 'with your own Mercado Pago, no commission from us'],
+            ['', 'Orders, stock and shipping panel'],
+            ['Support', 'via WhatsApp'],
+          ] },
+          { tier: 'Annual', sub: 'Pay 204,000 per year · save 36,000 (15%)', price: 17000, fixed: true, setup: 25000, setupLabel: 'Yearly hosting (on the first payment)', ctaLabel: 'Create my store', ctaHref: '/sistema-ecommerce/#registro', feats: [
+            ['Up to', '200 products, 5 photos each'],
+            ['', 'Your logo and colours'],
+            ['Collect', 'with your own Mercado Pago, no commission from us'],
+            ['', 'Orders, stock and shipping panel'],
+            ['Support', 'via WhatsApp'],
           ] },
         ],
         ticket: [
