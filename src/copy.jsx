@@ -99,7 +99,7 @@ export const COPY = {
     },
     metrics: {
       items: [
-        { n: '37', u: '', l: 'Proyectos entregados' },
+        { n: '9', u: '', l: 'Clientes activos confiando en nosotros' },
         { n: '<5', u: 'sem', l: 'Tiempo a producción' },
         { n: '99.9', u: '%', l: 'Uptime últimos 12m' },
         { n: '100', u: '%', l: 'Trabajo remoto' },
@@ -577,7 +577,7 @@ export const COPY = {
     },
     metrics: {
       items: [
-        { n: '37', u: '', l: 'Projects shipped' },
+        { n: '9', u: '', l: 'Active clients' },
         { n: '<5', u: 'w', l: 'Time to production' },
         { n: '99.9', u: '%', l: 'Uptime last 12m' },
         { n: '100', u: '%', l: 'Fully remote' },
