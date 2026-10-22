@@ -56,6 +56,7 @@ export const COPY = {
         { n: '05', cat: 'Gimnasio', t: 'CR-ONFIT', m: 'Gestión de socios y pagos para un gimnasio que opera sin fricción.', kind: 'orders', image: '/cliente6.webp', url: 'https://www.cronfit.com.ar' },
         { n: '06', cat: 'Gimnasio', t: 'Hangar Fitness', m: 'Socios, cuotas, rutinas y acceso QR con la marca del gimnasio.', kind: 'orders', image: '/cliente7.jpg', url: 'https://www.hangarfitness.ar' },
         { n: '07', cat: 'Viajes', t: 'Velvet Travel', m: 'Sitio de viajes con reservas online y ERP: caja, pagos en cuotas, vouchers y consultas por WhatsApp.', kind: 'orders', image: '/cliente8.jpg', url: 'https://www.velvet-travel.com.ar' },
+        { n: '08', cat: 'Construcción', t: 'Barriola Constructora', m: 'Sitio institucional y panel de gestión de obras, asistencias y maquinaria.', kind: 'orders', image: '/cliente9.jpg', url: 'https://www.barriolaconstructora.com' },
       ],
     },
     stack: {
@@ -558,6 +559,7 @@ export const COPY = {
         { n: '05', cat: 'Gym', t: 'CR-ONFIT', m: 'Member and payment management for a gym that runs without friction.', kind: 'orders', image: '/cliente6.webp', url: 'https://www.cronfit.com.ar' },
         { n: '06', cat: 'Gym', t: 'Hangar Fitness', m: 'Members, fees, routines and QR access under the gym brand.', kind: 'orders', image: '/cliente7.jpg', url: 'https://www.hangarfitness.ar' },
         { n: '07', cat: 'Travel', t: 'Velvet Travel', m: 'Travel agency site with online booking and an ERP: cash desk, installment payments, vouchers and WhatsApp inquiries.', kind: 'orders', image: '/cliente8.jpg', url: 'https://www.velvet-travel.com.ar' },
+        { n: '08', cat: 'Construction', t: 'Barriola Constructora', m: 'Company website and a management panel for sites, attendance and machinery.', kind: 'orders', image: '/cliente9.jpg', url: 'https://www.barriolaconstructora.com' },
       ],
     },
     stack: {
