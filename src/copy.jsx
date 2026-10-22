@@ -19,7 +19,7 @@ export const COPY = {
       titleC: 'Remoto,',
       titleD: 'de punta a punta.',
       lead:
-        'Diseñamos y construimos sistemas para pymes desde cualquier lugar: ecommerce, turneros y gestión de gimnasios y restaurantes. Kickoff por videollamada, iteramos online y entregamos andando. Sin promesas raras.',
+        'Diseñamos y construimos sistemas para pymes desde cualquier lugar: ecommerce, turneros y gestión de gimnasios y restaurantes. Kickoff por videollamada, iteramos online, entregamos el sistema terminado y después te acompañamos en las decisiones de negocio y en el crecimiento. Sin promesas raras.',
       footMeta: 'GMT‑3',
       footStatus: 'Operando',
     },
@@ -33,12 +33,12 @@ export const COPY = {
       title: 'Dos semanas',
       titleEm: 'a producción',
       lead:
-        'Desde TU demo hasta producción, iteramos con vos hasta que estés completamente satisfecho, mostramos avances reales y entregamos tu sistema andando.',
+        'Desde TU demo hasta producción, iteramos con vos hasta que estés completamente satisfecho, mostramos avances reales y entregamos tu sistema terminado y andando en dos semanas. Y no termina ahí: te acompañamos en las decisiones de negocio y en el crecimiento, no solo con el software.',
       steps: [
-        { t: 'Descubrimiento',  d: 'Elegís tu solución, te escuchamos, definimos lo que queres hacer y te presentamos tu demo personalizada.', dur: 'Semana 01' },
-        { t: 'Diseño',          d: 'Validamos con los usuarios reales y realizamos la integracion de tu plan.', dur: 'Semana 01' },
+        { t: 'Descubrimiento',  d: 'Elegís tu solución, te escuchamos, definimos lo que querés hacer y te presentamos tu demo personalizada.', dur: 'Semana 01' },
+        { t: 'Diseño',          d: 'Validamos con los usuarios reales y realizamos la integración de tu plan.', dur: 'Semana 01' },
         { t: 'Construcción',    d: 'Vos ves el progreso, opinás, ajustamos.', dur: 'Semana 02' },
-        { t: 'Puesta en marcha',d: 'Capacitación con tu producto en producción. Listo para usar. Después: soporte mensual opcional.', dur: 'Semana 02' },
+        { t: 'Puesta en marcha',d: 'Capacitación con tu producto en producción. Listo para usar. Después: te acompañamos mes a mes en las decisiones de negocio y el crecimiento.', dur: 'Semana 02' },
       ],
     },
     work: {
@@ -54,6 +54,8 @@ export const COPY = {
         { n: '03', cat: 'Landing', t: 'Legales MV Kulman', m: 'Sitio profesional para captar consultas y proyectar una imagen de estudio.', kind: 'orders', image: '/cliente3.webp', url: 'https://legalesmvkulman.com' },
         { n: '04', cat: 'Reservas', t: 'Patagonia Inquieta', m: 'Landing con sistema de reserva de tours, lista para vender online.', kind: 'orders', image: '/cliente5.webp', url: 'https://www.patagoniainquieta.com' },
         { n: '05', cat: 'Gimnasio', t: 'CR-ONFIT', m: 'Gestión de socios y pagos para un gimnasio que opera sin fricción.', kind: 'orders', image: '/cliente6.webp', url: 'https://www.cronfit.com.ar' },
+        { n: '06', cat: 'Gimnasio', t: 'Hangar Fitness', m: 'Socios, cuotas, rutinas y acceso QR con la marca del gimnasio.', kind: 'orders', image: '/cliente7.jpg', url: 'https://www.hangarfitness.ar' },
+        { n: '07', cat: 'Viajes', t: 'Velvet Travel', m: 'Sitio de viajes con reservas online y ERP: caja, pagos en cuotas, vouchers y consultas por WhatsApp.', kind: 'orders', image: '/cliente8.jpg', url: 'https://www.velvet-travel.com.ar' },
       ],
     },
     stack: {
@@ -61,19 +63,20 @@ export const COPY = {
       num: 'Capítulo 04',
       title: 'Lo que usamos,',
       titleEm: 'sin parecer feria',
-      lead: 'Apostamos a herramientas estables, no a la moda del mes. Lo que está acá lleva años en producción nuestra.',
+      lead: 'Apostamos a herramientas estables, no a la moda del mes. Lo que está acá es lo que usamos en los sistemas que ya están en producción.',
       items: [
         { n: 'TypeScript', c: 'Lenguaje' },
         { n: 'React',      c: 'Frontend' },
-        { n: 'Next.js',    c: 'Framework' },
+        { n: 'Angular',    c: 'Frontend' },
         { n: 'Node.js',    c: 'Backend' },
+        { n: 'NestJS',     c: 'Framework' },
         { n: 'PostgreSQL', c: 'Base de datos' },
-        { n: 'Redis',      c: 'Cache / colas' },
-        { n: 'Prisma',     c: 'ORM' },
+        { n: 'TypeORM',    c: 'ORM' },
         { n: 'Tailwind',   c: 'Estilos' },
+        { n: 'Docker',     c: 'Contenedores' },
+        { n: 'Cloudinary', c: 'Imágenes' },
         { n: 'Mercado Pago', c: 'Pagos AR' },
         { n: 'Transferencia', c: 'Pagos USD' },
-        { n: 'Cloudflare', c: 'Infra / CDN' },
       ],
     },
     quotes: {
@@ -84,24 +87,24 @@ export const COPY = {
       lead: 'Creele al que ya lo está usando todos los días.',
       items: [
         {
-          q: 'Unificamos el trafico de dos webs de cada local en una sola, mejoró nuestro tráfico y el diseño de la pagina nos encanto.',
-          who: 'Sebastían Segovia', role: 'Director, Impacto Tienda', av: 'SS',
+          q: 'Unificamos el tráfico de dos webs de cada local en una sola, mejoró nuestro tráfico y el diseño de la página nos encantó.',
+          who: 'Sebastián Segovia', role: 'Director, Impacto Tienda', av: 'SS',
         },
         {
-          q: 'Dejamos un CRM generico para tener nuestro propia marca personal y aprovechamos la promo por miembro para bajar nuestros costos.',
-          who: 'Sebastían Pagano', role: 'Dueño, Barbería Authentic', av: 'SP',
+          q: 'Dejamos un CRM genérico para tener nuestra propia marca personal y aprovechamos la promo por miembro para bajar nuestros costos.',
+          who: 'Sebastián Pagano', role: 'Dueño, Barbería Authentic', av: 'SP',
         },
         {
-          q: 'Abri mi estudio propio y mi web me permitió llegar a mas clientes y tener un sitio y una imagen mucho más profesional.',
-          who: 'Veronica Kulman', role: 'Abogada, Estudio de Abogacía', av: 'VK',
+          q: 'Abrí mi estudio propio y mi web me permitió llegar a más clientes y tener un sitio y una imagen mucho más profesional.',
+          who: 'Verónica Kulman', role: 'Abogada, Estudio de Abogacía', av: 'VK',
         },
       ],
     },
     metrics: {
       items: [
         { n: '9', u: '', l: 'Clientes activos confiando en nosotros' },
-        { n: '<5', u: 'sem', l: 'Tiempo a producción' },
-        { n: '99.9', u: '%', l: 'Uptime últimos 12m' },
+        { n: '2', u: 'sem', l: 'Producto terminado, en producción' },
+        { n: '6', u: 'meses', l: 'Operando con clientes reales' },
         { n: '100', u: '%', l: 'Trabajo remoto' },
       ],
     },
@@ -112,7 +115,7 @@ export const COPY = {
       titleEm: 'sistemas que entendemos a medida',
       lead: 'Cada uno de nuestros sistemas viene en tres tamaños. Empezás con lo que necesitás hoy, escalás cuando hace falta. Vamos juntos, mes a mes, cancelás cuando quieras.',
       payHd: 'Tus clientes pagan con',
-      payFoot: 'Activamos cada método como te quede mas cómodo. Comisiones según el proveedor.',
+      payFoot: 'Activamos cada método como te quede más cómodo. Comisiones según el proveedor.',
       payMethods: [
         'Mercado Pago', 'Visa', 'Mastercard', 'Transferencia (CBU/CVU)','Efectivo',
       ],
@@ -124,7 +127,7 @@ export const COPY = {
         { id: 'ticket',    n: '05', name: 'E-ticketera',   intro: 'Vendé entradas y validá QR en la puerta.',     lead: 'Para boliches, teatros, espectáculos y eventos corporativos. Cobrás con Mercado Pago o transferencia y seguí al evento.' },
         { id: 'gastro',    n: '06', name: 'Gastronomía',   intro: 'Mozo, cocina, delivery y caja, en un mismo sistema.',  lead: 'QR para mesas y mostrador, pantalla de pedidos en cocina, seguimiento de delivery, stock por insumo y arqueo de caja.', landing: '/sistema-cafeteria' },
         { id: 'clinic',    n: '07', name: 'Clínica médica', intro: 'Agenda, historia clínica y telemedicina en un solo lugar.', lead: 'MediCore, para clínicas y médicos particulares: turnos, historia clínica, telemedicina, sala de espera, portal del paciente y facturación con obras sociales. Empezá gratis con hasta 5 pacientes.', landing: 'https://cns.codigonortesoluciones.com' },
-        { id: 'pos',    n: '08', name: 'Sistema POS', intro: 'Sistema de Gestíon interna para inventiraio, facturacion y cobro de negocio.', lead: 'Sistema de Gestíon interna para inventiraio, facturacion y cobro de negocio.' },
+        { id: 'pos',    n: '08', name: 'Sistema POS', intro: 'Sistema de gestión interna para inventario, facturación y cobro de tu negocio.', lead: 'Sistema de gestión interna para inventario, facturación y cobro de tu negocio.' },
       ],
       monthly: '/mes',
       priceFrom: 'A partir de',
@@ -166,7 +169,7 @@ export const COPY = {
             ['Pagos:', 'Mercado Pago + transferencia'], ['', 'QR validable desde celular'],
             ['', 'Reporte de ventas en vivo'],
             ['', 'Reserva y gestión de mesas online'], ['Soporte', 'personalizado'],
-          ], muted: ['Sin panel RRPP', 'Sin menu de mesas online'] },
+          ], muted: ['Sin panel RRPP', 'Sin menú de mesas online'] },
           { tier: 'Grow', tag: 'GRW', sub: 'Festivales y eventos medianos', price: 'comisión', priceNum: '5%', priceSuffix: 'por ticket vendido', setup: 25000, featured: true,
              feats: [
             ['', 'Sin límite de entradas'], ['', 'Todos los tipos de entrada (general, vip, early, free)'], ['', 'Múltiples eventos simultáneos'], 
@@ -176,7 +179,7 @@ export const COPY = {
             ['', 'Reserva y gestión de mesas online, con menú propio'],
             ['Soporte', 'personalizado'],
           ] },
-          { tier: 'Pro', tag: 'PRO', sub: 'Productoras y eventos grandes(según facturación)', price: 'comisión', priceNum: '3,5%', priceSuffix: 'o cuota fija mensual', setup: 'a medida', feats: [
+          { tier: 'Pro', tag: 'PRO', sub: 'Productoras y eventos grandes (según facturación)', price: 'comisión', priceNum: '3,5%', priceSuffix: 'o cuota fija mensual', setup: 'a medida', feats: [
             ['', 'Todo lo de Grow, más:'],['', 'Multi-sucursal'],['', 'Sin límite de usuarios'],
             ['', 'API + integración con ERP'],
             ['APP propia', 'para scanner y promociones por usuario por aplicación'],
@@ -231,8 +234,8 @@ export const COPY = {
           { tier: 'Starter', tag: 'STR', sub: 'Un profesional', price: 20000, setup: 25000, feats: [
             ['', 'Marca personal'], ['', 'Sin límite de servicios'],
             ['', 'Reserva con mail y panel administrador'],
-            ['', 'Configuracion de servicios y horarios'],
-            ['', 'Bloqueo de horarios y dias'],
+            ['', 'Configuración de servicios y horarios'],
+            ['', 'Bloqueo de horarios y días'],
             ['Pagos', 'de reservas online: Mercado Pago, Transferencia, tarjetas'],
             ['', 'Panel de administración de tus cobros y reservas'],
             ['CTA', 'Botón de whatsapp para reservar'],
@@ -281,24 +284,24 @@ export const COPY = {
             ['', 'Tickets con tu logo'],
 
           ] },
-          { tier: 'Grow', sub: 'Tu sitio  profesional', price: 40000, setup: 19000,featured: true, feats: [
+          { tier: 'Grow', sub: 'Con facturación electrónica', price: 40000, setup: 19000,featured: true, feats: [
             ['', 'Todo lo de Starter, más:'],
-            ['', 'Facturación electronica con ARCA'],
+            ['', 'Facturación electrónica con ARCA'],
             ['', 'Factura B con CAE y QR'],
             ['Soporte', 'dedicado prioritario'],
           ] },
         ],
         landing: [
           { tier: 'Grow', tag: 'GRW', sub: 'Pagás una sola vez por un año', price: 'comision',priceNum: '120.000', priceSuffix: 'por año (AHORRO 50% vs mensual)', setup: 19000, featured: false, feats: [
-            ['', '1 página · diseño a medida de tu marca'], ['Secciones', 'Sobre mi, Servicios, Testimonios, Contacto'],
-            ['', 'Boton de whatsapp para contactar'],
+            ['', '1 página · diseño a medida de tu marca'], ['Secciones', 'Sobre mí, Servicios, Testimonios, Contacto'],
+            ['', 'Botón de WhatsApp para contactar'],
             ['', 'Formulario de contacto'],
             ['Galería', ' hasta 20 fotos'],
             ['', 'Dominio + SSL + hosting incluido'], ['Soporte', 'personalizado'],
           ] },
-          { tier: 'Starter', sub: 'Tu sitio  profesional', price: 20000, setup: 19000,featured: true, feats: [
-            ['', '1 página · diseño a medida de tu marca'], ['Secciones', 'Sobre mi, Servicios, Testimonios, Contacto'],
-            ['', 'Boton de whatsapp para contactar'],
+          { tier: 'Starter', sub: 'Tu sitio profesional', price: 20000, setup: 19000,featured: true, feats: [
+            ['', '1 página · diseño a medida de tu marca'], ['Secciones', 'Sobre mí, Servicios, Testimonios, Contacto'],
+            ['', 'Botón de WhatsApp para contactar'],
             ['', 'Formulario de contacto'],
             ['Galería', ' hasta 20 fotos'],
             ['', 'Dominio + SSL + hosting incluido'], ['Soporte', 'personalizado'],
@@ -338,9 +341,9 @@ export const COPY = {
         { q: '¿Trabajan presencial o solo remoto?',
           a: 'Somos 100% remotos. Kickoff por videollamada, iteramos por WhatsApp y entregamos el sistema andando, estés donde estés.' },
         { q: '¿Se puede transferir el dominio?',
-          a: 'Si, el costo de configuracion anual incluye el dominio y el hosting. Es tuyo para siempre.' },
+          a: 'Sí, el costo de configuración anual incluye el dominio y el hosting. Es tuyo para siempre.' },
         { q: '¿Hacen mantenimiento después?',
-          a: 'Sí, todos los planes tienen soporte personalizado, estamos para apoyarte en todo lo que necesites.' },
+          a: 'Sí, todos los planes tienen soporte personalizado. Y además de mantener el sistema, te acompañamos en las decisiones de negocio y en cómo hacer crecer tu emprendimiento.' },
         { q: '¿Y si necesito algo que no está en la lista?',
           a: 'Lo podemos charlar. Escribinos contando qué necesitás y nos acomodamos a tu medida (puede incluir costos extra dependiendo de la complejidad).' },
       ],
@@ -369,7 +372,7 @@ export const COPY = {
           {
             title: '1. Uso del servicio',
             paragraphs: [
-              'Codigo Norte Soluciones provee herramientas SaaS para automatización de comunicaciones, notificaciones y gestión de procesos.',
+              'Código Norte Soluciones provee herramientas SaaS para automatización de comunicaciones, notificaciones y gestión de procesos.',
             ],
           },
           {
@@ -414,7 +417,7 @@ export const COPY = {
         sections: [
           {
             title: '1. Información que recopilamos',
-            intro: 'En Codigo Norte Soluciones (https://codigonortesoluciones.com), valoramos la privacidad de nuestros usuarios y clientes. Podemos recopilar:',
+            intro: 'En Código Norte Soluciones (https://codigonortesoluciones.com), valoramos la privacidad de nuestros usuarios y clientes. Podemos recopilar:',
             bullets: [
               'Nombre y datos de contacto',
               'Información de uso de la plataforma',
@@ -518,7 +521,7 @@ export const COPY = {
       titleC: 'Remote,',
       titleD: 'end to end.',
       lead:
-        'We design and build systems for small businesses from anywhere: ecommerce, booking, and gym and restaurant management. Kickoff over video, iterate online, ship it running. No weird promises.',
+        'We design and build systems for small businesses from anywhere: ecommerce, booking, and gym and restaurant management. Kickoff over video, iterate online, ship a finished system, and then stay with you on business decisions and growth. No weird promises.',
       footMeta: 'GMT‑3',
       footStatus: 'Operational',
     },
@@ -529,15 +532,15 @@ export const COPY = {
     process: {
       eyebrow: '02 — How we work',
       num: 'Chapter 02',
-      title: 'Four weeks',
+      title: 'Two weeks',
       titleEm: 'to production',
       lead:
-        'No waterfall, no cardboard scrum. We iterate with you every week, show real progress and ship a running system, not a PDF.',
+        'From YOUR demo to production, we iterate with you until you are completely satisfied, show real progress and ship your finished, running system in two weeks. And it does not end there: we stay with you on business decisions and growth, not just the software.',
       steps: [
-        { t: 'Discovery',   d: 'We jump on a call. Map current flows, listen to the team, define the minimum viable scope.', dur: 'Week 01' },
-        { t: 'Design',      d: 'Wireframes and clickable prototypes. Validated with real users before we touch a line of code.', dur: 'Week 02' },
-        { t: 'Build',       d: '5-day sprints with Friday demos. You see the progress, give feedback, we adjust.', dur: 'Week 03–04' },
-        { t: 'Launch',      d: 'Data migration, team training, hypercare week. Then: optional monthly support.', dur: 'Week 05' },
+        { t: 'Discovery',   d: 'You pick your solution, we listen, define what you want to do and show you your personalized demo.', dur: 'Week 01' },
+        { t: 'Design',      d: 'We validate with real users and set up the integration for your plan.', dur: 'Week 01' },
+        { t: 'Build',       d: 'You see the progress, give feedback, we adjust.', dur: 'Week 02' },
+        { t: 'Launch',      d: 'Training with your product in production. Ready to use. After that: we stay with you month to month on business decisions and growth.', dur: 'Week 02' },
       ],
     },
     work: {
@@ -553,6 +556,8 @@ export const COPY = {
         { n: '03', cat: 'Landing', t: 'Legales MV Kulman', m: 'A professional site to capture inquiries and look like a real firm.', kind: 'orders', image: '/cliente3.webp', url: 'https://legalesmvkulman.com' },
         { n: '04', cat: 'Bookings', t: 'Patagonia Inquieta', m: 'A landing with a tour booking system, ready to sell online.', kind: 'orders', image: '/cliente5.webp', url: 'https://www.patagoniainquieta.com' },
         { n: '05', cat: 'Gym', t: 'CR-ONFIT', m: 'Member and payment management for a gym that runs without friction.', kind: 'orders', image: '/cliente6.webp', url: 'https://www.cronfit.com.ar' },
+        { n: '06', cat: 'Gym', t: 'Hangar Fitness', m: 'Members, fees, routines and QR access under the gym brand.', kind: 'orders', image: '/cliente7.jpg', url: 'https://www.hangarfitness.ar' },
+        { n: '07', cat: 'Travel', t: 'Velvet Travel', m: 'Travel agency site with online booking and an ERP: cash desk, installment payments, vouchers and WhatsApp inquiries.', kind: 'orders', image: '/cliente8.jpg', url: 'https://www.velvet-travel.com.ar' },
       ],
     },
     stack: {
@@ -560,12 +565,13 @@ export const COPY = {
       num: 'Chapter 04',
       title: 'What we use,',
       titleEm: 'no trade-show vibes',
-      lead: 'We pick stable tools, not whatever ate Twitter last month. Everything here has been in our production for years.',
+      lead: 'We pick stable tools, not whatever ate Twitter last month. Everything here is what we use in the systems already in production.',
       items: [
         { n: 'TypeScript', c: 'Language' }, { n: 'React',     c: 'Frontend' },
-        { n: 'Next.js',    c: 'Framework' },{ n: 'Node.js',   c: 'Backend' },
-        { n: 'PostgreSQL', c: 'Database' }, { n: 'Redis',     c: 'Cache / queues' },
-        { n: 'Prisma',     c: 'ORM' },      { n: 'Tailwind',  c: 'Styling' },
+        { n: 'Angular',    c: 'Frontend' }, { n: 'Node.js',   c: 'Backend' },
+        { n: 'NestJS',     c: 'Framework' },{ n: 'PostgreSQL', c: 'Database' },
+        { n: 'TypeORM',    c: 'ORM' },      { n: 'Tailwind',  c: 'Styling' },
+        { n: 'Docker',     c: 'Containers' }, { n: 'Cloudinary', c: 'Images' },
         { n: 'Mercado Pago', c: 'AR payments' }, { n: 'Transferencia', c: 'USD payments' },
       ],
     },
@@ -576,19 +582,19 @@ export const COPY = {
       titleEm: 'our word',
       lead: 'Trust the ones using it every day.',
       items: [
-        { q: 'We went from Excel to a real system in five weeks. Members renew on their own via auto-debit and I stopped chasing late payments.',
-          who: 'Mariano Quispe', role: 'Director, Club San Pedro', av: 'MQ' },
-        { q: 'What I valued most: they hopped on a call, understood how we worked and built something my waiter uses without any training.',
-          who: 'Laura Mamaní', role: 'Owner, Almacén del Sur', av: 'LM' },
-        { q: 'We validated 14,000 tickets in one night without internet on site. Unthinkable with our previous solution.',
-          who: 'Diego Fernández', role: 'Producer, Pachamama Festival', av: 'DF' },
+        { q: 'We merged the traffic of two websites per store into a single one, our traffic improved and we loved the design of the page.',
+          who: 'Sebastián Segovia', role: 'Director, Impacto Tienda', av: 'SS' },
+        { q: 'We left a generic CRM to have our own personal brand, and we used the member promo to cut our costs.',
+          who: 'Sebastián Pagano', role: 'Owner, Barbería Authentic', av: 'SP' },
+        { q: 'I opened my own firm and my website helped me reach more clients and have a much more professional site and image.',
+          who: 'Verónica Kulman', role: 'Lawyer, Law Firm', av: 'VK' },
       ],
     },
     metrics: {
       items: [
         { n: '9', u: '', l: 'Active clients' },
-        { n: '<5', u: 'w', l: 'Time to production' },
-        { n: '99.9', u: '%', l: 'Uptime last 12m' },
+        { n: '2', u: 'w', l: 'Finished product, in production' },
+        { n: '6', u: 'mo', l: 'Running with real clients' },
         { n: '100', u: '%', l: 'Fully remote' },
       ],
     },
@@ -795,12 +801,12 @@ export const COPY = {
       title: 'What we\'re',
       titleEm: 'always asked',
       items: [
-        { q: 'How much does a project cost?', a: 'Depends on scope, but most start between USD 4K and USD 15K. We give a fixed quote after the discovery phase. No weird clauses.' },
-        { q: 'Do you work on-site or remote?', a: 'Fully remote. Kickoff over video, iterate on WhatsApp, and we ship a running system wherever you are.' },
+        { q: 'How much does a project cost?', a: 'Each solution has a different price depending on the plan you choose, and all of them have a setup cost, separate from our work, of 25,000 pesos per year. Payment gateway fees are not included.' },
+        { q: 'Do you work on-site or remote?', a: 'We are 100% remote. Kickoff over video, we iterate on WhatsApp and ship the system running, wherever you are.' },
         { q: 'Who owns the code?', a: 'You do. Repo, credentials, hosting — all in your name. If you ever want to switch vendors, we hand you the keys.' },
-        { q: 'Do you maintain it afterwards?', a: 'Yes, optional monthly plan from USD 350 with SLA. If you prefer another vendor or in-house team, we leave docs and transfer sessions.' },
-        { q: 'Do you integrate with Mercado Pago?', a: 'Yes — already built and battle-tested. QR, discounts, auto-debit, the whole menu.' },
-        { q: 'What if I need something not on the list?', a: 'We\'ve probably done it too. Write us what you need; if it\'s not our thing we recommend someone trustworthy.' },
+        { q: 'Can the domain be transferred?', a: 'Yes. The annual setup cost includes the domain and hosting. It is yours for good.' },
+        { q: 'Do you maintain it afterwards?', a: 'Yes. Every plan includes personalized support, and beyond keeping the system running we stay with you on business decisions and on growing your business.' },
+        { q: 'What if I need something not on the list?', a: 'We can talk it through. Tell us what you need and we will adapt to it (it may include extra costs depending on complexity).' },
       ],
     },
     contact: {
@@ -827,7 +833,7 @@ export const COPY = {
           {
             title: '1. Use of the service',
             paragraphs: [
-              'Codigo Norte Soluciones provides SaaS tools for communication automation, notifications, and process management.',
+              'Código Norte Soluciones provides SaaS tools for communication automation, notifications, and process management.',
             ],
           },
           {
@@ -872,7 +878,7 @@ export const COPY = {
         sections: [
           {
             title: '1. Information we collect',
-            intro: 'At Codigo Norte Soluciones (https://codigonortesoluciones.com), we value the privacy of our users and clients. We may collect:',
+            intro: 'At Código Norte Soluciones (https://codigonortesoluciones.com), we value the privacy of our users and clients. We may collect:',
             bullets: [
               'Name and contact details',
               'Platform usage information',
