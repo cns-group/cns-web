@@ -137,7 +137,7 @@ export const COPY = {
       featured: 'Más elegido',
       footer: [
         { h: 'Métodos de pago aceptados',    p: 'Mercado Pago, todas las tarjetas argentinas (Visa, Mastercard, Amex, Naranja, Cabal) y transferencia CBU/CVU. Activamos lo que tu negocio necesite.' },
-        { h: 'Tu data, tu código',           p: 'Repositorio, hosting y credenciales a tu nombre. Si dejás de trabajar con nosotros, te entregamos las llaves y listo. Sin lock-in.' },
+        { h: 'Tu marca, tu plata',           p: 'El sistema lleva tu logo, tus colores y tu sitio. Tus clientes ven tu marca, no la nuestra, y cobrás con tu propio Mercado Pago: la plata va directo a tu cuenta.' },
         { h: 'Sin sorpresas en la factura',  p: 'Precios en pesos argentinos. Sin comisión por venta, sin cargos por usuario, sin tarifas ocultas. Soporte incluido en todos los planes.' },
       ],
       software: {
@@ -341,8 +341,8 @@ export const COPY = {
           a: 'Cada solución tiene un precio diferente según el plan que elijas, pero todos cuentan con un costo de configuración externo a nuestro trabajo de 25.000 pesos al año. Los costos de pasarelas de pagos no se encuentran incluidos en el precio.' },
         { q: '¿Trabajan presencial o solo remoto?',
           a: 'Somos 100% remotos. Kickoff por videollamada, iteramos por WhatsApp y entregamos el sistema andando, estés donde estés.' },
-        { q: '¿Se puede transferir el dominio?',
-          a: 'Sí, el costo de configuración anual incluye el dominio y el hosting. Es tuyo para siempre.' },
+        { q: '¿El dominio es mío?',
+          a: 'Sí. El costo de configuración anual incluye tu dominio y el hosting del sistema mientras trabajemos juntos. El dominio está a tu nombre y te lo llevás si algún día te vas.' },
         { q: '¿Hacen mantenimiento después?',
           a: 'Sí, todos los planes tienen soporte personalizado. Y además de mantener el sistema, te acompañamos en las decisiones de negocio y en cómo hacer crecer tu emprendimiento.' },
         { q: '¿Y si necesito algo que no está en la lista?',
