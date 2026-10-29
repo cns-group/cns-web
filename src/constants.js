@@ -20,3 +20,14 @@ export function whatsappCustomDevUrl(lang = 'es') {
     : 'Hola, quiero organizar una llamada para charlar sobre un desarrollo a medida. Tengo un caso particular y me gustaría que lo conozcan.'
   return `${WHATSAPP_URL}?text=${encodeURIComponent(msg)}`
 }
+
+/**
+ * Video que va justo despues del hero. Dejar `src` vacio lo oculta en produccion
+ * (en desarrollo se ve un marco de ejemplo). Acepta un archivo (/video.mp4 en public/)
+ * o un link de YouTube/Vimeo en formato embed.
+ */
+export const HERO_VIDEO = {
+  src: '',
+  poster: '',
+  title: 'Así trabajamos en CNS',
+}

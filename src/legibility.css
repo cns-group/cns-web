@@ -1,0 +1,18 @@
+/* Piso de tamaño de texto: nada de lo que se lee debe quedar por debajo de ~14px. */
+.hero-stats { gap: clamp(28px, 5vw, 56px); }
+.hero-stats dt { font-size: 18px; line-height: 1.25; color: var(--fg-2); max-width: 22ch; }
+.hero-stats dd { font-size: clamp(38px, 5vw, 52px); }
+.hero-float-card span, .quote-who span, .spot-tab-who small { font-size: 15px; }
+.metric-l { font-size: 16px; }
+.stack-cat, .step-tick, .contact-card h4, .footer-col h5, .footer-base,
+.custom-dev-eyebrow, .custom-dev-hint, .work-shot .work-cat, .pay-strip .lbl,
+.pay-strip .foot, .pay-strip .chip, .legal-doc-updated, .nav-drawer-title { font-size: 14px; }
+.plan-sub, .plan-setup, .contact-wa-hint, .plans-foot .ff p, .legal-back { font-size: 15px; }
+.plan-from, .plans-tab .tnum, .card-mini .p { font-size: 13px; }
+.plan-feats li { font-size: 16px; }
+.nav-cta-btn { font-size: 15px; }
+.step-body { font-size: 16px; }
+.eyebrow, .sec-num { font-size: 14px; }
+.hero-scroll { font-size: 14px; }
+.browser-url { font-size: 14px; }
+.plans-tab .tnum { font-size: 14px; }

@@ -1,0 +1,25 @@
+.video-sec { padding-top: 0; }
+.video-frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--surface);
+  box-shadow: var(--shadow-md);
+}
+.video-frame video,
+.video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: #000; }
+.video-empty {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+  color: var(--muted);
+}
+.video-empty p { margin: 0; font-size: 24px; color: var(--fg-2); }
+.video-empty small { font-size: 15px; }
+.video-play {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 76px; height: 76px; border-radius: 50%;
+  background: var(--accent); color: #fff; font-size: 26px; padding-left: 5px;
+}
