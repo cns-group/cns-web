@@ -324,6 +324,22 @@ const VISUALS = {
   produccion: VisualProduccion,
 }
 
+/* ── Beneficios de un sistema a medida ── */
+const BENEFICIOS = [
+  {
+    q: '¿Qué cambia en tu día a día?',
+    a: 'Lo que hoy hacés a mano, como planillas, mensajes y cobros, pasa a hacerse solo dentro de un sistema pensado para cómo trabajás.',
+  },
+  {
+    q: '¿Por qué no usar un programa genérico?',
+    a: 'Porque el sistema se adapta a tu negocio y no al revés: lleva tu marca, tus reglas y solo lo que necesitás.',
+  },
+  {
+    q: '¿Cómo ayuda a que tu negocio crezca?',
+    a: 'Te ordena la información y te libera tiempo para atender más clientes y decidir mejor, sin sumar trabajo manual.',
+  },
+]
+
 /* ── Sección ── */
 export function Tutorial() {
   const [active, setActive] = React.useState(0)
@@ -460,6 +476,22 @@ export function Tutorial() {
           </div>
         </div>
       </Reveal>
+
+      <div className="tut-why">
+        <Reveal as="div" className="tut-why-hd">
+          <div className="sec-num">Para tu negocio</div>
+          <h3>¿En qué te ayuda un sistema a medida?</h3>
+        </Reveal>
+        <div className="tut-why-grid">
+          {BENEFICIOS.map((b, i) => (
+            <Reveal as="article" key={b.q} index={i} className="tut-why-card">
+              <span className="tut-why-n">{i + 1}</span>
+              <h4>{b.q}</h4>
+              <p>{b.a}</p>
+            </Reveal>
+          ))}
+        </div>
+      </div>
 
       <Reveal as="div" className="tut-chat" ref={chatRef} id="preguntas">
         <div className="tut-chat-hd">
