@@ -7,6 +7,7 @@
     { "source": "/sistema-cafeteria", "destination": "/sistema-cafeteria/", "permanent": true }
   ],
   "rewrites": [
+    { "source": "/api/:path*", "destination": "https://crm.codigonortesoluciones.com/api/:path*" },
     { "source": "/sistema-cafeteria/app/:path*", "destination": "/sistema-cafeteria/app/index.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
