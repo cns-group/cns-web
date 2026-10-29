@@ -1,6 +1,6 @@
 import React from 'react'
 import { sectionClick } from './scroll'
-import { WHATSAPP_URL } from './constants'
+import { WHATSAPP_URL, whatsappCallUrl } from './constants'
 import { Reveal } from './reveal'
 import { HeroVideo } from './sections-video'
 
@@ -148,16 +148,21 @@ export function Hero({ c, onSection }) {
           </h1>
           <Reveal as="p" index={2} className="lead">{c.hero.lead}</Reveal>
           <Reveal as="div" index={3} className="row hero-actions">
-            <button type="button" className="btn btn-primary btn-lg" onClick={sectionClick('planes', onSection)}>
-              {c.nav.cta}
+            <a
+              className="btn btn-primary btn-lg"
+              href={whatsappCallUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {c.nav.ctaCall}
               <svg className="arr" width="12" height="12" viewBox="0 0 11 11" fill="none" aria-hidden="true"><path d="M2 9L9 2M9 2H3.5M9 2V7.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" /></svg>
-            </button>
+            </a>
             <a
               className="btn btn-ghost btn-lg"
-              href="#casos"
-              onClick={sectionClick('casos', onSection)}
+              href="#proceso"
+              onClick={sectionClick('proceso', onSection)}
             >
-              {c.nav.ctaGhost}
+              {c.nav.ctaFlow}
             </a>
           </Reveal>
         </div>

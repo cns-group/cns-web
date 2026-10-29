@@ -11,6 +11,8 @@ export const COPY = {
       status: 'Aceptando proyectos',
       cta: 'Elegir proyecto',
       ctaGhost: 'Ver casos',
+      ctaCall: 'Agendá una llamada',
+      ctaFlow: 'Flujo de trabajo',
     },
     hero: {
       eyebrow: 'Software a medida, automatización e IA',
@@ -512,6 +514,8 @@ export const COPY = {
       status: 'Booking 2 projects',
       cta: 'Start a project',
       ctaGhost: 'See work',
+      ctaCall: 'Schedule a call',
+      ctaFlow: 'Workflow',
     },
     hero: {
       eyebrow: 'Remote consultancy',

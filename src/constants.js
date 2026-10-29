@@ -31,3 +31,10 @@ export const HERO_VIDEO = {
   poster: '/video-poster.jpg',
   title: 'Así trabajamos en CNS',
 }
+
+export function whatsappCallUrl(lang = 'es') {
+  const msg = lang === 'en'
+    ? "Hi, I'd like to schedule a call: the free 15-minute audit of my business."
+    : 'Hola, quiero agendar una llamada: la auditoría gratis de 15 minutos de mi negocio.'
+  return `${WHATSAPP_URL}?text=${encodeURIComponent(msg)}`
+}
