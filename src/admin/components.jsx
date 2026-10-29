@@ -11,6 +11,7 @@ const NAV = [
   { to: '/admin/pagos', label: 'Pagos' },
   { to: '/admin/demos', label: 'Demos' },
   { to: '/admin/whatsapp', label: 'WhatsApp' },
+  { to: '/admin/asistente', label: 'Asistente IA' },
   { to: '/admin/embudo', label: 'Embudo' },
 ]
 

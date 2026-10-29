@@ -234,3 +234,16 @@
 
 /* En pantallas angostas el título de la tarjeta y sus botones pasan a otra línea. */
 .admin-card-hd { flex-wrap: wrap; gap: 12px; }
+
+/* ── Asistente IA ───────────────────────────────────────────────────────── */
+.ai-log { height: 380px; }
+.ai-sugerencias { display: grid; gap: 10px; justify-items: start; }
+.ai-sugerencias .admin-chip { text-align: left; border-radius: 14px; line-height: 1.3; }
+.ai-sugerencias .admin-chip:disabled { opacity: .5; cursor: not-allowed; }
+.ai-pensando { display: flex; gap: 5px; padding: 14px 16px; }
+.ai-pensando i { width: 7px; height: 7px; border-radius: 50%; background: var(--admin-muted); animation: aiDot 1s ease-in-out infinite; }
+.ai-pensando i:nth-child(2) { animation-delay: .15s; }
+.ai-pensando i:nth-child(3) { animation-delay: .3s; }
+@keyframes aiDot { 50% { transform: translateY(-4px); opacity: .5; } }
+.ai-gasto { margin: 14px 0 0; }
+@media (prefers-reduced-motion: reduce) { .ai-pensando i { animation: none; } }

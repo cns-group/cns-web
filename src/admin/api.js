@@ -110,6 +110,11 @@ export const api = {
         body: JSON.stringify({ cuerpo, ...(lineaId ? { lineaId } : {}) }),
       }),
   },
+  ai: {
+    status: () => request('/ai/status'),
+    chat: (mensajes, modelo) =>
+      request('/ai/chat', { method: 'POST', body: JSON.stringify({ mensajes, ...(modelo ? { modelo } : {}) }) }),
+  },
   setupSteps: {
     update: (id, data) =>
       request(`/setup-steps/${id}`, { method: 'PATCH', body: JSON.stringify(data) }),
