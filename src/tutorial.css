@@ -257,3 +257,13 @@
   letter-spacing: .04em;
   text-transform: uppercase;
 }
+
+.tv-opt {
+  padding: 10px 14px;
+  border: 1px dashed var(--accent);
+  border-radius: var(--radius-sm);
+  color: var(--fg);
+  font-size: 16px;
+  opacity: 0;
+  animation: tutIn .4s var(--ease) 4.6s both;
+}

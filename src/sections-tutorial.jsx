@@ -23,7 +23,7 @@ const STEPS = [
     tab: 'Contanos',
     when: 'Día 1',
     title: 'Nos contás qué querés resolver',
-    body: 'Un sistema a medida, automatizar lo que hoy hacés a mano, o arrancar con uno de nuestros sistemas listos. Nos escribís por WhatsApp y te ofrecemos una auditoría de 15 minutos de tu negocio, totalmente gratis.',
+    body: 'Sistema a medida, automatización o uno de nuestros sistemas listos. Escribinos por WhatsApp.',
     ask: ['automatizar', 'soluciones'],
   },
   {
@@ -31,7 +31,7 @@ const STEPS = [
     tab: 'Auditoría gratis',
     when: 'Día 1 · 15 minutos',
     title: 'Auditoría gratis de tu negocio',
-    body: 'Una videollamada de 15 minutos, totalmente gratis, para revisar cómo trabajás hoy y qué se puede mejorar o automatizar. Con eso armamos tu demo personalizada, que ves en 2 días. Todo remoto, estés donde estés.',
+    body: '15 minutos por videollamada, totalmente gratis, para revisar tu negocio y ver qué se puede automatizar.',
     ask: ['auditoria', 'precio'],
   },
   {
@@ -55,7 +55,7 @@ const STEPS = [
     tab: 'En producción',
     when: 'Puesta en marcha',
     title: 'Sistema andando y acompañamiento',
-    body: 'Te capacitamos con tu producto ya en producción. Después seguimos mes a mes: soporte y decisiones de negocio para que crezca.',
+    body: 'Te capacitamos con tu sistema ya en producción. Una vez que está listo, podés sumar la consultoría de crecimiento de tu negocio.',
     ask: ['soporte', 'dominio'],
   },
 ]
@@ -98,7 +98,7 @@ const KB = [
     id: 'soporte',
     q: '¿Hacen mantenimiento después?',
     kw: ['mantenimiento', 'soporte', 'despues', 'acompan', 'ayuda', 'problema', 'error', 'falla', 'seguimiento', 'crecer'],
-    a: 'Sí, todos los planes tienen soporte personalizado. Además de mantener el sistema, te acompañamos en las decisiones de negocio y en cómo hacer crecer tu emprendimiento.',
+    a: 'Sí, todos los planes tienen soporte personalizado. Y una vez que el sistema está listo, podés contratar la consultoría de crecimiento de tu negocio.',
   },
   {
     id: 'pagos',
@@ -312,9 +312,10 @@ function VisualProduccion() {
       </ul>
       <div className="tv-months">
         {['Mes 1', 'Mes 2', 'Mes 3'].map((m, i) => (
-          <div key={m} style={{ '--d': `${3.4 + i * 0.4}s` }}><b>{m}</b><span>Soporte y decisiones</span></div>
+          <div key={m} style={{ '--d': `${3.4 + i * 0.4}s` }}><b>{m}</b><span>Soporte</span></div>
         ))}
       </div>
+      <div className="tv-opt">Opcional: consultoría de crecimiento del negocio</div>
     </div>
   )
 }
