@@ -70,7 +70,7 @@ export function Work({ c }) {
   const w = c.work
   return (
     <section className="sec" id="casos">
-      <SectionHeader eyebrow={w.eyebrow} title={w.title} titleEm={w.titleEm} lead={w.lead} />
+      <SectionHeader eyebrow={w.eyebrow} title={w.title} titleEm={w.titleEm} />
       <div className="work-reel">
         {w.items.map((it, i) => (
           <WorkShot key={it.n ?? i} it={it} i={i} featured={i === 0} openLabel={w.open} />
@@ -211,7 +211,7 @@ export function Contact({ c, ctaRef }) {
   const cc = c.contact
   return (
     <section className="sec" id="contacto" ref={ctaRef}>
-      <SectionHeader eyebrow={cc.eyebrow} title={cc.title} titleEm={cc.titleEm} lead={cc.lead} />
+      <SectionHeader eyebrow={cc.eyebrow} title={cc.title} titleEm={cc.titleEm} />
       <div className="contact-wa">
         <Reveal as="div" className="contact-wa-main">
           <p className="contact-wa-lead">{cc.waLead}</p>

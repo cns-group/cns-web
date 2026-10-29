@@ -407,7 +407,6 @@ export function Tutorial() {
         eyebrow="02 — Cómo trabajamos"
         title="Así trabajamos,"
         titleEm="paso a paso"
-        lead="De la primera videollamada a tu sistema andando, con tu demo lista en 2 días. Tocá cada paso para verlo en acción."
       />
 
       <Reveal as="div" className="tut-stage">

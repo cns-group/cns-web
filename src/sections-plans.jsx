@@ -169,7 +169,6 @@ export function Plans({ c, lang, activeTab = 'ecommerce', onTabChange }) {
             <span className="title-em">{p.titleEm}</span>
           </h2>
         </div>
-        <p className="lead">{p.lead}</p>
       </Reveal>
 
       <div className="plans-tabs-wrap">
@@ -202,7 +201,6 @@ export function Plans({ c, lang, activeTab = 'ecommerce', onTabChange }) {
               <span className="title-em">· {tab.intro}</span>
             </h3>
             <div className="plans-intro-side">
-              <p>{tab.lead}</p>
               {tab.landing && (
                 <a href={tab.landing} target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-lg plan-detail-cta">
                   {p.landingCta}
