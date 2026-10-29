@@ -51,17 +51,18 @@
   100% { box-shadow: 0 0 0 22px transparent; }
 }
 
+/* Solo sonido y pantalla completa, arriba a la derecha: no tapan los subtitulos del video. */
 .vp-bar {
-  position: absolute; left: 12px; right: 12px; bottom: 12px;
-  display: flex; align-items: center; gap: 10px;
-  padding: 6px 10px;
+  position: absolute; top: 12px; right: 12px;
+  display: flex; align-items: center; gap: 4px;
+  padding: 4px;
   border-radius: 999px;
   background: rgba(10, 14, 18, .62);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255,255,255,.08);
   color: #fff;
-  opacity: 0; transform: translateY(6px);
+  opacity: 0; transform: translateY(-6px);
   transition: opacity .25s var(--ease), transform .25s var(--ease);
 }
 .vp:hover .vp-bar, .vp:focus-within .vp-bar, .vp.is-started:not(.is-playing) .vp-bar { opacity: 1; transform: none; }
@@ -73,27 +74,7 @@
 }
 .vp-btn:hover { background: rgba(255,255,255,.14); }
 .vp-btn svg { width: 18px; height: 18px; }
-.vp-time { font-size: 14px; font-variant-numeric: tabular-nums; opacity: .85; min-width: 34px; text-align: center; }
-.vp-track { position: relative; flex: 1; height: 18px; cursor: pointer; touch-action: none; }
-.vp-track::before {
-  content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 3px; margin-top: -1.5px;
-  border-radius: 2px; background: rgba(255,255,255,.25);
-}
-.vp-track i {
-  position: absolute; left: 0; top: 50%; height: 3px; margin-top: -1.5px;
-  border-radius: 2px; background: var(--accent);
-}
-.vp-track i::after {
-  content: ""; position: absolute; right: -6px; top: 50%; width: 12px; height: 12px; margin-top: -6px;
-  border-radius: 50%; background: #fff; transform: scale(0); transition: transform .15s var(--ease);
-}
-.vp-track:hover i::after { transform: scale(1); }
-
 @media (hover: none) { .vp.is-playing .vp-bar { opacity: 1; transform: none; } }
-@media (max-width: 560px) {
-  .vp-time:last-of-type { display: none; }
-  .vp-bar { left: 8px; right: 8px; bottom: 8px; gap: 6px; }
-}
 @media (prefers-reduced-motion: reduce) { .vp-big span { animation: none; } }
 
 /* En el hero: copy a la izquierda, video a la derecha (en celular, el video va debajo). */
