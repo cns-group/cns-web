@@ -3,6 +3,7 @@ import path from 'path'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { LANDINGS, EXTERNAL_LANDINGS } from './scripts/landings.mjs'
+import seoPlugin from './seo/vite-seo-plugin.mjs'
 
 const MIME = {
   '.html': 'text/html; charset=utf-8',
@@ -53,7 +54,7 @@ function staticLandings() {
 }
 
 export default defineConfig({
-  plugins: [react(), staticLandings()],
+  plugins: [react(), staticLandings(), seoPlugin()],
   server: {
     proxy: {
       '/api': {

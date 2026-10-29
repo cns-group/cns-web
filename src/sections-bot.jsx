@@ -40,7 +40,7 @@ function WorkShot({ it, i, featured, openLabel }) {
             <img
               className="work-shot-img"
               src={it.image}
-              alt=""
+              alt={`${it.t}: ${it.cat.toLowerCase()} desarrollado por Código Norte Soluciones`}
               width={1920}
               height={1080}
               loading={featured ? 'eager' : 'lazy'}

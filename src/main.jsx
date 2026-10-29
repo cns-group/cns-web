@@ -10,6 +10,9 @@ import './styles.css'
 import './skill-landing.css'
 import './legibility.css'
 
+// El contenido prerenderizado para buscadores ya no hace falta cuando la app carga.
+document.getElementById('seo-prerender')?.remove()
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>

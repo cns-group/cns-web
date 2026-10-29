@@ -12,6 +12,7 @@ import { startParallax } from './reveal'
 import { WorldCanvas } from './world-canvas'
 import { Tagline } from './tagline'
 import { startLandingTracking } from './analytics'
+import { metaForTab, setPageMeta } from './lib/seo'
 
 function ChapterRail() {
   const chapters = [
@@ -49,6 +50,13 @@ export default function App() {
   React.useEffect(() => { applyTheme(t) }, [t])
 
   React.useEffect(() => startParallax(), [])
+
+  // Título y descripción de la pestaña acordes al sistema que se está mirando (/ecommerce, /gimnasios…).
+  React.useEffect(() => {
+    const onPlanPath = Boolean(parsePlanTabFromPath())
+    const m = metaForTab(onPlanPath ? planTab : null)
+    setPageMeta(m.title, m.description)
+  }, [planTab])
 
   React.useEffect(() => startLandingTracking(), [])
 

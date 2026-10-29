@@ -28,6 +28,6 @@ export function whatsappCustomDevUrl(lang = 'es') {
  */
 export const HERO_VIDEO = {
   src: '/HEROVIDEO.mp4',
-  poster: '',
+  poster: '/video-poster.jpg',
   title: 'Así trabajamos en CNS',
 }

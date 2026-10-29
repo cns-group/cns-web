@@ -1,14 +1,87 @@
 {
   "redirects": [
-    { "source": "/sistema-ecommerce", "destination": "/sistema-ecommerce/", "permanent": true },
-    { "source": "/sistema-gimnasios", "destination": "/sistema-gimnasios/", "permanent": true },
-    { "source": "/sistema-gastronomia", "destination": "/sistema-cafeteria/", "permanent": true },
-    { "source": "/sistema-gastronomia/", "destination": "/sistema-cafeteria/", "permanent": true },
-    { "source": "/sistema-cafeteria", "destination": "/sistema-cafeteria/", "permanent": true }
+    {
+      "source": "/sistema-ecommerce",
+      "destination": "/sistema-ecommerce/",
+      "permanent": true
+    },
+    {
+      "source": "/sistema-gimnasios",
+      "destination": "/sistema-gimnasios/",
+      "permanent": true
+    },
+    {
+      "source": "/sistema-gastronomia",
+      "destination": "/sistema-cafeteria/",
+      "permanent": true
+    },
+    {
+      "source": "/sistema-gastronomia/",
+      "destination": "/sistema-cafeteria/",
+      "permanent": true
+    },
+    {
+      "source": "/sistema-cafeteria",
+      "destination": "/sistema-cafeteria/",
+      "permanent": true
+    }
   ],
   "rewrites": [
-    { "source": "/api/:path*", "destination": "https://crm.codigonortesoluciones.com/api/:path*" },
-    { "source": "/sistema-cafeteria/app/:path*", "destination": "/sistema-cafeteria/app/index.html" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/api/:path*",
+      "destination": "https://crm.codigonortesoluciones.com/api/:path*"
+    },
+    {
+      "source": "/sistema-cafeteria/app/:path*",
+      "destination": "/sistema-cafeteria/app/index.html"
+    },
+    {
+      "source": "/ecommerce",
+      "destination": "/ecommerce.html"
+    },
+    {
+      "source": "/gimnasios",
+      "destination": "/gimnasios.html"
+    },
+    {
+      "source": "/turneros",
+      "destination": "/turneros.html"
+    },
+    {
+      "source": "/gastronomia",
+      "destination": "/gastronomia.html"
+    },
+    {
+      "source": "/clinica-medica",
+      "destination": "/clinica-medica.html"
+    },
+    {
+      "source": "/pos",
+      "destination": "/pos.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/admin/:path*",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/HEROVIDEO.mp4",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
   ]
 }
