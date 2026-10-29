@@ -117,14 +117,14 @@ const KB = [
     q: '¿Y si necesito algo que no está en la lista?',
     kw: ['a medida', 'medida', 'especial', 'particular', 'custom', 'distinto', 'otro sistema', 'desde cero', 'no esta en', 'otra cosa'],
     a: 'Lo charlamos. Contanos qué necesitás y lo diseñamos y construimos desde cero, con alcance claro y cotización fija. Puede implicar costos extra según la complejidad.',
-    go: { id: 'desarrollo-a-medida', label: 'Ver desarrollo a medida' },
+    go: { id: 'contacto', label: 'Contanos tu caso' },
   },
   {
     id: 'automatizar',
     q: '¿Pueden automatizar procesos de mi negocio?',
     kw: ['automat', 'proceso', 'planilla', 'excel', 'manual', 'integrar', 'integracion', 'bot', 'avisos', 'repetitivo'],
     a: 'Sí. Vemos cómo trabajás hoy, detectamos las tareas manuales que más tiempo te llevan y las automatizamos con un sistema hecho a tu medida. Lo charlamos en la videollamada.',
-    go: { id: 'desarrollo-a-medida', label: 'Ver desarrollo a medida' },
+    go: { id: 'contacto', label: 'Contanos tu caso' },
   },
   {
     id: 'soluciones',

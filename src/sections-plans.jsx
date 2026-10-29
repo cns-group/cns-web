@@ -1,5 +1,5 @@
 import React from 'react'
-import { whatsappPlanUrl, whatsappCustomDevUrl } from './constants'
+import { whatsappPlanUrl } from './constants'
 import { Reveal } from './reveal'
 import { PLAN_TAB_IDS } from './plan-routes'
 
@@ -221,46 +221,6 @@ export function Plans({ c, lang, activeTab = 'ecommerce', onTabChange }) {
         </div>
       </div>
 
-      <CustomDev c={c} lang={lang} />
     </section>
-  )
-}
-
-export function CustomDev({ c, lang }) {
-  const d = c.customDev
-  const waUrl = whatsappCustomDevUrl(lang)
-
-  return (
-    <div className="custom-dev" id="desarrollo-a-medida" aria-labelledby="custom-dev-title">
-      <div className="custom-dev-inner">
-        <Reveal as="div" className="custom-dev-copy">
-          <div className="custom-dev-eyebrow">{d.eyebrow}</div>
-          <h2 id="custom-dev-title" className="custom-dev-title">
-            {d.title}{' '}
-            <span className="title-em">{d.titleEm}</span>
-          </h2>
-          <p className="custom-dev-lead">{d.lead}</p>
-          <ul className="custom-dev-points">
-            {d.points.map((point) => (
-              <li key={point}>{point}</li>
-            ))}
-          </ul>
-        </Reveal>
-        <Reveal as="div" index={1} className="custom-dev-cta">
-          <a
-            href={waUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-primary btn-lg custom-dev-btn"
-          >
-            {d.cta}
-            <svg className="arr" width="12" height="12" viewBox="0 0 11 11" fill="none" aria-hidden="true">
-              <path d="M2 9L9 2M9 2H3.5M9 2V7.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-            </svg>
-          </a>
-          <p className="custom-dev-hint">{d.hint}</p>
-        </Reveal>
-      </div>
-    </div>
   )
 }

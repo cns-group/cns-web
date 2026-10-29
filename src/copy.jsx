@@ -3,7 +3,6 @@ export const COPY = {
     nav: {
       links: [
         { id: 'planes',    label: 'Planes' },
-        { id: 'desarrollo-a-medida', label: 'A medida' },
         { id: 'proceso',   label: 'Proceso' },
         { id: 'casos',     label: 'Casos' },
         { id: 'contacto',  label: 'Contacto' },
@@ -474,7 +473,6 @@ export const COPY = {
           h: 'Sitio',
           links: [
             { label: 'Planes', href: '/#planes' },
-            { label: 'Desarrollo a medida', href: '/#desarrollo-a-medida' },
             { label: 'Proceso', href: '/#proceso' },
             { label: 'Casos', href: '/#casos' },
             { label: 'Contacto', href: '/#contacto' },
@@ -506,7 +504,6 @@ export const COPY = {
     nav: {
       links: [
         { id: 'planes',    label: 'Plans' },
-        { id: 'desarrollo-a-medida', label: 'Custom' },
         { id: 'proceso',   label: 'Process' },
         { id: 'casos',     label: 'Work' },
         { id: 'contacto',  label: 'Contact' },
@@ -936,7 +933,6 @@ export const COPY = {
           h: 'Site',
           links: [
             { label: 'Plans', href: '/#planes' },
-            { label: 'Custom development', href: '/#desarrollo-a-medida' },
             { label: 'Process', href: '/#proceso' },
             { label: 'Work', href: '/#casos' },
             { label: 'Contact', href: '/#contacto' },
