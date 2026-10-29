@@ -104,7 +104,7 @@ export const COPY = {
     metrics: {
       items: [
         { n: '9', u: '', l: 'Clientes activos confiando en nosotros' },
-        { n: '2', u: 'sem', l: 'Producto terminado, en producción' },
+        { n: '2', u: 'días', l: 'Hasta que veas tu demo' },
         { n: '6', u: 'meses', l: 'Operando con clientes reales' },
         { n: '100', u: '%', l: 'Trabajo remoto' },
       ],
@@ -595,7 +595,7 @@ export const COPY = {
     metrics: {
       items: [
         { n: '9', u: '', l: 'Active clients' },
-        { n: '2', u: 'w', l: 'Finished product, in production' },
+        { n: '2', u: 'days', l: 'Until you see your demo' },
         { n: '6', u: 'mo', l: 'Running with real clients' },
         { n: '100', u: '%', l: 'Fully remote' },
       ],

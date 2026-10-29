@@ -1,6 +1,6 @@
 import React from 'react'
 import { COPY } from './copy'
-import { Nav, Hero, Marquee } from './sections-top'
+import { Nav, Hero } from './sections-top'
 import { Tutorial } from './sections-tutorial'
 import { Plans } from './sections-plans'
 import { Work, Quotes, Contact, Footer } from './sections-bot'
@@ -87,7 +87,6 @@ export default function App() {
       <main id="main">
         <ChapterRail />
         <Hero c={c} onSection={scrollToSection} />
-        <Marquee items={c.marquee} />
         <Tutorial />
         <Tagline label="Nuestra mirada" lines={['El software bien hecho no es un gasto.', 'Es la base sobre la que tu negocio crece.']} />
         <Plans c={c} lang={t.lang} activeTab={planTab} onTabChange={handlePlanTabChange} />

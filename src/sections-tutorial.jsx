@@ -8,37 +8,44 @@ import './tutorial.css'
 
 const AUTOPLAY_MS = 8000
 
-const SOLUCIONES = ['Ecommerce', 'Turnero', 'Gimnasio', 'Gastronomía']
+const OPCIONES = [
+  { label: 'Sistema a medida', msg: 'Hola, quiero un sistema a medida para mi negocio y me gustaría coordinar una videollamada.' },
+  { label: 'Automatizar procesos', msg: 'Hola, quiero automatizar procesos de mi negocio (tareas manuales, planillas, avisos) y coordinar una videollamada.' },
+  { label: 'Ecommerce', msg: 'Hola, me interesa un sistema de ecommerce y quiero coordinar la videollamada.' },
+  { label: 'Turnero', msg: 'Hola, me interesa un turnero y quiero coordinar la videollamada.' },
+  { label: 'Gimnasio', msg: 'Hola, me interesa un sistema para gimnasio y quiero coordinar la videollamada.' },
+  { label: 'Gastronomía', msg: 'Hola, me interesa un sistema de gastronomía y quiero coordinar la videollamada.' },
+]
 
 const STEPS = [
   {
     id: 'elegir',
-    tab: 'Elegís',
+    tab: 'Contanos',
     when: 'Día 1',
-    title: 'Elegís qué necesitás',
-    body: 'Entrás a Planes, elegís la solución que se parece a tu negocio y nos escribís por WhatsApp. Sin formularios: el mensaje ya sale armado.',
-    ask: ['empezar', 'soluciones'],
+    title: 'Nos contás qué querés resolver',
+    body: 'Un sistema a medida, automatizar lo que hoy hacés a mano, o arrancar con uno de nuestros sistemas listos. Nos escribís por WhatsApp, sin formularios: el mensaje ya sale armado.',
+    ask: ['automatizar', 'soluciones'],
   },
   {
     id: 'kickoff',
     tab: 'Kickoff',
-    when: 'Semana 01',
+    when: 'Día 1',
     title: 'Nos juntamos por videollamada',
-    body: 'Te escuchamos, definimos juntos qué querés hacer y te presentamos tu demo personalizada. Todo remoto, estés donde estés.',
+    body: 'Te escuchamos, definimos juntos qué querés hacer y armamos tu demo personalizada, que ves en 2 días. Todo remoto, estés donde estés.',
     ask: ['remoto', 'precio'],
   },
   {
     id: 'demo',
     tab: 'Demo y diseño',
-    when: 'Semana 01',
-    title: 'Ves tu sistema con tu marca',
+    when: 'En 2 días',
+    title: 'Ves tu demo con tu marca',
     body: 'Validamos con usuarios reales y integramos tu plan. El sistema lleva tu logo y tus colores: tus clientes ven tu marca, no la nuestra.',
     ask: ['marca', 'pagos'],
   },
   {
     id: 'construccion',
     tab: 'Construcción',
-    when: 'Semana 02',
+    when: 'Iteramos online',
     title: 'Mirás el avance y opinás',
     body: 'Mostramos avances reales, vos probás, pedís cambios y ajustamos. Iteramos online hasta que estés completamente satisfecho.',
     ask: ['plazo', 'medida'],
@@ -46,7 +53,7 @@ const STEPS = [
   {
     id: 'produccion',
     tab: 'En producción',
-    when: 'Semana 02 y después',
+    when: 'Puesta en marcha',
     title: 'Sistema andando y acompañamiento',
     body: 'Te capacitamos con tu producto ya en producción. Después seguimos mes a mes: soporte y decisiones de negocio para que crezca.',
     ask: ['soporte', 'dominio'],
@@ -66,7 +73,7 @@ const KB = [
     id: 'plazo',
     q: '¿Cuánto tardan en entregarlo?',
     kw: ['cuanto tard', 'tiempo', 'plazo', 'demora', 'semanas', 'entrega', 'rapido', 'cuando estaria', 'listo'],
-    a: 'Dos semanas desde la demo hasta producción. Vas viendo avances reales en el camino y no se termina ahí: seguimos acompañándote mes a mes.',
+    a: 'Tu demo la ves en 2 días. Después iteramos con vos hasta que esté a tu gusto y lo ponemos en producción; el plazo final depende de lo que construyamos. No se termina ahí: seguimos acompañándote mes a mes.',
   },
   {
     id: 'remoto',
@@ -106,10 +113,17 @@ const KB = [
     go: { id: 'desarrollo-a-medida', label: 'Ver desarrollo a medida' },
   },
   {
+    id: 'automatizar',
+    q: '¿Pueden automatizar procesos de mi negocio?',
+    kw: ['automat', 'proceso', 'planilla', 'excel', 'manual', 'integrar', 'integracion', 'bot', 'avisos', 'repetitivo'],
+    a: 'Sí. Vemos cómo trabajás hoy, detectamos las tareas manuales que más tiempo te llevan y las automatizamos con un sistema hecho a tu medida. Lo charlamos en la videollamada.',
+    go: { id: 'desarrollo-a-medida', label: 'Ver desarrollo a medida' },
+  },
+  {
     id: 'soluciones',
     q: '¿Qué sistemas hacen?',
     kw: ['que hacen', 'sistemas', 'soluciones', 'ecommerce', 'tienda', 'turnero', 'turnos', 'gimnasio', 'gym', 'restaurante', 'gastro', 'clinica', 'pos', 'ticket', 'landing', 'servicios'],
-    a: 'Ecommerce, gimnasios, turneros, landing pro, e-ticketera, gastronomía, clínica médica y sistema POS. Cada uno viene en tres tamaños: empezás con lo que necesitás hoy y escalás cuando haga falta.',
+    a: 'Hacemos sistemas a medida y automatizaciones, y además tenemos sistemas listos para usar: ecommerce, gimnasios, turneros, landing pro, e-ticketera, gastronomía, clínica médica y sistema POS. Cada uno viene en tres tamaños: empezás con lo que necesitás hoy y escalás cuando haga falta.',
     go: { id: 'planes', label: 'Ver los planes' },
   },
   {
@@ -171,21 +185,21 @@ function prefersReducedMotion() {
 /* ── Visuales de cada paso (se re-montan al cambiar de paso para repetir la animación) ── */
 function VisualElegir() {
   const [sel, setSel] = React.useState(0)
-  const msg = `Hola, me interesa un sistema de ${SOLUCIONES[sel].toLowerCase()} y quiero coordinar la videollamada.`
+  const op = OPCIONES[sel]
   return (
     <div className="tv tv-pick">
-      <div className="tv-label">Tocá una solución</div>
+      <div className="tv-label">Tocá lo que necesitás</div>
       <div className="tv-chips">
-        {SOLUCIONES.map((s, i) => (
-          <button key={s} type="button" className={`tv-chip${i === sel ? ' on' : ''}`} onClick={() => setSel(i)}>
-            {s}
+        {OPCIONES.map((o, i) => (
+          <button key={o.label} type="button" className={`tv-chip${i === sel ? ' on' : ''}`} onClick={() => setSel(i)}>
+            {o.label}
           </button>
         ))}
       </div>
-      <div className="tv-bubble" key={sel}>{msg}</div>
+      <div className="tv-bubble" key={sel}>{op.msg}</div>
       <a
         className="btn btn-ghost tv-wa"
-        href={`${WHATSAPP_URL}?text=${encodeURIComponent(msg)}`}
+        href={`${WHATSAPP_URL}?text=${encodeURIComponent(op.msg)}`}
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -384,7 +398,7 @@ export function Tutorial() {
         eyebrow="02 — Cómo trabajamos"
         title="Así trabajamos,"
         titleEm="paso a paso"
-        lead="De la primera videollamada a tu sistema andando en dos semanas. Tocá cada paso para verlo en acción."
+        lead="De la primera videollamada a tu sistema andando, con tu demo lista en 2 días. Tocá cada paso para verlo en acción."
       />
 
       <Reveal as="div" className="tut-stage">
