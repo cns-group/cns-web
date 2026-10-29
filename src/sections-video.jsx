@@ -133,13 +133,12 @@ function Player({ src, poster, title }) {
   )
 }
 
-export function VideoSection() {
+export function HeroVideo() {
   const { src, poster, title } = HERO_VIDEO
   if (!src && !import.meta.env.DEV) return null
 
   return (
-    <section className="sec video-sec" id="video" aria-label={title}>
-      <Reveal as="div" className="video-frame">
+    <Reveal as="div" className="video-frame hero-media" id="video">
         {!src ? (
           <div className="video-empty">
             <span className="video-play" aria-hidden="true">▶</span>
@@ -157,7 +156,6 @@ export function VideoSection() {
         ) : (
           <Player src={src} poster={poster} title={title} />
         )}
-      </Reveal>
-    </section>
+    </Reveal>
   )
 }

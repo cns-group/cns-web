@@ -2,7 +2,6 @@ import React from 'react'
 import { COPY } from './copy'
 import { Nav, Hero } from './sections-top'
 import { Tutorial } from './sections-tutorial'
-import { VideoSection } from './sections-video'
 import { Plans } from './sections-plans'
 import { Work, Quotes, Contact, Footer } from './sections-bot'
 import { scrollToSection, sectionClick } from './scroll'
@@ -88,7 +87,6 @@ export default function App() {
       <main id="main">
         <ChapterRail />
         <Hero c={c} onSection={scrollToSection} />
-        <VideoSection />
         <Tutorial />
         <Tagline label="Nuestra mirada" lines={['El software bien hecho no es un gasto.', 'Es la base sobre la que tu negocio crece.']} />
         <Plans c={c} lang={t.lang} activeTab={planTab} onTabChange={handlePlanTabChange} />

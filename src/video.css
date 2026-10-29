@@ -1,8 +1,7 @@
-.video-sec { padding-top: 0; display: flex; justify-content: center; }
 .video-frame {
   position: relative;
   aspect-ratio: 16 / 9;
-  width: min(100%, 720px);
+  width: 100%;
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   overflow: hidden;
@@ -96,3 +95,10 @@
   .vp-bar { left: 8px; right: 8px; bottom: 8px; gap: 6px; }
 }
 @media (prefers-reduced-motion: reduce) { .vp-big span { animation: none; } }
+
+/* En el hero: copy a la izquierda, video a la derecha (en celular, el video va debajo). */
+.hero .hero-inner:has(.hero-media) { grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: clamp(32px, 4vw, 64px); align-items: center; }
+.hero .hero-media { margin-top: 0; }
+@media (max-width: 980px) {
+  .hero .hero-inner:has(.hero-media) { grid-template-columns: 1fr; gap: 36px; }
+}

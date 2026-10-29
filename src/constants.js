@@ -27,7 +27,7 @@ export function whatsappCustomDevUrl(lang = 'es') {
  * o un link de YouTube/Vimeo en formato embed.
  */
 export const HERO_VIDEO = {
-  src: '',
+  src: '/HEROVIDEO.mp4',
   poster: '',
   title: 'Así trabajamos en CNS',
 }

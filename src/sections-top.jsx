@@ -2,6 +2,7 @@ import React from 'react'
 import { sectionClick } from './scroll'
 import { WHATSAPP_URL } from './constants'
 import { Reveal } from './reveal'
+import { HeroVideo } from './sections-video'
 
 export function Nav({ c, onSection }) {
   const [open, setOpen] = React.useState(false)
@@ -168,6 +169,8 @@ export function Hero({ c, onSection }) {
             ))}
           </Reveal>
         </div>
+
+        <HeroVideo />
 
         <div className="hero-scroll" aria-hidden="true">Scrolleá para recorrer</div>
       </div>
