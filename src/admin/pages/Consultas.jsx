@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { api, ETAPAS, fmtDate, fmtDateTime, fmtMoney } from '../api'
 import { Badge, Btn, EmptyState, ErrorBox, Field, Modal, PageHeader, Select } from '../components'
+import { CoachVentas, PanoramaVentas } from './CoachVentas'
 
 const POLL_MS = 15000
 const SIN_LEIDOS = { total: 0, consultas: 0, porConsulta: {} }
@@ -26,6 +27,7 @@ export function ConsultasPage() {
   const [onlyUnread, setOnlyUnread] = React.useState(false)
   const [openId, setOpenId] = React.useState(null)
   const [creating, setCreating] = React.useState(false)
+  const [panorama, setPanorama] = React.useState(false)
   const [dragId, setDragId] = React.useState(null)
   const [overStage, setOverStage] = React.useState(null)
 
@@ -81,6 +83,9 @@ export function ConsultasPage() {
         subtitle="Cada persona que escribe por WhatsApp (o que cargás a mano) entra al embudo. Arrastrá las tarjetas entre etapas."
         actions={
           <>
+            <Btn variant="ghost" onClick={() => setPanorama(true)}>
+              Panorama de ventas
+            </Btn>
             <Link className="admin-btn admin-btn--ghost" to="/admin/whatsapp">
               Números de WhatsApp
             </Link>
@@ -200,6 +205,15 @@ export function ConsultasPage() {
           onClose={() => setOpenId(null)}
           onChanged={load}
           unread={unread.porConsulta[openId] || 0}
+        />
+      )}
+      {panorama && (
+        <PanoramaVentas
+          onClose={() => setPanorama(false)}
+          onAbrir={(id) => {
+            setPanorama(false)
+            setOpenId(id)
+          }}
         />
       )}
       <NuevaConsulta
@@ -465,10 +479,27 @@ function Ficha({ id, onClose, onChanged, unread }) {
               >
                 Historial y notas
               </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={tab === 'coach'}
+                className={tab === 'coach' ? 'on' : ''}
+                onClick={() => setTab('coach')}
+              >
+                Coach de ventas
+              </button>
             </div>
 
             {tab === 'chat' && c.telefono && <Chat consulta={c} onSent={() => { cargar(); onChanged() }} />}
             {tab === 'chat' && !c.telefono && <EmptyState>Cargá un teléfono para chatear por WhatsApp.</EmptyState>}
+
+            {tab === 'coach' && (
+              <CoachVentas
+                consultaId={id}
+                etapaActual={c.etapa}
+                onUsarEtapa={(etapa) => setForm((f) => ({ ...f, etapa }))}
+              />
+            )}
 
             {tab === 'historial' && (
               <div className="crm-history">

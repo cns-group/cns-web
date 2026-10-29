@@ -112,6 +112,13 @@ export const api = {
   },
   ai: {
     status: () => request('/ai/status'),
+    ventas: {
+      last: (consultaId) => request(`/ai/ventas/consultas/${consultaId}`),
+      analyze: (consultaId, modelo) =>
+        request(`/ai/ventas/consultas/${consultaId}/analizar`, { method: 'POST', body: JSON.stringify(modelo ? { modelo } : {}) }),
+      panorama: (modelo) =>
+        request('/ai/ventas/panorama', { method: 'POST', body: JSON.stringify(modelo ? { modelo } : {}) }),
+    },
     chat: (mensajes, modelo) =>
       request('/ai/chat', { method: 'POST', body: JSON.stringify({ mensajes, ...(modelo ? { modelo } : {}) }) }),
   },

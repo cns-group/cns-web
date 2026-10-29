@@ -247,3 +247,38 @@
 @keyframes aiDot { 50% { transform: translateY(-4px); opacity: .5; } }
 .ai-gasto { margin: 14px 0 0; }
 @media (prefers-reduced-motion: reduce) { .ai-pensando i { animation: none; } }
+
+/* ── Coach de ventas ────────────────────────────────────────────────────── */
+.coach { display: grid; gap: 18px; }
+.coach-hd { display: flex; justify-content: space-between; gap: 18px; align-items: flex-start; flex-wrap: wrap; }
+.coach-hd p { margin: 0; max-width: 460px; font-size: 14px; line-height: 1.45; }
+.coach-body { display: grid; gap: 18px; }
+.coach-top { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.coach-prob { display: grid; gap: 4px; font-size: 14px; min-width: 150px; }
+.coach-prob i { display: block; height: 6px; border-radius: 3px; background: var(--admin-line); position: relative; overflow: hidden; }
+.coach-prob i::after { content: ''; position: absolute; inset: 0 auto 0 0; width: var(--p); background: var(--admin-accent); border-radius: 3px; animation: adminGrow .9s cubic-bezier(.16, 1, .3, 1) both; transform-origin: left; }
+.coach-resumen { margin: 0; line-height: 1.5; font-size: 17px; }
+.coach-sec h4, .coach-cierre h4 { margin: 0 0 8px; font-size: 15px; letter-spacing: .08em; color: var(--admin-muted); }
+.coach-sec p, .coach-cierre p { margin: 0; line-height: 1.5; }
+.coach-sec ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; line-height: 1.4; }
+.coach-sec--ok li::marker { color: var(--admin-success); }
+.coach-sec--riesgo li::marker { color: var(--admin-danger); }
+.coach-cierre { padding: 16px 18px; border: 1px solid var(--admin-accent); border-radius: 12px; background: color-mix(in srgb, var(--admin-accent) 9%, var(--admin-surface)); }
+.coach-cierre h4 { color: var(--admin-accent); }
+.coach-pasos { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; counter-reset: paso; }
+.coach-pasos li { counter-increment: paso; position: relative; padding: 12px 14px 12px 46px; border: 1px solid var(--admin-line); border-radius: 12px; background: var(--admin-surface-2); display: grid; gap: 4px; }
+.coach-pasos li::before { content: counter(paso); position: absolute; left: 12px; top: 12px; width: 24px; height: 24px; border-radius: 50%; background: var(--admin-accent); color: var(--admin-bg); display: grid; place-items: center; font-size: 14px; }
+.coach-pasos small { color: var(--admin-muted); line-height: 1.35; }
+.coach-cuando { color: var(--admin-accent); font-size: 13px; letter-spacing: .06em; text-transform: uppercase; }
+.coach-objs { display: grid; gap: 10px; }
+.coach-objs article { padding: 12px 14px; border: 1px solid var(--admin-line); border-radius: 12px; display: grid; gap: 6px; }
+.coach-objs p { color: var(--admin-muted); }
+.coach-etapa { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 12px 14px; border: 1px dashed var(--admin-line); border-radius: 12px; }
+.coach-pie { display: block; }
+.coach-prioridades { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.coach-prioridades button { width: 100%; display: flex; gap: 14px; text-align: left; align-items: flex-start; padding: 12px 14px; border: 1px solid var(--admin-line); border-radius: 12px; background: var(--admin-surface-2); color: inherit; font: inherit; cursor: pointer; transition: border-color .2s, transform .2s; }
+.coach-prioridades button:hover { border-color: var(--admin-accent); transform: translateY(-2px); }
+.coach-prioridades span:last-child { display: grid; gap: 4px; }
+.coach-prioridades small { color: var(--admin-muted); line-height: 1.35; }
+.coach-prioridades em { font-style: normal; color: var(--admin-accent); }
+.coach-n { flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--admin-accent); color: var(--admin-bg); display: grid; place-items: center; font-size: 15px; }
