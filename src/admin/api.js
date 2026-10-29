@@ -45,6 +45,9 @@ export const api = {
     }),
   me: () => request('/auth/me'),
   stats: () => request('/crm/stats'),
+  analytics: {
+    embudo: (dias = 28) => request(`/analytics/embudo?dias=${dias}`),
+  },
   clients: {
     list: () => request('/clients'),
     get: (id) => request(`/clients/${id}`),

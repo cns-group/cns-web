@@ -8,6 +8,7 @@ const NAV = [
   { to: '/admin/planes', label: 'Planes' },
   { to: '/admin/pagos', label: 'Pagos' },
   { to: '/admin/demos', label: 'Demos' },
+  { to: '/admin/embudo', label: 'Embudo' },
 ]
 
 export function AdminLayout() {

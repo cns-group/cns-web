@@ -9,6 +9,7 @@ import { ClientDetailPage } from './pages/ClientDetail'
 import { PlansPage } from './pages/Plans'
 import { PaymentsPage } from './pages/Payments'
 import { DemosPage } from './pages/Demos'
+import { EmbudoPage } from './pages/Embudo'
 import './admin.css'
 
 export default function AdminApp() {
@@ -30,6 +31,7 @@ export default function AdminApp() {
           <Route path="planes" element={<PlansPage />} />
           <Route path="pagos" element={<PaymentsPage />} />
           <Route path="demos" element={<DemosPage />} />
+          <Route path="embudo" element={<EmbudoPage />} />
         </Route>
         <Route path="*" element={<Navigate to="/admin" replace />} />
       </Routes>

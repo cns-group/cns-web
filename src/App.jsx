@@ -11,6 +11,7 @@ import { TWEAK_DEFAULTS, applyTheme } from './theme-config'
 import { startParallax } from './reveal'
 import { WorldCanvas } from './world-canvas'
 import { Tagline } from './tagline'
+import { startLandingTracking } from './analytics'
 
 function ChapterRail() {
   const chapters = [
@@ -48,6 +49,8 @@ export default function App() {
   React.useEffect(() => { applyTheme(t) }, [t])
 
   React.useEffect(() => startParallax(), [])
+
+  React.useEffect(() => startLandingTracking(), [])
 
   React.useEffect(() => {
     const fromPath = parsePlanTabFromPath()
