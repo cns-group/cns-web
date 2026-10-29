@@ -11,10 +11,6 @@ const AUTOPLAY_MS = 8000
 const OPCIONES = [
   { label: 'Sistema a medida', msg: 'Hola, quiero un sistema a medida para mi negocio y me gustaría coordinar una videollamada.' },
   { label: 'Automatizar procesos', msg: 'Hola, quiero automatizar procesos de mi negocio (tareas manuales, planillas, avisos) y coordinar una videollamada.' },
-  { label: 'Ecommerce', msg: 'Hola, me interesa un sistema de ecommerce y quiero coordinar la videollamada.' },
-  { label: 'Turnero', msg: 'Hola, me interesa un turnero y quiero coordinar la videollamada.' },
-  { label: 'Gimnasio', msg: 'Hola, me interesa un sistema para gimnasio y quiero coordinar la videollamada.' },
-  { label: 'Gastronomía', msg: 'Hola, me interesa un sistema de gastronomía y quiero coordinar la videollamada.' },
 ]
 
 const STEPS = [
