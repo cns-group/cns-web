@@ -160,14 +160,6 @@ export function Hero({ c, onSection }) {
               {c.nav.ctaGhost}
             </a>
           </Reveal>
-          <Reveal as="dl" index={4} className="hero-stats">
-            {c.metrics.items.slice(0, 2).map((metric) => (
-              <div key={metric.l}>
-                <dt>{metric.l}</dt>
-                <dd>{metric.n}<span>{metric.u}</span></dd>
-              </div>
-            ))}
-          </Reveal>
         </div>
 
         <HeroVideo />
