@@ -3,7 +3,7 @@ import { COPY } from './copy'
 import { Nav, Hero, Marquee } from './sections-top'
 import { Tutorial } from './sections-tutorial'
 import { Plans } from './sections-plans'
-import { Work, Quotes, Contact, Footer, Metrics } from './sections-bot'
+import { Work, Quotes, Contact, Footer } from './sections-bot'
 import { scrollToSection, sectionClick } from './scroll'
 import { WhatsAppFloat } from './whatsapp-float'
 import { parsePlanTabFromPath, setPlanPath } from './plan-routes'
@@ -88,7 +88,6 @@ export default function App() {
         <ChapterRail />
         <Hero c={c} onSection={scrollToSection} />
         <Marquee items={c.marquee} />
-        <Metrics c={c} />
         <Tutorial />
         <Tagline label="Nuestra mirada" lines={['El software bien hecho no es un gasto.', 'Es la base sobre la que tu negocio crece.']} />
         <Plans c={c} lang={t.lang} activeTab={planTab} onTabChange={handlePlanTabChange} />
