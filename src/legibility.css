@@ -16,3 +16,8 @@
 .hero-scroll { font-size: 14px; }
 .browser-url { font-size: 14px; }
 .plans-tab .tnum { font-size: 14px; }
+
+/* Boton "Ver el sistema en detalle": es el paso que lleva al sistema funcionando */
+.plan-detail-cta { box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 55%, transparent); animation: detailPulse 2.6s ease-out infinite; }
+@keyframes detailPulse { 0% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 50%, transparent); } 100% { box-shadow: 0 0 0 16px transparent; } }
+@media (prefers-reduced-motion: reduce) { .plan-detail-cta { animation: none; } }

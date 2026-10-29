@@ -204,7 +204,7 @@ export function Plans({ c, lang, activeTab = 'ecommerce', onTabChange }) {
             <div className="plans-intro-side">
               <p>{tab.lead}</p>
               {tab.landing && (
-                <a href={tab.landing} target="_blank" rel="noopener noreferrer" className="btn btn-ghost">
+                <a href={tab.landing} target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-lg plan-detail-cta">
                   {p.landingCta}
                   <svg className="arr" width="12" height="12" viewBox="0 0 11 11" fill="none" aria-hidden="true">
                     <path d="M2 9L9 2M9 2H3.5M9 2V7.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />

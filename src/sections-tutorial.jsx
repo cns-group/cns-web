@@ -23,16 +23,16 @@ const STEPS = [
     tab: 'Contanos',
     when: 'Día 1',
     title: 'Nos contás qué querés resolver',
-    body: 'Un sistema a medida, automatizar lo que hoy hacés a mano, o arrancar con uno de nuestros sistemas listos. Nos escribís por WhatsApp, sin formularios: el mensaje ya sale armado.',
+    body: 'Un sistema a medida, automatizar lo que hoy hacés a mano, o arrancar con uno de nuestros sistemas listos. Nos escribís por WhatsApp y te ofrecemos una auditoría de 15 minutos de tu negocio, totalmente gratis.',
     ask: ['automatizar', 'soluciones'],
   },
   {
     id: 'kickoff',
-    tab: 'Kickoff',
-    when: 'Día 1',
-    title: 'Nos juntamos por videollamada',
-    body: 'Te escuchamos, definimos juntos qué querés hacer y armamos tu demo personalizada, que ves en 2 días. Todo remoto, estés donde estés.',
-    ask: ['remoto', 'precio'],
+    tab: 'Auditoría gratis',
+    when: 'Día 1 · 15 minutos',
+    title: 'Auditoría gratis de tu negocio',
+    body: 'Una videollamada de 15 minutos, totalmente gratis, para revisar cómo trabajás hoy y qué se puede mejorar o automatizar. Con eso armamos tu demo personalizada, que ves en 2 días. Todo remoto, estés donde estés.',
+    ask: ['auditoria', 'precio'],
   },
   {
     id: 'demo',
@@ -68,6 +68,13 @@ const KB = [
     kw: ['cuanto sale', 'precio', 'cuesta', 'costo', 'valor', 'presupuesto', 'abono', 'mensual', 'cobran', 'tarifa'],
     a: 'Cada solución tiene un precio distinto según el plan que elijas. Todos suman un costo de configuración anual de 25.000 pesos, aparte de nuestro trabajo. Las comisiones de las pasarelas de pago no están incluidas.',
     go: { id: 'planes', label: 'Ver los planes' },
+  },
+  {
+    id: 'auditoria',
+    q: '¿Qué es la auditoría gratis de 15 minutos?',
+    kw: ['auditoria', 'gratis', 'gratuit', 'sin costo', 'reunion', 'revisar', 'diagnostico', '15 minutos'],
+    a: 'Es una videollamada de 15 minutos, totalmente gratis, donde revisamos tu negocio: cómo trabajás hoy y qué se puede mejorar o automatizar. Escribinos por WhatsApp y la agendamos.',
+    go: { id: 'contacto', label: 'Pedir mi auditoría' },
   },
   {
     id: 'plazo',
@@ -130,8 +137,8 @@ const KB = [
     id: 'empezar',
     q: '¿Cómo empiezo?',
     kw: ['empezar', 'empiezo', 'arrancar', 'contratar', 'primer paso', 'contacto', 'contactar', 'quiero', 'hablar', 'escribir', 'whatsapp'],
-    a: 'Elegís tu plan en la sección Planes y te abrimos el chat de WhatsApp con el mensaje listo. Respondemos en el día y coordinamos la videollamada.',
-    go: { id: 'planes', label: 'Elegir mi plan' },
+    a: 'Escribinos por WhatsApp contando qué necesitás. Respondemos en el día y agendamos una auditoría gratis de 15 minutos de tu negocio, por videollamada.',
+    go: { id: 'contacto', label: 'Pedir mi auditoría gratis' },
   },
   {
     id: 'cancelar',
@@ -210,9 +217,10 @@ function VisualElegir() {
 }
 
 function VisualKickoff() {
-  const items = ['A qué se dedica tu negocio', 'Cómo cobrás hoy', 'Quién va a usar el sistema', 'Qué querés ver en tu demo']
+  const items = ['Cómo trabajás hoy', 'Qué tareas te llevan más tiempo', 'Qué se puede automatizar', 'Qué querés ver en tu demo']
   return (
     <div className="tv tv-call">
+      <div className="tv-badge">Gratis · 15 min</div>
       <div className="tv-tiles">
         <div className="tv-tile"><span className="tv-avatar">VOS</span><i className="tv-live" /></div>
         <div className="tv-tile"><span className="tv-avatar tv-avatar--cns">CNS</span><i className="tv-live" /></div>

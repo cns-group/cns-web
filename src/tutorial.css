@@ -246,3 +246,14 @@
   }
   .tv-live, .tut-typing i { animation: none; }
 }
+
+.tv-badge {
+  align-self: flex-start;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: var(--accent-2);
+  color: #fff;
+  font-size: 15px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
