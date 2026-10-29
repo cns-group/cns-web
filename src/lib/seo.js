@@ -1,4 +1,4 @@
-import { HOME, SISTEMAS } from '../../seo/seo.config.mjs'
+import { HOME, IA, SISTEMAS } from '../../seo/seo.config.mjs'
 
 /**
  * Mantiene el título y la descripción de la pestaña en sintonía con lo que se está viendo
@@ -16,3 +16,6 @@ export function metaForTab(tabId) {
   const s = SISTEMAS.find((x) => x.tab === tabId)
   return s ? { title: s.title, description: s.description } : { title: HOME.title, description: HOME.description }
 }
+
+/** Metadatos de la página de sistemas de IA. */
+export const iaMeta = { title: IA.title, description: IA.description }

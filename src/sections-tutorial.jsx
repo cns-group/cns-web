@@ -123,6 +123,13 @@ const KB = [
     go: { id: 'contacto', label: 'Contanos tu caso' },
   },
   {
+    id: 'ia',
+    q: '¿Hacen sistemas con inteligencia artificial?',
+    kw: ['ia', 'inteligencia artificial', 'chatbot', 'asistente', 'inteligente', 'gpt', 'bot'],
+    a: 'Sí. Sumamos IA a los sistemas: asistentes de WhatsApp que responden consultas frecuentes, automatización de tareas repetitivas, resúmenes del negocio y clasificación de consultas. Lo vemos en la auditoría gratis de 15 minutos.',
+    go: { id: 'ia', label: 'Ver sistemas de IA' },
+  },
+  {
     id: 'soluciones',
     q: '¿Qué sistemas hacen?',
     kw: ['que hacen', 'sistemas', 'soluciones', 'ecommerce', 'tienda', 'turnero', 'turnos', 'gimnasio', 'gym', 'restaurante', 'gastro', 'clinica', 'pos', 'ticket', 'landing', 'servicios'],

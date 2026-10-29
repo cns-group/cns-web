@@ -56,12 +56,14 @@ export const BENEFICIOS = [
 /** Sistemas listos (SaaS). `slug` es la URL pública; `tab` el id de pestaña de la app. */
 export const SISTEMAS = [
   {
-    slug: 'ecommerce',
+    slug: 'tienda-online',
+    oldSlug: 'ecommerce',
     tab: 'ecommerce',
+    heading: 'Software para tienda online',
     nombre: 'Ecommerce',
-    title: 'Tienda online para pymes: catálogo, carrito y pagos | Código Norte',
+    title: 'Software para tienda online: catálogo, carrito y pagos | Código Norte',
     description: 'Sistema de ecommerce con tu marca: catálogo, carrito, Mercado Pago y panel de pedidos y stock. Vendé online 24/7 y cobrá directo en tu cuenta.',
-    h1: 'Sistema de ecommerce para pymes',
+    h1: 'Software de ecommerce para tu tienda online',
     parrafos: [
       'Tienda propia con catálogo, carrito y pasarela de pago integrada. Es tu plataforma: lleva tu logo y tus colores, y cobrás con tu propio Mercado Pago, sin comisión nuestra.',
       'Incluye panel de pedidos, stock y envíos, y soporte por WhatsApp. Empezás con lo que necesitás hoy y escalás cuando haga falta.',
@@ -70,12 +72,14 @@ export const SISTEMAS = [
     tipo: 'Ecommerce',
   },
   {
-    slug: 'gimnasios',
+    slug: 'software-para-gimnasios',
+    oldSlug: 'gimnasios',
     tab: 'gym',
+    heading: 'Software para gimnasios',
     nombre: 'Gimnasios',
-    title: 'Sistema para gimnasios: socios, cuotas y acceso QR | Código Norte',
+    title: 'Software para gimnasios: socios, cuotas y acceso QR | Código Norte',
     description: 'Software para gimnasios, estudios, pilates y crossfit: débito automático, control de acceso por QR, clases con cupo y métricas de retención.',
-    h1: 'Sistema de gestión para gimnasios',
+    h1: 'Software de gestión para gimnasios',
     parrafos: [
       'Débito automático, control de acceso por QR, clases con cupo y métricas de retención. Para gimnasios, estudios, pilates y crossfit.',
       'Cada gimnasio tiene su marca, sus socios, sus cuotas y sus rutinas en un solo lugar.',
@@ -84,24 +88,28 @@ export const SISTEMAS = [
     tipo: 'Gestión de gimnasios',
   },
   {
-    slug: 'turneros',
+    slug: 'sistema-de-turnos',
+    oldSlug: 'turneros',
     tab: 'queue',
+    heading: 'Sistema de turnos online',
     nombre: 'Turneros',
-    title: 'Turnero online para profesionales y consultorios | Código Norte',
+    title: 'Sistema de turnos online para profesionales y consultorios | Código Norte',
     description: 'Sistema de turnos con tu marca personal: reservas 24/7, agenda del equipo y cobros online para profesionales, clínicas, consultorios y barberías.',
-    h1: 'Turnero online con tu propia marca',
+    h1: 'Sistema de turnos online con tu propia marca',
     parrafos: [
       'Para profesionales particulares, clínicas, consultorios y barberías. Automatiza tus reservas y funciona 24/7, con tu marca y cobros online.',
     ],
     tipo: 'Sistema de turnos',
   },
   {
-    slug: 'gastronomia',
+    slug: 'software-para-restaurantes',
+    oldSlug: 'gastronomia',
     tab: 'gastro',
+    heading: 'Software para restaurantes y cafeterías',
     nombre: 'Gastronomía',
-    title: 'Sistema para restaurantes y cafeterías: mozo, cocina y caja | Código Norte',
+    title: 'Software para restaurantes y cafeterías: mozo, cocina y caja | Código Norte',
     description: 'Software gastronómico: QR para mesas y mostrador, pantalla de pedidos en cocina, seguimiento de delivery, stock por insumo y arqueo de caja.',
-    h1: 'Sistema para restaurantes y cafeterías',
+    h1: 'Software para restaurantes y cafeterías',
     parrafos: [
       'Mozo, cocina, delivery y caja en un mismo sistema: QR para mesas y mostrador, pantalla de pedidos en cocina, seguimiento de delivery, stock por insumo y arqueo de caja.',
     ],
@@ -109,20 +117,24 @@ export const SISTEMAS = [
     tipo: 'Gestión gastronómica',
   },
   {
-    slug: 'clinica-medica',
+    slug: 'software-para-clinicas',
+    oldSlug: 'clinica-medica',
     tab: 'clinic',
+    heading: 'Software para clínicas y consultorios',
     nombre: 'Clínica médica',
-    title: 'Software para clínicas y consultorios médicos | Código Norte',
+    title: 'Software para clínicas y consultorios: historia clínica y turnos | Código Norte',
     description: 'MediCore: turnos, historia clínica, telemedicina, sala de espera, portal del paciente y facturación con obras sociales para clínicas y médicos.',
-    h1: 'Sistema para clínicas y médicos particulares',
+    h1: 'Software para clínicas y médicos particulares',
     parrafos: [
       'MediCore reúne agenda, historia clínica y telemedicina: turnos, sala de espera, portal del paciente y facturación con obras sociales.',
     ],
     tipo: 'Gestión de clínicas',
   },
   {
-    slug: 'pos',
+    slug: 'sistema-pos',
+    oldSlug: 'pos',
     tab: 'pos',
+    heading: 'Sistema POS para tu negocio',
     nombre: 'Sistema POS',
     title: 'Sistema POS: inventario, facturación y cobro | Código Norte',
     description: 'Sistema de gestión interna para tu negocio: inventario, facturación y cobro en un solo lugar, hecho a la medida de cómo vendés.',
@@ -132,17 +144,35 @@ export const SISTEMAS = [
   },
 ]
 
+/** Página de sistemas de IA. Su contenido visible está en src/sections-ia.jsx: mantenerlos iguales. */
+export const IA = {
+  slug: 'sistemas-de-ia',
+  nombre: 'Sistemas de IA',
+  title: 'Sistemas de IA para pymes: asistentes y automatización | Código Norte',
+  description:
+    'Sistemas de inteligencia artificial a medida para tu negocio: asistente de WhatsApp, automatización de tareas repetitivas y reportes. Auditoría gratis de 15 minutos.',
+  h1: 'Sistemas de IA para pymes',
+  intro:
+    'Sumamos inteligencia artificial a los sistemas que construimos para que tu negocio atienda más y trabaje menos a mano. Empezamos por una auditoría gratis de 15 minutos para ver dónde tiene sentido usarla.',
+  items: [
+    ['Asistente de WhatsApp', 'Responde las consultas frecuentes de tus clientes a toda hora y deriva a una persona cuando hace falta.'],
+    ['Automatización de tareas repetitivas', 'Cargar pedidos, mandar recordatorios y avisos, pasar datos de un lado a otro: lo que hoy hacés a mano lo hace el sistema.'],
+    ['Resúmenes y reportes del negocio', 'Convierte tus datos (ventas, turnos, socios) en resúmenes claros para decidir mejor.'],
+    ['Clasificación de consultas', 'Ordena lo que te escriben por tema y prioridad, para que atiendas primero lo que importa.'],
+  ],
+}
+
 export const HOME = {
   path: '/',
-  title: 'Software a medida y automatización para pymes | Código Norte',
+  title: 'Software a medida y sistemas de IA para pymes | Código Norte Soluciones',
   description:
-    'Diseñamos sistemas a medida y automatizamos procesos para pymes, 100% remoto. Auditoría gratis de 15 minutos y tu demo en 2 días. Ecommerce, turneros, gimnasios y más.',
+    'Software a medida, sistemas de IA y automatización de procesos para pymes, 100% remoto. Auditoría gratis de 15 minutos y tu demo en 2 días. Software para gimnasios, restaurantes, clínicas y tiendas online.',
   h1: 'Software a medida. Remoto, de punta a punta.',
 }
 
 export const LLMS = {
   summary:
-    'Código Norte Soluciones (CNS) es una consultora remota argentina que diseña y construye software a medida y automatiza procesos para pymes, y ofrece sistemas listos para usar (ecommerce, turneros, gimnasios, gastronomía, clínicas, POS).',
+    'Código Norte Soluciones (CNS) es una consultora remota argentina que diseña y construye software a medida, sistemas de inteligencia artificial y automatización de procesos para pymes, y ofrece software listo para usar: para gimnasios, restaurantes y cafeterías, clínicas, tiendas online, sistemas de turnos y POS.',
   notes: [
     'Atiende 100% en forma remota (videollamada y WhatsApp), desde Argentina.',
     'Ofrece una auditoría gratuita de 15 minutos del negocio y una demo personalizada en 2 días.',

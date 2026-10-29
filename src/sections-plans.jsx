@@ -197,7 +197,7 @@ export function Plans({ c, lang, activeTab = 'ecommerce', onTabChange }) {
         <div className="plans-content" role="tabpanel" id={panelId} aria-labelledby={`tab-${active}`}>
           <div className="plans-intro">
             <h3>
-              {tab.name}
+              {tab.heading || tab.name}
               <span className="title-em">· {tab.intro}</span>
             </h3>
             <div className="plans-intro-side">

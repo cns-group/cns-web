@@ -1,0 +1,5 @@
+.ia-intro { max-width: 62ch; margin: 0 0 28px; color: var(--muted); font-size: 19px; line-height: 1.5; }
+.ia-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.ia-grid .tut-why-card h3 { font-size: 23px; line-height: 1.15; margin: 4px 0 0; }
+.ia-cta { margin-top: 28px; }
+@media (max-width: 880px) { .ia-grid { grid-template-columns: 1fr; } }

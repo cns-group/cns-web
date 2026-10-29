@@ -2,6 +2,7 @@ import React from 'react'
 import { COPY } from './copy'
 import { Nav, Hero } from './sections-top'
 import { Tutorial } from './sections-tutorial'
+import { AiSection } from './sections-ia'
 import { Plans } from './sections-plans'
 import { Work, Quotes, Contact, Footer } from './sections-bot'
 import { scrollToSection, sectionClick } from './scroll'
@@ -12,7 +13,7 @@ import { startParallax } from './reveal'
 import { WorldCanvas } from './world-canvas'
 import { Tagline } from './tagline'
 import { startLandingTracking } from './analytics'
-import { metaForTab, setPageMeta } from './lib/seo'
+import { iaMeta, metaForTab, setPageMeta } from './lib/seo'
 
 function ChapterRail() {
   const chapters = [
@@ -53,12 +54,18 @@ export default function App() {
 
   // Título y descripción de la pestaña acordes al sistema que se está mirando (/ecommerce, /gimnasios…).
   React.useEffect(() => {
+    const onIaPath = window.location.pathname.replace(/\/+$/, '') === '/sistemas-de-ia'
     const onPlanPath = Boolean(parsePlanTabFromPath())
-    const m = metaForTab(onPlanPath ? planTab : null)
+    const m = onIaPath ? iaMeta : metaForTab(onPlanPath ? planTab : null)
     setPageMeta(m.title, m.description)
   }, [planTab])
 
   React.useEffect(() => startLandingTracking(), [])
+
+  React.useEffect(() => {
+    if (window.location.pathname.replace(/\/+$/, '') !== '/sistemas-de-ia') return
+    requestAnimationFrame(() => requestAnimationFrame(() => scrollToSection('ia')))
+  }, [])
 
   React.useEffect(() => {
     const fromPath = parsePlanTabFromPath()
@@ -96,6 +103,7 @@ export default function App() {
         <ChapterRail />
         <Hero c={c} onSection={scrollToSection} />
         <Tutorial />
+        <AiSection />
         <Tagline label="Nuestra mirada" lines={['El software bien hecho no es un gasto.', 'Es la base sobre la que tu negocio crece.']} />
         <Plans c={c} lang={t.lang} activeTab={planTab} onTabChange={handlePlanTabChange} />
         <Work c={c} />

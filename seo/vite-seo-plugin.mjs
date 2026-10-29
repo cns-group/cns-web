@@ -19,6 +19,7 @@ import {
   DEFAULT_IMAGE,
   DISALLOW,
   HOME,
+  IA,
   LLMS,
   PASOS,
   SHORT_BRAND,
@@ -66,6 +67,8 @@ export default function seoPlugin() {
     knowsAbout: [
       'Desarrollo de software a medida',
       'Automatización de procesos',
+      'Inteligencia artificial para pymes',
+      'Asistentes de WhatsApp con IA',
       'Ecommerce',
       'Sistemas de turnos',
       'Software para gimnasios',
@@ -80,6 +83,7 @@ export default function seoPlugin() {
     makesOffer: [
       { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Desarrollo de software a medida', description: 'Sistemas diseñados y construidos para la forma de trabajar de cada negocio.' } },
       { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Automatización de procesos', description: 'Tareas manuales (planillas, mensajes, cobros) pasadas a un sistema que las hace solo.' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: IA.nombre, url: abs(`/${IA.slug}`), description: IA.description } },
       { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Auditoría gratuita de 15 minutos', description: 'Videollamada para revisar el negocio y detectar qué se puede mejorar o automatizar.' }, price: '0', priceCurrency: 'ARS' },
       ...SISTEMAS.map((s) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: s.nombre, url: abs(`/${s.slug}`) } })),
     ],
@@ -101,7 +105,7 @@ export default function seoPlugin() {
     itemListElement: items.map((it, i) => ({ '@type': 'ListItem', position: i + 1, name: it.name, item: abs(it.path) })),
   })
 
-  const nav = `<nav>${[['/', 'Inicio'], ...SISTEMAS.map((s) => [`/${s.slug}`, s.nombre])]
+  const nav = `<nav>${[['/', 'Inicio'], [`/${IA.slug}`, IA.nombre], ...SISTEMAS.map((s) => [`/${s.slug}`, s.nombre])]
     .map(([href, label]) => `<a href="${esc(href)}">${esc(label)}</a>`)
     .join(' · ')} · <a href="${esc(CONTACT.whatsapp)}">WhatsApp</a></nav>`
 
@@ -112,6 +116,7 @@ export default function seoPlugin() {
       `<p>Agendá una llamada: auditoría gratis de 15 minutos de tu negocio y tu demo en 2 días.</p>` +
       `<h2>Así trabajamos, paso a paso</h2><ol>${PASOS.map(([t, d]) => `<li><strong>${esc(t)}.</strong> ${esc(d)}</li>`).join('')}</ol>` +
       `<h2>¿En qué te ayuda un sistema a medida?</h2>${BENEFICIOS.map(([q, a]) => `<h3>${esc(q)}</h3><p>${esc(a)}</p>`).join('')}` +
+      `<h2>${esc(IA.h1)}</h2><p>${esc(IA.intro)}</p><ul>${IA.items.map(([t, d]) => `<li><strong>${esc(t)}.</strong> ${esc(d)}</li>`).join('')}</ul>` +
       `<h2>Sistemas que ya están funcionando</h2><ul>${SISTEMAS.map((s) => `<li><a href="/${esc(s.slug)}">${esc(s.h1)}</a>: ${esc(s.description)}</li>`).join('')}</ul>` +
       `<h2>Ellos ya confiaron en nosotros</h2><ul>${CASOS.map((c) => `<li><a href="${esc(c.url)}">${esc(c.nombre)}</a>: ${esc(c.descripcion)}</li>`).join('')}</ul>` +
       `<h2>Contacto</h2><p>WhatsApp ${esc(CONTACT.phone)} · ${esc(CONTACT.email)}. Respondemos en el día.</p>` +
@@ -162,6 +167,33 @@ export default function seoPlugin() {
           areaServed: { '@type': 'Country', name: 'Argentina' },
         },
         breadcrumbs([{ name: 'Inicio', path: '/' }, { name: s.nombre, path: pagePath }]),
+      ],
+    }
+  }
+
+  function iaPage() {
+    const pagePath = `/${IA.slug}`
+    return {
+      path: pagePath,
+      title: IA.title,
+      description: IA.description,
+      body:
+        `<h1>${esc(IA.h1)}</h1><p>${esc(IA.intro)}</p>` +
+        `<ul>${IA.items.map(([t, d]) => `<li><strong>${esc(t)}.</strong> ${esc(d)}</li>`).join('')}</ul>` +
+        `<p>Escribinos por WhatsApp y coordinamos una auditoría gratis de 15 minutos de tu negocio: <a href="${esc(CONTACT.whatsapp)}">${esc(CONTACT.phone)}</a>.</p>` +
+        nav,
+      ld: [
+        {
+          '@context': 'https://schema.org',
+          '@type': 'Service',
+          name: IA.h1,
+          serviceType: 'Inteligencia artificial y automatización para pymes',
+          description: IA.description,
+          url: abs(pagePath),
+          provider: { '@id': abs('/#organization') },
+          areaServed: { '@type': 'Country', name: 'Argentina' },
+        },
+        breadcrumbs([{ name: 'Inicio', path: '/' }, { name: IA.nombre, path: pagePath }]),
       ],
     }
   }
@@ -237,7 +269,8 @@ Sitemap: ${abs('/sitemap.xml')}
 
 ## Páginas principales
 
-- [Inicio](${abs('/')}): software a medida, automatización y sistemas listos para pymes
+- [Inicio](${abs('/')}): software a medida, sistemas de IA, automatización y software listo para pymes
+- [${IA.nombre}](${abs(`/${IA.slug}`)}): ${IA.description}
 ${SISTEMAS.map((s) => `- [${s.nombre}](${abs(`/${s.slug}`)}): ${s.description}`).join('\n')}
 
 ## Casos
@@ -272,6 +305,12 @@ ${PASOS.map(([t, d], i) => `${i + 1}. ${t}: ${d}`).join('\n')}
 ## ¿En qué ayuda un sistema a medida?
 
 ${BENEFICIOS.map(([q, a]) => `### ${q}\n${a}`).join('\n\n')}
+
+## ${IA.nombre}
+
+${IA.intro}
+
+${IA.items.map(([t, d]) => `- ${t}: ${d}`).join('\n')}
 
 ## Sistemas listos para usar
 
@@ -337,7 +376,7 @@ ${LLMS.notes.map((n) => `- ${n}`).join('\n')}
       if (!fs.existsSync(tplPath)) return
       const template = fs.readFileSync(tplPath, 'utf8')
 
-      const pages = [homePage(), ...SISTEMAS.map(sistemaPage)]
+      const pages = [homePage(), iaPage(), ...SISTEMAS.map(sistemaPage)]
       for (const page of pages) {
         const html = renderPage(template, page)
         const file = page.path === '/' ? 'index.html' : `${page.path.slice(1)}.html`

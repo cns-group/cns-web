@@ -24,6 +24,36 @@
       "source": "/sistema-cafeteria",
       "destination": "/sistema-cafeteria/",
       "permanent": true
+    },
+    {
+      "source": "/ecommerce",
+      "destination": "/tienda-online",
+      "permanent": true
+    },
+    {
+      "source": "/gimnasios",
+      "destination": "/software-para-gimnasios",
+      "permanent": true
+    },
+    {
+      "source": "/turneros",
+      "destination": "/sistema-de-turnos",
+      "permanent": true
+    },
+    {
+      "source": "/gastronomia",
+      "destination": "/software-para-restaurantes",
+      "permanent": true
+    },
+    {
+      "source": "/clinica-medica",
+      "destination": "/software-para-clinicas",
+      "permanent": true
+    },
+    {
+      "source": "/pos",
+      "destination": "/sistema-pos",
+      "permanent": true
     }
   ],
   "rewrites": [
@@ -36,28 +66,32 @@
       "destination": "/sistema-cafeteria/app/index.html"
     },
     {
-      "source": "/ecommerce",
-      "destination": "/ecommerce.html"
+      "source": "/tienda-online",
+      "destination": "/tienda-online.html"
     },
     {
-      "source": "/gimnasios",
-      "destination": "/gimnasios.html"
+      "source": "/software-para-gimnasios",
+      "destination": "/software-para-gimnasios.html"
     },
     {
-      "source": "/turneros",
-      "destination": "/turneros.html"
+      "source": "/sistema-de-turnos",
+      "destination": "/sistema-de-turnos.html"
     },
     {
-      "source": "/gastronomia",
-      "destination": "/gastronomia.html"
+      "source": "/software-para-restaurantes",
+      "destination": "/software-para-restaurantes.html"
     },
     {
-      "source": "/clinica-medica",
-      "destination": "/clinica-medica.html"
+      "source": "/software-para-clinicas",
+      "destination": "/software-para-clinicas.html"
     },
     {
-      "source": "/pos",
-      "destination": "/pos.html"
+      "source": "/sistema-pos",
+      "destination": "/sistema-pos.html"
+    },
+    {
+      "source": "/sistemas-de-ia",
+      "destination": "/sistemas-de-ia.html"
     },
     {
       "source": "/(.*)",

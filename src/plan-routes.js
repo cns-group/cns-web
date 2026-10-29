@@ -4,6 +4,14 @@ export const PLAN_TAB_IDS = ['ecommerce', 'gym', 'queue', 'gastro', 'clinic', 'p
 
 /** Slug en URL → id de pestaña */
 const SLUG_TO_TAB = {
+  // slugs actuales (los que indexa Google)
+  'tienda-online': 'ecommerce',
+  'software-para-gimnasios': 'gym',
+  'sistema-de-turnos': 'queue',
+  'software-para-restaurantes': 'gastro',
+  'software-para-clinicas': 'clinic',
+  'sistema-pos': 'pos',
+  // slugs anteriores: siguen resolviendo (Vercel los redirige a los nuevos)
   ecommerce: 'ecommerce',
   'e-ticketera': 'ticket',
   ticketera: 'ticket',
@@ -22,14 +30,14 @@ const SLUG_TO_TAB = {
 
 /** id de pestaña → slug canónico para compartir */
 export const TAB_TO_SLUG = {
-  ecommerce: 'ecommerce',
+  ecommerce: 'tienda-online',
   ticket: 'e-ticketera',
-  gastro: 'gastronomia',
-  gym: 'gimnasios',
-  queue: 'turneros',
+  gastro: 'software-para-restaurantes',
+  gym: 'software-para-gimnasios',
+  queue: 'sistema-de-turnos',
   landing: 'landing',
-  clinic: 'clinica-medica',
-  pos: 'pos',
+  clinic: 'software-para-clinicas',
+  pos: 'sistema-pos',
 }
 
 export function parsePlanTabFromPath(pathname = window.location.pathname) {
