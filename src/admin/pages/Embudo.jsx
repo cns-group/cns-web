@@ -59,6 +59,7 @@ function Barras({ visitantes, pasos }) {
           </div>
           <div style={{ height: 14, borderRadius: 7, background: 'rgba(127,127,127,.2)', overflow: 'hidden' }}>
             <div
+              className="admin-bar-fill"
               style={{
                 width: `${Math.max(2, Math.round((f.usuarios / max) * 100))}%`,
                 height: '100%',

@@ -10,7 +10,10 @@ import { PlansPage } from './pages/Plans'
 import { PaymentsPage } from './pages/Payments'
 import { DemosPage } from './pages/Demos'
 import { EmbudoPage } from './pages/Embudo'
+import { ConsultasPage } from './pages/Consultas'
+import { WhatsAppPage } from './pages/WhatsApp'
 import './admin.css'
+import './admin-crm.css'
 
 export default function AdminApp() {
   return (
@@ -26,6 +29,8 @@ export default function AdminApp() {
           }
         >
           <Route index element={<DashboardPage />} />
+          <Route path="consultas" element={<ConsultasPage />} />
+          <Route path="whatsapp" element={<WhatsAppPage />} />
           <Route path="clientes" element={<ClientsPage />} />
           <Route path="clientes/:id" element={<ClientDetailPage />} />
           <Route path="planes" element={<PlansPage />} />

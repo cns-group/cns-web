@@ -1,19 +1,36 @@
 import React from 'react'
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import { useAuth } from './auth'
+import { api } from './api'
 
 const NAV = [
   { to: '/admin', end: true, label: 'Dashboard' },
+  { to: '/admin/consultas', label: 'Consultas', badge: true },
   { to: '/admin/clientes', label: 'Clientes' },
   { to: '/admin/planes', label: 'Planes' },
   { to: '/admin/pagos', label: 'Pagos' },
   { to: '/admin/demos', label: 'Demos' },
+  { to: '/admin/whatsapp', label: 'WhatsApp' },
   { to: '/admin/embudo', label: 'Embudo' },
 ]
 
 export function AdminLayout() {
   const { user, logout } = useAuth()
   const navigate = useNavigate()
+  const [unread, setUnread] = React.useState(0)
+
+  // Mensajes de WhatsApp sin leer: se muestran como globito en "Consultas".
+  React.useEffect(() => {
+    let alive = true
+    const tick = () =>
+      api.whatsapp.unread().then((d) => alive && setUnread(d.total || 0)).catch(() => {})
+    tick()
+    const t = setInterval(tick, 15000)
+    return () => {
+      alive = false
+      clearInterval(t)
+    }
+  }, [])
 
   const handleLogout = () => {
     logout()
@@ -39,6 +56,7 @@ export function AdminLayout() {
               className={({ isActive }) => `admin-nav-link${isActive ? ' active' : ''}`}
             >
               {item.label}
+              {item.badge && unread > 0 && <span className="admin-nav-badge">{unread}</span>}
             </NavLink>
           ))}
         </nav>

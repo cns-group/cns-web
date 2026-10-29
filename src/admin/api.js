@@ -82,11 +82,48 @@ export const api = {
     update: (id, data) => request(`/demos/${id}`, { method: 'PATCH', body: JSON.stringify(data) }),
     remove: (id) => request(`/demos/${id}`, { method: 'DELETE' }),
   },
+  consultas: {
+    list: () => request('/consultas'),
+    get: (id) => request(`/consultas/${id}`),
+    create: (data) => request('/consultas', { method: 'POST', body: JSON.stringify(data) }),
+    update: (id, data) => request(`/consultas/${id}`, { method: 'PATCH', body: JSON.stringify(data) }),
+    addNote: (id, texto) =>
+      request(`/consultas/${id}/notas`, { method: 'POST', body: JSON.stringify({ texto }) }),
+    toClient: (id) => request(`/consultas/${id}/convertir`, { method: 'POST' }),
+    remove: (id) => request(`/consultas/${id}`, { method: 'DELETE' }),
+  },
+  whatsapp: {
+    status: () => request('/integrations/whatsapp/status'),
+    lines: () => request('/integrations/whatsapp/lineas'),
+    createLine: (nombre) =>
+      request('/integrations/whatsapp/lineas', { method: 'POST', body: JSON.stringify({ nombre }) }),
+    removeLine: (id) => request(`/integrations/whatsapp/lineas/${id}`, { method: 'DELETE' }),
+    connect: (id) => request(`/integrations/whatsapp/lineas/${id}/connect`, { method: 'POST' }),
+    disconnect: (id) => request(`/integrations/whatsapp/lineas/${id}/disconnect`, { method: 'POST' }),
+    unread: () => request('/integrations/whatsapp/unread'),
+    messages: (consultaId) => request(`/integrations/whatsapp/consultas/${consultaId}/mensajes`),
+    markRead: (consultaId) =>
+      request(`/integrations/whatsapp/consultas/${consultaId}/leer`, { method: 'POST' }),
+    send: (consultaId, cuerpo, lineaId) =>
+      request(`/integrations/whatsapp/consultas/${consultaId}/enviar`, {
+        method: 'POST',
+        body: JSON.stringify({ cuerpo, ...(lineaId ? { lineaId } : {}) }),
+      }),
+  },
   setupSteps: {
     update: (id, data) =>
       request(`/setup-steps/${id}`, { method: 'PATCH', body: JSON.stringify(data) }),
   },
 }
+
+export const ETAPAS = [
+  { id: 'nuevo', label: 'Nuevo' },
+  { id: 'contactado', label: 'Contactado' },
+  { id: 'auditoria', label: 'Auditoría' },
+  { id: 'propuesta', label: 'Propuesta' },
+  { id: 'ganado', label: 'Ganado' },
+  { id: 'perdido', label: 'Perdido' },
+]
 
 export const LABELS = {
   clientStatus: {
