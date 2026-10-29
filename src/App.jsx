@@ -1,9 +1,9 @@
 import React from 'react'
 import { COPY } from './copy'
 import { Nav, Hero, Marquee } from './sections-top'
-import { Process } from './sections-mid'
+import { Tutorial } from './sections-tutorial'
 import { Plans } from './sections-plans'
-import { Work, Quotes, FAQ, Contact, Footer, Metrics } from './sections-bot'
+import { Work, Quotes, Contact, Footer, Metrics } from './sections-bot'
 import { scrollToSection, sectionClick } from './scroll'
 import { WhatsAppFloat } from './whatsapp-float'
 import { parsePlanTabFromPath, setPlanPath } from './plan-routes'
@@ -16,7 +16,7 @@ import { startLandingTracking } from './analytics'
 function ChapterRail() {
   const chapters = [
     ['01', 'Inicio', 'top'],
-    ['02', 'Proceso', 'proceso'],
+    ['02', 'Cómo trabajamos', 'proceso'],
     ['03', 'Soluciones', 'planes'],
     ['04', 'Casos', 'casos'],
     ['05', 'Contacto', 'contacto'],
@@ -89,12 +89,11 @@ export default function App() {
         <Hero c={c} onSection={scrollToSection} />
         <Marquee items={c.marquee} />
         <Metrics c={c} />
-        <Process c={c} />
+        <Tutorial />
         <Tagline label="Nuestra mirada" lines={['El software bien hecho no es un gasto.', 'Es la base sobre la que tu negocio crece.']} />
         <Plans c={c} lang={t.lang} activeTab={planTab} onTabChange={handlePlanTabChange} />
         <Work c={c} />
         <Quotes c={c} />
-        <FAQ c={c} />
         <Contact c={c} ctaRef={contactRef} />
       </main>
       <Footer c={c} />

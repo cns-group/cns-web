@@ -5,6 +5,8 @@
  *   view_planes   → la sección de planes entró en pantalla (una vez por visita)
  *   select_plan   → clic en el botón de un plan
  *   contact_click → clic en WhatsApp o en el email (param `canal` y `ubicacion`)
+ *   tutorial_step → el visitante eligió un paso del tutorial (param `paso`)
+ *   ask_question  → hizo una pregunta en el chat (param `origen` y `tema`, nunca el texto escrito)
  */
 
 function send(name, params) {
@@ -19,6 +21,11 @@ function ubicacionDe(link) {
   if (link.closest('nav, header')) return 'menu'
   if (link.closest('footer')) return 'footer'
   return 'otro'
+}
+
+/** Evento de la landing que no sale de un clic en un link. */
+export function track(name, params) {
+  send(name, params)
 }
 
 /** Engancha los eventos de la landing. Devuelve la función que los quita. */

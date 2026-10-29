@@ -19,7 +19,7 @@ export const COPY = {
       titleC: 'Remoto,',
       titleD: 'de punta a punta.',
       lead:
-        'Diseñamos y construimos sistemas para pymes desde cualquier lugar: ecommerce, turneros y gestión de gimnasios y restaurantes. Kickoff por videollamada, iteramos online, entregamos el sistema terminado y después te acompañamos en las decisiones de negocio y en el crecimiento. Sin promesas raras.',
+        'Recorré paso a paso cómo trabajamos, de la primera videollamada a tu sistema andando, y preguntanos lo que quieras.',
       footMeta: 'GMT‑3',
       footStatus: 'Operando',
     },
