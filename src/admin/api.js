@@ -184,8 +184,8 @@ export const api = {
     },
     ingles: {
       escenarios: () => request('/ai/ingles/escenarios'),
-      conversarStream: (escenario, nivel, turnos, modelo, onPedazo, signal) =>
-        stream('/ai/ingles/conversar/stream', { escenario, nivel, turnos, ...(modelo ? { modelo } : {}) }, onPedazo, signal),
+      conversarStream: (escenario, nivel, turnos, modelo, onPedazo, signal, tutor = false) =>
+        stream('/ai/ingles/conversar/stream', { escenario, nivel, turnos, ...(modelo ? { modelo } : {}), ...(tutor ? { tutor: true } : {}) }, onPedazo, signal),
       corregir: (texto, nivel, contexto, modelo) =>
         request('/ai/ingles/corregir', { method: 'POST', body: JSON.stringify({ texto, nivel, ...(contexto ? { contexto } : {}), ...(modelo ? { modelo } : {}) }) }),
       traducir: (texto, modelo) =>

@@ -74,6 +74,12 @@ export function InglesPage() {
   const logRef = React.useRef(null)
   const dictadoRef = React.useRef(null)
   const dictadoEsRef = React.useRef(null) // micrófono en español, para preguntarle cosas al tutor
+  const modoEsRef = React.useRef(false)
+  const [modoEs, setModoEsEstado] = React.useState(false) // true: hablás (o escribís) en español y el tutor te responde en español
+  const setModoEs = (v) => {
+    modoEsRef.current = v
+    setModoEsEstado(v)
+  }
   const enviarRef = React.useRef(null)
   const locutorRef = React.useRef(null)
   const cortarRef = React.useRef(null)
@@ -124,8 +130,8 @@ export function InglesPage() {
     if (el) el.scrollTop = el.scrollHeight
   }, [turnos, esperando, parcial, devolucion])
 
-  const escuchar = React.useCallback((enEspanol = false) => {
-    const d = enEspanol ? dictadoEsRef.current : dictadoRef.current
+  const escuchar = React.useCallback(() => {
+    const d = modoEsRef.current ? dictadoEsRef.current : dictadoRef.current
     if (!d || d.activo()) return
     dictadoRef.current?.detener()
     dictadoEsRef.current?.detener()
@@ -137,7 +143,7 @@ export function InglesPage() {
   }, [pararTodo])
 
   React.useEffect(() => {
-    const armar = (idioma) =>
+    const armar = (idioma, tutor) =>
       crearDictado({
         idioma,
         onParcial: setParcial,
@@ -145,20 +151,20 @@ export function InglesPage() {
           setEscuchando(false)
           setParcial('')
         },
-        onFinal: (t) => enviarRef.current?.(t),
+        onFinal: (t) => enviarRef.current?.(t, tutor),
         onError: (m) => {
           setEscuchando(false)
           setError(m)
         },
       })
-    dictadoRef.current = armar(IDIOMA_DICTADO)
-    dictadoEsRef.current = armar('es-AR')
+    dictadoRef.current = armar(IDIOMA_DICTADO, false)
+    dictadoEsRef.current = armar('es-AR', true)
   }, [])
 
   const soloMensajes = (lista) => lista.map(({ role, content, tutor }) => ({ role, content: tutor ? `${MARCA_TUTOR} ${content}` : content }))
 
   /** La IA responde por pedazos y se va diciendo en voz alta frase por frase. */
-  const turnoIA = async (historial, correccion = null) => {
+  const turnoIA = async (historial, correccion = null, tutor = false) => {
     setOcupado(true)
     setEsperando(true)
     setError('')
@@ -222,8 +228,9 @@ export function InglesPage() {
         const t = crudo.trimStart()
         if (t.length < MARCA_TUTOR.length && MARCA_TUTOR.startsWith(t)) return
         decidido = true
-        esTutor = t.startsWith(MARCA_TUTOR)
-        nuevo = esTutor ? t.slice(MARCA_TUTOR.length).trimStart() : crudo
+        const conMarca = t.startsWith(MARCA_TUTOR)
+        esTutor = tutor || conMarca
+        nuevo = conMarca ? t.slice(MARCA_TUTOR.length).trimStart() : crudo
         locutor = nuevoLocutor()
         locutorRef.current = locutor
         abrir()
@@ -240,7 +247,7 @@ export function InglesPage() {
     }
 
     try {
-      await api.ai.ingles.conversarStream(escenario, nivel, soloMensajes(historial), modelo, alLlegar, corte.signal)
+      await api.ai.ingles.conversarStream(escenario, nivel, soloMensajes(historial), modelo, alLlegar, corte.signal, tutor)
       if (locutor) {
         await puertaLista
         abrir()
@@ -257,6 +264,8 @@ export function InglesPage() {
       setHablando(false)
       if (!corte.signal.aborted) setError(e.message)
     } finally {
+      // Después de responderte la duda, el micrófono vuelve solo al inglés para seguir con la charla.
+      if (esTutor) setModoEs(false)
       setEsperando(false)
       setOcupado(false)
       if (cortarRef.current === corte) cortarRef.current = null
@@ -277,7 +286,8 @@ export function InglesPage() {
     }
   }
 
-  const enviar = (contenido) => {
+  const enviar = (contenido, tutorForzado) => {
+    const tutor = tutorForzado ?? modoEsRef.current
     const t = String(contenido ?? texto).trim()
     if (!t || ocupado) return
     pararTodo()
@@ -286,8 +296,9 @@ export function InglesPage() {
     const ultimaIA = [...turnos].reverse().find((x) => x.role === 'assistant')?.content
     const historial = [...turnos, { id, role: 'user', content: t }]
     setTurnos(historial)
-    const correccion = corregirOn ? corregirFrase(id, t, ultimaIA) : null
-    turnoIA(historial, correccion)
+    // En español no hay nada que corregir: es una pregunta al tutor.
+    const correccion = corregirOn && !tutor ? corregirFrase(id, t, ultimaIA) : null
+    turnoIA(historial, correccion, tutor)
   }
   enviarRef.current = enviar
 
@@ -306,6 +317,7 @@ export function InglesPage() {
     setTurnos([])
     setDevolucion(null)
     setEmpezo(false)
+    setModoEs(false)
     setVerConfig(true)
     setOcupado(false)
     setEsperando(false)
@@ -574,27 +586,29 @@ export function InglesPage() {
                     </svg>
                   </button>
                 )}
-                {puedeDictar && (
-                  <button
-                    type="button"
-                    className="ing-es"
-                    disabled={!configurado || escuchando || (ocupado && !hablando)}
-                    onClick={() => escuchar(true)}
-                    title="Hablá en español para preguntarle al tutor cómo se dice algo o qué significa"
-                  >
-                    ¿Cómo se dice…? <small>hablar en español</small>
+                <div className="ing-idioma" role="group" aria-label="Idioma en el que hablás">
+                  <span>Hablo en</span>
+                  <button type="button" className={modoEs ? '' : 'on'} aria-pressed={!modoEs} onClick={() => { dictadoRef.current?.detener(); dictadoEsRef.current?.detener(); setModoEs(false) }}>
+                    Inglés
                   </button>
-                )}
+                  <button type="button" className={modoEs ? 'on' : ''} aria-pressed={modoEs} onClick={() => { dictadoRef.current?.detener(); dictadoEsRef.current?.detener(); setModoEs(true) }}>
+                    Español <small>(preguntale al tutor)</small>
+                  </button>
+                </div>
                 <div className="ent-estado" aria-live="polite">
                   {escuchando
-                    ? 'Listening… hablá y se envía solo cuando termines'
+                    ? modoEs
+                      ? 'Escuchando… preguntá en español y se envía solo cuando termines'
+                      : 'Listening… hablá y se envía solo cuando termines'
                     : hablando
                       ? 'Hablando… tocá el micrófono para interrumpir'
                       : ocupado
                         ? 'Pensando…'
-                        : puedeDictar
-                          ? 'Tocá el micrófono (o la barra espaciadora) y hablá en inglés'
-                          : 'Escribí tu respuesta en inglés'}
+                        : modoEs
+                          ? 'Modo español: tocá el micrófono y preguntá lo que quieras, el tutor te responde en español'
+                          : puedeDictar
+                            ? 'Tocá el micrófono (o la barra espaciadora) y hablá en inglés'
+                            : 'Escribí tu respuesta en inglés'}
                   {hablando && (
                     <button type="button" className="admin-link-btn" onClick={pararTodo}>
                       Silenciar
@@ -611,7 +625,7 @@ export function InglesPage() {
                   <input
                     value={texto}
                     onChange={(e) => setTexto(e.target.value)}
-                    placeholder="…or type in English"
+                    placeholder={modoEs ? '…o escribí tu pregunta en español' : '…or type in English'}
                     maxLength={400}
                     disabled={!configurado}
                   />

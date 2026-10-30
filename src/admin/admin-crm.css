@@ -404,3 +404,12 @@
 .art-bloque .art-linea { font-size: 19px; font-weight: 700; }
 .admin-page-hd p a { color: var(--admin-accent); text-decoration: none; }
 .admin-page-hd p a:hover { text-decoration: underline; }
+
+/* Entrenador de inglés: selector del idioma en el que hablás */
+.ing-idioma { grid-column: 1 / -1; display: inline-flex; align-items: center; gap: 6px; justify-self: start; padding: 4px; border: 1px solid var(--admin-line); border-radius: 999px; }
+.ing-idioma span { padding: 0 8px 0 10px; font-size: 14px; letter-spacing: .08em; text-transform: uppercase; color: var(--admin-muted); }
+.ing-idioma button { padding: 6px 16px; background: none; border: 0; border-radius: 999px; color: var(--admin-fg); font: inherit; font-size: 16px; cursor: pointer; transition: background .2s, color .2s; }
+.ing-idioma button small { color: var(--admin-muted); font-size: 13px; }
+.ing-idioma button:hover:not(.on) { background: var(--admin-surface-2); }
+.ing-idioma button.on { background: var(--admin-accent); color: var(--admin-bg); }
+.ing-idioma button.on small { color: inherit; opacity: .8; }
