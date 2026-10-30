@@ -350,3 +350,20 @@
 .ing-es small { color: var(--admin-muted); font-size: 13px; }
 .ing-es:hover:not(:disabled) { border-color: var(--admin-accent); background: color-mix(in srgb, var(--admin-accent) 8%, transparent); }
 .ing-es:disabled { opacity: .5; cursor: not-allowed; }
+
+/* Menú lateral colapsable: se oculta del todo y un botón flotante lo vuelve a abrir */
+.admin-shell { transition: grid-template-columns .25s cubic-bezier(.16, 1, .3, 1); }
+.admin-menu-toggle { position: fixed; top: 14px; left: 14px; z-index: 40; width: 38px; height: 38px; display: grid; place-items: center; background: var(--admin-surface); color: var(--admin-fg); border: 1px solid var(--admin-line); border-radius: 10px; cursor: pointer; transition: border-color .2s, background .2s; }
+.admin-menu-toggle:hover { border-color: var(--admin-accent); background: var(--admin-surface-2); }
+.admin-shell:not(.admin-shell--menu-cerrado) .admin-menu-toggle { left: 192px; top: 18px; width: 34px; height: 34px; }
+.admin-shell--menu-cerrado { grid-template-columns: 0 minmax(0, 1fr); }
+.admin-shell--menu-cerrado .admin-sidebar { display: none; }
+.admin-shell--menu-cerrado .admin-page-hd { padding-left: 50px; }
+@media (max-width: 960px) {
+  .admin-shell--menu-cerrado { grid-template-columns: 1fr; }
+  .admin-shell:not(.admin-shell--menu-cerrado) .admin-menu-toggle { left: auto; right: 14px; top: 14px; }
+}
+
+/* Entrenadores: sin la tarjeta de configuración el chat ocupa todo el ancho */
+.ent-layout--solo { grid-template-columns: minmax(0, 1fr); }
+.ent-layout--solo > .admin-card:first-child { display: none; }

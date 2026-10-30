@@ -21,6 +21,22 @@ export function AdminLayout() {
   const { user, logout } = useAuth()
   const navigate = useNavigate()
   const [unread, setUnread] = React.useState(0)
+  const [menuCerrado, setMenuCerrado] = React.useState(() => {
+    try {
+      return localStorage.getItem('cns_admin_menu') === 'cerrado'
+    } catch {
+      return false
+    }
+  })
+  const alternarMenu = () =>
+    setMenuCerrado((c) => {
+      try {
+        localStorage.setItem('cns_admin_menu', c ? 'abierto' : 'cerrado')
+      } catch {
+        /* sin almacenamiento: no pasa nada */
+      }
+      return !c
+    })
 
   // Mensajes de WhatsApp sin leer: se muestran como globito en "Consultas".
   React.useEffect(() => {
@@ -41,7 +57,19 @@ export function AdminLayout() {
   }
 
   return (
-    <div className="admin-shell">
+    <div className={`admin-shell${menuCerrado ? ' admin-shell--menu-cerrado' : ''}`}>
+      <button
+        type="button"
+        className="admin-menu-toggle"
+        onClick={alternarMenu}
+        aria-expanded={!menuCerrado}
+        aria-label={menuCerrado ? 'Mostrar menú' : 'Ocultar menú'}
+        title={menuCerrado ? 'Mostrar menú' : 'Ocultar menú'}
+      >
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+          <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" />
+        </svg>
+      </button>
       <aside className="admin-sidebar">
         <div className="admin-brand">
           <img className="admin-brand-logo" src="/cnslogo.png" alt="CNS" width="111" height="40" />

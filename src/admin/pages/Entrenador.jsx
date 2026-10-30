@@ -52,6 +52,7 @@ export function EntrenadorPage() {
   const [modelo, setModelo] = React.useState('')
   const [turnos, setTurnos] = React.useState([])
   const [empezo, setEmpezo] = React.useState(false)
+  const [verConfig, setVerConfig] = React.useState(true) // se oculta al empezar para dejar el chat grande
   const [ocupado, setOcupado] = React.useState(false) // generando una respuesta
   const [esperando, setEsperando] = React.useState(false) // todavía no llegó ni la primera palabra
   const [error, setError] = React.useState('')
@@ -230,6 +231,7 @@ export function EntrenadorPage() {
     setTurnos([])
     setDevolucion(null)
     setEmpezo(true)
+    setVerConfig(false)
     turnoIA([])
   }
 
@@ -239,6 +241,7 @@ export function EntrenadorPage() {
     setTurnos([])
     setDevolucion(null)
     setEmpezo(false)
+    setVerConfig(true)
     setOcupado(false)
     setEsperando(false)
     setError('')
@@ -302,11 +305,16 @@ export function EntrenadorPage() {
       <PageHeader
         title="Entrenador de ventas"
         subtitle="Practicá tus llamadas hablando: la IA hace de cliente, te contesta con voz y después te dice cómo mejorar. Usa lo que aprendiste en tu cerebro."
-        actions={status && <Badge tone={configurado ? 'success' : 'danger'}>{configurado ? 'Conectado' : 'Falta la clave'}</Badge>}
+        actions={
+          <>
+            <Btn variant="ghost" onClick={() => setVerConfig((v) => !v)}>{verConfig ? 'Ocultar configuración' : '⚙ Configuración'}</Btn>
+            {status && <Badge tone={configurado ? 'success' : 'danger'}>{configurado ? 'Conectado' : 'Falta la clave'}</Badge>}
+          </>
+        }
       />
       <ErrorBox message={error} />
 
-      <div className="ent-layout">
+      <div className={`ent-layout${verConfig ? '' : ' ent-layout--solo'}`}>
         <Card title="Configuración">
           <div className="ent-config">
             <div className="admin-tabs" role="tablist">

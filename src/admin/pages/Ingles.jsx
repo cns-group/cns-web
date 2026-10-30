@@ -52,6 +52,7 @@ export function InglesPage() {
   const [modelo, setModelo] = React.useState('')
   const [turnos, setTurnos] = React.useState([]) // { id, role, content, correccion?, traduccion? }
   const [empezo, setEmpezo] = React.useState(false)
+  const [verConfig, setVerConfig] = React.useState(true) // se oculta al empezar para dejar el chat grande
   const [ocupado, setOcupado] = React.useState(false)
   const [esperando, setEsperando] = React.useState(false)
   const [error, setError] = React.useState('')
@@ -263,6 +264,7 @@ export function InglesPage() {
     setTurnos([])
     setDevolucion(null)
     setEmpezo(true)
+    setVerConfig(false)
     turnoIA([])
   }
 
@@ -272,6 +274,7 @@ export function InglesPage() {
     setTurnos([])
     setDevolucion(null)
     setEmpezo(false)
+    setVerConfig(true)
     setOcupado(false)
     setEsperando(false)
     setError('')
@@ -335,11 +338,16 @@ export function InglesPage() {
       <PageHeader
         title="Entrenador de inglés"
         subtitle="Practicá conversaciones hablando en inglés: la IA hace de la otra persona, te contesta con voz, te corrige frase por frase y al final te dice qué mejorar."
-        actions={status && <Badge tone={configurado ? 'success' : 'danger'}>{configurado ? 'Conectado' : 'Falta la clave'}</Badge>}
+        actions={
+          <>
+            <Btn variant="ghost" onClick={() => setVerConfig((v) => !v)}>{verConfig ? 'Ocultar configuración' : '⚙ Configuración'}</Btn>
+            {status && <Badge tone={configurado ? 'success' : 'danger'}>{configurado ? 'Conectado' : 'Falta la clave'}</Badge>}
+          </>
+        }
       />
       <ErrorBox message={error} />
 
-      <div className="ent-layout">
+      <div className={`ent-layout${verConfig ? '' : ' ent-layout--solo'}`}>
         <Card title="Configuración">
           <div className="ent-config">
             <label className="admin-field">
