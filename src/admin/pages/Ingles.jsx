@@ -162,7 +162,9 @@ export function InglesPage() {
     dictadoEsRef.current = armar('es-AR', true)
   }, [])
 
-  const soloMensajes = (lista) => lista.map(({ role, content, tutor }) => ({ role, content: tutor ? `${MARCA_TUTOR} ${content}` : content }))
+  // Los turnos vacíos (una respuesta que falló) no se mandan: el servidor los rechaza.
+  const soloMensajes = (lista) =>
+    lista.filter((t) => t.content?.trim()).map(({ role, content, tutor }) => ({ role, content: tutor ? `${MARCA_TUTOR} ${content}` : content }))
 
   /** La IA responde por pedazos y se va diciendo en voz alta frase por frase. */
   const turnoIA = async (historial, correccion = null, tutor = false) => {
@@ -264,6 +266,8 @@ export function InglesPage() {
       locutor?.cancelar()
       setHablando(false)
       if (!corte.signal.aborted) setError(e.message)
+      // Si la respuesta falló antes de decir nada, no dejar el globo vacío en la charla.
+      setTurnos((lista) => lista.filter((t) => t.id !== idIA || t.content))
     } finally {
       // Después de responderte la duda, el micrófono vuelve solo al inglés para seguir con la charla.
       if (esTutor) setModoEs(false)
