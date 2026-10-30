@@ -292,7 +292,7 @@
 .ent-check { display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.3; cursor: pointer; }
 .ent-check input { margin-top: 3px; accent-color: var(--admin-accent); }
 .ent-config input[type="range"] { accent-color: var(--admin-accent); }
-.ent-log { height: 430px; }
+.ent-log { height: clamp(430px, calc(100vh - 430px), 900px); }
 .ent-vacio { margin: auto; max-width: 420px; text-align: center; display: grid; gap: 16px; justify-items: center; }
 .ent-vacio p { margin: 0; line-height: 1.5; color: var(--admin-muted); }
 .ent-quien { text-transform: uppercase; letter-spacing: .08em; opacity: .7; margin: 0 0 4px; }
@@ -318,3 +318,8 @@
 .ent-nota small { font-size: 22px; color: var(--admin-muted); }
 @media (max-width: 1100px) { .ent-layout { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion: reduce) { .ent-mic.on, .ent-dev { animation: none; } }
+
+.ent-esc-acc { margin-top: -4px; }
+.ent-idea { display: grid; gap: 10px; justify-items: start; padding: 14px; border: 1px dashed var(--admin-line); border-radius: 12px; }
+.ent-idea .admin-field { width: 100%; }
+.ent-idea textarea { width: 100%; }

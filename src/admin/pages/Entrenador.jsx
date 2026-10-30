@@ -1,6 +1,6 @@
 import React from 'react'
 import { api } from '../api'
-import { Badge, Btn, Card, ErrorBox, PageHeader, Select } from '../components'
+import { Badge, Btn, Card, ErrorBox, Field, Modal, PageHeader, Select } from '../components'
 import {
   alCambiarVoces,
   crearDictado,
@@ -58,6 +58,7 @@ export function EntrenadorPage() {
   const [devolucion, setDevolucion] = React.useState(null)
   const [pidiendoDev, setPidiendoDev] = React.useState(false)
   const [texto, setTexto] = React.useState('')
+  const [editor, setEditor] = React.useState(null) // escenario que se está creando o editando
 
   // Voz
   const [vozOn, setVozOn] = React.useState(inicial.vozOn ?? true)
@@ -74,6 +75,15 @@ export function EntrenadorPage() {
   const enviarRef = React.useRef(null)
   const locutorRef = React.useRef(null)
   const cortarRef = React.useRef(null)
+
+  const cargarEscenarios = React.useCallback(
+    () =>
+      api.ai.entrenador
+        .escenarios()
+        .then((d) => setEscenarios(d.escenarios))
+        .catch((e) => setError(e.message)),
+    [],
+  )
 
   const puedeDictar = hayDictado()
   const puedeHablar = hayVoz()
@@ -97,17 +107,14 @@ export function EntrenadorPage() {
         setModelo(s.modeloVentas || s.modelo)
       })
       .catch((e) => setError(e.message))
-    api.ai.entrenador
-      .escenarios()
-      .then((d) => setEscenarios(d.escenarios))
-      .catch((e) => setError(e.message))
+    cargarEscenarios()
     const off = alCambiarVoces(() => setVoces(vocesEspanol()))
     return () => {
       off()
       pararTodo()
       dictadoRef.current?.detener()
     }
-  }, [pararTodo])
+  }, [pararTodo, cargarEscenarios])
 
   React.useEffect(() => {
     guardarPrefs({ modo, escenario, nivel, vozOn, manosLibres, vozNombre, velocidad })
@@ -266,6 +273,19 @@ export function EntrenadorPage() {
     return () => window.removeEventListener('keydown', onKey)
   }, [escuchar])
 
+  const borrarEscenario = async () => {
+    const e = escenarios.find((x) => x.id === escenario)
+    if (!e?.propio || !window.confirm(`¿Eliminar el escenario "${e.titulo}"?`)) return
+    try {
+      await api.ai.entrenador.deleteScenario(e.id)
+      reiniciar()
+      setEscenario('gimnasio')
+      await cargarEscenarios()
+    } catch (err) {
+      setError(err.message)
+    }
+  }
+
   const probarVoz = () => {
     pararTodo()
     hablar(FRASE_DE_PRUEBA, { vozNombre, velocidad })
@@ -311,6 +331,21 @@ export function EntrenadorPage() {
                   </Select>
                 </label>
                 {esc && <p className="admin-muted ent-persona">Vas a hablar con: {esc.personaje}.</p>}
+                <div className="admin-actions ent-esc-acc">
+                  <Btn variant="ghost" onClick={() => setEditor({ titulo: '', personaje: '', dolor: '', objeciones: '' })}>
+                    + Agregar escenario
+                  </Btn>
+                  {esc?.propio && (
+                    <>
+                      <Btn variant="ghost" onClick={() => setEditor({ id: esc.id, titulo: esc.titulo, ...esc.detalle })}>
+                        Editar
+                      </Btn>
+                      <Btn variant="ghost" onClick={borrarEscenario}>
+                        Eliminar
+                      </Btn>
+                    </>
+                  )}
+                </div>
                 <label className="admin-field">
                   <span>Dificultad</span>
                   <Select value={nivel} onChange={(e) => { reiniciar(); setNivel(e.target.value) }}>
@@ -501,7 +536,102 @@ export function EntrenadorPage() {
           </div>
         </Card>
       </div>
+
+      <EscenarioEditor
+        editor={editor}
+        modelo={modelo}
+        onClose={() => setEditor(null)}
+        onGuardado={async (e) => {
+          setEditor(null)
+          await cargarEscenarios()
+          reiniciar()
+          setEscenario(e.id)
+        }}
+      />
     </>
+  )
+}
+
+/** Formulario para crear o editar un escenario propio. Se puede armar con IA a partir de una descripción corta. */
+function EscenarioEditor({ editor, modelo, onClose, onGuardado }) {
+  const [form, setForm] = React.useState(null)
+  const [idea, setIdea] = React.useState('')
+  const [armando, setArmando] = React.useState(false)
+  const [guardando, setGuardando] = React.useState(false)
+  const [error, setError] = React.useState('')
+
+  React.useEffect(() => {
+    setForm(editor ? { titulo: editor.titulo, personaje: editor.personaje, dolor: editor.dolor, objeciones: editor.objeciones } : null)
+    setIdea('')
+    setError('')
+  }, [editor])
+
+  const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }))
+
+  const armar = async () => {
+    setArmando(true)
+    setError('')
+    try {
+      setForm(await api.ai.entrenador.generateScenario(idea.trim(), modelo))
+    } catch (e) {
+      setError(e.message)
+    } finally {
+      setArmando(false)
+    }
+  }
+
+  const guardar = async (ev) => {
+    ev.preventDefault()
+    setGuardando(true)
+    setError('')
+    try {
+      const guardado = editor.id ? await api.ai.entrenador.updateScenario(editor.id, form) : await api.ai.entrenador.createScenario(form)
+      await onGuardado(guardado)
+    } catch (e) {
+      setError(e.message)
+    } finally {
+      setGuardando(false)
+    }
+  }
+
+  return (
+    <Modal open={Boolean(editor && form)} title={editor?.id ? 'Editar escenario' : 'Nuevo escenario'} onClose={onClose}>
+      {form && editor && (
+        <form className="admin-form" onSubmit={guardar}>
+          <ErrorBox message={error} />
+          {!editor.id && (
+            <div className="ent-idea">
+              <Field label="¿Con quién querés practicar? Describilo en una frase y la IA arma el escenario">
+                <textarea rows={2} value={idea} maxLength={600} onChange={(e) => setIdea(e.target.value)} placeholder="Dueño de una agencia de viajes que atiende todo por WhatsApp y pierde consultas" />
+              </Field>
+              <Btn variant="ghost" disabled={armando || idea.trim().length < 8} onClick={armar}>
+                {armando ? 'Armándolo…' : 'Armarlo con IA'}
+              </Btn>
+            </div>
+          )}
+          <Field label="Título (cómo se ve en la lista)">
+            <input value={form.titulo} onChange={set('titulo')} maxLength={80} required />
+          </Field>
+          <Field label="Quién es el cliente y cómo habla">
+            <textarea rows={3} value={form.personaje} onChange={set('personaje')} maxLength={600} required />
+          </Field>
+          <Field label="Su dolor real (lo cuenta solo si le preguntás bien)">
+            <textarea rows={3} value={form.dolor} onChange={set('dolor')} maxLength={600} required />
+          </Field>
+          <Field label="Objeciones que va a poner">
+            <textarea rows={3} value={form.objeciones} onChange={set('objeciones')} maxLength={600} required />
+          </Field>
+          <div className="admin-actions">
+            <Btn variant="ghost" onClick={onClose}>
+              Cancelar
+            </Btn>
+            <Btn type="submit" disabled={guardando}>
+              {guardando ? 'Guardando…' : 'Guardar escenario'}
+            </Btn>
+          </div>
+        </form>
+      )}
+    </Modal>
   )
 }
 
