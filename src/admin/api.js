@@ -119,6 +119,15 @@ export const api = {
       panorama: (modelo) =>
         request('/ai/ventas/panorama', { method: 'POST', body: JSON.stringify(modelo ? { modelo } : {}) }),
     },
+    entrenador: {
+      escenarios: () => request('/ai/entrenador/escenarios'),
+      roleplay: (escenario, nivel, turnos, modelo) =>
+        request('/ai/entrenador/roleplay', { method: 'POST', body: JSON.stringify({ escenario, nivel, turnos, ...(modelo ? { modelo } : {}) }) }),
+      coach: (turnos, modelo) =>
+        request('/ai/entrenador/coach', { method: 'POST', body: JSON.stringify({ turnos, ...(modelo ? { modelo } : {}) }) }),
+      feedback: (escenario, nivel, turnos, modelo) =>
+        request('/ai/entrenador/feedback', { method: 'POST', body: JSON.stringify({ escenario, nivel, turnos, ...(modelo ? { modelo } : {}) }) }),
+    },
     chat: (mensajes, modelo) =>
       request('/ai/chat', { method: 'POST', body: JSON.stringify({ mensajes, ...(modelo ? { modelo } : {}) }) }),
   },
