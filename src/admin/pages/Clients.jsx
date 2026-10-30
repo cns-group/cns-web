@@ -25,6 +25,8 @@ const EMPTY_FORM = {
   email: '',
   company: '',
   phone: '',
+  instagram: '',
+  consulta: '',
   productionUrl: '',
   status: 'lead',
 }
@@ -50,6 +52,7 @@ export function ClientsPage() {
     try {
       const payload = {
         ...form,
+        email: form.email.trim() || undefined,
         productionUrl: form.productionUrl.trim() || undefined,
       }
       const created = await api.clients.create(payload)
@@ -68,7 +71,8 @@ export function ClientsPage() {
         {r.company && <div className="admin-muted">{r.company}</div>}
       </div>
     )},
-    { key: 'email', label: 'Email' },
+    { key: 'email', label: 'Email', render: (r) => r.email || '—' },
+    { key: 'instagram', label: 'Instagram', render: (r) => r.instagram || '—' },
     {
       key: 'productionUrl',
       label: 'Producción',
@@ -113,7 +117,7 @@ export function ClientsPage() {
             <input required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
           </Field>
           <Field label="Email">
-            <input type="email" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
+            <input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
           </Field>
           <Field label="Empresa">
             <input value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })} />
@@ -128,6 +132,12 @@ export function ClientsPage() {
           </Field>
           <Field label="Teléfono">
             <input value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
+          </Field>
+          <Field label="Instagram">
+            <input placeholder="@usuario" value={form.instagram} onChange={(e) => setForm({ ...form, instagram: e.target.value })} />
+          </Field>
+          <Field label="Consulta">
+            <textarea rows={3} value={form.consulta} onChange={(e) => setForm({ ...form, consulta: e.target.value })} />
           </Field>
           <Field label="Estado">
             <Select value={form.status} onChange={(e) => setForm({ ...form, status: e.target.value })}>

@@ -129,7 +129,7 @@ export function ClientDetailPage() {
     <>
       <PageHeader
         title={client?.name || 'Cliente'}
-        subtitle={client?.company || client?.email}
+        subtitle={client?.company || client?.email || client?.instagram}
         actions={
           <Link to="/admin/clientes" className="admin-btn admin-btn--ghost">
             ← Volver
@@ -176,6 +176,27 @@ export function ClientDetailPage() {
                 <input
                   defaultValue={client.phone || ''}
                   onBlur={(e) => updateClient({ phone: e.target.value })}
+                />
+              </Field>
+              <Field label="Email">
+                <input
+                  type="email"
+                  defaultValue={client.email || ""}
+                  onBlur={(e) => updateClient({ email: e.target.value.trim() })}
+                />
+              </Field>
+              <Field label="Instagram">
+                <input
+                  placeholder="@usuario"
+                  defaultValue={client.instagram || ""}
+                  onBlur={(e) => updateClient({ instagram: e.target.value })}
+                />
+              </Field>
+              <Field label="Consulta">
+                <textarea
+                  defaultValue={client.consulta || ""}
+                  rows={3}
+                  onBlur={(e) => updateClient({ consulta: e.target.value })}
                 />
               </Field>
               <Field label="Notas">
