@@ -4,6 +4,7 @@ import { COPY } from './copy'
 import { LegalPageShell } from './legal-pages'
 import { ArticuloContenido, minutosDeLectura } from './articulo-contenido'
 import { TWEAK_DEFAULTS, applyTheme } from './theme-config'
+import { WHATSAPP_URL } from './constants'
 import './articulos.css'
 
 const API_BASE = import.meta.env.VITE_API_URL || '/api'
@@ -165,8 +166,13 @@ export function ArticuloPage() {
             <aside className="art-cierre">
               <h2>¿Querés aplicar esto en tu negocio?</h2>
               <p>Te hacemos una auditoría gratis de 15 minutos y te mostramos qué se puede automatizar.</p>
-              <a className="art-cta" href="/#contacto">
-                Agendá una llamada
+              <a
+                className="art-cta"
+                href={`${WHATSAPP_URL}?text=${encodeURIComponent(`Hola! Leí el artículo "${articulo.titulo}" en su web y quiero agendar una llamada para ver cómo aplicarlo en mi negocio.`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Agendá una llamada por WhatsApp
               </a>
             </aside>
           </>
