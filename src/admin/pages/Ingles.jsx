@@ -34,6 +34,9 @@ function guardarPrefs(p) {
   }
 }
 
+// Cuando le hablás en español para pedir ayuda, la IA sale del personaje y empieza la respuesta con esta marca.
+const MARCA_TUTOR = '[[TUTOR]]'
+
 const FRASE_DE_PRUEBA = 'Hi Mario, this is how I sound. Today we are going to practice a short conversation. Are you ready?'
 
 let contador = 0
@@ -68,6 +71,7 @@ export function InglesPage() {
 
   const logRef = React.useRef(null)
   const dictadoRef = React.useRef(null)
+  const dictadoEsRef = React.useRef(null) // micrófono en español, para preguntarle cosas al tutor
   const enviarRef = React.useRef(null)
   const locutorRef = React.useRef(null)
   const cortarRef = React.useRef(null)
@@ -105,6 +109,7 @@ export function InglesPage() {
       off()
       pararTodo()
       dictadoRef.current?.detener()
+      dictadoEsRef.current?.detener()
     }
   }, [pararTodo])
 
@@ -117,9 +122,11 @@ export function InglesPage() {
     if (el) el.scrollTop = el.scrollHeight
   }, [turnos, esperando, parcial, devolucion])
 
-  const escuchar = React.useCallback(() => {
-    const d = dictadoRef.current
+  const escuchar = React.useCallback((enEspanol = false) => {
+    const d = enEspanol ? dictadoEsRef.current : dictadoRef.current
     if (!d || d.activo()) return
+    dictadoRef.current?.detener()
+    dictadoEsRef.current?.detener()
     pararTodo()
     setParcial('')
     setError('')
@@ -128,22 +135,25 @@ export function InglesPage() {
   }, [pararTodo])
 
   React.useEffect(() => {
-    dictadoRef.current = crearDictado({
-      idioma: IDIOMA_DICTADO,
-      onParcial: setParcial,
-      onFin: () => {
-        setEscuchando(false)
-        setParcial('')
-      },
-      onFinal: (t) => enviarRef.current?.(t),
-      onError: (m) => {
-        setEscuchando(false)
-        setError(m)
-      },
-    })
+    const armar = (idioma) =>
+      crearDictado({
+        idioma,
+        onParcial: setParcial,
+        onFin: () => {
+          setEscuchando(false)
+          setParcial('')
+        },
+        onFinal: (t) => enviarRef.current?.(t),
+        onError: (m) => {
+          setEscuchando(false)
+          setError(m)
+        },
+      })
+    dictadoRef.current = armar(IDIOMA_DICTADO)
+    dictadoEsRef.current = armar('es-AR')
   }, [])
 
-  const soloMensajes = (lista) => lista.map(({ role, content }) => ({ role, content }))
+  const soloMensajes = (lista) => lista.map(({ role, content, tutor }) => ({ role, content: tutor ? `${MARCA_TUTOR} ${content}` : content }))
 
   /** La IA responde por pedazos y se va diciendo en voz alta frase por frase. */
   const turnoIA = async (historial) => {
@@ -155,12 +165,19 @@ export function InglesPage() {
 
     const corte = new AbortController()
     cortarRef.current = corte
-    const locutor =
+    let locutor = null
+    let decidido = false
+    let esTutor = false
+    let crudo = ''
+    let acumulado = ''
+    let buffer = ''
+
+    const nuevoLocutor = () =>
       vozOn && puedeHablar
         ? crearLocutor({
-            vozNombre,
+            vozNombre: esTutor ? '' : vozNombre,
             velocidad,
-            idioma: IDIOMA_VOZ,
+            idioma: esTutor ? 'es' : IDIOMA_VOZ,
             onFin: () => {
               setHablando(false)
               if (locutorRef.current === locutor) locutorRef.current = null
@@ -168,15 +185,24 @@ export function InglesPage() {
             },
           })
         : null
-    locutorRef.current = locutor
 
-    let acumulado = ''
-    let buffer = ''
     const alLlegar = (pedazo) => {
-      acumulado += pedazo
-      buffer += pedazo
+      let nuevo = pedazo
+      if (!decidido) {
+        // Los primeros caracteres dicen si la IA salió del personaje para ayudarte en español.
+        crudo += pedazo
+        const t = crudo.trimStart()
+        if (t.length < MARCA_TUTOR.length && MARCA_TUTOR.startsWith(t)) return
+        decidido = true
+        esTutor = t.startsWith(MARCA_TUTOR)
+        nuevo = esTutor ? t.slice(MARCA_TUTOR.length).trimStart() : crudo
+        locutor = nuevoLocutor()
+        locutorRef.current = locutor
+      }
+      acumulado += nuevo
+      buffer += nuevo
       setEsperando(false)
-      setTurnos([...historial, { id: idIA, role: 'assistant', content: acumulado }])
+      setTurnos([...historial, { id: idIA, role: 'assistant', content: acumulado, tutor: esTutor }])
       if (!locutor) return
       const { oraciones, resto } = extraerOraciones(buffer, { minimo: 18 })
       buffer = resto
@@ -210,6 +236,8 @@ export function InglesPage() {
   const corregirFrase = async (id, frase, contexto) => {
     try {
       const r = await api.ai.ingles.corregir(frase, nivel, contexto, modelo)
+      // Si le preguntaste algo en español al tutor, no hay nada que corregir.
+      if (r.esPregunta) return
       setTurnos((lista) => lista.map((t) => (t.id === id ? { ...t, correccion: r } : t)))
     } catch {
       /* la corrección es un extra: si falla, la charla sigue */
@@ -265,6 +293,7 @@ export function InglesPage() {
   const pedirDevolucion = async () => {
     pararTodo()
     dictadoRef.current?.detener()
+    dictadoEsRef.current?.detener()
     setPidiendoDev(true)
     setError('')
     try {
@@ -283,8 +312,10 @@ export function InglesPage() {
       if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || tag === 'BUTTON') return
       if (!dictadoRef.current) return
       e.preventDefault()
-      if (dictadoRef.current.activo()) dictadoRef.current.detener()
-      else escuchar()
+      if (dictadoRef.current.activo() || dictadoEsRef.current?.activo()) {
+        dictadoRef.current.detener()
+        dictadoEsRef.current?.detener()
+      } else escuchar()
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
@@ -422,7 +453,7 @@ export function InglesPage() {
                 <div className="ent-vacio">
                   <p>
                     Elegí la situación y tu nivel, y tocá empezar. La otra persona abre la conversación en inglés y vos le contestás:
-                    podés hablar con el micrófono o escribir. Con la barra espaciadora prendés y apagás el micrófono.
+                    podés hablar con el micrófono o escribir. Si no sabés cómo decir algo, preguntáselo en español (“¿cómo se dice…?”) y el tutor te responde. Con la barra espaciadora prendés y apagás el micrófono.
                   </p>
                   <Btn onClick={empezar} disabled={!configurado || !escenarios.length}>
                     Empezar a practicar
@@ -433,10 +464,10 @@ export function InglesPage() {
                 .filter((t) => t.content)
                 .map((t) => (
                   <div key={t.id} className={`ing-turno ing-turno--${t.role === 'user' ? 'yo' : 'ia'}`}>
-                    <div className={`wa-msg ${t.role === 'user' ? 'wa-msg--out' : 'wa-msg--in'}`}>
-                      <small className="ent-quien">{t.role === 'user' ? 'Vos' : 'Ellos'}</small>
+                    <div className={`wa-msg ${t.role === 'user' ? 'wa-msg--out' : 'wa-msg--in'}${t.tutor ? ' ing-tutor' : ''}`}>
+                      <small className="ent-quien">{t.role === 'user' ? 'Vos' : t.tutor ? 'Tutor' : 'Ellos'}</small>
                       <p>{t.content}</p>
-                      {t.role === 'assistant' && (
+                      {t.role === 'assistant' && !t.tutor && (
                         <div className="ing-acc">
                           <button type="button" onClick={() => escucharFrase(t.content)}>
                             🔊 Escuchar
@@ -458,6 +489,7 @@ export function InglesPage() {
                               <strong>Mejor:</strong> {t.correccion.corregido}
                             </p>
                             {t.correccion.explicacion && <small>{t.correccion.explicacion}</small>}
+                            {t.correccion.consejo && <small className="ing-consejo">💡 {t.correccion.consejo}</small>}
                             <button type="button" onClick={() => escucharFrase(t.correccion.corregido)}>
                               🔊 Escuchar cómo se dice
                             </button>
@@ -489,7 +521,7 @@ export function InglesPage() {
                     type="button"
                     className={`ent-mic${escuchando ? ' on' : ''}`}
                     disabled={!configurado || (ocupado && !hablando)}
-                    onClick={() => (escuchando ? dictadoRef.current?.detener() : escuchar())}
+                    onClick={() => (escuchando ? (dictadoRef.current?.detener(), dictadoEsRef.current?.detener()) : escuchar())}
                     aria-pressed={escuchando}
                     aria-label={escuchando ? 'Stop listening' : 'Speak'}
                   >
@@ -498,9 +530,20 @@ export function InglesPage() {
                     </svg>
                   </button>
                 )}
+                {puedeDictar && (
+                  <button
+                    type="button"
+                    className="ing-es"
+                    disabled={!configurado || escuchando || (ocupado && !hablando)}
+                    onClick={() => escuchar(true)}
+                    title="Hablá en español para preguntarle al tutor cómo se dice algo o qué significa"
+                  >
+                    ¿Cómo se dice…? <small>hablar en español</small>
+                  </button>
+                )}
                 <div className="ent-estado" aria-live="polite">
                   {escuchando
-                    ? 'Listening… hablá en inglés y se envía solo cuando termines'
+                    ? 'Listening… hablá y se envía solo cuando termines'
                     : hablando
                       ? 'Hablando… tocá el micrófono para interrumpir'
                       : ocupado

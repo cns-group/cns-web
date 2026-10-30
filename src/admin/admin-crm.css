@@ -343,3 +343,10 @@
   .ent-layout > .admin-card:last-child .ent-chat { flex: 1; min-height: 0; display: flex; flex-direction: column; }
   .ent-chat .ent-log { flex: 1; min-height: 0; height: auto; }
 }
+
+.ing-tutor { border-left: 3px solid var(--admin-accent); }
+.ing-consejo { color: var(--admin-fg); }
+.ing-es { grid-column: 1 / -1; justify-self: start; display: inline-flex; gap: 8px; align-items: baseline; background: none; border: 1px solid var(--admin-line); color: var(--admin-fg); border-radius: 999px; padding: 6px 14px; font: inherit; font-size: 15px; cursor: pointer; transition: border-color .2s, background .2s; }
+.ing-es small { color: var(--admin-muted); font-size: 13px; }
+.ing-es:hover:not(:disabled) { border-color: var(--admin-accent); background: color-mix(in srgb, var(--admin-accent) 8%, transparent); }
+.ing-es:disabled { opacity: .5; cursor: not-allowed; }
