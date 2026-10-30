@@ -63,6 +63,7 @@ export function InglesPage() {
   const [vozOn, setVozOn] = React.useState(inicial.vozOn ?? true)
   const [manosLibres, setManosLibres] = React.useState(inicial.manosLibres ?? false)
   const [corregirOn, setCorregirOn] = React.useState(inicial.corregirOn ?? true)
+  const [corrVoz, setCorrVoz] = React.useState(inicial.corrVoz ?? true)
   const [vozNombre, setVozNombre] = React.useState(inicial.vozNombre || '')
   const [velocidad, setVelocidad] = React.useState(inicial.velocidad || 0.9)
   const [voces, setVoces] = React.useState(() => vocesIdioma(IDIOMA_VOZ))
@@ -115,8 +116,8 @@ export function InglesPage() {
   }, [pararTodo])
 
   React.useEffect(() => {
-    guardarPrefs({ escenario, nivel, vozOn, manosLibres, corregirOn, vozNombre, velocidad })
-  }, [escenario, nivel, vozOn, manosLibres, corregirOn, vozNombre, velocidad])
+    guardarPrefs({ escenario, nivel, vozOn, manosLibres, corregirOn, corrVoz, vozNombre, velocidad })
+  }, [escenario, nivel, vozOn, manosLibres, corregirOn, corrVoz, vozNombre, velocidad])
 
   React.useEffect(() => {
     const el = logRef.current
@@ -157,7 +158,7 @@ export function InglesPage() {
   const soloMensajes = (lista) => lista.map(({ role, content, tutor }) => ({ role, content: tutor ? `${MARCA_TUTOR} ${content}` : content }))
 
   /** La IA responde por pedazos y se va diciendo en voz alta frase por frase. */
-  const turnoIA = async (historial) => {
+  const turnoIA = async (historial, correccion = null) => {
     setOcupado(true)
     setEsperando(true)
     setError('')
@@ -172,6 +173,32 @@ export function InglesPage() {
     let crudo = ''
     let acumulado = ''
     let buffer = ''
+
+    // La corrección se dice en voz alta (en español) antes de seguir con la charla en inglés.
+    const puertaLista = (correccion ? Promise.race([correccion, new Promise((r) => setTimeout(() => r(null), 3000))]) : Promise.resolve(null)).then((r) => {
+      corrDicha = r
+      gateListo = true
+    })
+    let corrDicha = null
+    let gateListo = false
+    let abierta = false
+    const cola = []
+    const abrir = () => {
+      if (abierta || !gateListo || !locutor) return
+      abierta = true
+      const c = corrDicha
+      if (corrVoz && c && !c.esPregunta && !c.correcto && c.explicacion) {
+        setHablando(true)
+        locutor.decir(`Ojo: ${c.explicacion} Mejor decilo así:`, { idioma: 'es', vozNombre: '' })
+        locutor.decir(c.corregido)
+      }
+      cola.splice(0).forEach((o) => locutor.decir(o))
+    }
+    const decirOEncolar = (o) => {
+      if (abierta) locutor.decir(o)
+      else cola.push(o)
+    }
+    puertaLista.then(abrir)
 
     const nuevoLocutor = () =>
       vozOn && puedeHablar
@@ -199,6 +226,7 @@ export function InglesPage() {
         nuevo = esTutor ? t.slice(MARCA_TUTOR.length).trimStart() : crudo
         locutor = nuevoLocutor()
         locutorRef.current = locutor
+        abrir()
       }
       acumulado += nuevo
       buffer += nuevo
@@ -208,15 +236,17 @@ export function InglesPage() {
       const { oraciones, resto } = extraerOraciones(buffer, { minimo: 18 })
       buffer = resto
       if (oraciones.length) setHablando(true)
-      oraciones.forEach((o) => locutor.decir(o))
+      oraciones.forEach(decirOEncolar)
     }
 
     try {
       await api.ai.ingles.conversarStream(escenario, nivel, soloMensajes(historial), modelo, alLlegar, corte.signal)
       if (locutor) {
+        await puertaLista
+        abrir()
         if (buffer.trim()) {
           setHablando(true)
-          locutor.decir(buffer)
+          decirOEncolar(buffer)
         }
         locutor.cerrar()
       } else if (manosLibres) {
@@ -238,10 +268,12 @@ export function InglesPage() {
     try {
       const r = await api.ai.ingles.corregir(frase, nivel, contexto, modelo)
       // Si le preguntaste algo en español al tutor, no hay nada que corregir.
-      if (r.esPregunta) return
+      if (r.esPregunta) return null
       setTurnos((lista) => lista.map((t) => (t.id === id ? { ...t, correccion: r } : t)))
+      return r
     } catch {
       /* la corrección es un extra: si falla, la charla sigue */
+      return null
     }
   }
 
@@ -254,8 +286,8 @@ export function InglesPage() {
     const ultimaIA = [...turnos].reverse().find((x) => x.role === 'assistant')?.content
     const historial = [...turnos, { id, role: 'user', content: t }]
     setTurnos(historial)
-    if (corregirOn) corregirFrase(id, t, ultimaIA)
-    turnoIA(historial)
+    const correccion = corregirOn ? corregirFrase(id, t, ultimaIA) : null
+    turnoIA(historial, correccion)
   }
   enviarRef.current = enviar
 
@@ -389,6 +421,10 @@ export function InglesPage() {
             <label className="ent-check">
               <input type="checkbox" checked={corregirOn} onChange={(e) => setCorregirOn(e.target.checked)} />
               Corregirme cada frase (aparece debajo de lo que decís)
+            </label>
+            <label className="ent-check">
+              <input type="checkbox" checked={corrVoz} disabled={!corregirOn || !vozOn} onChange={(e) => setCorrVoz(e.target.checked)} />
+              Decirme las correcciones en voz alta, en español, y seguir hablando en inglés
             </label>
 
             <div className="ent-voz">

@@ -244,11 +244,11 @@ export function crearLocutor({ vozNombre, velocidad = 1, idioma = 'es', onFin } 
     onFin?.()
   }
   return {
-    decir(frase) {
-      const limpio = normalizarParaVoz(frase, idioma)
+    decir(frase, { idioma: idiomaFrase = idioma, vozNombre: vozFrase = vozNombre } = {}) {
+      const limpio = normalizarParaVoz(frase, idiomaFrase)
       if (cancelado || !hayVoz() || !limpio) return
       pendientes++
-      const u = armarVoz(limpio, { vozNombre, velocidad, idioma })
+      const u = armarVoz(limpio, { vozNombre: vozFrase, velocidad, idioma: idiomaFrase })
       const listo = () => {
         pendientes = Math.max(0, pendientes - 1)
         comprobar()
