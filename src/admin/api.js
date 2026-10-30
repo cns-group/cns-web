@@ -35,6 +35,51 @@ async function request(path, options = {}) {
   return res.json()
 }
 
+/**
+ * POST que responde por eventos (SSE) con `{ t: "pedazo" }`, `{ fin: true }` o `{ error: "…" }`.
+ * Llama a `onPedazo` con cada trozo de texto a medida que llega.
+ */
+async function stream(path, body, onPedazo, signal) {
+  const headers = { 'Content-Type': 'application/json' }
+  const token = getToken()
+  if (token) headers.Authorization = `Bearer ${token}`
+  const res = await fetch(`${API_BASE}${path}`, { method: 'POST', headers, body: JSON.stringify(body), signal })
+  if (res.status === 401) {
+    setToken(null)
+    throw new Error('UNAUTHORIZED')
+  }
+  if (!res.ok || !res.body) {
+    let msg = `Error ${res.status}`
+    try {
+      const j = await res.json()
+      msg = Array.isArray(j.message) ? j.message.join(', ') : j.message || msg
+    } catch { /* ignore */ }
+    throw new Error(msg)
+  }
+  const lector = res.body.getReader()
+  const decodificador = new TextDecoder()
+  let resto = ''
+  for (;;) {
+    const { done, value } = await lector.read()
+    if (done) break
+    resto += decodificador.decode(value, { stream: true })
+    let corte
+    while ((corte = resto.indexOf('\n\n')) >= 0) {
+      const bloque = resto.slice(0, corte)
+      resto = resto.slice(corte + 2)
+      if (!bloque.startsWith('data:')) continue
+      let evento
+      try {
+        evento = JSON.parse(bloque.slice(5))
+      } catch {
+        continue
+      }
+      if (evento.error) throw new Error(evento.error)
+      if (evento.t) onPedazo(evento.t)
+    }
+  }
+}
+
 export const api = {
   getToken,
   setToken,
@@ -123,6 +168,10 @@ export const api = {
       escenarios: () => request('/ai/entrenador/escenarios'),
       roleplay: (escenario, nivel, turnos, modelo) =>
         request('/ai/entrenador/roleplay', { method: 'POST', body: JSON.stringify({ escenario, nivel, turnos, ...(modelo ? { modelo } : {}) }) }),
+      roleplayStream: (escenario, nivel, turnos, modelo, onPedazo, signal) =>
+        stream('/ai/entrenador/roleplay/stream', { escenario, nivel, turnos, ...(modelo ? { modelo } : {}) }, onPedazo, signal),
+      coachStream: (turnos, modelo, onPedazo, signal) =>
+        stream('/ai/entrenador/coach/stream', { turnos, ...(modelo ? { modelo } : {}) }, onPedazo, signal),
       coach: (turnos, modelo) =>
         request('/ai/entrenador/coach', { method: 'POST', body: JSON.stringify({ turnos, ...(modelo ? { modelo } : {}) }) }),
       feedback: (escenario, nivel, turnos, modelo) =>
