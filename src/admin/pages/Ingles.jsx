@@ -75,6 +75,7 @@ export function InglesPage() {
   const dictadoRef = React.useRef(null)
   const dictadoEsRef = React.useRef(null) // micrófono en español, para preguntarle cosas al tutor
   const modoEsRef = React.useRef(false)
+  const puedeHablarRef = React.useRef(false)
   const [modoEs, setModoEsEstado] = React.useState(false) // true: hablás (o escribís) en español y el tutor te responde en español
   const setModoEs = (v) => {
     modoEsRef.current = v
@@ -364,8 +365,29 @@ export function InglesPage() {
         dictadoEsRef.current?.detener()
       } else escuchar()
     }
+    // Mantener apretada la E: habla en español (el tutor te responde en español). Al soltarla, se envía.
+    const abajoE = (e) => {
+      if (e.code !== 'KeyE' || e.repeat || e.ctrlKey || e.metaKey || e.altKey) return
+      const tag = e.target?.tagName
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || e.target?.isContentEditable) return
+      if (!puedeHablarRef.current || !dictadoEsRef.current || dictadoEsRef.current.activo()) return
+      e.preventDefault()
+      dictadoRef.current?.detener()
+      setModoEs(true)
+      escuchar()
+    }
+    const sueltaE = (e) => {
+      if (e.code !== 'KeyE') return
+      if (dictadoEsRef.current?.activo()) dictadoEsRef.current.detener()
+    }
     window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
+    window.addEventListener('keydown', abajoE)
+    window.addEventListener('keyup', sueltaE)
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      window.removeEventListener('keydown', abajoE)
+      window.removeEventListener('keyup', sueltaE)
+    }
   }, [escuchar])
 
   const escucharFrase = (frase) => {
@@ -374,6 +396,7 @@ export function InglesPage() {
   }
 
   const configurado = status?.configurado
+  puedeHablarRef.current = Boolean(empezo && !devolucion && configurado)
   const pasoMario = turnos.filter((t) => t.role === 'user').length
   const esc = escenarios.find((e) => e.id === escenario)
 
@@ -509,7 +532,7 @@ export function InglesPage() {
                 <div className="ent-vacio">
                   <p>
                     Elegí la situación y tu nivel, y tocá empezar. La otra persona abre la conversación en inglés y vos le contestás:
-                    podés hablar con el micrófono o escribir. Si no sabés cómo decir algo, preguntáselo en español (“¿cómo se dice…?”) y el tutor te responde. Con la barra espaciadora prendés y apagás el micrófono.
+                    podés hablar con el micrófono o escribir. Si no sabés cómo decir algo, mantené apretada la tecla E y preguntáselo en español (“¿cómo se dice…?”): el tutor te responde en español. Con la barra espaciadora prendés y apagás el micrófono.
                   </p>
                   <Btn onClick={empezar} disabled={!configurado || !escenarios.length}>
                     Empezar a practicar
@@ -587,7 +610,7 @@ export function InglesPage() {
                   </button>
                 )}
                 <div className="ing-idioma" role="group" aria-label="Idioma en el que hablás">
-                  <span>Hablo en</span>
+                  <span title="Atajo: mantené apretada la tecla E para hablar en español">Hablo en</span>
                   <button type="button" className={modoEs ? '' : 'on'} aria-pressed={!modoEs} onClick={() => { dictadoRef.current?.detener(); dictadoEsRef.current?.detener(); setModoEs(false) }}>
                     Inglés
                   </button>
@@ -607,7 +630,7 @@ export function InglesPage() {
                         : modoEs
                           ? 'Modo español: tocá el micrófono y preguntá lo que quieras, el tutor te responde en español'
                           : puedeDictar
-                            ? 'Tocá el micrófono (o la barra espaciadora) y hablá en inglés'
+                            ? 'Tocá el micrófono (o la barra espaciadora) y hablá en inglés. Para preguntar en español, mantené apretada la E'
                             : 'Escribí tu respuesta en inglés'}
                   {hablando && (
                     <button type="button" className="admin-link-btn" onClick={pararTodo}>
