@@ -53,6 +53,13 @@ export function LegalPageShell({ children, c }) {
             style={{ width: 94, height: 'auto' }}
           />
         </Link>
+        <nav className="legal-nav" aria-label="Principal">
+          {c.nav.links.map((l) => (
+            <a key={l.id} href={l.href || `/#${l.id}`}>
+              {l.label}
+            </a>
+          ))}
+        </nav>
         <Link className="legal-back" to="/">{c.legal.back}</Link>
       </header>
       <main id="main" className="legal-main">

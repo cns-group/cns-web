@@ -55,8 +55,8 @@ export function Nav({ c, onSection }) {
           {c.nav.links.map(l => (
             <a
               key={l.id}
-              href={`#${l.id}`}
-              onClick={go(l.id)}
+              href={l.href || `#${l.id}`}
+              onClick={l.href ? undefined : go(l.id)}
             >
               {l.label}
             </a>
@@ -102,7 +102,7 @@ export function Nav({ c, onSection }) {
           </div>
           <nav className="nav-drawer-links" aria-label="Menú móvil">
             {c.nav.links.map(l => (
-              <a key={l.id} href={`#${l.id}`} onClick={go(l.id)}>{l.label}</a>
+              <a key={l.id} href={l.href || `#${l.id}`} onClick={l.href ? close : go(l.id)}>{l.label}</a>
             ))}
           </nav>
           <div className="nav-drawer-cta">
