@@ -404,7 +404,7 @@ export function InglesPage() {
     <>
       <PageHeader
         title="Entrenador de inglés"
-        subtitle="Practicá conversaciones hablando en inglés: la IA hace de la otra persona, te contesta con voz, te corrige frase por frase y al final te dice qué mejorar."
+        subtitle={empezo ? undefined : "Practicá conversaciones hablando en inglés: la IA hace de la otra persona, te contesta con voz, te corrige frase por frase y al final te dice qué mejorar."}
         actions={
           <>
             <Btn variant="ghost" onClick={() => setVerConfig((v) => !v)}>{verConfig ? 'Ocultar configuración' : '⚙ Configuración'}</Btn>

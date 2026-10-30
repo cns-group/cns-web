@@ -304,7 +304,7 @@ export function EntrenadorPage() {
     <>
       <PageHeader
         title="Entrenador de ventas"
-        subtitle="Practicá tus llamadas hablando: la IA hace de cliente, te contesta con voz y después te dice cómo mejorar. Usa lo que aprendiste en tu cerebro."
+        subtitle={empezo ? undefined : "Practicá tus llamadas hablando: la IA hace de cliente, te contesta con voz y después te dice cómo mejorar. Usa lo que aprendiste en tu cerebro."}
         actions={
           <>
             <Btn variant="ghost" onClick={() => setVerConfig((v) => !v)}>{verConfig ? 'Ocultar configuración' : '⚙ Configuración'}</Btn>
