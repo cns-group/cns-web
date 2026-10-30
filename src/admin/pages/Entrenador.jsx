@@ -435,7 +435,7 @@ export function EntrenadorPage() {
             </div>
           }
         >
-          <div className="wa-chat">
+          <div className="wa-chat ent-chat">
             <div className="wa-chat-body ent-log" ref={logRef}>
               {roleplay && !empezo && (
                 <div className="ent-vacio">
