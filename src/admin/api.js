@@ -182,6 +182,17 @@ export const api = {
       feedback: (escenario, nivel, turnos, modelo) =>
         request('/ai/entrenador/feedback', { method: 'POST', body: JSON.stringify({ escenario, nivel, turnos, ...(modelo ? { modelo } : {}) }) }),
     },
+    ingles: {
+      escenarios: () => request('/ai/ingles/escenarios'),
+      conversarStream: (escenario, nivel, turnos, modelo, onPedazo, signal) =>
+        stream('/ai/ingles/conversar/stream', { escenario, nivel, turnos, ...(modelo ? { modelo } : {}) }, onPedazo, signal),
+      corregir: (texto, nivel, contexto, modelo) =>
+        request('/ai/ingles/corregir', { method: 'POST', body: JSON.stringify({ texto, nivel, ...(contexto ? { contexto } : {}), ...(modelo ? { modelo } : {}) }) }),
+      traducir: (texto, modelo) =>
+        request('/ai/ingles/traducir', { method: 'POST', body: JSON.stringify({ texto, ...(modelo ? { modelo } : {}) }) }),
+      feedback: (escenario, nivel, turnos, modelo) =>
+        request('/ai/ingles/feedback', { method: 'POST', body: JSON.stringify({ escenario, nivel, turnos, ...(modelo ? { modelo } : {}) }) }),
+    },
     chat: (mensajes, modelo) =>
       request('/ai/chat', { method: 'POST', body: JSON.stringify({ mensajes, ...(modelo ? { modelo } : {}) }) }),
   },

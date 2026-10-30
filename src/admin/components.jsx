@@ -12,6 +12,7 @@ const NAV = [
   { to: '/admin/demos', label: 'Demos' },
   { to: '/admin/whatsapp', label: 'WhatsApp' },
   { to: '/admin/entrenador', label: 'Entrenador de ventas' },
+  { to: '/admin/ingles', label: 'Entrenador de inglés' },
   { to: '/admin/asistente', label: 'Asistente IA' },
   { to: '/admin/embudo', label: 'Embudo' },
 ]

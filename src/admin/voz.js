@@ -73,7 +73,7 @@ const SIGLAS = [
 const sinPuntos = (s) => s.replace(/\./g, '')
 
 /** Deja el texto como se diría en voz alta: sin markdown, con números, plata, horas y siglas en palabras. */
-export function normalizarParaVoz(texto) {
+export function normalizarParaVoz(texto, idioma = 'es') {
   let t = String(texto || '')
     .replace(/https?:\/\/\S+/g, '')
     .replace(/[*_`#>~]/g, '')
@@ -81,6 +81,9 @@ export function normalizarParaVoz(texto) {
     .replace(/\([^)]{0,60}\)/g, '')
     .replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/gu, '')
     .replace(/[—–]/g, ', ')
+
+  // En inglés no hace falta pasar números ni siglas a palabras: solo se limpia lo que no se lee bien.
+  if (/^en/i.test(idioma)) return t.replace(/\s+/g, ' ').trim()
 
   for (const [re, dicho] of SIGLAS) t = t.replace(re, dicho)
 
@@ -161,17 +164,23 @@ function puntaje(v) {
   else if (/online|google/i.test(v.name)) p -= 8
   if (/es[-_]AR/i.test(v.lang)) p -= 6
   else if (/es[-_](UY|US|MX|419|CL|CO)/i.test(v.lang)) p -= 3
+  else if (/en[-_]US/i.test(v.lang)) p -= 6
+  else if (/en[-_](GB|AU|CA)/i.test(v.lang)) p -= 3
   return p
 }
 
-/** Voces en español disponibles, las más naturales y rioplatenses primero. */
-export function vocesEspanol() {
+/** Voces de un idioma ('es' o 'en'), las más naturales primero (en español, las rioplatenses; en inglés, las de EE.UU.). */
+export function vocesIdioma(prefijo = 'es') {
   if (!hayVoz()) return []
+  const re = new RegExp(`^${prefijo}([-_]|$)`, 'i')
   return window.speechSynthesis
     .getVoices()
-    .filter((v) => /^es([-_]|$)/i.test(v.lang))
+    .filter((v) => re.test(v.lang))
     .sort((a, b) => puntaje(a) - puntaje(b) || a.name.localeCompare(b.name))
 }
+
+/** Voces en español disponibles, las más naturales y rioplatenses primero. */
+export const vocesEspanol = () => vocesIdioma('es')
 
 /** Avisa cuando el navegador termina de cargar las voces (en Chrome llegan tarde). */
 export function alCambiarVoces(fn) {
@@ -184,15 +193,15 @@ export function detenerVoz() {
   if (hayVoz()) window.speechSynthesis.cancel()
 }
 
-function armarVoz(texto, { vozNombre, velocidad = 1 }) {
+function armarVoz(texto, { vozNombre, velocidad = 1, idioma = 'es' }) {
   const u = new SpeechSynthesisUtterance(texto)
-  const voces = vocesEspanol()
+  const voces = vocesIdioma(idioma)
   const voz = voces.find((v) => v.name === vozNombre) || voces[0]
   if (voz) {
     u.voice = voz
     u.lang = voz.lang
   } else {
-    u.lang = 'es-AR'
+    u.lang = /^en/i.test(idioma) ? 'en-US' : 'es-AR'
   }
   // Un poco de vida: las preguntas suben apenas el tono y la velocidad varía una pizca de frase en frase.
   u.pitch = /\?["')\]]*\s*$/.test(texto) ? 1.06 : 1
@@ -201,14 +210,14 @@ function armarVoz(texto, { vozNombre, velocidad = 1 }) {
 }
 
 /** Lee un texto en voz alta. `onFin` se llama al terminar (o si no se pudo hablar). */
-export function hablar(texto, { vozNombre, velocidad = 1, onFin } = {}) {
-  const limpio = normalizarParaVoz(texto)
+export function hablar(texto, { vozNombre, velocidad = 1, idioma = 'es', onFin } = {}) {
+  const limpio = normalizarParaVoz(texto, idioma)
   if (!hayVoz() || !limpio) {
     onFin?.()
     return
   }
   window.speechSynthesis.cancel()
-  const u = armarVoz(limpio, { vozNombre, velocidad })
+  const u = armarVoz(limpio, { vozNombre, velocidad, idioma })
   let terminado = false
   const fin = () => {
     if (terminado) return
@@ -224,7 +233,7 @@ export function hablar(texto, { vozNombre, velocidad = 1, onFin } = {}) {
  * Locutor: recibe frases de a una (a medida que la IA las escribe) y las va diciendo en orden.
  * `cerrar()` avisa que no vienen más; `onFin` se llama cuando se dijo todo. `cancelar()` corta en seco.
  */
-export function crearLocutor({ vozNombre, velocidad = 1, onFin } = {}) {
+export function crearLocutor({ vozNombre, velocidad = 1, idioma = 'es', onFin } = {}) {
   let pendientes = 0
   let cerrado = false
   let cancelado = false
@@ -236,10 +245,10 @@ export function crearLocutor({ vozNombre, velocidad = 1, onFin } = {}) {
   }
   return {
     decir(frase) {
-      const limpio = normalizarParaVoz(frase)
+      const limpio = normalizarParaVoz(frase, idioma)
       if (cancelado || !hayVoz() || !limpio) return
       pendientes++
-      const u = armarVoz(limpio, { vozNombre, velocidad })
+      const u = armarVoz(limpio, { vozNombre, velocidad, idioma })
       const listo = () => {
         pendientes = Math.max(0, pendientes - 1)
         comprobar()
