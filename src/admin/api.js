@@ -196,6 +196,16 @@ export const api = {
     chat: (mensajes, modelo) =>
       request('/ai/chat', { method: 'POST', body: JSON.stringify({ mensajes, ...(modelo ? { modelo } : {}) }) }),
   },
+  articulos: {
+    listAdmin: () => request('/articulos/admin/todos'),
+    getAdmin: (id) => request(`/articulos/admin/${id}`),
+    create: (datos) => request('/articulos', { method: 'POST', body: JSON.stringify(datos) }),
+    update: (id, datos) => request(`/articulos/${id}`, { method: 'PATCH', body: JSON.stringify(datos) }),
+    remove: (id) => request(`/articulos/${id}`, { method: 'DELETE' }),
+    /** La imagen viaja como binario puro: el Content-Type es el de la propia imagen. */
+    uploadImage: (archivo) =>
+      request('/articulos/imagenes', { method: 'POST', body: archivo, headers: { 'Content-Type': archivo.type || 'image/jpeg' } }),
+  },
   setupSteps: {
     update: (id, data) =>
       request(`/setup-steps/${id}`, { method: 'PATCH', body: JSON.stringify(data) }),

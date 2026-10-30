@@ -1,0 +1,48 @@
+/* Artículos (blog): listado y página de cada artículo. Usa las variables de la landing. */
+.art-lista, .art-pagina { max-width: 1080px; margin: 0 auto; }
+.art-pagina { max-width: 760px; }
+.art-lista-hd { margin-bottom: clamp(28px, 5vh, 48px); }
+.art-lista-hd h1 { font-size: clamp(34px, 5vw, 54px); margin: 0 0 12px; }
+.art-lista-hd p { margin: 0; max-width: 60ch; font-size: var(--fs-body); line-height: 1.55; color: var(--fg-2); }
+.art-aviso { padding: 20px 0; font-size: var(--fs-body); color: var(--fg-2); }
+.art-aviso a { color: var(--accent); }
+
+.art-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 22px; }
+.art-card { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: var(--radius, 18px); overflow: hidden; background: var(--surface); color: inherit; text-decoration: none; transition: transform .25s cubic-bezier(.16, 1, .3, 1), border-color .25s; }
+.art-card:hover { transform: translateY(-4px); border-color: var(--accent); }
+.art-card img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; background: var(--surface-2); }
+.art-card-txt { padding: 18px 20px 22px; display: grid; gap: 8px; }
+.art-card-txt time { font-size: 14px; color: var(--muted); }
+.art-card-txt h2 { margin: 0; font-size: 26px; line-height: 1.1; color: var(--fg); }
+.art-card-txt p { margin: 0; font-size: 16px; line-height: 1.5; color: var(--fg-2); }
+
+.art-volver { display: inline-block; margin-bottom: 22px; font-size: 15px; color: var(--fg-2); text-decoration: none; }
+.art-volver:hover { color: var(--accent); }
+.art-hd h1 { font-size: clamp(34px, 5.2vw, 56px); line-height: 1.02; margin: 0 0 16px; }
+.art-bajada { margin: 0 0 14px; font-size: 20px; line-height: 1.5; color: var(--fg-2); }
+.art-meta { margin: 0 0 28px; font-size: 14px; color: var(--muted); }
+.art-portada { margin: 0 0 32px; }
+.art-portada img { width: 100%; border-radius: var(--radius-sm, 10px); display: block; }
+
+/* Cuerpo: tipografía de lectura, no la de los titulares de la landing */
+.art-cuerpo { font-family: "Arial", "Helvetica Neue", sans-serif; font-size: 18px; line-height: 1.75; color: var(--fg-2); letter-spacing: 0; }
+.art-cuerpo > * + * { margin-top: 1.1em; }
+.art-cuerpo h2 { font-size: 34px; line-height: 1.1; margin: 1.8em 0 .4em; color: var(--fg); }
+.art-cuerpo h3 { font-size: 26px; line-height: 1.15; margin: 1.5em 0 .3em; color: var(--fg); }
+.art-cuerpo p { margin: 0; }
+.art-cuerpo p + p { margin-top: 1.1em; }
+.art-cuerpo a { color: var(--accent); text-underline-offset: 3px; }
+.art-cuerpo strong { color: var(--fg); }
+.art-cuerpo code { padding: 1px 6px; border-radius: 6px; background: var(--surface-2); font-family: var(--f-mono, monospace); font-size: .9em; }
+.art-cuerpo ul { padding-left: 1.3em; }
+.art-cuerpo li + li { margin-top: .4em; }
+.art-cuerpo blockquote { margin-left: 0; padding: 4px 0 4px 20px; border-left: 3px solid var(--accent); font-size: 1.1em; color: var(--fg); font-style: italic; }
+.art-cuerpo figure { margin: 1.8em 0; }
+.art-cuerpo figure img { width: 100%; height: auto; border-radius: var(--radius-sm, 10px); display: block; }
+.art-cuerpo figcaption { margin-top: 10px; font-size: 14px; line-height: 1.4; color: var(--muted); text-align: center; }
+
+.art-cierre { margin-top: 56px; padding: 28px; border: 1px solid var(--line); border-radius: var(--radius, 18px); background: var(--surface); display: grid; gap: 12px; justify-items: start; }
+.art-cierre h2 { margin: 0; font-size: 30px; }
+.art-cierre p { margin: 0; font-size: 17px; line-height: 1.5; color: var(--fg-2); }
+.art-cta { display: inline-block; padding: 12px 22px; border-radius: 999px; background: var(--accent); color: var(--accent-ink, #fff); font-size: 18px; text-decoration: none; transition: transform .2s; }
+.art-cta:hover { transform: translateY(-2px); }

@@ -39,7 +39,7 @@ function LegalDocument({ doc }) {
   )
 }
 
-function LegalPageShell({ children, c }) {
+export function LegalPageShell({ children, c }) {
   return (
     <div className="app legal-page">
       <header className="legal-top">

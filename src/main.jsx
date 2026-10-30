@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import App from './App'
 import AdminApp from './admin/AdminApp'
 import { TermsPage, PrivacyPage } from './legal-pages'
+import { ArticuloPage, ArticulosPage } from './articulos'
 import '@fontsource-variable/manrope'
 import './fonts.css'
 import './styles.css'
@@ -20,6 +21,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/admin/*" element={<AdminApp />} />
         <Route path="/terminos" element={<TermsPage />} />
         <Route path="/privacidad" element={<PrivacyPage />} />
+        <Route path="/articulos" element={<ArticulosPage />} />
+        <Route path="/articulos/:slug" element={<ArticuloPage />} />
         <Route path="/*" element={<App />} />
       </Routes>
     </BrowserRouter>
