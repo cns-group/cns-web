@@ -63,19 +63,25 @@ export function EntrenadorPage() {
 
   // Voz
   const [vozOn, setVozOn] = React.useState(inicial.vozOn ?? true)
-  const [manosLibres, setManosLibres] = React.useState(inicial.manosLibres ?? false)
+  const [manosLibres, setManosLibres] = React.useState(inicial.mlV === 2 ? (inicial.manosLibres ?? true) : true)
   const [vozNombre, setVozNombre] = React.useState(inicial.vozNombre || '')
   const [velocidad, setVelocidad] = React.useState(inicial.velocidad || 1)
   const [voces, setVoces] = React.useState(() => vocesEspanol())
   const [escuchando, setEscuchando] = React.useState(false)
   const [hablando, setHablando] = React.useState(false)
   const [parcial, setParcial] = React.useState('')
+  const [pausado, setPausado] = React.useState(false) // micrófono apagado a mano
 
   const logRef = React.useRef(null)
   const dictadoRef = React.useRef(null)
   const enviarRef = React.useRef(null)
   const locutorRef = React.useRef(null)
   const cortarRef = React.useRef(null)
+  const escucharRef = React.useRef(null)
+  const alternarMicRef = React.useRef(null)
+  const puedeRearmarRef = React.useRef(() => false)
+  const pausaRef = React.useRef(false) // el usuario apagó el micrófono a mano: no se reabre solo
+  const sinMicRef = React.useRef(false) // el navegador no deja usar el micrófono: no insistir
 
   const cargarEscenarios = React.useCallback(
     () =>
@@ -118,7 +124,7 @@ export function EntrenadorPage() {
   }, [pararTodo, cargarEscenarios])
 
   React.useEffect(() => {
-    guardarPrefs({ modo, escenario, nivel, vozOn, manosLibres, vozNombre, velocidad })
+    guardarPrefs({ mlV: 2, modo, escenario, nivel, vozOn, manosLibres, vozNombre, velocidad })
   }, [modo, escenario, nivel, vozOn, manosLibres, vozNombre, velocidad])
 
   React.useEffect(() => {
@@ -135,17 +141,36 @@ export function EntrenadorPage() {
     d.iniciar()
     setEscuchando(true)
   }, [pararTodo])
+  escucharRef.current = escuchar
+
+  /** Prende o apaga el micrófono a mano. Apagarlo frena también la reapertura automática. */
+  const alternarMic = () => {
+    if (dictadoRef.current?.activo()) {
+      pausaRef.current = true
+      setPausado(true)
+      dictadoRef.current.detener()
+    } else {
+      pausaRef.current = false
+      setPausado(false)
+      sinMicRef.current = false
+      escuchar()
+    }
+  }
+  alternarMicRef.current = alternarMic
 
   // El dictado se crea una vez; llama a `enviarRef` para usar siempre la versión más nueva de `enviar`.
   React.useEffect(() => {
     dictadoRef.current = crearDictado({
       onParcial: setParcial,
-      onFin: () => {
+      onFin: (texto) => {
         setEscuchando(false)
         setParcial('')
+        // Manos libres: si no dijiste nada, el micrófono se vuelve a abrir solo (el navegador lo corta tras unos segundos de silencio).
+        if (!texto) setTimeout(() => puedeRearmarRef.current() && escucharRef.current?.(), 400)
       },
       onFinal: (t) => enviarRef.current?.(t),
       onError: (m) => {
+        sinMicRef.current = true
         setEscuchando(false)
         setError(m)
       },
@@ -269,12 +294,11 @@ export function EntrenadorPage() {
       if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || tag === 'BUTTON') return
       if (!dictadoRef.current) return
       e.preventDefault()
-      if (dictadoRef.current.activo()) dictadoRef.current.detener()
-      else escuchar()
+      alternarMicRef.current?.()
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [escuchar])
+  }, [])
 
   const borrarEscenario = async () => {
     const e = escenarios.find((x) => x.id === escenario)
@@ -297,6 +321,8 @@ export function EntrenadorPage() {
   const roleplay = modo === 'roleplay'
   const configurado = status?.configurado
   const activo = roleplay ? empezo : true
+  puedeRearmarRef.current = () =>
+    manosLibres && puedeDictar && activo && !pausaRef.current && !sinMicRef.current && !ocupado && !hablando && !devolucion && !pidiendoDev && !document.hidden
   const pasoMario = turnos.filter((t) => t.role === 'user').length
   const esc = escenarios.find((e) => e.id === escenario)
 
@@ -392,7 +418,7 @@ export function EntrenadorPage() {
               </label>
               <label className="ent-check">
                 <input type="checkbox" checked={manosLibres} disabled={!puedeDictar} onChange={(e) => setManosLibres(e.target.checked)} />
-                Manos libres: el micrófono se prende solo después de que la IA habla
+                Manos libres: el micrófono queda abierto y se envía solo cuando terminás de hablar
               </label>
               {puedeHablar && (
                 <>
@@ -496,7 +522,7 @@ export function EntrenadorPage() {
                     type="button"
                     className={`ent-mic${escuchando ? ' on' : ''}`}
                     disabled={!configurado || (ocupado && !hablando)}
-                    onClick={() => (escuchando ? dictadoRef.current?.detener() : escuchar())}
+                    onClick={alternarMic}
                     aria-pressed={escuchando}
                     aria-label={escuchando ? 'Dejar de escuchar' : 'Hablar'}
                   >
@@ -513,7 +539,9 @@ export function EntrenadorPage() {
                       : ocupado
                         ? 'Pensando…'
                         : puedeDictar
-                          ? 'Tocá el micrófono (o la barra espaciadora) y hablá'
+                          ? manosLibres && activo && !pausado
+                            ? 'Manos libres: hablá cuando quieras'
+                            : 'Tocá el micrófono (o la barra espaciadora) y hablá'
                           : 'Escribí tu respuesta'}
                   {hablando && (
                     <button type="button" className="admin-link-btn" onClick={pararTodo}>

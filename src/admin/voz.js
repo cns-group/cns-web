@@ -314,7 +314,7 @@ export function crearDictado({ idioma = 'es-AR', onParcial, onFinal, onFin, onEr
     rec.onend = () => {
       activo = false
       const texto = final.trim()
-      onFin?.()
+      onFin?.(texto)
       if (texto) onFinal?.(texto)
     }
     activo = true
