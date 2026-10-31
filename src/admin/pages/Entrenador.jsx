@@ -1,5 +1,6 @@
 import React from 'react'
 import { api } from '../api'
+import { useAuth } from '../auth'
 import { Badge, Btn, Card, ErrorBox, Field, Modal, PageHeader, Select } from '../components'
 import {
   alCambiarVoces,
@@ -44,6 +45,9 @@ const FRASE_DE_PRUEBA =
 
 export function EntrenadorPage() {
   const inicial = React.useMemo(leerPrefs, [])
+  const { user } = useAuth()
+  // Los escenarios propios son de todos: solo el acceso completo los crea, edita o borra.
+  const puedeEditarEscenarios = !user?.acceso || user.acceso === 'completo'
   const [status, setStatus] = React.useState(null)
   const [escenarios, setEscenarios] = React.useState([])
   const [modo, setModo] = React.useState(inicial.modo || 'roleplay')
@@ -365,6 +369,7 @@ export function EntrenadorPage() {
                   </Select>
                 </label>
                 {esc && <p className="admin-muted ent-persona">Vas a hablar con: {esc.personaje}.</p>}
+                {puedeEditarEscenarios && (
                 <div className="admin-actions ent-esc-acc">
                   <Btn variant="ghost" onClick={() => setEditor({ titulo: '', personaje: '', dolor: '', objeciones: '' })}>
                     + Agregar escenario
@@ -380,6 +385,7 @@ export function EntrenadorPage() {
                     </>
                   )}
                 </div>
+                )}
                 <label className="admin-field">
                   <span>Dificultad</span>
                   <Select value={nivel} onChange={(e) => { reiniciar(); setNivel(e.target.value) }}>

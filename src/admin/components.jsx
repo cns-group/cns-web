@@ -3,6 +3,12 @@ import { Navigate, NavLink, Outlet, useLocation, useNavigate } from 'react-route
 import { useAuth } from './auth'
 import { api } from './api'
 
+// Páginas que puede ver cada acceso limitado (el servidor también lo exige). Sin entrada = acceso completo.
+const RUTAS_POR_ACCESO = {
+  ingles: ['/admin/ingles'],
+  entrenadores: ['/admin/ingles', '/admin/entrenador'],
+}
+
 const NAV = [
   { to: '/admin', end: true, label: 'Dashboard' },
   { to: '/admin/consultas', label: 'Consultas', badge: true },
@@ -22,8 +28,9 @@ export function AdminLayout() {
   const { user, logout } = useAuth()
   const navigate = useNavigate()
   const location = useLocation()
-  // Usuarios con acceso 'ingles': solo ven el entrenador de inglés (el servidor también lo exige).
-  const soloIngles = user?.acceso === 'ingles'
+  // Usuarios con acceso limitado: solo ven algunas páginas.
+  const permitidas = RUTAS_POR_ACCESO[user?.acceso]
+  const restringido = Boolean(permitidas)
   const [unread, setUnread] = React.useState(0)
   const [menuCerrado, setMenuCerrado] = React.useState(() => {
     try {
@@ -44,7 +51,7 @@ export function AdminLayout() {
 
   // Mensajes de WhatsApp sin leer: se muestran como globito en "Consultas".
   React.useEffect(() => {
-    if (soloIngles) return undefined
+    if (restringido) return undefined
     let alive = true
     const tick = () =>
       api.whatsapp.unread().then((d) => alive && setUnread(d.total || 0)).catch(() => {})
@@ -54,18 +61,18 @@ export function AdminLayout() {
       alive = false
       clearInterval(t)
     }
-  }, [soloIngles])
+  }, [restringido])
 
   const handleLogout = () => {
     logout()
     navigate('/admin/login')
   }
 
-  if (soloIngles && location.pathname.replace(/\/+$/, '') !== '/admin/ingles') {
-    return <Navigate to="/admin/ingles" replace />
+  if (restringido && !permitidas.includes(location.pathname.replace(/\/+$/, ''))) {
+    return <Navigate to={permitidas[0]} replace />
   }
 
-  const nav = soloIngles ? NAV.filter((item) => item.to === '/admin/ingles') : NAV
+  const nav = restringido ? NAV.filter((item) => permitidas.includes(item.to)) : NAV
 
   return (
     <div className={`admin-shell${menuCerrado ? ' admin-shell--menu-cerrado' : ''}`}>
