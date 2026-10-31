@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink, Outlet, useNavigate } from 'react-router-dom'
+import { Navigate, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from './auth'
 import { api } from './api'
 
@@ -21,6 +21,9 @@ const NAV = [
 export function AdminLayout() {
   const { user, logout } = useAuth()
   const navigate = useNavigate()
+  const location = useLocation()
+  // Usuarios con acceso 'ingles': solo ven el entrenador de inglés (el servidor también lo exige).
+  const soloIngles = user?.acceso === 'ingles'
   const [unread, setUnread] = React.useState(0)
   const [menuCerrado, setMenuCerrado] = React.useState(() => {
     try {
@@ -41,6 +44,7 @@ export function AdminLayout() {
 
   // Mensajes de WhatsApp sin leer: se muestran como globito en "Consultas".
   React.useEffect(() => {
+    if (soloIngles) return undefined
     let alive = true
     const tick = () =>
       api.whatsapp.unread().then((d) => alive && setUnread(d.total || 0)).catch(() => {})
@@ -50,12 +54,18 @@ export function AdminLayout() {
       alive = false
       clearInterval(t)
     }
-  }, [])
+  }, [soloIngles])
 
   const handleLogout = () => {
     logout()
     navigate('/admin/login')
   }
+
+  if (soloIngles && location.pathname.replace(/\/+$/, '') !== '/admin/ingles') {
+    return <Navigate to="/admin/ingles" replace />
+  }
+
+  const nav = soloIngles ? NAV.filter((item) => item.to === '/admin/ingles') : NAV
 
   return (
     <div className={`admin-shell${menuCerrado ? ' admin-shell--menu-cerrado' : ''}`}>
@@ -80,7 +90,7 @@ export function AdminLayout() {
           </div>
         </div>
         <nav className="admin-nav">
-          {NAV.map((item) => (
+          {nav.map((item) => (
             <NavLink
               key={item.to}
               to={item.to}
