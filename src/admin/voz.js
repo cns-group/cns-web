@@ -271,22 +271,33 @@ export function crearLocutor({ vozNombre, velocidad = 1, idioma = 'es', onFin } 
 
 /* ── Dictado ────────────────────────────────────────────────────────────── */
 
+/** Silencio que se espera antes de dar por terminada la frase y enviarla. */
+export const PAUSA_DICTADO_MS = 2200
+
 /**
  * Dictado por micrófono. Devuelve { iniciar, detener, activo }.
  * `onParcial(texto)` mientras se habla; `onFinal(texto)` al terminar de hablar; `onFin()` cuando se cierra el micrófono;
- * `onError(mensaje)` con un texto listo para mostrar.
+ * `onError(mensaje)` con un texto listo para mostrar. `pausa`: milisegundos de silencio antes de enviar.
  */
-export function crearDictado({ idioma = 'es-AR', onParcial, onFinal, onFin, onError }) {
+export function crearDictado({ idioma = 'es-AR', pausa = PAUSA_DICTADO_MS, onParcial, onFinal, onFin, onError }) {
   if (!reconocimiento()) return null
   let rec = null
   let final = ''
   let activo = false
+  let temporizador = null
+
+  const limpiarTemporizador = () => {
+    clearTimeout(temporizador)
+    temporizador = null
+  }
 
   const iniciar = () => {
     if (activo) return
     rec = new (reconocimiento())()
     rec.lang = idioma
-    rec.continuous = false
+    // Continuo: el navegador no corta en el primer silencio. Cerramos nosotros cuando pasa `pausa` sin que hables,
+    // así podés frenar a pensar a mitad de frase y seguir sin que se envíe lo que llevabas.
+    rec.continuous = true
     rec.interimResults = true
     rec.maxAlternatives = 1
     final = ''
@@ -298,6 +309,10 @@ export function crearDictado({ idioma = 'es-AR', onParcial, onFinal, onFin, onEr
         else parcial += t
       }
       onParcial?.((final + parcial).trim())
+      limpiarTemporizador()
+      temporizador = setTimeout(() => {
+        if (rec && activo) rec.stop()
+      }, pausa)
     }
     rec.onerror = (e) => {
       if (e.error === 'no-speech' || e.error === 'aborted') return
@@ -313,6 +328,7 @@ export function crearDictado({ idioma = 'es-AR', onParcial, onFinal, onFin, onEr
     }
     rec.onend = () => {
       activo = false
+      limpiarTemporizador()
       const texto = final.trim()
       onFin?.(texto)
       if (texto) onFinal?.(texto)
@@ -326,6 +342,7 @@ export function crearDictado({ idioma = 'es-AR', onParcial, onFinal, onFin, onEr
   }
 
   const detener = () => {
+    limpiarTemporizador()
     if (rec && activo) rec.stop()
   }
 
