@@ -155,6 +155,19 @@ export const api = {
         body: JSON.stringify({ cuerpo, ...(lineaId ? { lineaId } : {}) }),
       }),
   },
+  // Entrenador de ventas abierto (/agentedeventas): sin sesión, sin elegir modelo, sin tocar escenarios.
+  publico: {
+    status: () => request('/ai/publico/entrenador/status'),
+    entrenador: {
+      escenarios: () => request('/ai/publico/entrenador/escenarios'),
+      roleplayStream: (escenario, nivel, turnos, _modelo, onPedazo, signal) =>
+        stream('/ai/publico/entrenador/roleplay/stream', { escenario, nivel, turnos }, onPedazo, signal),
+      coachStream: (turnos, _modelo, onPedazo, signal) =>
+        stream('/ai/publico/entrenador/coach/stream', { turnos }, onPedazo, signal),
+      feedback: (escenario, nivel, turnos) =>
+        request('/ai/publico/entrenador/feedback', { method: 'POST', body: JSON.stringify({ escenario, nivel, turnos }) }),
+    },
+  },
   ai: {
     status: () => request('/ai/status'),
     ventas: {

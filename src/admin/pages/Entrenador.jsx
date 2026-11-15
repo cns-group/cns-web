@@ -43,11 +43,13 @@ const SUGERENCIAS_COACH = [
 const FRASE_DE_PRUEBA =
   'Hola Mario, así voy a sonar. Por ejemplo: la auditoría dura 15 minutos y el sistema sale $150.000 por mes. ¿Te parece bien?'
 
-export function EntrenadorPage() {
+export function EntrenadorPage({ publico = false }) {
   const inicial = React.useMemo(leerPrefs, [])
-  const { user } = useAuth()
+  const { user } = useAuth() || {}
+  // En la página pública (/agentedeventas) se usan los endpoints abiertos, sin modelo elegible ni edición de escenarios.
+  const ia = publico ? api.publico : api.ai
   // Los escenarios propios son de todos: solo el acceso completo los crea, edita o borra.
-  const puedeEditarEscenarios = !user?.acceso || user.acceso === 'completo'
+  const puedeEditarEscenarios = !publico && (!user?.acceso || user.acceso === 'completo')
   const [status, setStatus] = React.useState(null)
   const [escenarios, setEscenarios] = React.useState([])
   const [modo, setModo] = React.useState(inicial.modo || 'roleplay')
@@ -89,7 +91,7 @@ export function EntrenadorPage() {
 
   const cargarEscenarios = React.useCallback(
     () =>
-      api.ai.entrenador
+      ia.entrenador
         .escenarios()
         .then((d) => setEscenarios(d.escenarios))
         .catch((e) => setError(e.message)),
@@ -111,11 +113,11 @@ export function EntrenadorPage() {
   }, [])
 
   React.useEffect(() => {
-    api.ai
+    ia
       .status()
       .then((s) => {
         setStatus(s)
-        setModelo(s.modeloVentas || s.modelo)
+        if (!publico) setModelo(s.modeloVentas || s.modelo)
       })
       .catch((e) => setError(e.message))
     cargarEscenarios()
@@ -220,9 +222,9 @@ export function EntrenadorPage() {
 
     try {
       if (modo === 'roleplay') {
-        await api.ai.entrenador.roleplayStream(escenario, nivel, historial, modelo, alLlegar, corte.signal)
+        await ia.entrenador.roleplayStream(escenario, nivel, historial, modelo, alLlegar, corte.signal)
       } else {
-        await api.ai.entrenador.coachStream(historial, modelo, alLlegar, corte.signal)
+        await ia.entrenador.coachStream(historial, modelo, alLlegar, corte.signal)
       }
       if (locutor) {
         if (buffer.trim()) {
@@ -282,7 +284,7 @@ export function EntrenadorPage() {
     setPidiendoDev(true)
     setError('')
     try {
-      setDevolucion(await api.ai.entrenador.feedback(escenario, nivel, turnos, modelo))
+      setDevolucion(await ia.entrenador.feedback(escenario, nivel, turnos, modelo))
     } catch (e) {
       setError(e.message)
     } finally {
@@ -334,7 +336,7 @@ export function EntrenadorPage() {
     <>
       <PageHeader
         title="Entrenador de ventas"
-        subtitle={empezo ? undefined : "Practicá tus llamadas hablando: la IA hace de cliente, te contesta con voz y después te dice cómo mejorar. Usa lo que aprendiste en tu cerebro."}
+        subtitle={empezo ? undefined : publico ? 'Practicá tus llamadas de venta: la IA hace de cliente, te contesta y después te dice cómo mejorar.' : "Practicá tus llamadas hablando: la IA hace de cliente, te contesta con voz y después te dice cómo mejorar. Usa lo que aprendiste en tu cerebro."}
         actions={
           <>
             <Btn variant="ghost" onClick={() => setVerConfig((v) => !v)}>{verConfig ? 'Ocultar configuración' : '⚙ Configuración'}</Btn>
@@ -399,7 +401,7 @@ export function EntrenadorPage() {
               </>
             )}
 
-            {status && (
+            {status && !publico && (
               <label className="admin-field">
                 <span>Modelo</span>
                 <Select value={modelo} onChange={(e) => setModelo(e.target.value)}>
