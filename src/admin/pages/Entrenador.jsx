@@ -84,6 +84,16 @@ function AvatarCliente({ hablando, velocidad = 1 }) {
     if (v) v.playbackRate = velocidad
   }, [velocidad])
 
+  // Si el navegador frena un clip a medias (por ejemplo al cambiar de pestaña), se retoma: un clip no se corta.
+  const retomar = React.useCallback(() => {
+    const v = refs.current[actualRef.current]
+    if (corriendoRef.current && v && !v.ended && v.paused) v.play().catch(() => {})
+  }, [])
+  React.useEffect(() => {
+    document.addEventListener('visibilitychange', retomar)
+    return () => document.removeEventListener('visibilitychange', retomar)
+  }, [retomar])
+
   const alTerminar = (i) => {
     if (i !== actualRef.current) return
     corriendoRef.current = false
@@ -108,6 +118,7 @@ function AvatarCliente({ hablando, velocidad = 1 }) {
           preload={i === actual || i === (actual + 1) % AVATAR_CLIPS.length ? 'auto' : 'metadata'}
           onLoadedMetadata={() => alCargar(i)}
           onEnded={() => alTerminar(i)}
+          onPause={() => { if (i === actualRef.current) retomar() }}
           className={i === actual ? 'ent-avatar-v ent-avatar-v--on' : 'ent-avatar-v'}
         />
       ))}
@@ -550,7 +561,7 @@ export function EntrenadorPage({ publico = false }) {
             </div>
           }
         >
-          {roleplay && empezo && <AvatarCliente hablando={hablando || (ocupado && !esperando)} velocidad={velocidad} />}
+          <div className={roleplay && empezo ? 'ent-escena ent-escena--avatar' : 'ent-escena'}>
           <div className="wa-chat ent-chat">
             <div className="wa-chat-body ent-log" ref={logRef}>
               {roleplay && !empezo && (
@@ -651,6 +662,8 @@ export function EntrenadorPage({ publico = false }) {
                 </form>
               </div>
             )}
+          </div>
+          {roleplay && empezo && <AvatarCliente hablando={hablando || (ocupado && !esperando)} velocidad={velocidad} />}
           </div>
         </Card>
       </div>
