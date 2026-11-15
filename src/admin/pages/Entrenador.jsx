@@ -47,6 +47,8 @@ const AVATAR_CLIPS = [1, 2, 3, 4, 5, 6, 7, 8].map((n) => `/avatar/avatar-${n}.mp
 /** Clips opcionales en bucle cuando no habla (si el archivo no está, se ignora): reposo, escuchando (mientras habla el usuario) y pensando (mientras llega la respuesta). */
 const AVATAR_IDLE = { reposo: '/avatar/reposo.mp4', escuchando: '/avatar/escuchando.mp4', pensando: '/avatar/pensando.mp4' }
 const IDLE_KEYS = Object.keys(AVATAR_IDLE)
+/** Segundo donde se corta el bucle de un clip de reposo (el de "escuchando" termina con un acercamiento a la cara que no sirve en bucle). */
+const IDLE_CORTE = { escuchando: 2.8 }
 
 function mezclar(n, evitar) {
   const a = Array.from({ length: n }, (_, i) => i)
@@ -121,6 +123,20 @@ function AvatarCliente({ hablando, escuchando = false, pensando = false, velocid
       else v.pause()
     })
   }, [enCurso, escuchando, pensando, disponibles])
+
+  // Los clips de reposo con corte vuelven al inicio en ese segundo, cuadro a cuadro.
+  React.useEffect(() => {
+    const corte = idleOn ? IDLE_CORTE[idleOn] : undefined
+    if (!corte) return undefined
+    let raf = 0
+    const tick = () => {
+      const v = idleRefs.current[idleOn]
+      if (v && v.currentTime >= corte) v.currentTime = 0
+      raf = requestAnimationFrame(tick)
+    }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [idleOn])
 
   // Si el navegador frena un clip a medias (por ejemplo al cambiar de pestaña), se retoma: un clip no se corta.
   const retomar = React.useCallback(() => {
