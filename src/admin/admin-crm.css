@@ -425,11 +425,19 @@
 .ent-avatar-v--on { opacity: 1; }
 .ent-switch { display: none; }
 .ent-mic--flotante { display: none; }
+.ent-cfg-ico { margin-right: 6px; }
+@media (max-width: 900px) { .ent-cfg-ico { margin-right: 0; } }
 @media (max-width: 900px) {
   /* Celular: se aprovecha todo el ancho y se ve o el avatar o el chat, con un switch arriba. */
   .admin-main:has(.ent-page) { padding: 8px 6px 12px; }
   .ent-page .admin-page-hd { margin-bottom: 8px; gap: 8px; }
   .ent-page .admin-page-hd h1 { font-size: 24px; }
+  /* Configuración: solo el ícono de la tuerca, y junto al estado "Conectado" en la misma fila. */
+  .ent-page .admin-page-hd { align-items: center; }
+  .ent-page .admin-page-hd .admin-actions { flex-wrap: nowrap; flex: none; gap: 8px; }
+  .ent-cfg { width: 42px; height: 42px; padding: 0; display: grid; place-items: center; }
+  .ent-cfg-ico { font-size: 22px; line-height: 1; }
+  .ent-cfg-txt { display: none; }
   .ent-page .admin-card { padding: 8px; border-radius: 10px; }
   .ent-page .admin-card-hd { margin-bottom: 8px; gap: 8px; flex-wrap: wrap; }
   .ent-page .ent-layout { gap: 8px; }

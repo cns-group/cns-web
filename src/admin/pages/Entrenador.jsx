@@ -508,7 +508,10 @@ export function EntrenadorPage({ publico = false }) {
         subtitle={empezo ? undefined : publico ? 'Practicá tus llamadas de venta: la IA hace de cliente, te contesta y después te dice cómo mejorar.' : "Practicá tus llamadas hablando: la IA hace de cliente, te contesta con voz y después te dice cómo mejorar. Usa lo que aprendiste en tu cerebro."}
         actions={
           <>
-            <Btn variant="ghost" onClick={() => setVerConfig((v) => !v)}>{verConfig ? 'Ocultar configuración' : '⚙ Configuración'}</Btn>
+            <Btn variant="ghost" className="admin-btn admin-btn--ghost ent-cfg" onClick={() => setVerConfig((v) => !v)} aria-label={verConfig ? 'Ocultar configuración' : 'Configuración'} title="Configuración">
+              <span aria-hidden="true" className="ent-cfg-ico">⚙</span>
+              <span className="ent-cfg-txt">{verConfig ? 'Ocultar configuración' : 'Configuración'}</span>
+            </Btn>
             {status && <Badge tone={configurado ? 'success' : 'danger'}>{configurado ? 'Conectado' : 'Falta la clave'}</Badge>}
           </>
         }
