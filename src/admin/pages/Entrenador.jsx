@@ -43,6 +43,44 @@ const SUGERENCIAS_COACH = [
 const FRASE_DE_PRUEBA =
   'Hola Mario, así voy a sonar. Por ejemplo: la auditoría dura 15 minutos y el sistema sale $150.000 por mes. ¿Te parece bien?'
 
+const AVATAR_CLIPS = [1, 2, 3, 4].map((n) => `/avatar/avatar-${n}.mp4`)
+
+/** Avatar del cliente: mientras la IA responde reproduce sus clips hablando, uno tras otro (los 4 en rotación); en silencio queda quieto. */
+function AvatarCliente({ hablando }) {
+  const [actual, setActual] = React.useState(0)
+  const refs = React.useRef([])
+
+  React.useEffect(() => {
+    const v = refs.current[actual]
+    if (!v) return
+    if (hablando) v.play().catch(() => {})
+    else v.pause()
+  }, [hablando, actual])
+
+  const siguiente = () => {
+    const v = refs.current[actual]
+    if (v) v.currentTime = 0
+    setActual((a) => (a + 1) % AVATAR_CLIPS.length)
+  }
+
+  return (
+    <div className={`ent-avatar${hablando ? ' ent-avatar--habla' : ''}`} aria-hidden="true">
+      {AVATAR_CLIPS.map((src, i) => (
+        <video
+          key={src}
+          ref={(el) => { refs.current[i] = el }}
+          src={src}
+          muted
+          playsInline
+          preload={i === 0 || i === 1 ? 'auto' : 'metadata'}
+          onEnded={i === actual ? siguiente : undefined}
+          className={i === actual ? 'ent-avatar-v ent-avatar-v--on' : 'ent-avatar-v'}
+        />
+      ))}
+    </div>
+  )
+}
+
 export function EntrenadorPage({ publico = false }) {
   const inicial = React.useMemo(leerPrefs, [])
   const { user } = useAuth() || {}
@@ -478,6 +516,7 @@ export function EntrenadorPage({ publico = false }) {
             </div>
           }
         >
+          {roleplay && empezo && <AvatarCliente hablando={hablando || (ocupado && !esperando)} />}
           <div className="wa-chat ent-chat">
             <div className="wa-chat-body ent-log" ref={logRef}>
               {roleplay && !empezo && (
