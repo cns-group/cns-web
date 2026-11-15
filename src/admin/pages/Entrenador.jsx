@@ -244,6 +244,7 @@ export function EntrenadorPage({ publico = false }) {
   const [parcial, setParcial] = React.useState('')
   const [pausado, setPausado] = React.useState(false) // micrófono apagado a mano
 
+  const [vistaMovil, setVistaMovil] = React.useState('avatar') // en pantallas chicas: 'avatar' o 'chat'
   const logRef = React.useRef(null)
   const dictadoRef = React.useRef(null)
   const enviarRef = React.useRef(null)
@@ -302,7 +303,7 @@ export function EntrenadorPage({ publico = false }) {
   React.useEffect(() => {
     const el = logRef.current
     if (el) el.scrollTop = el.scrollHeight
-  }, [turnos, esperando, parcial, devolucion])
+  }, [turnos, esperando, parcial, devolucion, vistaMovil])
 
   const escuchar = React.useCallback(() => {
     const d = dictadoRef.current
@@ -445,6 +446,7 @@ export function EntrenadorPage({ publico = false }) {
   }
 
   const pedirDevolucion = async () => {
+    setVistaMovil('chat') // la devolución se lee en el chat
     pararTodo()
     dictadoRef.current?.detener()
     setPidiendoDev(true)
@@ -500,7 +502,7 @@ export function EntrenadorPage({ publico = false }) {
   const esc = escenarios.find((e) => e.id === escenario)
 
   return (
-    <>
+    <div className="ent-page">
       <PageHeader
         title="Entrenador de ventas"
         subtitle={empezo ? undefined : publico ? 'Practicá tus llamadas de venta: la IA hace de cliente, te contesta y después te dice cómo mejorar.' : "Practicá tus llamadas hablando: la IA hace de cliente, te contesta con voz y después te dice cómo mejorar. Usa lo que aprendiste en tu cerebro."}
@@ -644,7 +646,17 @@ export function EntrenadorPage({ publico = false }) {
             </div>
           }
         >
-          <div className={roleplay && empezo ? 'ent-escena ent-escena--avatar' : 'ent-escena'}>
+          {roleplay && empezo && (
+            <div className="ent-switch" role="tablist" aria-label="Qué ver">
+              <button type="button" role="tab" aria-selected={vistaMovil === 'avatar'} className={vistaMovil === 'avatar' ? 'on' : ''} onClick={() => setVistaMovil('avatar')}>
+                Avatar
+              </button>
+              <button type="button" role="tab" aria-selected={vistaMovil === 'chat'} className={vistaMovil === 'chat' ? 'on' : ''} onClick={() => setVistaMovil('chat')}>
+                Chat
+              </button>
+            </div>
+          )}
+          <div className={roleplay && empezo ? `ent-escena ent-escena--avatar ent-escena--ver-${vistaMovil}` : 'ent-escena'}>
           <div className="wa-chat ent-chat">
             <div className="wa-chat-body ent-log" ref={logRef}>
               {roleplay && !empezo && (
@@ -763,7 +775,7 @@ export function EntrenadorPage({ publico = false }) {
           setEscenario(e.id)
         }}
       />
-    </>
+    </div>
   )
 }
 
