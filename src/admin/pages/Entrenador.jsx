@@ -308,12 +308,13 @@ export function EntrenadorPage({ publico = false }) {
 
   const borrarEscenario = async () => {
     const e = escenarios.find((x) => x.id === escenario)
-    if (!e?.propio || !window.confirm(`¿Eliminar el escenario "${e.titulo}"?`)) return
+    if (!e || !window.confirm(`¿Eliminar el escenario "${e.titulo}"?`)) return
     try {
       await api.ai.entrenador.deleteScenario(e.id)
       reiniciar()
-      setEscenario('gimnasio')
-      await cargarEscenarios()
+      const d = await api.ai.entrenador.escenarios()
+      setEscenarios(d.escenarios)
+      setEscenario(d.escenarios[0]?.id || '')
     } catch (err) {
       setError(err.message)
     }
@@ -376,7 +377,7 @@ export function EntrenadorPage({ publico = false }) {
                   <Btn variant="ghost" onClick={() => setEditor({ titulo: '', personaje: '', dolor: '', objeciones: '' })}>
                     + Agregar escenario
                   </Btn>
-                  {esc?.propio && (
+                  {esc && (
                     <>
                       <Btn variant="ghost" onClick={() => setEditor({ id: esc.id, titulo: esc.titulo, ...esc.detalle })}>
                         Editar

@@ -18,7 +18,7 @@ export default function AgenteDeVentasPage() {
   return (
     <AuthProvider>
       <div className="admin-shell" style={{ gridTemplateColumns: '1fr' }}>
-        <main className="admin-main" style={{ maxWidth: 1100, margin: '0 auto', width: '100%' }}>
+        <main className="admin-main">
           <EntrenadorPage publico />
         </main>
       </div>
