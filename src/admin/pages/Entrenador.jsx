@@ -68,9 +68,7 @@ function AvatarCliente({ hablando, velocidad = 1 }) {
     v.currentTime = 0
     v.playbackRate = velocidadRef.current
     corriendoRef.current = true
-    v.play().catch(() => {
-      corriendoRef.current = false
-    })
+    v.play().catch(() => {}) // si falla, el vigilante de abajo lo reintenta
   }, [])
 
   // Empieza a hablar con el avatar quieto: arranca el siguiente clip.
@@ -94,6 +92,18 @@ function AvatarCliente({ hablando, velocidad = 1 }) {
     return () => document.removeEventListener('visibilitychange', retomar)
   }, [retomar])
 
+  // Vigilante: mientras haya un clip en curso, si quedó frenado sin haber terminado se vuelve a reproducir.
+  React.useEffect(() => {
+    const id = setInterval(() => {
+      const v = refs.current[actualRef.current]
+      if (corriendoRef.current && v && !v.ended && v.paused) {
+        v.playbackRate = velocidadRef.current
+        v.play().catch(() => {})
+      }
+    }, 300)
+    return () => clearInterval(id)
+  }, [])
+
   const alTerminar = (i) => {
     if (i !== actualRef.current) return
     corriendoRef.current = false
@@ -115,7 +125,7 @@ function AvatarCliente({ hablando, velocidad = 1 }) {
           src={src}
           muted
           playsInline
-          preload={i === actual || i === (actual + 1) % AVATAR_CLIPS.length ? 'auto' : 'metadata'}
+          preload="auto"
           onLoadedMetadata={() => alCargar(i)}
           onEnded={() => alTerminar(i)}
           onPause={() => { if (i === actualRef.current) retomar() }}
