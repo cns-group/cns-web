@@ -673,7 +673,8 @@ export function EntrenadorPage({ publico = false }) {
               </div>
             )}
           </div>
-          {roleplay && empezo && <AvatarCliente hablando={hablando || (ocupado && !esperando)} velocidad={velocidad} />}
+          {/* Con voz, el avatar se mueve solo mientras suena (el texto llega antes que el audio); sin voz, mientras llega el texto. */}
+          {roleplay && empezo && <AvatarCliente hablando={vozOn && puedeHablar ? hablando : ocupado && !esperando} velocidad={velocidad} />}
           </div>
         </Card>
       </div>
