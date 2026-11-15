@@ -43,24 +43,57 @@ const SUGERENCIAS_COACH = [
 const FRASE_DE_PRUEBA =
   'Hola Mario, así voy a sonar. Por ejemplo: la auditoría dura 15 minutos y el sistema sale $150.000 por mes. ¿Te parece bien?'
 
-const AVATAR_CLIPS = [1, 2, 3, 4].map((n) => `/avatar/avatar-${n}.mp4`)
+const AVATAR_CLIPS = [1, 2, 3, 4, 5, 6, 7, 8].map((n) => `/avatar/avatar-${n}.mp4`)
 
-/** Avatar del cliente: mientras la IA responde reproduce sus clips hablando, uno tras otro (los 4 en rotación); en silencio queda quieto. */
-function AvatarCliente({ hablando }) {
+/**
+ * Avatar del cliente. Mientras la IA habla reproduce sus clips uno tras otro (los 8 en rotación) a la velocidad de la voz.
+ * Cada clip termina con la boca cerrada: si la IA calla a mitad de un clip, ese clip se termina solo (no se pausa ni se corta)
+ * y recién ahí queda quieto; si sigue hablando, arranca el siguiente.
+ */
+function AvatarCliente({ hablando, velocidad = 1 }) {
   const [actual, setActual] = React.useState(0)
   const refs = React.useRef([])
+  const activoRef = React.useRef(hablando)
+  const actualRef = React.useRef(0)
+  const corriendoRef = React.useRef(false) // hay un clip reproduciéndose
+  const velocidadRef = React.useRef(velocidad)
+  activoRef.current = hablando
+  velocidadRef.current = velocidad
 
-  React.useEffect(() => {
-    const v = refs.current[actual]
+  const arrancar = React.useCallback((i) => {
+    const v = refs.current[i]
     if (!v) return
-    if (hablando) v.play().catch(() => {})
-    else v.pause()
-  }, [hablando, actual])
+    actualRef.current = i
+    setActual(i)
+    v.currentTime = 0
+    v.playbackRate = velocidadRef.current
+    corriendoRef.current = true
+    v.play().catch(() => {
+      corriendoRef.current = false
+    })
+  }, [])
 
-  const siguiente = () => {
-    const v = refs.current[actual]
-    if (v) v.currentTime = 0
-    setActual((a) => (a + 1) % AVATAR_CLIPS.length)
+  // Empieza a hablar con el avatar quieto: arranca el siguiente clip.
+  React.useEffect(() => {
+    if (hablando && !corriendoRef.current) arrancar((actualRef.current + 1) % AVATAR_CLIPS.length)
+  }, [hablando, arrancar])
+
+  // La velocidad de la voz también acelera o frena el clip que está sonando.
+  React.useEffect(() => {
+    const v = refs.current[actualRef.current]
+    if (v) v.playbackRate = velocidad
+  }, [velocidad])
+
+  const alTerminar = (i) => {
+    if (i !== actualRef.current) return
+    corriendoRef.current = false
+    if (activoRef.current) arrancar((i + 1) % AVATAR_CLIPS.length)
+  }
+
+  // Quieto, el avatar muestra el último cuadro de un clip (boca cerrada).
+  const alCargar = (i) => {
+    const v = refs.current[i]
+    if (v && i === 0 && !corriendoRef.current && v.currentTime === 0) v.currentTime = Math.max(0, v.duration - 0.05)
   }
 
   return (
@@ -72,8 +105,9 @@ function AvatarCliente({ hablando }) {
           src={src}
           muted
           playsInline
-          preload={i === 0 || i === 1 ? 'auto' : 'metadata'}
-          onEnded={i === actual ? siguiente : undefined}
+          preload={i === actual || i === (actual + 1) % AVATAR_CLIPS.length ? 'auto' : 'metadata'}
+          onLoadedMetadata={() => alCargar(i)}
+          onEnded={() => alTerminar(i)}
           className={i === actual ? 'ent-avatar-v ent-avatar-v--on' : 'ent-avatar-v'}
         />
       ))}
@@ -516,7 +550,7 @@ export function EntrenadorPage({ publico = false }) {
             </div>
           }
         >
-          {roleplay && empezo && <AvatarCliente hablando={hablando || (ocupado && !esperando)} />}
+          {roleplay && empezo && <AvatarCliente hablando={hablando || (ocupado && !esperando)} velocidad={velocidad} />}
           <div className="wa-chat ent-chat">
             <div className="wa-chat-body ent-log" ref={logRef}>
               {roleplay && !empezo && (
