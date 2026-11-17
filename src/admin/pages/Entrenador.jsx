@@ -12,6 +12,8 @@ import {
   hablar,
   hayDictado,
   hayVoz,
+  esVozMasculina,
+  TONO_GRAVE,
   vocesEspanol,
 } from '../voz'
 
@@ -236,7 +238,11 @@ export function EntrenadorPage({ publico = false }) {
   const [manosLibres, setManosLibres] = React.useState(inicial.mlV === 2 ? (inicial.manosLibres ?? true) : true)
   const [vozNombre, setVozNombre] = React.useState(inicial.vozNombre || '')
   const [velocidad, setVelocidad] = React.useState(inicial.velocidad || 1)
+  const [tonoManual, setTonoManual] = React.useState(typeof inicial.tono === 'number' ? inicial.tono : null) // null = automático
   const [voces, setVoces] = React.useState(() => vocesEspanol())
+  // El avatar es un hombre: si la voz que suena no es masculina (en muchas tablets y celulares solo hay voces de mujer) se la baja de tono.
+  const vozElegida = voces.find((v) => v.name === vozNombre) || voces[0]
+  const tono = tonoManual ?? (vozElegida && !esVozMasculina(vozElegida) ? TONO_GRAVE : 1)
   const [escuchando, setEscuchando] = React.useState(false)
   const [hablando, setHablando] = React.useState(false)
   const [parcial, setParcial] = React.useState('')
@@ -295,8 +301,8 @@ export function EntrenadorPage({ publico = false }) {
   }, [pararTodo, cargarEscenarios])
 
   React.useEffect(() => {
-    guardarPrefs({ mlV: 2, modo, escenario, nivel, vozOn, manosLibres, vozNombre, velocidad })
-  }, [modo, escenario, nivel, vozOn, manosLibres, vozNombre, velocidad])
+    guardarPrefs({ mlV: 2, modo, escenario, nivel, vozOn, manosLibres, vozNombre, velocidad, tono: tonoManual })
+  }, [modo, escenario, nivel, vozOn, manosLibres, vozNombre, velocidad, tonoManual])
 
   React.useEffect(() => {
     const el = logRef.current
@@ -362,6 +368,7 @@ export function EntrenadorPage({ publico = false }) {
         ? crearLocutor({
             vozNombre,
             velocidad,
+            tono,
             onFin: () => {
               setHablando(false)
               if (locutorRef.current === locutor) locutorRef.current = null
@@ -488,7 +495,7 @@ export function EntrenadorPage({ publico = false }) {
 
   const probarVoz = () => {
     pararTodo()
-    hablar(FRASE_DE_PRUEBA, { vozNombre, velocidad })
+    hablar(FRASE_DE_PRUEBA, { vozNombre, velocidad, tono })
   }
 
   const roleplay = modo === 'roleplay'
@@ -620,6 +627,18 @@ export function EntrenadorPage({ publico = false }) {
                   <label className="admin-field">
                     <span>Velocidad: {velocidad.toFixed(2)}x</span>
                     <input type="range" min="0.8" max="1.4" step="0.05" value={velocidad} onChange={(e) => setVelocidad(Number(e.target.value))} />
+                  </label>
+                  <label className="admin-field">
+                    <span>
+                      Tono: {tono.toFixed(2)}
+                      {tonoManual === null ? ' (automático)' : ''}
+                    </span>
+                    <input type="range" min="0.5" max="1.2" step="0.02" value={tono} onChange={(e) => setTonoManual(Number(e.target.value))} />
+                    {tonoManual !== null && (
+                      <button type="button" className="admin-link" onClick={() => setTonoManual(null)}>
+                        Volver al tono automático
+                      </button>
+                    )}
                   </label>
                   <Btn variant="ghost" onClick={probarVoz}>
                     Probar la voz

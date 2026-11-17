@@ -158,8 +158,16 @@ export function extraerOraciones(buffer, { minimo = 28 } = {}) {
 /** Las voces neuronales del navegador ("Microsoft Elena Online (Natural)", "Google español") suenan mucho mejor. */
 export const esNatural = (v) => /natural|neural/i.test(v.name)
 
-function puntaje(v) {
+/** Voz masculina según el nombre que le pone el navegador (no hay un dato de género: se reconoce por nombres y palabras típicas). */
+export const esVozMasculina = (v) =>
+  /(?<!fe)\b(male|masculin\w*|hombre|tom[aá]s|jorge|diego|carlos|juan|pablo|[aá]lvaro|enrique|miguel|antonio|pedro|andr[eé]s|luis|ra[uú]l|ricardo|fernando|alberto|javier|manuel|jos[eé]|alex)\b/i.test(v.name)
+
+/** Tono que se aplica solo cuando la voz elegida no es masculina: baja la voz para que no desentone con el avatar. */
+export const TONO_GRAVE = 0.78
+
+function puntaje(v, prefijo) {
   let p = 0
+  if (prefijo === 'es' && esVozMasculina(v)) p -= 30 // el avatar es un hombre: si hay una voz masculina, va primero
   if (esNatural(v)) p -= 20
   else if (/online|google/i.test(v.name)) p -= 8
   if (/es[-_]AR/i.test(v.lang)) p -= 6
@@ -176,7 +184,7 @@ export function vocesIdioma(prefijo = 'es') {
   return window.speechSynthesis
     .getVoices()
     .filter((v) => re.test(v.lang))
-    .sort((a, b) => puntaje(a) - puntaje(b) || a.name.localeCompare(b.name))
+    .sort((a, b) => puntaje(a, prefijo) - puntaje(b, prefijo) || a.name.localeCompare(b.name))
 }
 
 /** Voces en español disponibles, las más naturales y rioplatenses primero. */
@@ -193,7 +201,7 @@ export function detenerVoz() {
   if (hayVoz()) window.speechSynthesis.cancel()
 }
 
-function armarVoz(texto, { vozNombre, velocidad = 1, idioma = 'es' }) {
+function armarVoz(texto, { vozNombre, velocidad = 1, idioma = 'es', tono = 1 }) {
   const u = new SpeechSynthesisUtterance(texto)
   const voces = vocesIdioma(idioma)
   const voz = voces.find((v) => v.name === vozNombre) || voces[0]
@@ -204,20 +212,20 @@ function armarVoz(texto, { vozNombre, velocidad = 1, idioma = 'es' }) {
     u.lang = /^en/i.test(idioma) ? 'en-US' : 'es-AR'
   }
   // Un poco de vida: las preguntas suben apenas el tono y la velocidad varía una pizca de frase en frase.
-  u.pitch = /\?["')\]]*\s*$/.test(texto) ? 1.06 : 1
+  u.pitch = Math.min(2, Math.max(0.1, tono * (/\?["')\]]*\s*$/.test(texto) ? 1.06 : 1)))
   u.rate = velocidad * (0.985 + Math.random() * 0.03)
   return u
 }
 
 /** Lee un texto en voz alta. `onFin` se llama al terminar (o si no se pudo hablar). */
-export function hablar(texto, { vozNombre, velocidad = 1, idioma = 'es', onFin } = {}) {
+export function hablar(texto, { vozNombre, velocidad = 1, idioma = 'es', tono = 1, onFin } = {}) {
   const limpio = normalizarParaVoz(texto, idioma)
   if (!hayVoz() || !limpio) {
     onFin?.()
     return
   }
   window.speechSynthesis.cancel()
-  const u = armarVoz(limpio, { vozNombre, velocidad, idioma })
+  const u = armarVoz(limpio, { vozNombre, velocidad, idioma, tono })
   let terminado = false
   const fin = () => {
     if (terminado) return
@@ -233,7 +241,7 @@ export function hablar(texto, { vozNombre, velocidad = 1, idioma = 'es', onFin }
  * Locutor: recibe frases de a una (a medida que la IA las escribe) y las va diciendo en orden.
  * `cerrar()` avisa que no vienen más; `onFin` se llama cuando se dijo todo. `cancelar()` corta en seco.
  */
-export function crearLocutor({ vozNombre, velocidad = 1, idioma = 'es', onFin } = {}) {
+export function crearLocutor({ vozNombre, velocidad = 1, idioma = 'es', tono = 1, onFin } = {}) {
   let pendientes = 0
   let cerrado = false
   let cancelado = false
@@ -248,7 +256,7 @@ export function crearLocutor({ vozNombre, velocidad = 1, idioma = 'es', onFin } 
       const limpio = normalizarParaVoz(frase, idiomaFrase)
       if (cancelado || !hayVoz() || !limpio) return
       pendientes++
-      const u = armarVoz(limpio, { vozNombre: vozFrase, velocidad, idioma: idiomaFrase })
+      const u = armarVoz(limpio, { vozNombre: vozFrase, velocidad, idioma: idiomaFrase, tono })
       const listo = () => {
         pendientes = Math.max(0, pendientes - 1)
         comprobar()
