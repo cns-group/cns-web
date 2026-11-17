@@ -51,8 +51,7 @@ const AVATAR_HABLA = '/avatar/habla.mp4'
 
 /**
  * Avatar del cliente con solo dos clips. El de espera corre siempre en bucle por debajo; cuando la IA habla, el de habla se pone
- * encima de golpe (sin fundido) y gira en bucle. Si la IA calla a mitad del clip, ese clip se termina solo (queda con la boca
- * cerrada) y recién ahí se vuelve a ver el de espera.
+ * encima de golpe (sin fundido) y gira en bucle. Apenas la IA calla, el de habla se corta en el acto y se vuelve a ver el de espera.
  */
 function AvatarCliente({ hablando, velocidad = 1 }) {
   const [enCurso, setEnCurso] = React.useState(false) // el clip de habla está a la vista
@@ -62,17 +61,21 @@ function AvatarCliente({ hablando, velocidad = 1 }) {
   const velocidadRef = React.useRef(velocidad)
   velocidadRef.current = velocidad
 
-  // Empieza a hablar: el clip de habla arranca desde el principio. Mientras se habla gira en bucle; al callar se deja terminar.
+  // Empieza a hablar: el clip de habla arranca desde el principio y gira en bucle. Al callar se corta en el acto y vuelve el de espera.
   React.useEffect(() => {
     const v = hablaRef.current
     if (!v) return
-    v.loop = hablando
+    v.loop = true
     if (hablando && !corriendoRef.current) {
       v.currentTime = 0
       v.playbackRate = velocidadRef.current
       corriendoRef.current = true
       setEnCurso(true)
       v.play().catch(() => {}) // si falla, el vigilante de abajo lo reintenta
+    } else if (!hablando && corriendoRef.current) {
+      corriendoRef.current = false
+      setEnCurso(false)
+      v.pause()
     }
   }, [hablando])
 
@@ -80,12 +83,6 @@ function AvatarCliente({ hablando, velocidad = 1 }) {
   React.useEffect(() => {
     if (hablaRef.current) hablaRef.current.playbackRate = velocidad
   }, [velocidad])
-
-  const alTerminar = () => {
-    if (hablaRef.current?.loop) return
-    corriendoRef.current = false
-    setEnCurso(false)
-  }
 
   // Vigilante: el de espera siempre corre y el de habla, mientras esté a la vista; si el navegador los frena (por ejemplo al cambiar de pestaña) se retoman.
   React.useEffect(() => {
@@ -116,7 +113,6 @@ function AvatarCliente({ hablando, velocidad = 1 }) {
         muted
         playsInline
         preload="auto"
-        onEnded={alTerminar}
         className={enCurso ? 'ent-avatar-v ent-avatar-v--on' : 'ent-avatar-v'}
       />
     </div>
