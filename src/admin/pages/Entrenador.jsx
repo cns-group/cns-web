@@ -44,11 +44,8 @@ const FRASE_DE_PRUEBA =
   'Hola Mario, así voy a sonar. Por ejemplo: la auditoría dura 15 minutos y el sistema sale $150.000 por mes. ¿Te parece bien?'
 
 const AVATAR_CLIPS = [1, 2, 3, 4, 5, 6, 7, 8].map((n) => `/avatar/avatar-${n}.mp4`)
-/** Clips opcionales en bucle cuando no habla (si el archivo no está, se ignora): reposo, escuchando (mientras habla el usuario) y pensando (mientras llega la respuesta). */
-const AVATAR_IDLE = { reposo: '/avatar/reposo.mp4', escuchando: '/avatar/escuchando.mp4', pensando: '/avatar/pensando.mp4' }
-const IDLE_KEYS = Object.keys(AVATAR_IDLE)
-/** Segundo donde se corta el bucle de un clip de reposo (el de "escuchando" termina con un acercamiento a la cara que no sirve en bucle). */
-const IDLE_CORTE = { escuchando: 2.8 }
+/** Clips de silencio: cuando la IA no habla (esperando, escuchando o pensando) se reproduce uno al azar, y al terminar otro (si falta alguno, se ignora). */
+const AVATAR_SILENCIO = [1, 2, 3].map((n) => `/avatar/silencio-${n}.mp4`)
 
 function mezclar(n, evitar) {
   const a = Array.from({ length: n }, (_, i) => i)
@@ -63,16 +60,17 @@ function mezclar(n, evitar) {
 /**
  * Avatar del cliente. Mientras la IA habla reproduce sus clips uno tras otro, en orden aleatorio sin repetir hasta usar los 8, a la
  * velocidad de la voz y con un fundido corto entre clip y clip. Cada clip termina con la boca cerrada: si la IA calla a mitad de un clip,
- * ese clip se termina solo (no se pausa ni se corta). Después queda en un clip de reposo en bucle (o escuchando / pensando) si existen
- * en /avatar; si no, en el último cuadro del clip.
+ * ese clip se termina solo (no se pausa ni se corta). Mientras calla (espera, escucha o piensa) pasa clips de silencio al azar, uno
+ * tras otro sin repetir el anterior; si no existen en /avatar, queda en el último cuadro del clip.
  */
-function AvatarCliente({ hablando, escuchando = false, pensando = false, velocidad = 1 }) {
+function AvatarCliente({ hablando, velocidad = 1 }) {
   const [actual, setActual] = React.useState(0)
   const [enCurso, setEnCurso] = React.useState(false) // hay un clip de habla reproduciéndose
-  const [idleOn, setIdleOn] = React.useState(null) // clip de reposo visible (null = se ve un clip de habla)
+  const [idleOn, setIdleOn] = React.useState(null) // índice del clip de silencio visible (null = se ve un clip de habla)
   const [disponibles, setDisponibles] = React.useState(() => new Set())
   const refs = React.useRef([])
-  const idleRefs = React.useRef({})
+  const idleRefs = React.useRef([])
+  const ultimoSilencioRef = React.useRef(-1)
   const activoRef = React.useRef(hablando)
   const actualRef = React.useRef(0)
   const corriendoRef = React.useRef(false)
@@ -92,6 +90,7 @@ function AvatarCliente({ hablando, escuchando = false, pensando = false, velocid
     actualRef.current = i
     setActual(i)
     setIdleOn(null)
+    idleRefs.current.forEach((x) => x && x.pause())
     v.currentTime = 0
     v.playbackRate = velocidadRef.current
     corriendoRef.current = true
@@ -110,33 +109,32 @@ function AvatarCliente({ hablando, escuchando = false, pensando = false, velocid
     if (v) v.playbackRate = velocidad
   }, [velocidad])
 
-  // Sin hablar: el clip de reposo que corresponda (escuchando > pensando > reposo), si existe.
+  // Elige al azar un clip de silencio (distinto del anterior si hay más de uno) y lo reproduce.
+  const elegirSilencio = React.useCallback(() => {
+    const ok = AVATAR_SILENCIO.map((_, i) => i).filter((i) => disponibles.has(i))
+    if (!ok.length) {
+      setIdleOn(null)
+      return
+    }
+    const otros = ok.filter((i) => i !== ultimoSilencioRef.current)
+    const lista = otros.length ? otros : ok
+    const i = lista[Math.floor(Math.random() * lista.length)]
+    ultimoSilencioRef.current = i
+    setIdleOn(i)
+    idleRefs.current.forEach((v, k) => {
+      if (!v) return
+      if (k === i) {
+        v.currentTime = 0
+        v.play().catch(() => {})
+      } else v.pause()
+    })
+  }, [disponibles])
+
+  // Sin hablar: arranca un clip de silencio si no hay ninguno en pantalla.
   React.useEffect(() => {
     if (corriendoRef.current) return // se mira la referencia: el estado puede ir un render atrás y pisar el arranque de un clip
-    const quiere = escuchando ? 'escuchando' : pensando ? 'pensando' : 'reposo'
-    const key = disponibles.has(quiere) ? quiere : disponibles.has('reposo') ? 'reposo' : null
-    setIdleOn(key)
-    IDLE_KEYS.forEach((k) => {
-      const v = idleRefs.current[k]
-      if (!v) return
-      if (k === key) v.play().catch(() => {})
-      else v.pause()
-    })
-  }, [enCurso, escuchando, pensando, disponibles])
-
-  // Los clips de reposo con corte vuelven al inicio en ese segundo, cuadro a cuadro.
-  React.useEffect(() => {
-    const corte = idleOn ? IDLE_CORTE[idleOn] : undefined
-    if (!corte) return undefined
-    let raf = 0
-    const tick = () => {
-      const v = idleRefs.current[idleOn]
-      if (v && v.currentTime >= corte) v.currentTime = 0
-      raf = requestAnimationFrame(tick)
-    }
-    raf = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(raf)
-  }, [idleOn])
+    if (idleOn === null) elegirSilencio()
+  }, [enCurso, idleOn, disponibles, elegirSilencio])
 
   // Si el navegador frena un clip a medias (por ejemplo al cambiar de pestaña), se retoma: un clip no se corta.
   const retomar = React.useCallback(() => {
@@ -192,16 +190,16 @@ function AvatarCliente({ hablando, escuchando = false, pensando = false, velocid
           className={i === actual && !idleOn ? 'ent-avatar-v ent-avatar-v--on' : 'ent-avatar-v'}
         />
       ))}
-      {IDLE_KEYS.map((k) => (
+      {AVATAR_SILENCIO.map((src, k) => (
         <video
-          key={k}
+          key={src}
           ref={(el) => { idleRefs.current[k] = el }}
-          src={AVATAR_IDLE[k]}
+          src={src}
           muted
-          loop
           playsInline
           preload="auto"
           onLoadedMetadata={() => setDisponibles((s) => (s.has(k) ? s : new Set(s).add(k)))}
+          onEnded={() => { if (k === idleOn && !corriendoRef.current) elegirSilencio() }}
           className={idleOn === k ? 'ent-avatar-v ent-avatar-v--on' : 'ent-avatar-v'}
         />
       ))}
@@ -762,7 +760,7 @@ export function EntrenadorPage({ publico = false }) {
             )}
           </div>
           {/* Con voz, el avatar se mueve solo mientras suena (el texto llega antes que el audio); sin voz, mientras llega el texto. */}
-          {roleplay && empezo && <AvatarCliente hablando={vozOn && puedeHablar ? hablando : ocupado && !esperando} escuchando={escuchando || Boolean(parcial)} pensando={ocupado && !hablando} velocidad={velocidad} />}
+          {roleplay && empezo && <AvatarCliente hablando={vozOn && puedeHablar ? hablando : ocupado && !esperando} velocidad={velocidad} />}
           {roleplay && empezo && puedeDictar && (
             <button
               type="button"
