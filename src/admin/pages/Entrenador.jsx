@@ -45,166 +45,80 @@ const SUGERENCIAS_COACH = [
 const FRASE_DE_PRUEBA =
   'Hola Mario, así voy a sonar. Por ejemplo: la auditoría dura 15 minutos y el sistema sale $150.000 por mes. ¿Te parece bien?'
 
-const AVATAR_CLIPS = [1, 2, 3, 4, 5, 6, 7, 8].map((n) => `/avatar/avatar-${n}.mp4`)
-/** Clips de silencio: cuando la IA no habla (esperando, escuchando o pensando) se reproduce uno al azar, y al terminar otro (si falta alguno, se ignora). */
-const AVATAR_SILENCIO = [1, 2, 3].map((n) => `/avatar/silencio-${n}.mp4`)
-
-function mezclar(n, evitar) {
-  const a = Array.from({ length: n }, (_, i) => i)
-  for (let i = n - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[a[i], a[j]] = [a[j], a[i]]
-  }
-  if (a[a.length - 1] === evitar && n > 1) [a[0], a[a.length - 1]] = [a[a.length - 1], a[0]] // el primero en salir (el último del arreglo) no repite el anterior
-  return a
-}
+/** Dos clips: uno en espera (calla) y otro hablando. */
+const AVATAR_ESPERA = '/avatar/espera.mp4'
+const AVATAR_HABLA = '/avatar/habla.mp4'
 
 /**
- * Avatar del cliente. Mientras la IA habla reproduce sus clips uno tras otro, en orden aleatorio sin repetir hasta usar los 8, a la
- * velocidad de la voz y con un fundido corto entre clip y clip. Cada clip termina con la boca cerrada: si la IA calla a mitad de un clip,
- * ese clip se termina solo (no se pausa ni se corta). Mientras calla (espera, escucha o piensa) pasa clips de silencio al azar, uno
- * tras otro sin repetir el anterior; si no existen en /avatar, queda en el último cuadro del clip.
+ * Avatar del cliente con solo dos clips. El de espera corre siempre en bucle por debajo; cuando la IA habla, el de habla se pone
+ * encima de golpe (sin fundido) y gira en bucle. Si la IA calla a mitad del clip, ese clip se termina solo (queda con la boca
+ * cerrada) y recién ahí se vuelve a ver el de espera.
  */
 function AvatarCliente({ hablando, velocidad = 1 }) {
-  const [actual, setActual] = React.useState(0)
-  const [enCurso, setEnCurso] = React.useState(false) // hay un clip de habla reproduciéndose
-  const [idleOn, setIdleOn] = React.useState(null) // índice del clip de silencio visible (null = se ve un clip de habla)
-  const [disponibles, setDisponibles] = React.useState(() => new Set())
-  const refs = React.useRef([])
-  const idleRefs = React.useRef([])
-  const ultimoSilencioRef = React.useRef(-1)
-  const activoRef = React.useRef(hablando)
-  const actualRef = React.useRef(0)
+  const [enCurso, setEnCurso] = React.useState(false) // el clip de habla está a la vista
+  const hablaRef = React.useRef(null)
+  const esperaRef = React.useRef(null)
   const corriendoRef = React.useRef(false)
   const velocidadRef = React.useRef(velocidad)
-  const bolsaRef = React.useRef([])
-  activoRef.current = hablando
   velocidadRef.current = velocidad
 
-  const siguiente = React.useCallback(() => {
-    if (!bolsaRef.current.length) bolsaRef.current = mezclar(AVATAR_CLIPS.length, actualRef.current)
-    return bolsaRef.current.pop()
-  }, [])
-
-  const arrancar = React.useCallback((i) => {
-    const v = refs.current[i]
+  // Empieza a hablar: el clip de habla arranca desde el principio. Mientras se habla gira en bucle; al callar se deja terminar.
+  React.useEffect(() => {
+    const v = hablaRef.current
     if (!v) return
-    actualRef.current = i
-    setActual(i)
-    setIdleOn(null)
-    idleRefs.current.forEach((x) => x && x.pause())
-    v.currentTime = 0
-    v.playbackRate = velocidadRef.current
-    corriendoRef.current = true
-    setEnCurso(true)
-    v.play().catch(() => {}) // si falla, el vigilante de abajo lo reintenta
-  }, [])
+    v.loop = hablando
+    if (hablando && !corriendoRef.current) {
+      v.currentTime = 0
+      v.playbackRate = velocidadRef.current
+      corriendoRef.current = true
+      setEnCurso(true)
+      v.play().catch(() => {}) // si falla, el vigilante de abajo lo reintenta
+    }
+  }, [hablando])
 
-  // Empieza a hablar con el avatar en reposo: arranca un clip.
+  // La velocidad de la voz también acelera o frena el clip.
   React.useEffect(() => {
-    if (hablando && !corriendoRef.current) arrancar(siguiente())
-  }, [hablando, arrancar, siguiente])
-
-  // La velocidad de la voz también acelera o frena el clip que está sonando.
-  React.useEffect(() => {
-    const v = refs.current[actualRef.current]
-    if (v) v.playbackRate = velocidad
+    if (hablaRef.current) hablaRef.current.playbackRate = velocidad
   }, [velocidad])
 
-  // Elige al azar un clip de silencio (distinto del anterior si hay más de uno) y lo reproduce.
-  const elegirSilencio = React.useCallback(() => {
-    const ok = AVATAR_SILENCIO.map((_, i) => i).filter((i) => disponibles.has(i))
-    if (!ok.length) {
-      setIdleOn(null)
-      return
-    }
-    const otros = ok.filter((i) => i !== ultimoSilencioRef.current)
-    const lista = otros.length ? otros : ok
-    const i = lista[Math.floor(Math.random() * lista.length)]
-    ultimoSilencioRef.current = i
-    setIdleOn(i)
-    idleRefs.current.forEach((v, k) => {
-      if (!v) return
-      if (k === i) {
-        v.currentTime = 0
-        v.play().catch(() => {})
-      } else v.pause()
-    })
-  }, [disponibles])
+  const alTerminar = () => {
+    if (hablaRef.current?.loop) return
+    corriendoRef.current = false
+    setEnCurso(false)
+  }
 
-  // Sin hablar: arranca un clip de silencio si no hay ninguno en pantalla.
+  // Vigilante: el de espera siempre corre y el de habla, mientras esté a la vista; si el navegador los frena (por ejemplo al cambiar de pestaña) se retoman.
   React.useEffect(() => {
-    if (corriendoRef.current) return // se mira la referencia: el estado puede ir un render atrás y pisar el arranque de un clip
-    if (idleOn === null) elegirSilencio()
-  }, [enCurso, idleOn, disponibles, elegirSilencio])
-
-  // Si el navegador frena un clip a medias (por ejemplo al cambiar de pestaña), se retoma: un clip no se corta.
-  const retomar = React.useCallback(() => {
-    const v = refs.current[actualRef.current]
-    if (corriendoRef.current && v && !v.ended && v.paused) v.play().catch(() => {})
-  }, [])
-  React.useEffect(() => {
-    document.addEventListener('visibilitychange', retomar)
-    return () => document.removeEventListener('visibilitychange', retomar)
-  }, [retomar])
-
-  // Vigilante: mientras haya un clip en curso, si quedó frenado sin haber terminado se vuelve a reproducir.
-  React.useEffect(() => {
-    const id = setInterval(() => {
-      const v = refs.current[actualRef.current]
-      if (corriendoRef.current && v && !v.ended && v.paused) {
-        v.playbackRate = velocidadRef.current
-        v.play().catch(() => {})
+    const retomar = () => {
+      const e = esperaRef.current
+      if (e && e.paused) e.play().catch(() => {})
+      const h = hablaRef.current
+      if (corriendoRef.current && h && !h.ended && h.paused) {
+        h.playbackRate = velocidadRef.current
+        h.play().catch(() => {})
       }
-    }, 300)
-    return () => clearInterval(id)
-  }, [])
-
-  const alTerminar = (i) => {
-    if (i !== actualRef.current) return
-    if (activoRef.current) {
-      arrancar(siguiente())
-    } else {
-      corriendoRef.current = false
-      setEnCurso(false)
     }
-  }
-
-  // Quieto y sin clips de reposo, el avatar muestra el último cuadro de un clip (boca cerrada).
-  const alCargar = (i) => {
-    const v = refs.current[i]
-    if (v && i === 0 && !corriendoRef.current && v.currentTime === 0) v.currentTime = Math.max(0, v.duration - 0.05)
-  }
+    retomar()
+    const id = setInterval(retomar, 300)
+    document.addEventListener('visibilitychange', retomar)
+    return () => {
+      clearInterval(id)
+      document.removeEventListener('visibilitychange', retomar)
+    }
+  }, [])
 
   return (
     <div className={`ent-avatar${hablando ? ' ent-avatar--habla' : ''}`} aria-hidden="true">
-      {AVATAR_CLIPS.map((src, i) => (
-        <video
-          key={src}
-          ref={(el) => { refs.current[i] = el }}
-          src={src}
-          muted
-          playsInline
-          preload="auto"
-          onLoadedMetadata={() => alCargar(i)}
-          onEnded={() => alTerminar(i)}
-          onPause={() => { if (i === actualRef.current) retomar() }}
-          className={i === actual && !idleOn ? 'ent-avatar-v ent-avatar-v--on' : 'ent-avatar-v'}
-        />
-      ))}
-      {AVATAR_SILENCIO.map((src, k) => (
-        <video
-          key={src}
-          ref={(el) => { idleRefs.current[k] = el }}
-          src={src}
-          muted
-          playsInline
-          preload="auto"
-          onLoadedMetadata={() => setDisponibles((s) => (s.has(k) ? s : new Set(s).add(k)))}
-          onEnded={() => { if (k === idleOn && !corriendoRef.current) elegirSilencio() }}
-          className={idleOn === k ? 'ent-avatar-v ent-avatar-v--on' : 'ent-avatar-v'}
-        />
-      ))}
+      <video ref={esperaRef} src={AVATAR_ESPERA} muted loop playsInline autoPlay preload="auto" className="ent-avatar-v ent-avatar-v--base" />
+      <video
+        ref={hablaRef}
+        src={AVATAR_HABLA}
+        muted
+        playsInline
+        preload="auto"
+        onEnded={alTerminar}
+        className={enCurso ? 'ent-avatar-v ent-avatar-v--on' : 'ent-avatar-v'}
+      />
     </div>
   )
 }
