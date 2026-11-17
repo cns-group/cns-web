@@ -241,7 +241,7 @@ export function hablar(texto, { vozNombre, velocidad = 1, idioma = 'es', tono = 
  * Locutor: recibe frases de a una (a medida que la IA las escribe) y las va diciendo en orden.
  * `cerrar()` avisa que no vienen más; `onFin` se llama cuando se dijo todo. `cancelar()` corta en seco.
  */
-export function crearLocutor({ vozNombre, velocidad = 1, idioma = 'es', tono = 1, onFin } = {}) {
+export function crearLocutor({ vozNombre, velocidad = 1, idioma = 'es', tono = 1, onFin, onVoz } = {}) {
   let pendientes = 0
   let cerrado = false
   let cancelado = false
@@ -261,8 +261,15 @@ export function crearLocutor({ vozNombre, velocidad = 1, idioma = 'es', tono = 1
         pendientes = Math.max(0, pendientes - 1)
         comprobar()
       }
-      u.onend = listo
-      u.onerror = listo
+      u.onstart = () => onVoz?.(true)
+      u.onend = () => {
+        onVoz?.(false)
+        listo()
+      }
+      u.onerror = () => {
+        onVoz?.(false)
+        listo()
+      }
       window.speechSynthesis.speak(u)
     },
     cerrar() {

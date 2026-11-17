@@ -48,17 +48,29 @@ const FRASE_DE_PRUEBA =
 /** Dos clips: uno en espera (calla) y otro hablando. */
 const AVATAR_ESPERA = '/avatar/espera.mp4'
 const AVATAR_HABLA = '/avatar/habla.mp4'
+/** Segundos del clip de habla (10 s) en los que cierra la boca durante 1 s. Se usan para simular el seguimiento de labios: mientras la
+ * voz suena se saltean y, cuando el agente hace una pausa, el clip se queda dando vueltas dentro de uno de ellos. */
+const CIERRES_BOCA = [
+  [0, 1],
+  [5, 6],
+  [9, 10],
+]
+/** Silencio mínimo (ms) de la voz para cerrar la boca: las separaciones entre frases son más cortas y no cuentan. */
+const PAUSA_MIN_MS = 250
 
 /**
  * Avatar del cliente con solo dos clips. El de espera corre siempre en bucle por debajo; cuando la IA habla, el de habla se pone
  * encima de golpe (sin fundido) y gira en bucle. Apenas la IA calla, el de habla se corta en el acto y se vuelve a ver el de espera.
+ * Seguimiento de labios simulado: con la voz sonando se saltean los segundos en que el clip cierra la boca (CIERRES_BOCA); si la voz hace una
+ * pausa (fin de una frase o espera de la siguiente), el clip pasa a uno de esos tramos y queda en él hasta que la voz vuelve.
  */
-function AvatarCliente({ hablando, velocidad = 1 }) {
+function AvatarCliente({ hablando, enPausa = false, velocidad = 1 }) {
   const [enCurso, setEnCurso] = React.useState(false) // el clip de habla está a la vista
   const hablaRef = React.useRef(null)
   const esperaRef = React.useRef(null)
   const corriendoRef = React.useRef(false)
   const velocidadRef = React.useRef(velocidad)
+  const cerradaRef = React.useRef(false) // la boca está en un tramo cerrado esperando que la voz vuelva
   velocidadRef.current = velocidad
 
   // Empieza a hablar: el clip de habla arranca desde el principio y gira en bucle. Al callar se corta en el acto y vuelve el de espera.
@@ -68,6 +80,7 @@ function AvatarCliente({ hablando, velocidad = 1 }) {
     v.loop = true
     if (hablando && !corriendoRef.current) {
       v.currentTime = 0
+      cerradaRef.current = false
       v.playbackRate = velocidadRef.current
       corriendoRef.current = true
       setEnCurso(true)
@@ -78,6 +91,50 @@ function AvatarCliente({ hablando, velocidad = 1 }) {
       v.pause()
     }
   }, [hablando])
+
+  // Pausa de la voz: tras un silencio mínimo la boca pasa al tramo cerrado más cercano; al volver la voz, sigue por donde sigue la charla.
+  React.useEffect(() => {
+    if (!enPausa) {
+      const v = hablaRef.current
+      if (cerradaRef.current && v) {
+        cerradaRef.current = false
+        const tramo = CIERRES_BOCA.find(([d, h]) => v.currentTime >= d && v.currentTime < h)
+        if (tramo) v.currentTime = tramo[1] >= (v.duration || 10) - 0.05 ? CIERRES_BOCA[0][1] : tramo[1]
+      }
+      return undefined
+    }
+    const id = setTimeout(() => {
+      const v = hablaRef.current
+      if (!v || !corriendoRef.current) return
+      const t = v.currentTime
+      const cerca = CIERRES_BOCA.reduce((a, c) => (Math.abs(c[0] - t) < Math.abs(a[0] - t) ? c : a))
+      v.currentTime = cerca[0]
+      cerradaRef.current = true
+    }, PAUSA_MIN_MS)
+    return () => clearTimeout(id)
+  }, [enPausa])
+
+  // Cada cuadro: con la voz sonando se saltea todo tramo cerrado; en pausa se vuelve al inicio del tramo al terminarlo.
+  React.useEffect(() => {
+    let raf = 0
+    const tick = () => {
+      const v = hablaRef.current
+      if (v && corriendoRef.current) {
+        const t = v.currentTime
+        const fin = (v.duration || 10) - 0.05
+        const tramo = CIERRES_BOCA.find(([d, h]) => t >= d && t < h)
+        if (cerradaRef.current) {
+          if (tramo && t >= tramo[1] - 0.06) v.currentTime = tramo[0]
+          else if (!tramo) v.currentTime = CIERRES_BOCA[0][0]
+        } else if (tramo) {
+          v.currentTime = tramo[1] >= fin ? CIERRES_BOCA[0][1] : tramo[1]
+        }
+      }
+      raf = requestAnimationFrame(tick)
+    }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [])
 
   // La velocidad de la voz también acelera o frena el clip.
   React.useEffect(() => {
@@ -155,6 +212,7 @@ export function EntrenadorPage({ publico = false }) {
   const tono = tonoManual ?? (vozElegida && !esVozMasculina(vozElegida) ? TONO_GRAVE : 1)
   const [escuchando, setEscuchando] = React.useState(false)
   const [hablando, setHablando] = React.useState(false)
+  const [vozSonando, setVozSonando] = React.useState(false) // la voz está diciendo una frase en este instante (false = pausa entre frases o espera de la siguiente)
   const [parcial, setParcial] = React.useState('')
   const [pausado, setPausado] = React.useState(false) // micrófono apagado a mano
 
@@ -191,6 +249,7 @@ export function EntrenadorPage({ publico = false }) {
     cortarRef.current = null
     detenerVoz()
     setHablando(false)
+    setVozSonando(false)
   }, [])
 
   React.useEffect(() => {
@@ -279,8 +338,10 @@ export function EntrenadorPage({ publico = false }) {
             vozNombre,
             velocidad,
             tono,
+            onVoz: setVozSonando,
             onFin: () => {
               setHablando(false)
+              setVozSonando(false)
               if (locutorRef.current === locutor) locutorRef.current = null
               if (manosLibres) escuchar()
             },
@@ -689,7 +750,7 @@ export function EntrenadorPage({ publico = false }) {
             )}
           </div>
           {/* Con voz, el avatar se mueve solo mientras suena (el texto llega antes que el audio); sin voz, mientras llega el texto. */}
-          {roleplay && empezo && <AvatarCliente hablando={vozOn && puedeHablar ? hablando : ocupado && !esperando} velocidad={velocidad} />}
+          {roleplay && empezo && <AvatarCliente hablando={vozOn && puedeHablar ? hablando : ocupado && !esperando} enPausa={vozOn && puedeHablar && hablando && !vozSonando} velocidad={velocidad} />}
           {roleplay && empezo && puedeDictar && (
             <button
               type="button"
