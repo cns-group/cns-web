@@ -1,4 +1,5 @@
 import React from 'react'
+import { createPortal } from 'react-dom'
 import { Navigate, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from './auth'
 import { api } from './api'
@@ -162,18 +163,21 @@ export function Card({ title, children, actions }) {
   )
 }
 
-export function Modal({ open, title, onClose, children }) {
+/** La ventana va colgada del contenedor del admin (no de la página): así se centra siempre en la pantalla, aunque la página tenga scroll. */
+export function Modal({ open, title, onClose, children, wide = false }) {
   if (!open) return null
-  return (
+  const destino = document.querySelector('.admin-shell') || document.body
+  return createPortal(
     <div className="admin-modal-backdrop" onClick={onClose}>
-      <div className="admin-modal" onClick={(e) => e.stopPropagation()}>
+      <div className={`admin-modal${wide ? ' admin-modal--wide' : ''}`} onClick={(e) => e.stopPropagation()}>
         <div className="admin-modal-hd">
           <h2>{title}</h2>
           <button type="button" className="admin-icon-btn" onClick={onClose} aria-label="Cerrar">×</button>
         </div>
         {children}
       </div>
-    </div>
+    </div>,
+    destino,
   )
 }
 

@@ -181,8 +181,8 @@ export const api = {
       escenarios: () => request('/ai/entrenador/escenarios'),
       roleplay: (escenario, nivel, turnos, modelo) =>
         request('/ai/entrenador/roleplay', { method: 'POST', body: JSON.stringify({ escenario, nivel, turnos, ...(modelo ? { modelo } : {}) }) }),
-      generateScenario: (descripcion, modelo) =>
-        request('/ai/entrenador/escenarios/generar', { method: 'POST', body: JSON.stringify({ descripcion, ...(modelo ? { modelo } : {}) }) }),
+      generateScenario: (descripcion, modelo, tipo) =>
+        request('/ai/entrenador/escenarios/generar', { method: 'POST', body: JSON.stringify({ descripcion, ...(modelo ? { modelo } : {}), ...(tipo ? { tipo } : {}) }) }),
       createScenario: (datos) => request('/ai/entrenador/escenarios', { method: 'POST', body: JSON.stringify(datos) }),
       updateScenario: (id, datos) => request(`/ai/entrenador/escenarios/${id}`, { method: 'PATCH', body: JSON.stringify(datos) }),
       deleteScenario: (id) => request(`/ai/entrenador/escenarios/${id}`, { method: 'DELETE' }),

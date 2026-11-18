@@ -457,3 +457,13 @@
   .ent-page .wa-chat-body { padding: 8px; }
   .ent-page .wa-msg { max-width: 92%; }
 }
+
+/* Textos de ayuda y etiquetas de campo más grandes en el entrenador y en sus ventanas (el gris de 11 px no se leía). */
+.ent-page .admin-muted,
+.admin-modal--wide .admin-muted { font-size: 15px; line-height: 1.45; }
+.ent-page .admin-field span,
+.admin-modal--wide .admin-field span { font-size: 15px; line-height: 1.35; }
+.admin-modal--wide .admin-modal-hd h2 { font-size: 20px; }
+.admin-modal--wide .admin-field input,
+.admin-modal--wide .admin-field textarea,
+.admin-modal--wide .admin-field select { font-size: 16px; }

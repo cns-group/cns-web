@@ -521,12 +521,12 @@ export function EntrenadorPage({ publico = false }) {
                 {esc && <p className="admin-muted ent-persona">Vas a hablar con: {esc.personaje}.</p>}
                 {puedeEditarEscenarios && (
                 <div className="admin-actions ent-esc-acc">
-                  <Btn variant="ghost" onClick={() => setEditor({ titulo: '', personaje: '', dolor: '', objeciones: '' })}>
+                  <Btn variant="ghost" onClick={() => setEditor({ titulo: '', personaje: '', dolor: '', objeciones: '', tipo: 'cns' })}>
                     + Agregar escenario
                   </Btn>
                   {esc && (
                     <>
-                      <Btn variant="ghost" onClick={() => setEditor({ id: esc.id, titulo: esc.titulo, ...esc.detalle })}>
+                      <Btn variant="ghost" onClick={() => setEditor({ id: esc.id, titulo: esc.titulo, tipo: esc.tipo || 'cns', ...esc.detalle })}>
                         Editar
                       </Btn>
                       <Btn variant="ghost" onClick={borrarEscenario}>
@@ -793,7 +793,7 @@ function EscenarioEditor({ editor, modelo, onClose, onGuardado }) {
   const [error, setError] = React.useState('')
 
   React.useEffect(() => {
-    setForm(editor ? { titulo: editor.titulo, personaje: editor.personaje, dolor: editor.dolor, objeciones: editor.objeciones } : null)
+    setForm(editor ? { titulo: editor.titulo, personaje: editor.personaje, dolor: editor.dolor, objeciones: editor.objeciones, tipo: editor.tipo || 'cns' } : null)
     setIdea('')
     setError('')
   }, [editor])
@@ -804,7 +804,7 @@ function EscenarioEditor({ editor, modelo, onClose, onGuardado }) {
     setArmando(true)
     setError('')
     try {
-      setForm(await api.ai.entrenador.generateScenario(idea.trim(), modelo))
+      setForm(await api.ai.entrenador.generateScenario(idea.trim(), modelo, form?.tipo))
     } catch (e) {
       setError(e.message)
     } finally {
@@ -827,14 +827,20 @@ function EscenarioEditor({ editor, modelo, onClose, onGuardado }) {
   }
 
   return (
-    <Modal open={Boolean(editor && form)} title={editor?.id ? 'Editar escenario' : 'Nuevo escenario'} onClose={onClose}>
+    <Modal wide open={Boolean(editor && form)} title={editor?.id ? 'Editar escenario' : 'Nuevo escenario'} onClose={onClose}>
       {form && editor && (
         <form className="admin-form" onSubmit={guardar}>
           <ErrorBox message={error} />
+          <Field label="Tipo de práctica">
+            <select value={form.tipo} onChange={set('tipo')}>
+              <option value="cns">Vendo los servicios de CNS a un negocio</option>
+              <option value="local">Soy vendedor de un local y vendo sus productos a un cliente</option>
+            </select>
+          </Field>
           {!editor.id && (
             <div className="ent-idea">
-              <Field label="¿Con quién querés practicar? Describilo en una frase y la IA arma el escenario">
-                <textarea rows={2} value={idea} maxLength={600} onChange={(e) => setIdea(e.target.value)} placeholder="Dueño de una agencia de viajes que atiende todo por WhatsApp y pierde consultas" />
+              <Field label={form.tipo === 'local' ? 'Describí el local o el producto que se vende y la IA arma el cliente' : '¿Con quién querés practicar? Describilo en una frase y la IA arma el escenario'}>
+                <textarea rows={2} value={idea} maxLength={600} onChange={(e) => setIdea(e.target.value)} placeholder={form.tipo === 'local' ? 'Local de bicicletas que vende rodados y accesorios' : 'Dueño de una agencia de viajes que atiende todo por WhatsApp y pierde consultas'} />
               </Field>
               <Btn variant="ghost" disabled={armando || idea.trim().length < 8} onClick={armar}>
                 {armando ? 'Armándolo…' : 'Armarlo con IA'}
@@ -844,10 +850,10 @@ function EscenarioEditor({ editor, modelo, onClose, onGuardado }) {
           <Field label="Título (cómo se ve en la lista)">
             <input value={form.titulo} onChange={set('titulo')} maxLength={80} required />
           </Field>
-          <Field label="Quién es el cliente y cómo habla">
+          <Field label={form.tipo === 'local' ? 'Quién es el cliente que viene a comprar y cómo habla' : 'Quién es el cliente y cómo habla'}>
             <textarea rows={3} value={form.personaje} onChange={set('personaje')} maxLength={600} required />
           </Field>
-          <Field label="Su dolor real (lo cuenta solo si le preguntás bien)">
+          <Field label={form.tipo === 'local' ? 'Lo que necesita de verdad (lo cuenta solo si le preguntan bien)' : 'Su dolor real (lo cuenta solo si le preguntás bien)'}>
             <textarea rows={3} value={form.dolor} onChange={set('dolor')} maxLength={600} required />
           </Field>
           <Field label="Objeciones que va a poner">

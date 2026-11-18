@@ -497,6 +497,8 @@
   padding: 24px;
 }
 
+.admin-modal--wide { width: min(900px, 100%); }
+
 .admin-modal {
   width: min(480px, 100%);
   background: var(--admin-surface);
