@@ -38,6 +38,7 @@ const STATUS_TONE = {
 
 export function ClientDetailPage() {
   const { id } = useParams()
+  const navigate = useNavigate()
   const [client, setClient] = React.useState(null)
   const [plans, setPlans] = React.useState([])
   const [error, setError] = React.useState('')
@@ -125,7 +126,6 @@ export function ClientDetailPage() {
 
   if (!client && !error) return <div className="admin-loading">Cargando cliente…</div>
 
-  const navigate = useNavigate()
   const eliminarCliente = async () => {
     const pagos = client.payments?.length || 0
     const demos = client.demos?.length || 0
