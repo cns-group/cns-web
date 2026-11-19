@@ -10,6 +10,9 @@ const SUGERENCIAS = [
   'Pasá a pausado el cliente Carspa.',
 ]
 
+/** Velocidad de la voz del asistente (1 = normal). */
+const VELOCIDAD_VOZ = 1.25
+
 const usd = (n) => (n == null ? '—' : `US$ ${n.toFixed(5)}`)
 
 const sinTildes = (t) => t.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()
@@ -89,6 +92,7 @@ export function AsistentePage() {
     if (vivo.current.vozActiva && hayVoz()) {
       setHablando(true)
       hablar(frase, {
+        velocidad: VELOCIDAD_VOZ,
         onFin: () => {
           setHablando(false)
           alTerminar?.()
@@ -199,6 +203,9 @@ export function AsistentePage() {
       vivo.current.manosLibres = false
       d.detener()
     } else {
+      // Al dictar queda en manos libres: responde en voz y vuelve a escuchar solo, hasta que lo pares.
+      setManosLibres(true)
+      vivo.current.manosLibres = true
       iniciarDictado()
     }
   }
@@ -233,7 +240,7 @@ export function AsistentePage() {
   const titulos = { pendiente: 'Cambios propuestos', hecho: 'Cambios aplicados', cancelado: 'Cambios cancelados', descartado: 'Cambios sin aplicar' }
 
   return (
-    <>
+    <div className="asist-pagina">
       <PageHeader
         title="Asistente IA"
         subtitle="Hablale o escribile: consulta tus clientes, cobros y agenda, y puede registrar o editar pagos, clientes y tareas. Cada cambio te lo muestra y se aplica recién cuando lo confirmás."
@@ -385,6 +392,6 @@ export function AsistentePage() {
           Esta sesión: {gasto.tokens} tokens · {usd(gasto.costo)}
         </p>
       </Card>
-    </>
+    </div>
   )
 }

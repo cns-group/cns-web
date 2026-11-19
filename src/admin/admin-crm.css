@@ -528,3 +528,41 @@
 .asist-botones { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 10px; }
 .asist-ok { color: var(--admin-success); }
 .asist-mal { color: var(--admin-danger); }
+
+/* ---------- Celular: menú como cajón y más espacio útil ---------- */
+.admin-menu-fondo { display: none; }
+@media (max-width: 960px) {
+  .admin-shell, .admin-shell--menu-cerrado { grid-template-columns: minmax(0, 1fr); }
+  .admin-sidebar, .admin-shell--menu-cerrado .admin-sidebar {
+    display: flex; position: fixed; z-index: 60; top: 0; left: 0; bottom: 0; width: min(82vw, 300px);
+    overflow-y: auto; overscroll-behavior: contain; border-right: 1px solid var(--admin-line); border-bottom: 0;
+    transform: translateX(-104%); transition: transform .25s ease, box-shadow .25s ease; padding-top: 64px;
+  }
+  .admin-shell:not(.admin-shell--menu-cerrado) .admin-sidebar { transform: none; box-shadow: 0 0 48px rgba(0, 0, 0, .7); }
+  .admin-shell:not(.admin-shell--menu-cerrado) .admin-menu-fondo { display: block; position: fixed; inset: 0; z-index: 55; background: rgba(0, 0, 0, .55); }
+  .admin-menu-toggle, .admin-shell:not(.admin-shell--menu-cerrado) .admin-menu-toggle { position: fixed; top: 10px; left: 10px; right: auto; z-index: 70; width: 42px; height: 42px; }
+  .admin-nav-link { padding-top: 12px; padding-bottom: 12px; }
+  .admin-main { padding: 12px 10px 28px; }
+  .admin-page-hd, .admin-shell--menu-cerrado .admin-page-hd { padding-left: 52px; margin-bottom: 14px; min-height: 42px; gap: 10px; flex-wrap: wrap; }
+  .admin-page-hd h1 { font-size: 26px; }
+  .admin-page-hd p { font-size: 14px; }
+  .admin-card { padding: 12px; }
+  .admin-card-hd { margin-bottom: 10px; }
+  .admin-modal { max-width: calc(100vw - 16px); }
+}
+
+/* Asistente en celular: el chat aprovecha el alto de la pantalla y el cuadro de escribir queda a mano */
+@media (max-width: 960px) {
+  .asist-pagina .admin-page-hd p { display: none; }
+  .asist-pagina .admin-page-hd { margin-bottom: 8px; min-height: 42px; align-items: center; }
+  .asist-pagina .ai-log { height: calc(100dvh - 285px); min-height: 240px; padding: 8px; }
+  .asist-pagina .wa-msg { max-width: 94%; padding: 8px 11px; }
+  .asist-pagina .wa-chat { gap: 8px; }
+  .asist-pagina .wa-chat-form { grid-template-columns: 1fr; gap: 8px; }
+  .asist-pagina .wa-chat-form textarea { min-height: 46px; }
+  .asist-pagina .asist-controles { display: grid; grid-template-columns: 1fr 1fr; }
+  .asist-pagina .asist-controles .admin-btn { justify-content: center; min-height: 44px; }
+  .asist-pagina .admin-card-hd .admin-actions { width: 100%; justify-content: space-between; }
+  .asist-pagina .admin-card-hd h2 { display: none; }
+  .asist-pagina .ai-gasto { margin: 6px 0 0; font-size: 12px; }
+}

@@ -34,7 +34,10 @@ export function AdminLayout() {
   const permitidas = RUTAS_POR_ACCESO[user?.acceso]
   const restringido = Boolean(permitidas)
   const [unread, setUnread] = React.useState(0)
+  // En celular el menú es un cajón que arranca cerrado y se cierra al elegir una página; en escritorio recuerda cómo lo dejaste.
+  const esCelular = () => typeof window !== 'undefined' && window.matchMedia('(max-width: 960px)').matches
   const [menuCerrado, setMenuCerrado] = React.useState(() => {
+    if (esCelular()) return true
     try {
       return localStorage.getItem('cns_admin_menu') === 'cerrado'
     } catch {
@@ -43,13 +46,23 @@ export function AdminLayout() {
   })
   const alternarMenu = () =>
     setMenuCerrado((c) => {
-      try {
-        localStorage.setItem('cns_admin_menu', c ? 'abierto' : 'cerrado')
-      } catch {
-        /* sin almacenamiento: no pasa nada */
+      if (!esCelular()) {
+        try {
+          localStorage.setItem('cns_admin_menu', c ? 'abierto' : 'cerrado')
+        } catch {
+          /* sin almacenamiento: no pasa nada */
+        }
       }
       return !c
     })
+  React.useEffect(() => {
+    if (esCelular()) setMenuCerrado(true)
+  }, [location.pathname])
+  React.useEffect(() => {
+    const cerrarConEsc = (e) => e.key === 'Escape' && esCelular() && setMenuCerrado(true)
+    window.addEventListener('keydown', cerrarConEsc)
+    return () => window.removeEventListener('keydown', cerrarConEsc)
+  }, [])
 
   // Mensajes de WhatsApp sin leer: se muestran como globito en "Consultas".
   React.useEffect(() => {
@@ -90,6 +103,7 @@ export function AdminLayout() {
           <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" />
         </svg>
       </button>
+      <div className="admin-menu-fondo" onClick={() => setMenuCerrado(true)} aria-hidden="true" />
       <aside className="admin-sidebar">
         <div className="admin-brand">
           <img className="admin-brand-logo" src="/cnslogo.png" alt="CNS" width="111" height="40" />
