@@ -11,7 +11,7 @@ const SUGERENCIAS = [
 ]
 
 /** Velocidad de la voz del asistente (1 = normal). */
-const VELOCIDAD_VOZ = 1.25
+const VELOCIDAD_VOZ = 1.5
 
 const usd = (n) => (n == null ? '—' : `US$ ${n.toFixed(5)}`)
 
