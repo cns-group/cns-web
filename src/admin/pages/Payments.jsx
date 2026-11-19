@@ -44,6 +44,11 @@ export function PaymentsPage() {
   const [open, setOpen] = React.useState(false)
   const [form, setForm] = React.useState(EMPTY_PAYMENT)
   const [saving, setSaving] = React.useState(false)
+  const [cobrando, setCobrando] = React.useState(null) // { pago, fecha }
+  const hoyIso = () => {
+    const d = new Date()
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
+  }
 
   const load = React.useCallback(() => {
     Promise.all([api.payments.list(), api.clients.list()])
@@ -82,6 +87,21 @@ export function PaymentsPage() {
     }
   }
 
+  const confirmarCobro = async (e) => {
+    e.preventDefault()
+    setSaving(true)
+    setError('')
+    try {
+      await api.payments.update(cobrando.pago.id, { status: 'paid', paidAt: cobrando.fecha })
+      setCobrando(null)
+      load()
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setSaving(false)
+    }
+  }
+
   const columns = [
     {
       key: 'client',
@@ -105,7 +125,10 @@ export function PaymentsPage() {
       key: 'status',
       label: 'Estado',
       render: (r) => (
-        <Badge tone={STATUS_TONE[r.status]}>{LABELS.paymentStatus[r.status]}</Badge>
+        <>
+          <Badge tone={STATUS_TONE[r.status]}>{LABELS.paymentStatus[r.status]}</Badge>
+          {r.status === 'paid' && r.paidAt && <small className="admin-muted"> el {fmtDate(r.paidAt)}</small>}
+        </>
       ),
     },
     {
@@ -114,6 +137,16 @@ export function PaymentsPage() {
       render: (r) => <DueDateCell payment={r} fmtDate={fmtDate} />,
     },
     { key: 'description', label: 'Concepto', render: (r) => r.description || '—' },
+    {
+      key: 'acciones',
+      label: '',
+      render: (r) =>
+        r.status === 'pending' ? (
+          <Btn variant="ghost" onClick={() => setCobrando({ pago: r, fecha: hoyIso() })}>
+            Marcar cobrado
+          </Btn>
+        ) : null,
+    },
   ]
 
   return (
@@ -154,6 +187,26 @@ export function PaymentsPage() {
           rowClassName={paymentRowClass}
         />
       )}
+
+      <Modal open={Boolean(cobrando)} title="Marcar pago como cobrado" onClose={() => setCobrando(null)}>
+        {cobrando && (
+          <form className="admin-form" onSubmit={confirmarCobro}>
+            <p className="admin-text">
+              {cobrando.pago.client?.name} · {fmtMoney(cobrando.pago.amount)}
+              {cobrando.pago.description ? ` · ${cobrando.pago.description}` : ''}
+            </p>
+            <Field label="Día en que lo cobraste">
+              <input type="date" required max={hoyIso()} value={cobrando.fecha} onChange={(e) => setCobrando({ ...cobrando, fecha: e.target.value })} />
+            </Field>
+            <div className="admin-form-actions">
+              <Btn variant="ghost" onClick={() => setCobrando(null)}>Cancelar</Btn>
+              <Btn type="submit" variant="primary" disabled={saving}>
+                {saving ? 'Guardando…' : 'Confirmar cobro'}
+              </Btn>
+            </div>
+          </form>
+        )}
+      </Modal>
 
       <Modal open={open} title="Registrar pago" onClose={() => setOpen(false)}>
         <form className="admin-form" onSubmit={handleCreate}>
