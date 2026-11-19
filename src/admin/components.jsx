@@ -13,6 +13,7 @@ const RUTAS_POR_ACCESO = {
 const NAV = [
   { to: '/admin', end: true, label: 'Dashboard' },
   { to: '/admin/consultas', label: 'Consultas', badge: true },
+  { to: '/admin/agenda', label: 'Agenda' },
   { to: '/admin/clientes', label: 'Clientes' },
   { to: '/admin/planes', label: 'Planes' },
   { to: '/admin/pagos', label: 'Pagos' },

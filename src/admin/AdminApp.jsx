@@ -9,6 +9,7 @@ import { ClientDetailPage } from './pages/ClientDetail'
 import { PlansPage } from './pages/Plans'
 import { PaymentsPage } from './pages/Payments'
 import { DemosPage } from './pages/Demos'
+import { AgendaPage } from './pages/Agenda'
 import { EmbudoPage } from './pages/Embudo'
 import { ConsultasPage } from './pages/Consultas'
 import { WhatsAppPage } from './pages/WhatsApp'
@@ -45,6 +46,7 @@ export default function AdminApp() {
           <Route path="planes" element={<PlansPage />} />
           <Route path="pagos" element={<PaymentsPage />} />
           <Route path="demos" element={<DemosPage />} />
+          <Route path="agenda" element={<AgendaPage />} />
           <Route path="embudo" element={<EmbudoPage />} />
         </Route>
         <Route path="*" element={<Navigate to="/admin" replace />} />

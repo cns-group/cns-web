@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { api, fmtDate, fmtDateTime, fmtMoney, LABELS } from '../api'
 import { PaymentBillingFields } from '../PaymentBillingFields'
 import {
@@ -125,15 +125,37 @@ export function ClientDetailPage() {
 
   if (!client && !error) return <div className="admin-loading">Cargando cliente…</div>
 
+  const navigate = useNavigate()
+  const eliminarCliente = async () => {
+    const pagos = client.payments?.length || 0
+    const demos = client.demos?.length || 0
+    const detalle = [pagos && `${pagos} ${pagos === 1 ? 'pago' : 'pagos'}`, demos && `${demos} ${demos === 1 ? 'demo' : 'demos'}`].filter(Boolean).join(' y ')
+    const aviso = `¿Eliminar a ${client.name}? Se borra para siempre${detalle ? `, junto con sus ${detalle}` : ''}. No se puede deshacer.`
+    if (!window.confirm(aviso)) return
+    try {
+      await api.clients.remove(client.id)
+      navigate('/admin/clientes')
+    } catch (err) {
+      setError(err.message)
+    }
+  }
+
   return (
     <>
       <PageHeader
         title={client?.name || 'Cliente'}
         subtitle={client?.company || client?.email || client?.instagram}
         actions={
-          <Link to="/admin/clientes" className="admin-btn admin-btn--ghost">
-            ← Volver
-          </Link>
+          <>
+            {client && (
+              <Btn variant="danger" onClick={eliminarCliente}>
+                Eliminar cliente
+              </Btn>
+            )}
+            <Link to="/admin/clientes" className="admin-btn admin-btn--ghost">
+              ← Volver
+            </Link>
+          </>
         }
       />
       <ErrorBox message={error} />

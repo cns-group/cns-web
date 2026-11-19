@@ -127,6 +127,12 @@ export const api = {
     update: (id, data) => request(`/demos/${id}`, { method: 'PATCH', body: JSON.stringify(data) }),
     remove: (id) => request(`/demos/${id}`, { method: 'DELETE' }),
   },
+  agenda: {
+    list: (desde, hasta) => request(`/agenda?desde=${desde}&hasta=${hasta}`),
+    create: (data) => request('/agenda', { method: 'POST', body: JSON.stringify(data) }),
+    update: (id, data) => request(`/agenda/${id}`, { method: 'PATCH', body: JSON.stringify(data) }),
+    remove: (id) => request(`/agenda/${id}`, { method: 'DELETE' }),
+  },
   consultas: {
     list: () => request('/consultas'),
     get: (id) => request(`/consultas/${id}`),
@@ -170,6 +176,9 @@ export const api = {
   },
   ai: {
     status: () => request('/ai/status'),
+    chat: (mensajes, modelo) => request('/ai/chat', { method: 'POST', body: JSON.stringify({ mensajes, ...(modelo ? { modelo } : {}) }) }),
+    asistente: (mensajes, modelo) => request('/ai/asistente', { method: 'POST', body: JSON.stringify({ mensajes, ...(modelo ? { modelo } : {}) }) }),
+    ejecutar: (acciones) => request('/ai/asistente/ejecutar', { method: 'POST', body: JSON.stringify({ acciones }) }),
     ventas: {
       last: (consultaId) => request(`/ai/ventas/consultas/${consultaId}`),
       analyze: (consultaId, modelo) =>
